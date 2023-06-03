@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习笔记 on zzzi的小站</title><link>https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><description>Recent content in 学习笔记 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 May 2023 18:07:27 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>STL标准库和泛型编程</title><link>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 31 May 2023 18:07:27 +0800</pubDate><guid>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😶STL标准库和泛型编程&lt;/p>
+&lt;/blockquote>
+&lt;p>STL标准库和泛型编程的学习笔记，记录了STL中六大部件之间的关系和部件的实现细节，以及泛型编程的相关知识，逻辑稍微有点乱，后期再修改&lt;/p></description></item><item><title>Linux学习笔记</title><link>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 28 May 2023 21:01:03 +0800</pubDate><guid>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>linux学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>linux系统的基本结构、编辑器、一些基本的配置以及linux的实操和扩展，包括文件管理、用户权限、磁盘管理、进程管理以及shell编程&lt;/p></description></item><item><title>平衡二叉树和红黑树</title><link>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</link><pubDate>Sat, 27 May 2023 12:38:42 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>😄平衡二叉树和红黑树&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍平衡二叉树的插入和删除操作，红黑树的基础理论以及红黑树的插入和删除&lt;/p></description></item><item><title>Git学习笔记</title><link>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 25 May 2023 21:18:49 +0800</pubDate><guid>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄Git学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>Git的基本理论和使用&lt;/p></description></item></channel></rss>

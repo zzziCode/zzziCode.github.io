@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on zzzi的小站</title><link>https://zzzicode.github.io/categories/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 24 May 2023 16:01:29 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/%E6%95%99%E7%A8%8B/rss.xml" rel="self" type="application/rss+xml"/><item><title>VScode无法编译C++中文文件解决办法</title><link>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link><pubDate>Wed, 24 May 2023 16:01:29 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid><description>&lt;blockquote>
+&lt;p>😄VScode无法编译C++中文文件解决办法&lt;/p>
+&lt;/blockquote>
+&lt;p>更新&lt;code>.vscode&lt;/code>文件夹中的配置文件&lt;/p></description></item><item><title>Typora PicGo GitHub无痛使用</title><link>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 22 May 2023 22:34:28 +0800</pubDate><guid>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</guid><description>&lt;blockquote>
+&lt;p>Typora-PicGo-GitHub无痛使用&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>
+&lt;a href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here" title="PicGo" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+PicGo
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>: 一个用于快速上传图片并获取图片 URL 链接的工具&lt;/strong>&lt;/p>
+&lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item><item><title>不从零开始搭建博客</title><link>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 22 May 2023 20:41:29 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
+&lt;p>不从零开始搭建自己的博客&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item></channel></rss>

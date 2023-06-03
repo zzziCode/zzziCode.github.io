@@ -1,0 +1,273 @@
+<!doctype html><html lang=zh-cn data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.111.3"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/favicon_next.png><meta itemprop=name content="491.递增子序列"><meta itemprop=description content="491.递增子序列"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://zzzicode.github.io/imgs/avatar.png"><meta itemprop=keywords content="回溯法"><meta property="og:type" content="article"><meta property="og:title" content="491.递增子序列"><meta property="og:description" content="491.递增子序列"><meta property="og:image" content="/imgs/avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/"><meta property="og:site_name" content="zzzi的小站"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="zzzi"><meta property="article:published_time" content="2023-05-24 19:59:32 +0800 CST"><meta property="article:modified_time" content="2023-05-24 19:59:32 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.000718ecbbae491041cb469457e61e226b6cf9839bc3149d2d203c9c368a6fd1.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"js":{"file":"es5/tex-mml-chtml.js","name":"mathjax","version":"3.2.0"},"render":"mathjax"},"path":"491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97","permalink":"https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/","title":"491.递增子序列","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>491.递增子序列 - zzzi的小站</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label=切换导航栏 role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>zzzi的小站</h1><i class=logo-line></i></a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about.html class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>24</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#示例>示例</a></li><li><a href=#自己的想法>自己的想法</a><ul><li><a href=#思路>思路</a><ul><li><a href=#基本想法>基本想法</a></li><li><a href=#执行流程>执行流程</a></li></ul></li><li><a href=#代码>代码</a><ul><li><a href=#出现的错误>出现的错误😢</a></li></ul></li></ul></li><li><a href=#代码随想录>代码随想录</a><ul><li><a href=#思路-1>思路</a></li><li><a href=#代码-1>代码</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=zzzi src=/imgs/img-lazy-loading.gif data-src=/imgs/avatar.png><p class=site-author-name itemprop=name>zzzi</p><div class=site-description itemprop=description>保持简单</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>24</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>14</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2022-06-01T15:59:41+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=60515></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=134></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2023-06-03T19:06:25+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script>
+<script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/avatar.png"><meta itemprop=name content="zzzi"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="zzzi"><meta itemprop=description content="保持简单"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="491.递增子序列"><meta itemprop=description content="491.递增子序列"></span><header class=post-header><h1 class=post-title itemprop="name headline">491.递增子序列</h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i></span>
+<span class=post-meta-item-text>发表于：</span>
+<time title="发表于：2023-05-24 19:59:32 +0800 CST" itemprop="dateCreated datePublished" datetime="2023-05-24 19:59:32 +0800 CST">2023-05-24</time></span>
+<span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i></span>
+<span class=post-meta-item-text>分类于：</span>
+<span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/leetcode itemprop=url rel=index><span itemprop=name>leetcode</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i></span>
+<span class=post-meta-item-text>字数：</span><span>2011</span></span>
+<span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i></span>
+<span class=post-meta-item-text>阅读：&ap;</span>
+<span>5分钟</span></span>
+<span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i></span>
+<span class=post-meta-item-text>浏览：</span>
+<span id=busuanzi_value_page_pv class=waline-pageview-count data-path=/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>😴 491.递增子序列</p></blockquote><p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。</p><h2 id=示例>示例</h2><p>示例:</p><ul><li>输入: [4, 6, 7, 7]</li><li>输出: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]</li></ul><p>说明:</p><ul><li>给定数组的长度不会超过15。</li><li>数组中的整数范围是 [-100,100]。</li><li>给定数组中可能包含重复数字，相等的数字应该被视为递增的一种情况。</li></ul><h2 id=自己的想法>自己的想法</h2><h3 id=思路>思路</h3><h4 id=基本想法>基本想法</h4><p>是求数组幂集的改进，先求数组的幂集，然后将幂集中的所有递增子序列找出来，并且数组中的元素可能重复，所以需要进行两次判断：</p><ol><li>递增子序列</li><li>元素没重复使用</li></ol><p>形成新的搜索树：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305242007411.png alt=image-20230524200747307 style=zoom:67%><h4 id=执行流程>执行流程</h4><p>首先需要从头开始遍历，当子数组元素个数大于一才符合第一个要求，此时还需判断当前子数组中的元素是否是递增序列，最后还需判断数组中的元素是否重复使用。</p><p>并且由于求的是数组中自然递增的子序列，所以不能使用排序，不然所求结果就不是自然递增的子序列，判断元素重复的方法就不能简单的使用前一个元素等于当前元素，也就是：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span>index<span style=color:#f92672>&amp;&amp;</span>nums[i]<span style=color:#f92672>==</span>nums[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]){
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>而是需要判断从<code>index</code>开始到当前位置的前一个元素有没有与当前元素重复的元素<code>nums[index ~ i-1]==nums[i]??</code></p><p>总结来说，在求幂集的思路上，代码中还需要使用三个判断逻辑：</p><ol><li>元素个数是否大于一</li><li>子数组是否是递增序列</li><li>是否使用重复元素</li></ol><h3 id=代码>代码</h3><p>根据以上分析，得出以下代码</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//定义全局变量存放结果和子数组
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> res;
+</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> path;
+</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> findSubsequences(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(nums.size()<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        backtrack(nums,<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//判断是否有元素与nums[i]重复,没有重复为false
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>isSame</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums,<span style=color:#66d9ef>int</span> start,<span style=color:#66d9ef>int</span> end){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里肯定start!=end
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>bool</span> flag<span style=color:#f92672>=</span>false;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//判断start~end-1范围内的元素是否与nums[end]重复
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>start;i<span style=color:#f92672>&lt;</span>end;<span style=color:#f92672>++</span>i){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(nums[i]<span style=color:#f92672>==</span>nums[end])
+</span></span><span style=display:flex><span>                flag<span style=color:#f92672>=</span>true;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> flag;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums,<span style=color:#66d9ef>int</span> index){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//元素的个数大于一才判断是否是递增序列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(path.size()<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//判断是否是递增序列，是递增序列为true
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>bool</span> flag<span style=color:#f92672>=</span>true;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> it<span style=color:#f92672>=</span>path.begin();it<span style=color:#f92672>!=</span>path.end()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;<span style=color:#f92672>++</span>it){
+</span></span><span style=display:flex><span>                <span style=color:#75715e>//不是递增序列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span>((<span style=color:#f92672>*</span>it)<span style=color:#f92672>&gt;</span>(<span style=color:#f92672>*</span>(it<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>))){
+</span></span><span style=display:flex><span>                    flag<span style=color:#f92672>=</span>false;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//是递增叙序列才加入结果集
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(flag){
+</span></span><span style=display:flex><span>                res.push_back(path);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(index<span style=color:#f92672>==</span>nums.size()){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//开始横向遍历
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>index;i<span style=color:#f92672>&lt;</span>nums.size();<span style=color:#f92672>++</span>i){
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//判断nums[i]是否重复
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//使用了重复元素，当前元素不搜索，从下一元素开始搜索
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span>index<span style=color:#f92672>&amp;&amp;</span>isSame(nums,index,i)){
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//除了使用重复元素，其余的情况都符合要求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>else</span>{
+</span></span><span style=display:flex><span>                path.push_back(nums[i]);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>//进行纵向遍历
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                backtrack(nums,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>//触发任意一个返回条件进行回溯
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                path.pop_back();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></td></tr></table></div></div><h4 id=出现的错误>出现的错误😢</h4><p>编写代码时，出现两个错误：</p><ol><li><p>判断是否是递增序列时，由于判断条件是<code>(*it)>(*(it+1))</code>，所以for循环的范围不再是</p><p><code>auto it=path.begin();it!=path.end();++it</code>，而是</p><p><code>auto it=path.begin();it!=path.end()-1;++it</code>，这样才不会访问到未知内存</p></li><li><p>判断是否使用重复元素时，判断的逻辑不应该是<code>i>index</code>并且没有重复元素时才进行递归，而是<code>i>index</code>并且出现重复元素就不进行递归，其余的情况都进行递归，否则会出现没有任何子集被选中的情况。</p><p>也就是不应该使用代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>//使用了重复元素，当前元素不搜索，从下一元素开始搜索
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span>index<span style=color:#f92672>&amp;&amp;</span>isSame(nums,index,i)){
+</span></span><span style=display:flex><span>	path.push_back(nums[i]);
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//进行纵向遍历
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	backtrack(nums,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//触发任意一个返回条件进行回溯
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	path.pop_back();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>//除了使用重复元素，其余的情况都符合要求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>else</span>{
+</span></span><span style=display:flex><span>	cotinue;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>而是使用：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span>index<span style=color:#f92672>&amp;&amp;</span>isSame(nums,index,i)){
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//除了使用重复元素，其余的情况都符合要求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>else</span>{
+</span></span><span style=display:flex><span>	path.push_back(nums[i]);
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//进行纵向遍历
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	backtrack(nums,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//触发任意一个返回条件进行回溯
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	path.pop_back();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=代码随想录>代码随想录</h2><h3 id=思路-1>思路</h3><p>也是在子集的基础上进行筛选，但是使用的方法不同</p><ol><li><p>判断是否时递增子序列的方法是在<code>path</code>进行<code>push_back()</code>之前判断将要加入容器的元素是否小于容器中最后一个元素，小于的话就不加入容器，这样可以保证元素每次加入容器之后，容器中的元素是非递减排列的</p></li><li><p>判断是否是重复元素使用了一个新的容器：<code>unordered_set</code>,相当于使用哈希表查找元素是否重复，一个元素一旦使用过，立刻将其加入哈希表中</p></li></ol><blockquote><p>注意哈希表的建立时机，判断的是横向遍历时是否会使用重复元素，所以横向便利一开始就需要建立一个哈希表</p></blockquote><h3 id=代码-1>代码</h3><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//定义全局变量存放结果和子数组
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> res;
+</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> path;
+</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> findSubsequences(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(nums.size()<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        backtrack(nums,<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums,<span style=color:#66d9ef>int</span> index){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//当子数组元素个数大于一可以加入结果集
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(path.size()<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>            res.push_back(path);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//进行横向遍历，定义一个哈希表判断元素是否重复
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unordered_set<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> Hash_Set;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>index;i<span style=color:#f92672>&lt;</span>nums.size();<span style=color:#f92672>++</span>i){
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//判断元素是否重复，是否是递增序列，不满足的continue
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>((<span style=color:#f92672>!</span>path.empty() <span style=color:#f92672>&amp;&amp;</span> nums[i]<span style=color:#f92672>&lt;</span>path.back())
+</span></span><span style=display:flex><span>                <span style=color:#f92672>||</span> Hash_Set.find(nums[i])<span style=color:#f92672>!=</span>Hash_Set.end()){
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//到这里就既是递增序列又不是重复元素
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//正常进行回溯法三部曲即可
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            path.push_back(nums[i]);
+</span></span><span style=display:flex><span>            backtrack(nums,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>            path.pop_back();
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//注意！！，使用过的元素需要加入哈希表中
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            Hash_Set.insert(nums[i]);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>对比自己的想法和代码随想录中的想法，都是将集合的幂集进行筛选，同时判断使用的不是重复元素，但是实现的方式不一样</p><p>自己的想法时直接定义函数每次都需要调用函数判断是否是递增序列和是否使用重复元素</p><p>代码随想录中直接在元素即将加入容器时就进行判断，每次都这样判断，可以保证容器中的元素一直都是非递减的，同时判断使用的是不是重复元素，二者结合进行筛选</p><blockquote><p>优化的部分个人觉得就是在判断子集合的递增上</p></blockquote></li></ol></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%9e%e6%ba%af%e6%b3%95>回溯法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/46.%E5%85%A8%E6%8E%92%E5%88%97/ rel=next title=46.全排列><i class="fa fa-chevron-left"></i> 46.全排列</a></div><div class="post-nav-prev post-nav-item"><a href=/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/ rel=prev title=VScode无法编译C++中文文件解决办法>VScode无法编译C++中文文件解决办法
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2022 - 2023</span>
+<span class=with-love><i class="fa fa-heart"></i></span>
+<span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>
+<script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":false,"save":"manual"},"busuanzi":{"pageview":true},"copybtn":true,"darkmode":false,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://zzzicode.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"right","width":256},"statis":{"enable":true,"plugin":"busuanzi"},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.4.0","waline":{"cfg":{"comment":true,"emoji":false,"imguploader":false,"pageview":true,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":"https://walinejs.comment.lithub.cc","sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.2284d88630c80e95b1a04a72df87fb70ede43d8c03ed2d7299db0dabb991486c.js defer></script>
+<script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>

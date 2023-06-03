@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on zzzi的小站</title><link>https://zzzicode.github.io/post/</link><description>Recent content in Posts on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 03 Jun 2023 19:06:25 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>欢迎加入 Hugo NexT 组织！</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Wed, 01 Jun 2022 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
+&lt;p>⛽134.加油站&lt;/p>
+&lt;/blockquote>
+&lt;p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 &lt;code>gas[i]&lt;/code> 升。&lt;/p>
+&lt;p>你有一辆油箱容量无限的的汽车，从第 &lt;code>i&lt;/code> 个加油站开往第 &lt;code>i+1&lt;/code> 个加油站需要消耗汽油 &lt;code>cost[i]&lt;/code> 升。你从其中的一个加油站出发，开始时油箱为空。&lt;/p>
+&lt;p>如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。&lt;/p>
+&lt;blockquote>
+&lt;p>要保证油箱中的油大于需要消耗的汽油&lt;/p>
+&lt;p>基本思想就是最开始要积累足够多的剩余汽油，才够后面消耗&lt;/p>
+&lt;/blockquote></description></item><item><title>1005.K次取反后最大化的数组和</title><link>https://zzzicode.github.io/post/1005.k%E6%AC%A1%E5%8F%96%E5%8F%8D%E5%90%8E%E6%9C%80%E5%A4%A7%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84%E5%92%8C/</link><pubDate>Fri, 02 Jun 2023 19:02:54 +0800</pubDate><guid>https://zzzicode.github.io/post/1005.k%E6%AC%A1%E5%8F%96%E5%8F%8D%E5%90%8E%E6%9C%80%E5%A4%A7%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>😉1005.K次取反后最大化的数组和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 A，我们只能用以下方法修改该数组：我们选择某个索引 i 并将 A[i] 替换为 -A[i]，然后总共重复这个过程 K 次。（我们可以多次选择同一个索引 i。）&lt;/p>
+&lt;p>以这种方式修改数组后，返回数组可能的最大和。&lt;/p></description></item><item><title>45.跳跃游戏II</title><link>https://zzzicode.github.io/post/45.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8Fii/</link><pubDate>Thu, 01 Jun 2023 19:26:43 +0800</pubDate><guid>https://zzzicode.github.io/post/45.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8Fii/</guid><description>&lt;blockquote>
+&lt;p>🚶‍♂️45.跳跃游戏II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p>
+&lt;p>数组中的每个元素代表你在该位置可以跳跃的最大长度。&lt;/p>
+&lt;p>你的目标是使用最少的跳跃次数到达数组的最后一个位置。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [2,3,1,1,4]&lt;/li>
+&lt;li>输出: 2&lt;/li>
+&lt;li>解释: 跳到最后一个位置的最小跳跃数是 2。从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。&lt;/li>
+&lt;/ul>
+&lt;p>说明: 假设你总是可以到达数组的最后一个位置&lt;/p></description></item><item><title>55.跳跃游戏</title><link>https://zzzicode.github.io/post/55.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</link><pubDate>Thu, 01 Jun 2023 18:52:01 +0800</pubDate><guid>https://zzzicode.github.io/post/55.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</guid><description>&lt;blockquote>
+&lt;p>🏃‍♂️55.跳跃游戏&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p>
+&lt;p>数组中的每个元素代表你在该位置可以跳跃的最大长度。&lt;/p>
+&lt;p>判断你是否能够到达最后一个位置。&lt;/p></description></item><item><title>121.买卖股票的最佳时机</title><link>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link><pubDate>Wed, 31 May 2023 18:30:03 +0800</pubDate><guid>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid><description>&lt;blockquote>
+&lt;p>💰121.买卖股票的最佳时机&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。&lt;/p>
+&lt;p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。&lt;/p>
+&lt;p>尽可能地在最低点买入，然后在之后的最高点卖出，只买卖一次&lt;/p>
+&lt;p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。&lt;/p></description></item><item><title>122.买卖股票的最佳时机II</title><link>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link><pubDate>Wed, 31 May 2023 18:20:37 +0800</pubDate><guid>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid><description>&lt;blockquote>
+&lt;p>💰122.买卖股票的最佳时机II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。&lt;/p>
+&lt;p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候&lt;strong>最多&lt;/strong>只能持有 一股 股票。你也可以先购买，然后在同一天出售。&lt;/p>
+&lt;p>多次买卖，且买卖时间不能重合，但是卖和买可以在同一天，所以需要将多次买卖的利润求和&lt;/p>
+&lt;p>返回 你能获得的&lt;strong>最大&lt;/strong>利润 。&lt;/p></description></item><item><title>STL标准库和泛型编程</title><link>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 31 May 2023 18:07:27 +0800</pubDate><guid>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😶STL标准库和泛型编程&lt;/p>
+&lt;/blockquote>
+&lt;p>STL标准库和泛型编程的学习笔记，记录了STL中六大部件之间的关系和部件的实现细节，以及泛型编程的相关知识，逻辑稍微有点乱，后期再修改&lt;/p></description></item><item><title>53.最大子序和</title><link>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</link><pubDate>Tue, 30 May 2023 15:59:20 +0800</pubDate><guid>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>💫53.最大子序和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [-2,1,-3,4,-1,2,1,-5,4]&lt;/li>
+&lt;li>输出: 6&lt;/li>
+&lt;li>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6&lt;/li>
+&lt;/ul></description></item><item><title>455.分发饼干</title><link>https://zzzicode.github.io/post/455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</link><pubDate>Mon, 29 May 2023 19:52:01 +0800</pubDate><guid>https://zzzicode.github.io/post/455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</guid><description>&lt;blockquote>
+&lt;p>👶455.分发饼干&lt;/p>
+&lt;/blockquote>
+&lt;p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。&lt;/p>
+&lt;p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &amp;gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。&lt;/p></description></item><item><title>Linux学习笔记</title><link>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 28 May 2023 21:01:03 +0800</pubDate><guid>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>linux学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>linux系统的基本结构、编辑器、一些基本的配置以及linux的实操和扩展，包括文件管理、用户权限、磁盘管理、进程管理以及shell编程&lt;/p></description></item><item><title>37.解数独</title><link>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</link><pubDate>Sun, 28 May 2023 19:05:13 +0800</pubDate><guid>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</guid><description>&lt;blockquote>
+&lt;p>😯37.解数独&lt;/p>
+&lt;/blockquote>
+&lt;p>编写一个程序，通过填充空格来解决数独问题。&lt;/p>
+&lt;p>一个数独的解法需遵循如下规则： 数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。 空白格用 &amp;lsquo;.&amp;rsquo; 表示。&lt;/p></description></item><item><title>51.N皇后</title><link>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</link><pubDate>Sat, 27 May 2023 19:01:06 +0800</pubDate><guid>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</guid><description>&lt;blockquote>
+&lt;p>😱51.N皇后&lt;/p>
+&lt;/blockquote>
+&lt;p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。&lt;/p>
+&lt;p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。&lt;/p>
+&lt;p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 &amp;lsquo;Q&amp;rsquo; 和 &amp;lsquo;.&amp;rsquo; 分别代表了皇后和空位。&lt;/p></description></item><item><title>平衡二叉树和红黑树</title><link>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</link><pubDate>Sat, 27 May 2023 12:38:42 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>😄平衡二叉树和红黑树&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍平衡二叉树的插入和删除操作，红黑树的基础理论以及红黑树的插入和删除&lt;/p></description></item><item><title>332.重新安排行程</title><link>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</link><pubDate>Fri, 26 May 2023 18:17:13 +0800</pubDate><guid>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😭332.重新安排行程&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个机票的字符串二维数组 [from, to]，子数组中的两个成员分别表示飞机出发和降落的机场地点，对该行程进行重新规划排序。所有这些机票都属于一个从 JFK（肯尼迪国际机场）出发的先生，所以该行程必须从 JFK 开始。&lt;/p></description></item><item><title>Git学习笔记</title><link>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 25 May 2023 21:18:49 +0800</pubDate><guid>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄Git学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>Git的基本理论和使用&lt;/p></description></item><item><title>47.全排列II</title><link>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</link><pubDate>Thu, 25 May 2023 19:17:58 +0800</pubDate><guid>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</guid><description>&lt;blockquote>
+&lt;p>😏47.全排列II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。&lt;/p></description></item><item><title>46.全排列</title><link>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</link><pubDate>Thu, 25 May 2023 18:31:19 +0800</pubDate><guid>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😍46.全排列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 没有重复数字的序列，返回其所有可能的&lt;strong>全排列&lt;/strong>。&lt;/p></description></item><item><title>491.递增子序列</title><link>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Wed, 24 May 2023 19:59:32 +0800</pubDate><guid>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😴 491.递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。&lt;/p></description></item><item><title>VScode无法编译C++中文文件解决办法</title><link>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link><pubDate>Wed, 24 May 2023 16:01:29 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid><description>&lt;blockquote>
+&lt;p>😄VScode无法编译C++中文文件解决办法&lt;/p>
+&lt;/blockquote>
+&lt;p>更新&lt;code>.vscode&lt;/code>文件夹中的配置文件&lt;/p></description></item><item><title>90.子集II</title><link>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</link><pubDate>Tue, 23 May 2023 20:26:33 +0800</pubDate><guid>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</guid><description>&lt;blockquote>
+&lt;p>90.子集II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个&lt;strong>可能包含重复元素&lt;/strong>的整数数组 nums，返回该数组所有可能的子集（幂集）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [1,2,2]&lt;/li>
+&lt;li>输出: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]&lt;/li>
+&lt;/ul></description></item><item><title>78.子集</title><link>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 23 May 2023 19:34:56 +0800</pubDate><guid>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>
+&lt;a href="https://leetcode.cn/problems/subsets/" title="78.子集" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+78.子集
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一组不含重复元素的整数数组 &lt;code>nums&lt;/code>，返回该数组所有可能的子集（&lt;strong>幂集&lt;/strong>）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例: 输入: nums = [1,2,3] 输出: [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]&lt;/p></description></item><item><title>Typora PicGo GitHub无痛使用</title><link>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 22 May 2023 22:34:28 +0800</pubDate><guid>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</guid><description>&lt;blockquote>
+&lt;p>Typora-PicGo-GitHub无痛使用&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>
+&lt;a href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here" title="PicGo" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+PicGo
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>: 一个用于快速上传图片并获取图片 URL 链接的工具&lt;/strong>&lt;/p>
+&lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item><item><title>不从零开始搭建博客</title><link>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 22 May 2023 20:41:29 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
+&lt;p>不从零开始搭建自己的博客&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item></channel></rss>
