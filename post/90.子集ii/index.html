@@ -21,15 +21,15 @@
 <span>2分钟</span></span>
 <span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i></span>
 <span class=post-meta-item-text>浏览：</span>
-<span id=busuanzi_value_page_pv class=waline-pageview-count data-path=/post/90.%E5%AD%90%E9%9B%86ii/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>90.子集II</p></blockquote><p>给定一个<strong>可能包含重复元素</strong>的整数数组 nums，返回该数组所有可能的子集（幂集）。</p><p>说明：解集不能包含重复的子集。</p><p>示例:</p><ul><li>输入: [1,2,2]</li><li>输出: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]</li></ul><h2 id=思路>思路</h2><h3 id=基本想法>基本想法</h3><p>相比于70题，只是多了一个可能包含重复元素，只需要在递归之前检查当前元素是否重复即可，所以形成的搜索树会有一些树枝被剪掉</p><p>但是给定的<code>nums</code>可能是无序的，所以需要先进行排序，让重复的元素挨在一起，才可以执行去重操作，避免出现重复子集。</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305232030547.png alt=image-20230523203008494 style=zoom:67%><h3 id=执行流程>执行流程</h3><p>也是分为横向遍历和纵向遍历，只不过在每次<strong>横向</strong>遍历的过程中需要增加条件进行筛选，重复元素不能选取，否则会出现多次从同一个x开始进行搜索的情况</p><p>例如[1,2,2,3]，不加筛选条件可能会出现两次从2开始形成子集的情况，筛选条件如下：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+<span id=busuanzi_value_page_pv class=waline-pageview-count data-path=/post/90.%E5%AD%90%E9%9B%86ii/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>90.子集II</p></blockquote><p>给定一个<strong>可能包含重复元素</strong>的整数数组 nums，返回该数组所有可能的子集（幂集）。</p><p>说明：解集不能包含重复的子集。</p><p>示例:</p><ul><li>输入: [1,2,2]</li><li>输出: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]</li></ul><h2 id=思路>思路</h2><h3 id=基本想法>基本想法</h3><p>相比于70题，只是多了一个可能包含重复元素，只需要在递归之前检查当前元素是否重复即可，所以形成的搜索树会有一些树枝被剪掉</p><p>但是给定的<code>nums</code>可能是无序的，所以需要先进行排序，让重复的元素挨在一起，才可以执行去重操作，避免出现重复子集。</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305232030547.png alt=image-20230523203008494 style=zoom:67%><h3 id=执行流程>执行流程</h3><p>也是分为横向遍历和纵向遍历，只不过在每次<strong>横向</strong>遍历的过程中需要增加条件进行筛选，重复元素不能选取，否则会出现多次从同一个x开始进行搜索的情况</p><p>例如[1,2,2,3]，不加筛选条件可能会出现两次从2开始形成子集的情况，筛选条件如下：</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>//当不是当前层横向遍历的第一个元素时，就可能出现重复子集的情况
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>if</span>(index<span style=color:#f92672>==</span>nums.size()){
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span>;
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#93a1a1;font-style:italic>//当不是当前层横向遍历的第一个元素时，就可能出现重复子集的情况
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span><span style=color:#859900>if</span>(<span style=color:#268bd2>index</span>==<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>size</span>()){
+</span></span><span style=display:flex><span>    <span style=color:#859900>return</span>;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><h2 id=代码>代码</h2><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=代码>代码</h2><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -65,39 +65,39 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//全局变量存放结果
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> res;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> path;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> subsetsWithDup(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(nums.size()<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> res;
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#859900>class</span> <span style=color:#cb4b16>Solution</span> {
+</span></span><span style=display:flex><span><span style=color:#859900>public</span>:
+</span></span><span style=display:flex><span>    <span style=color:#93a1a1;font-style:italic>//全局变量存放结果
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>    <span style=color:#268bd2>vector</span>&lt;<span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt;&gt; <span style=color:#268bd2>res</span>;
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt; <span style=color:#268bd2>path</span>;
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>vector</span>&lt;<span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt;&gt; <span style=color:#268bd2>subsetsWithDup</span>(<span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt;&amp; <span style=color:#268bd2>nums</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#859900>if</span>(<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>size</span>()==<span style=color:#2aa198;font-weight:700>0</span>){
+</span></span><span style=display:flex><span>            <span style=color:#859900>return</span> <span style=color:#268bd2>res</span>;
 </span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//vector自身没有sort函数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//因为它可以随机访问，没必要增加自带sort函数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        sort(nums.begin(),nums.end());
-</span></span><span style=display:flex><span>        backtrack(nums,<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>        <span style=color:#93a1a1;font-style:italic>//vector自身没有sort函数
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>        <span style=color:#93a1a1;font-style:italic>//因为它可以随机访问，没必要增加自带sort函数
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>        <span style=color:#268bd2>sort</span>(<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>begin</span>(),<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>end</span>());
+</span></span><span style=display:flex><span>        <span style=color:#268bd2>backtrack</span>(<span style=color:#268bd2>nums</span>,<span style=color:#2aa198;font-weight:700>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#859900>return</span> <span style=color:#268bd2>res</span>;
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums,<span style=color:#66d9ef>int</span> index){
-</span></span><span style=display:flex><span>        res.push_back(path);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(index<span style=color:#f92672>==</span>nums.size()){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    <span style=color:#859900;font-weight:700>void</span> <span style=color:#268bd2>backtrack</span>(<span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt;&amp; <span style=color:#268bd2>nums</span>,<span style=color:#859900;font-weight:700>int</span> <span style=color:#268bd2>index</span>){
+</span></span><span style=display:flex><span>        <span style=color:#268bd2>res</span>.<span style=color:#268bd2>push_back</span>(<span style=color:#268bd2>path</span>);
+</span></span><span style=display:flex><span>        <span style=color:#859900>if</span>(<span style=color:#268bd2>index</span>==<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>size</span>()){
+</span></span><span style=display:flex><span>            <span style=color:#859900>return</span>;
 </span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//进行横向搜索
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>index;i<span style=color:#f92672>&lt;</span>nums.size();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//需要增加筛选条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//之前从x开始搜索过，之后就不必再从x开始搜索
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span>index<span style=color:#f92672>&amp;&amp;</span>nums[i]<span style=color:#f92672>==</span>nums[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]){
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>        <span style=color:#93a1a1;font-style:italic>//进行横向搜索
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>        <span style=color:#859900>for</span>(<span style=color:#859900;font-weight:700>int</span> <span style=color:#268bd2>i</span>=<span style=color:#268bd2>index</span>;<span style=color:#268bd2>i</span>&lt;<span style=color:#268bd2>nums</span>.<span style=color:#268bd2>size</span>();++<span style=color:#268bd2>i</span>){
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//需要增加筛选条件
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#93a1a1;font-style:italic>//之前从x开始搜索过，之后就不必再从x开始搜索
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#859900>if</span>(<span style=color:#268bd2>i</span>&gt;<span style=color:#268bd2>index</span>&amp;&amp;<span style=color:#268bd2>nums</span>[<span style=color:#268bd2>i</span>]==<span style=color:#268bd2>nums</span>[<span style=color:#268bd2>i</span>-<span style=color:#2aa198;font-weight:700>1</span>]){
+</span></span><span style=display:flex><span>                <span style=color:#859900>continue</span>;
 </span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//元素没有重复
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            path.push_back(nums[i]);
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//进行递归纵向遍历
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            backtrack(nums,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            path.pop_back();
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//元素没有重复
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#268bd2>path</span>.<span style=color:#268bd2>push_back</span>(<span style=color:#268bd2>nums</span>[<span style=color:#268bd2>i</span>]);
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//进行递归纵向遍历
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#268bd2>backtrack</span>(<span style=color:#268bd2>nums</span>,<span style=color:#268bd2>i</span>+<span style=color:#2aa198;font-weight:700>1</span>);
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//回溯
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#268bd2>path</span>.<span style=color:#268bd2>pop_back</span>();
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>};

@@ -28,7 +28,7 @@
 示例 2：</p><p>输入：prices = [7,6,4,3,1]
 输出：0
 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</p><p>提示：</p><p>1 &lt;= prices.length &lt;= 105
-0 &lt;= prices[i] &lt;= 104</p><h2 id=思路>思路</h2><h3 id=基本思路>基本思路</h3><p>由于不知道什么时候是最低点，什么时候是最高点，所以我们默认当前值就是最低点，先进行买入，然后遇到比买入点低的我们就买入，继续向后遍历，总能找到最低的一个买入点</p><p>在买入之后，遇到比买入点低的我们就买入，遇到比买入点高的我们就卖出，卖出之后遇到更高利润就更新利润结果，当运行结束之后，就会知道当前股票的最高利润是多少</p><blockquote><p>低就买入，高就卖出</p></blockquote><h3 id=执行流程>执行流程</h3><p>设置两个变量，一个存放买入价格，一个存放结果利润，买入价格的初值就是容器第一个元素的值，结果利润的初值是0</p><p>之后遍历容器，遇到低就买入，遇到高就卖出，这样设置之后，“最高点”之前的买入点肯定是最低的，这里的最高点不是全局最高，例如<code>[6，7，1，5]</code>，“最高点”肯定是5而不是7</p><p><strong>而遍历的过程中肯定会遇到这种“最高点”，而由于程序的逻辑是低就买入，所以一定会得到“最高点”之前的最低点</strong></p><p>有更大利润就更新结果，最后得出最大利润</p><h2 id=代码>代码</h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+0 &lt;= prices[i] &lt;= 104</p><h2 id=思路>思路</h2><h3 id=基本思路>基本思路</h3><p>由于不知道什么时候是最低点，什么时候是最高点，所以我们默认当前值就是最低点，先进行买入，然后遇到比买入点低的我们就买入，继续向后遍历，总能找到最低的一个买入点</p><p>在买入之后，遇到比买入点低的我们就买入，遇到比买入点高的我们就卖出，卖出之后遇到更高利润就更新利润结果，当运行结束之后，就会知道当前股票的最高利润是多少</p><blockquote><p>低就买入，高就卖出</p></blockquote><h3 id=执行流程>执行流程</h3><p>设置两个变量，一个存放买入价格，一个存放结果利润，买入价格的初值就是容器第一个元素的值，结果利润的初值是0</p><p>之后遍历容器，遇到低就买入，遇到高就卖出，这样设置之后，“最高点”之前的买入点肯定是最低的，这里的最高点不是全局最高，例如<code>[6，7，1，5]</code>，“最高点”肯定是5而不是7</p><p><strong>而遍历的过程中肯定会遇到这种“最高点”，而由于程序的逻辑是低就买入，所以一定会得到“最高点”之前的最低点</strong></p><p>有更大利润就更新结果，最后得出最大利润</p><h2 id=代码>代码</h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
@@ -47,23 +47,23 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> maxProfit(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> prices) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> buy<span style=color:#f92672>=</span>prices[<span style=color:#ae81ff>0</span>];
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> num:prices){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//低就买入
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(num<span style=color:#f92672>&lt;</span>buy){
-</span></span><span style=display:flex><span>                buy<span style=color:#f92672>=</span>num;
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#586e75;background-color:#eee8d5;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#859900>class</span> <span style=color:#cb4b16>Solution</span> {
+</span></span><span style=display:flex><span><span style=color:#859900>public</span>:
+</span></span><span style=display:flex><span>    <span style=color:#859900;font-weight:700>int</span> <span style=color:#268bd2>maxProfit</span>(<span style=color:#268bd2>vector</span>&lt;<span style=color:#859900;font-weight:700>int</span>&gt;&amp; <span style=color:#268bd2>prices</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#859900;font-weight:700>int</span> <span style=color:#268bd2>buy</span>=<span style=color:#268bd2>prices</span>[<span style=color:#2aa198;font-weight:700>0</span>];
+</span></span><span style=display:flex><span>        <span style=color:#859900;font-weight:700>int</span> <span style=color:#268bd2>res</span>=<span style=color:#2aa198;font-weight:700>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#859900>for</span>(<span style=color:#859900>auto</span> <span style=color:#268bd2>num</span>:<span style=color:#268bd2>prices</span>){
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//低就买入
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#859900>if</span>(<span style=color:#268bd2>num</span>&lt;<span style=color:#268bd2>buy</span>){
+</span></span><span style=display:flex><span>                <span style=color:#268bd2>buy</span>=<span style=color:#268bd2>num</span>;
 </span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//高就卖出
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(num<span style=color:#f92672>&gt;</span>buy){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//利润更高就更新res
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                res<span style=color:#f92672>=</span>(num<span style=color:#f92672>-</span>buy)<span style=color:#f92672>&gt;</span>res<span style=color:#f92672>?</span>(num<span style=color:#f92672>-</span>buy)<span style=color:#f92672>:</span>res;
+</span></span><span style=display:flex><span>            <span style=color:#93a1a1;font-style:italic>//高就卖出
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>            <span style=color:#859900>if</span>(<span style=color:#268bd2>num</span>&gt;<span style=color:#268bd2>buy</span>){
+</span></span><span style=display:flex><span>                <span style=color:#93a1a1;font-style:italic>//利润更高就更新res
+</span></span></span><span style=display:flex><span><span style=color:#93a1a1;font-style:italic></span>                <span style=color:#268bd2>res</span>=(<span style=color:#268bd2>num</span>-<span style=color:#268bd2>buy</span>)&gt;<span style=color:#268bd2>res</span>?(<span style=color:#268bd2>num</span>-<span style=color:#268bd2>buy</span>):<span style=color:#268bd2>res</span>;
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
+</span></span><span style=display:flex><span>        <span style=color:#859900>return</span> <span style=color:#268bd2>res</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>将当前位置当成最低点买入，遇到更低的价格就买入，遇到更高的价格就卖出，出现更高利润就更新，相当于模拟出所有的买入和卖出的情况，从而可以挑选出最高的利润</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/55.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/ rel=next title=55.跳跃游戏><i class="fa fa-chevron-left"></i> 55.跳跃游戏</a></div><div class="post-nav-prev post-nav-item"><a href=/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/ rel=prev title=122.买卖股票的最佳时机II>122.买卖股票的最佳时机II
