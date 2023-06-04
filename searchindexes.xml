@@ -1,4 +1,108 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>134.加油站</title><url>/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</url><categories><category>leetcode</category></categories><tags><tag>贪心算法</tag></tags><content type="html"><![CDATA[ ⛽134.加油站
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>860.柠檬水找零</title><url>/post/860.%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/</url><categories><category>leetcode</category></categories><tags><tag>贪心算法</tag></tags><content type="html"><![CDATA[ 🍋860.柠檬水找零
+在柠檬水摊上，每一杯柠檬水的售价为 5 美元。
+顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。
+每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。
+注意，一开始你手头没有任何零钱。
+如果你能给每位顾客正确找零，返回 true ，否则返回 false 。
+示例 示例 1：
+输入：[5,5,5,10,20] 输出：true 解释： 前 3 位顾客那里，我们按顺序收取 3 张 5 美元的钞票。 第 4 位顾客那里，我们收取一张 10 美元的钞票，并返还 5 美元。 第 5 位顾客那里，我们找还一张 10 美元的钞票和一张 5 美元的钞票。 由于所有客户都得到了正确的找零，所以我们输出 true。 示例 2：
+输入：[5,5,10] 输出：true 示例 3：
+输入：[10,10] 输出：false 示例 4：
+输入：[5,5,10,10,20] 输出：false 解释： 前 2 位顾客那里，我们按顺序收取 2 张 5 美元的钞票。 对于接下来的 2 位顾客，我们收取一张 10 美元的钞票，然后返还 5 美元。 对于最后一位顾客，我们无法退回 15 美元，因为我们现在只有两张 10 美元的钞票。 由于不是每位顾客都得到了正确的找零，所以答案是 false。 提示：
+0 &lt;= bills.length &lt;= 10000 bills[i] 不是 5 就是 10 或是 20 思路 基本思想 第一想法就是顾客之间进行组合，10美元的顾客需要先有一个5美元的顾客消费，20美元的顾客需要有一个10美元，一个5美元的顾客消费或者三个5美元的顾客消费
+这样才能保证可以找零
+但是看到示例4发现还需要知道每种金额的数量，虽然余额为20，但是因为是两张10美金，所以无法给20美金的顾客正确找零，也就是找不开
+所以可以维护两个标志，分别是5美金和10美金的个数，遇到不同的顾客对应处理不同的标志
+执行流程 遍历容器，设置两个标志记录5美金和10美金的数量
+遇到5美金的顾客，直接将记录5的标志++
+遇到10美金的顾客，判断是否还有5美金，没有返回false
+遇到20美金的顾客，先判断是否还有10+5的组合，再判断是否还有3*5的组合，没有返回false
+遍历结束都没有出现无法找零的情况，返回true
+只有10美金和20美金才找零，而10美金只能给20美金找零，5美金可以给10和20美金找零，更为通用，所以尽量把通用的5美元放在最后用
+和小商贩卖菜是一样的道理，都希望手上零钱更多
+代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 class Solution { public: bool lemonadeChange(vector&lt;int&gt;&amp; bills) { int five=0; int ten=0; for(auto elem : bills){ //5美金，不用找零 if(elem==5){ ++five; } //10美金 if(elem==10){ //够找零 if(five&gt;0){ five--; ten++; } else{ return false; } } //20美金 if(elem==20){ //优先使用10+5的找零组合 if(ten&gt;0&amp;&amp;five&gt;0){ ten--; five--; } //在使用3*5的找零组合 else if(five&gt;=3){ five-=3; } else{ return false; } } } //遍历结束都没有出现无法找零的情况 return true; } }; 总结 只需要简单模拟消费和找零的情况即可，遇到20美元时，优先使用10+5的找零组合，尽可能留下通用的5美元，防止后面出现余额足够但是找不开（示例4）的情况
+]]></content></entry><entry><title>135.分发糖果</title><url>/post/135.%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/</url><categories><category>leetcode</category></categories><tags><tag>贪心算法</tag></tags><content type="html"><![CDATA[ 🍬135.分发糖果
+老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。
+你需要按照以下要求，帮助老师给这些孩子分发糖果：
+每个孩子至少分配到 1 个糖果。 相邻的孩子中，评分高的孩子必须获得更多的糖果。 相邻孩子评分相同是可以分配相同的糖果 那么这样下来，老师至少需要准备多少颗糖果呢？
+示例 示例 1:
+输入: [1,0,2] 输出: 5 解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。 示例 2:
+输入: [1,2,2] 输出: 4 解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。 思路 基本思想 容器不能排序，否则最开始相邻的孩子可能不相邻，拆解规则二，相邻的孩子中分数高的糖果多
+这个规则可以拆分成两个规则，分数比左边高，糖果比左边多，分数比右边高，糖果比右边多
+初始状态下每个小孩都有一个糖果
+右大于左，右边小孩糖果数=左边小孩糖果数+1 左大于右，左边小孩糖果数=右边小孩糖果数+1 所以需要经过两次统计，两次统计的结果综合起来才是最终的结果
+执行流程 从前向后遍历，如果右边小孩的分数大于左边小孩，糖果书就比左边小孩多1，完成第一阶段的统计
+接下来判断左边小孩是不是比右边小孩分数高，是的话糖果数也要变化，这里必须从后向前变化
+因为统计的是左&gt;右的情况，右边的结果直接影响到左边的结果，所以右边的要先统计
+想不明白可以拿[1,2,87,87,87,2,1]举例，如果从前向后统计左&gt;右的情况得到的糖果数组为
+[1,2,3,1,2,2,1],而从后向前统计得到的糖果数组为[1,2,3,1,3,2,1]，原因就是从前向后统计最右边的2的影响无法传递给最右边的87
+可以将统计和合并的工作放在一起，不用统计完成之后再合并
+代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 class Solution { public: //统计完成之后再合并 int candy(vector&lt;int&gt;&amp; ratings) { //初始状态下每个人一个糖果 vector&lt;int&gt; candy(ratings.size(),1); vector&lt;int&gt; candy2(ratings.size(),1); int res=0; //统计右&gt;左的情况 for(int i=1;i&lt;ratings.size();++i){ if(ratings[i]&gt;ratings[i-1]){ candy[i]=candy[i-1]+1; } } //统计左&gt;右的情况 for(int i=ratings.size()-2;i&gt;=0;--i){ if(ratings[i]&gt;ratings[i+1]){ //取大的情况 candy[i]=max(candy[i+1]+1,candy[i]); } } //将两种情况合并，宁可多发也不能少发 //统计结果 for(int i=0;i&lt;candy.size();++i){ res+=candy[i]; } return res; } }; 如果理解不了上面的代码，可以看下面的代码，将两种情况分开统计，最后合并
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 class Solution { public: //统计完成之后再合并 int candy(vector&lt;int&gt;&amp; ratings) { //初始状态下每个人一个糖果 vector&lt;int&gt; candy1(ratings.size(),1); vector&lt;int&gt; candy2(ratings.size(),1); int res=0; //统计右&gt;左的情况 for(int i=1;i&lt;ratings.size();++i){ if(ratings[i]&gt;ratings[i-1]){ candy1[i]=candy1[i-1]+1; } } //统计左&gt;右的情况 for(int i=ratings.size()-2;i&gt;=0;--i){ if(ratings[i]&gt;ratings[i+1]){ candy2[i]=candy2[i+1]+1; } } //将两种情况合并，宁可多发也不能少发 //统计结果 for(int i=0;i&lt;candy1.size();++i){ candy1[i]=max(candy1[i],candy2[i]); res+=candy1[i]; } return res; } }; 总结 将规则2进行拆分，分为左&gt;右和右&gt;左，在统计每一种情况时统计的方向不一样
+左&gt;右时需要从后向前统计，这样先统计右边，右边的影响才能传递到左边
+右&gt;左时需要从前向后统计，这样先统计左边，左边的影响才能传递到右边
+因为将规则2进行拆分，所以统计完成之后还需要进行合并，从两次统计的结果中取一个大的，理解为宁可多分，也不要少分
+]]></content></entry><entry><title>C++11-14新标准</title><url>/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</url><categories><category>学习笔记</category></categories><tags><tag>c++</tag><tag>新标准</tag></tags><content type="html"><![CDATA[ 😄C++11-14新标准
+记录C++11&amp;14中出现的新特性，主要分为语言和标准库两部分
+语言 介绍C++11中新出现的语言特性
+Variadic Templates 总结来说就是可以接收变长参数，在标准库中的万用哈希函数hash_val以及tuple等知识都用到了Variadic Templates这个新特性，接收变长参数，将其一层一层的处理
+举一个简单的例子：
+函数printX接收的参数个数不定，假设传递n个参数，printX将n个参数分成1和n-1个，先输出一个
+然后在函数体内调用自身，传递n-1个参数，printX将n-1个参数分成1和n-2个，输出一个。。。
+就这样一层一层的调用自身，每次调用之前先减少一个参数
+最后一层剩下一个参数，调用自身传递0个参数，到了结束标志，整个打印结束
+递归调用自身，调用过程中剥离参数进行处理，使得参数变得越来越少
+总结一个变长参数的函数模板：
+1 2 3 4 5 6 7 8 template&lt;typename T,typename... Types&gt; void func(T&amp; firstArg,Types&amp; otherArgs){ // 处理firstArg //递归调用自身,少传递一个参数 func(otherArgs...); } //处理边界条件 void func(){} 如果想要知道后面的n-1个参数的大小，可以使用sizeof...(otherArgs)
+...是一个包，出现在不同参数的后面就是不同的包：
+typename...，模板参数包 Types... otherArgs，函数参数类型包 otherArgs...，函数参数包 不仅仅是函数，tuple也借用了变长参数的理论来实现自身，tuple可以存放不同的元素，在调用构造函数时，将传递进来的参数分成1和n-1，然后剩下的n-1以继承的方式交给新的tuple
+最后使用一个空tuple处理边界条件
+获取tuple中的元素时，使用head和tail，head返回1，tail返回n-1形成的tuple，在代码中先返回this，再对this进行转型
+具体的实现细节如图所示：
+函数和类的处理思路是一样的，一个是调用自身，一个是继承自身，在这个过程中减少参数量
+容器嵌套容器 最开始c++容器嵌套容器时，需要使用空格区分是容器还是输出运算符，但是c++11新标准之后，编译器已经可以智能的区分了，所以不用加空格
+1 2 vector&lt;list&lt;int&gt; &gt; //c++11之前需要加一个空格 vector&lt;list&lt;int&gt;&gt; //c++11之后不需要加空格 auto 编译器可以自动推导变量的类型，和模板或者函数重载一样，可以自动推导出参数的类型
+1 2 3 4 5 6 auto i=42//i是int类型 double f(); auto d=f();//d是double类型 vector&lt;int&gt;v1; auto it=v1.begin()//it是vector&lt;int&gt;::iterator类型 auto num;//编译失败 当参数的类型名很长，例如迭代器，或者参数的类型实在想不起来的时候，就可以使用auto，但是不推荐任何地方都是用auto，这样会降低代码的可读性
+统一初始化 c++11之前对于初始化的操作有多种不统一的方式，()、{}、=都可以用来初始化，并且每个变量支持初始化的方式不同，这就导致了初始化时会造成一些不必要的错误
+基于这个原因，c++11提出了一个统一初始化，规定任何变量都可以使用{}初始化，当然以前的方式都保留，只是给一些没有{}赋值的变量增加了这种方式
+不知道怎么初始化就用{}
+背后的原理就是将{}中的内容传递给一个initializer_list，之后initializer_list将元素传递给array，array会判断变量的构造函数能否接受initializer_list这种类型，可以的话直接初始化，不可以的话就将{}中的元素依次取出传递给要初始化的变量
+能接受initializer_list就传递initializer_list,接受不了就依次取出进行初始化
+Initializer Lists 使用initializer lists可以对变量进行统一初始化，底层使用array
+1 2 3 4 5 6 int i;//i未定义 int j{};//j有初值0 int *p;//p未定义 double d1={2.2};//d1有初值2.2 int *q{};//q有初值nullptr //相当于调用构造函数时生成了一个initializer_list&lt;&gt; 为了实现统一初始化，规定可以使用{}，编译器将{}中的内容转化成一个initializer_list&lt;&gt;类型的容器，其中存放初始化的值
+相比与variadic templates，这个容器只能存放类型一样的元素，但是元素的个数不定
+使用initializer_list初始化时，如果构造函数能接受initializer_list&lt;&gt;就直接调用这个版本的构造函数
+如果没有的话需要将initializer_list拆分，拆分出来n个元素，但是没有接收n个元素的构造函数，此时初始化就失败了
+底层使用一个迭代器
+没有匹配的initializer_list就拆分之后有没有匹配的构造函数
+容器可以接受任意数量的参数就是因为构造函数可以接受initializer_list&lt;&gt;,并且有的参数可以接收变长参数也是因为重载了接收initializer_list&lt;&gt;的版本，例如max和min
+小总结 c++11提供两种处理变长参数的方式：
+variadic templates：接收的参数不定，类型任意 initializer_list：接受的参数不定类型一致 explicit 如果使用explicit修饰构造函数，那么编译器就不会隐式的将一些动作转化成对构造函数的调用，只有显式的声明需要调用构造函数时才会调用
+c++11之前只有单个参数的非explicit构造函数有时才会提供explicit的修饰，但是c++11之后，一个以上参数的构造函数也可以使用explicit修饰
+使用explicit修饰的构造函数只能显式调用
+range for 范围for循环，可以遍历容器，语法如下：
+1 2 3 4 5 6 7 for(auto elem:coll){ cout&lt;&lt;elem&lt;&lt;endl; } //或者 for(auto&amp; elem:coll){ elem+=3; } 第一种拷贝方式无法修改元素，第二种引用方式读取到的elem可以修改，并且可以影响到原容器
+底层编译器还是使用普通的for循环实现，将容器中的元素依次取出来交给elem
+范围for循环和explicit关键字：
+原本vs中的string类型的元素可以隐式的调用C的构造函数，从而将string转化成C，但是增加了explicit关键字修饰之后，就无法转换
+=default，=delete 如果想让编译器提供默认的构造函数（包括有参和无参），只需要在对应的构造函数后加上一个=default即可，但是如果有自定义的构造函数，就不能使用=default再让编译器给一个默认的，不然会出现二义性
+=delete使用的较少，因为不想要可以直接不写，没有必要写出来又告诉编译器我不要
+对于同一个函数，=default和=delete不能并存
+主要就是使用=default告诉编译器提供一个默认版本的函数
+如果只定义了一个空类，编译器会自动地提供一些构造函数和析构函数，这些函数都是inline的，所以在调用这些函数时，会在调用处直接展开，而不是一层一层的递归调用，减少递归的开销
+如果想要其他成员不能拷贝自己的内容，就需要将拷贝构造和赋值函数定义为私有，c++11中提供了一个noncopyable类，这个类中的拷贝构造和赋值函数都是私有的，继承这个类就可以不倍拷贝
+哪些类需要自定义上述构造函数？
+若类中有指针成员，就需要自定义上述几个函数，若没有指针成员，基本上就不需要自定义这些函数
+因为指针的拷贝设计到深拷贝和浅拷贝的问题，所以需要自定义这些函数
+深拷贝和浅拷贝 简单来说浅拷贝只是对指针的拷贝，拷贝完成之后两个指针指向同一块内存，此时还不会出现问题，一旦调用析构函数，由于存在两个指针，会调用两次析构函数，但是两个指针指向同一块内存，所以会造成同一块内存的二次释放问题
+深拷贝就是新创建一个指针，将指针中的值拷贝过来放到新指针中，两个指针除了值一样，指向的内存是不一样的，所以调用析构函数时不会出现问题
+Alias Template 化名模板，也就是说给模板一个别名，后期在使用时就可以使用这个别名从而间接使用这个模板，当模板的名称太长时就可以使用简短的别名
+但是特化是还是需要使用最初的模板进行特化，不能使用别名
+例如：
+1 2 3 4 5 6 template &lt;typename T&gt; using Vec = std::vector&lt;T,MyAlloc&lt;T&gt;&gt;; //后期可以直接使用Vec作为别名 Vec&lt;int&gt; coll; //等价于 std::vector&lt;int,MyAlloc&lt;int&gt;&gt; coll; 化名模板并不单单是为了使用模板时少写几个字母
+]]></content></entry><entry><title>134.加油站</title><url>/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</url><categories><category>leetcode</category></categories><tags><tag>贪心算法</tag></tags><content type="html"><![CDATA[ ⛽134.加油站
 在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
 如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。
