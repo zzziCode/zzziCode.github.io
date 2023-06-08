@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 07 Jun 2023 21:26:34 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sat, 21 May 2022 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>Vscode文件夹配置</title><link>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 07 Jun 2023 21:26:34 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 08 Jun 2023 18:49:14 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sat, 21 May 2022 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>738.单调递增的数字</title><link>https://zzzicode.github.io/post/738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/</link><pubDate>Thu, 08 Jun 2023 18:49:14 +0800</pubDate><guid>https://zzzicode.github.io/post/738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>🔺738.单调递增的数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。&lt;/p>
+&lt;p>示例 1:&lt;/p>
+&lt;ul>
+&lt;li>输入: N = 1234&lt;/li>
+&lt;li>输出: 1234&lt;/li>
+&lt;/ul>
+&lt;p>示例 2:&lt;/p>
+&lt;ul>
+&lt;li>输入: N = 332&lt;/li>
+&lt;li>输出: 299&lt;/li>
+&lt;/ul></description></item><item><title>56.合并区间</title><link>https://zzzicode.github.io/post/56.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</link><pubDate>Thu, 08 Jun 2023 18:25:35 +0800</pubDate><guid>https://zzzicode.github.io/post/56.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</guid><description>&lt;blockquote>
+&lt;p>😄56.合并区间&lt;/p>
+&lt;/blockquote>
+&lt;p>给出一个区间的集合，请合并所有重叠的区间。&lt;/p>
+&lt;p>示例 1:&lt;/p>
+&lt;ul>
+&lt;li>输入: intervals = [[1,3],[2,6],[8,10],[15,18]]&lt;/li>
+&lt;li>输出: [[1,6],[8,10],[15,18]]&lt;/li>
+&lt;li>解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].&lt;/li>
+&lt;/ul>
+&lt;p>示例 2:&lt;/p>
+&lt;ul>
+&lt;li>输入: intervals = [[1,4],[4,5]]&lt;/li>
+&lt;li>输出: [[1,5]]&lt;/li>
+&lt;li>解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。&lt;/li>
+&lt;li>注意：输入类型已于2019年4月15日更改。 请重置默认代码定义以获取新方法签名。&lt;/li>
+&lt;/ul></description></item><item><title>Vscode文件夹配置</title><link>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 07 Jun 2023 21:26:34 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote>
 &lt;p>😄vscode文件夹配置&lt;/p>
 &lt;/blockquote>
 &lt;p>配置&lt;code>.vscode&lt;/code>文件夹之后，实现cpp文件的编译和调试&lt;/p></description></item><item><title>763.划分字母区间</title><link>https://zzzicode.github.io/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/</link><pubDate>Wed, 07 Jun 2023 19:02:45 +0800</pubDate><guid>https://zzzicode.github.io/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/</guid><description>&lt;blockquote>
@@ -42,10 +71,7 @@
 &lt;li>相邻的孩子中，评分高的孩子必须获得更多的糖果。&lt;/li>
 &lt;li>相邻孩子评分相同是可以分配相同的糖果&lt;/li>
 &lt;/ul>
-&lt;p>那么这样下来，老师至少需要准备多少颗糖果呢？&lt;/p></description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Sun, 04 Jun 2023 09:15:23 +0800</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
-&lt;p>😄C++11-14新标准&lt;/p>
-&lt;/blockquote>
-&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
+&lt;p>那么这样下来，老师至少需要准备多少颗糖果呢？&lt;/p></description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
 &lt;p>⛽134.加油站&lt;/p>
 &lt;/blockquote>
 &lt;p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 &lt;code>gas[i]&lt;/code> 升。&lt;/p>
@@ -165,4 +191,7 @@ PicGo
 &lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item><item><title>不从零开始搭建博客</title><link>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 22 May 2023 20:41:29 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
 &lt;p>不从零开始搭建自己的博客&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item><item><title>关于zzzi</title><link>https://zzzicode.github.io/about.html</link><pubDate>Thu, 09 Jun 2022 20:12:52 +0800</pubDate><guid>https://zzzicode.github.io/about.html</guid><description>Hi 👋 Welcome to zzzi&amp;rsquo;s blog! 🎉🎉🎉 🏫 Studing at @ HEU 🏡 Living at HaErBin 📙 《C++ Primer》 🧐 Try to find a good job 🤔 論文を出版したい</description></item><item><title>站点示例</title><link>https://zzzicode.github.io/flinks.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zzzicode.github.io/flinks.html</guid><description>如想交换本站友情链接，请在评论区留下你的站点信息，格式参考如下： 1 2 3 4 - name: Hugo-NexT desc: Hugo NexT 官方预览网站。 avatar: https://hugo-next.eu.org/imgs/hugo_next_avatar.png link: https://hugo-next.eu.org</description></item></channel></rss>
+&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item><item><title>关于zzzi</title><link>https://zzzicode.github.io/about.html</link><pubDate>Thu, 09 Jun 2022 20:12:52 +0800</pubDate><guid>https://zzzicode.github.io/about.html</guid><description>Hi 👋 Welcome to zzzi&amp;rsquo;s blog! 🎉🎉🎉 🏫 Studing at @ HEU 🏡 Living at HaErBin 📙 《C++ Primer》 🧐 Try to find a good job 🤔 論文を出版したい</description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
+&lt;p>😄C++11-14新标准&lt;/p>
+&lt;/blockquote>
+&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item><item><title>站点示例</title><link>https://zzzicode.github.io/flinks.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zzzicode.github.io/flinks.html</guid><description>如想交换本站友情链接，请在评论区留下你的站点信息，格式参考如下： 1 2 3 4 - name: Hugo-NexT desc: Hugo NexT 官方预览网站。 avatar: https://hugo-next.eu.org/imgs/hugo_next_avatar.png link: https://hugo-next.eu.org</description></item></channel></rss>
