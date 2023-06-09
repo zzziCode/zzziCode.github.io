@@ -76,7 +76,10 @@
 &lt;li>相邻的孩子中，评分高的孩子必须获得更多的糖果。&lt;/li>
 &lt;li>相邻孩子评分相同是可以分配相同的糖果&lt;/li>
 &lt;/ul>
-&lt;p>那么这样下来，老师至少需要准备多少颗糖果呢？&lt;/p></description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
+&lt;p>那么这样下来，老师至少需要准备多少颗糖果呢？&lt;/p></description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Sun, 04 Jun 2023 09:15:23 +0800</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
+&lt;p>😄C++11-14新标准&lt;/p>
+&lt;/blockquote>
+&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
 &lt;p>⛽134.加油站&lt;/p>
 &lt;/blockquote>
 &lt;p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 &lt;code>gas[i]&lt;/code> 升。&lt;/p>
@@ -196,7 +199,4 @@ PicGo
 &lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item><item><title>不从零开始搭建博客</title><link>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 22 May 2023 20:41:29 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
 &lt;p>不从零开始搭建自己的博客&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
-&lt;p>😄C++11-14新标准&lt;/p>
-&lt;/blockquote>
-&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item></channel></rss>
+&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item></channel></rss>
