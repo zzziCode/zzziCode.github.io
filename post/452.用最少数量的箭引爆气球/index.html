@@ -71,7 +71,7 @@
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>尽可能的将气球挤在一起，这样就能尽可能少的拿箭引爆，排序之后就求气球之间的交集，判断交集时边界重叠也算有交集。</p><p>但是[10,16],[12,14],[15,18]这种情况就是两个交集，需要使用<strong>两只</strong>箭，而不是一只，所以每次遍历都需要更新最小右边界</p><p>因为如果不更新最小右边界，[15,18]就会和[10,16]比较，就会认为有边界，<strong>其实[15,18]已经与[12,14]没有交集了</strong>，一只箭无法引爆他们两个，所以需要更新最小右边界</p><blockquote><p>准备工作做完之后，在记录标志才符合要求</p></blockquote></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/ rel=next title=435.无重叠区间><i class="fa fa-chevron-left"></i> 435.无重叠区间</a></div><div class="post-nav-prev post-nav-item"><a href=/post/406.%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/ rel=prev title=406.根据身高重建队列>406.根据身高重建队列
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
-<span itemprop=copyrightYear>2022 - 2023</span>
+<span itemprop=copyrightYear>2023</span>
 <span class=with-love><i class="fa fa-heart"></i></span>
 <span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
 <script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>

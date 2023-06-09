@@ -229,7 +229,7 @@
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>每一层递归都从头开始找到一个空白位置尝试填充，合法就向下找到下一个空白位置继续填充，非法就返回上一层，更换一个填充元素再向下，如果无法填充就再向上，更换元素之后再向下，来来回回的进行递归回溯，直到9*9的位置都被填满。</p><p>其实每一层递归可以不从头开始，可以从当前位置的下一个位置开始，也就是记住当前位置的行，但是<strong>不能</strong>记住列，因为搜索下一行时需要从下一行的头开始，不能从col开始，否则会丢掉情况😄</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%9e%e6%ba%af%e6%b3%95>回溯法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ rel=next title=Linux学习笔记><i class="fa fa-chevron-left"></i> Linux学习笔记</a></div><div class="post-nav-prev post-nav-item"><a href=/post/51.n%E7%9A%87%E5%90%8E/ rel=prev title=51.N皇后>51.N皇后
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
-<span itemprop=copyrightYear>2022 - 2023</span>
+<span itemprop=copyrightYear>2023</span>
 <span class=with-love><i class="fa fa-heart"></i></span>
 <span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
 <script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>

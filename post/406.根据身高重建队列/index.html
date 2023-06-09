@@ -83,7 +83,7 @@
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>题目要求第i个人之前至少有ki个人不矮于自己,所以先进行身高的降序,让不矮于自己的<strong>全</strong>在自己前面,在进行ki的升序,形成[7,0],[7,<strong>1</strong>]的情况\</p><blockquote><blockquote><p>这里的不矮于自己的先全在自己前面就是一个贪心</p><p>然后不矮于自己的太多了,只要ki个,就把vector移动到ki上即可</p></blockquote></blockquote><p>之后再进行插入,由于已经有序,大的会先插入,小的插入时会将大的挤到后面,形成有ki个不矮于自己的局面,大的本来插入到ki位置上,但是被后来的小元素<font color=red>挤到后面也不影响</font>,因为前面多出的元素是<strong>小</strong>元素</p><p>并且由于插入比较频繁,所以使用list,最后将链表转换成vector</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/452.%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83/ rel=next title=452.用最少数量的箭引爆气球><i class="fa fa-chevron-left"></i> 452.用最少数量的箭引爆气球</a></div><div class="post-nav-prev post-nav-item"><a href=/post/860.%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/ rel=prev title=860.柠檬水找零>860.柠檬水找零
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
-<span itemprop=copyrightYear>2022 - 2023</span>
+<span itemprop=copyrightYear>2023</span>
 <span class=with-love><i class="fa fa-heart"></i></span>
 <span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
 <script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>

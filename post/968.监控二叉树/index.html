@@ -209,7 +209,7 @@
 </span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>层序遍历模拟过程中总会丢掉一些情况，而题目的基本思想就是<strong>孩子节点</strong>中任有一个未被监控覆盖，当前节点就需要装摄像头，叶子节点属于孩子节点，所以不装摄像头，从下向上遍历模拟器来更方便，所以选择后序遍历，分为三种情况：</p><ol><li>两个孩子节点都被监控覆盖，当前节点不用管他们，只需让自己的父节点装监控覆盖到自己即可</li><li>两个孩子节点任有一个未被覆盖，此时当前节点需要装监控才能覆盖到他们</li><li>两个孩子任有一个有监控，当前节点<code>node</code>可以被覆盖，<code>node</code>的父节点不用管它，只需管好自己</li></ol><blockquote><p>2，3的顺序不能调换</p></blockquote></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/external-link/ rel=next title=开始><i class="fa fa-chevron-left"></i> 开始</a></div><div class="post-nav-prev post-nav-item"><a href=/post/738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/ rel=prev title=738.单调递增的数字>738.单调递增的数字
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
-<span itemprop=copyrightYear>2022 - 2023</span>
+<span itemprop=copyrightYear>2023</span>
 <span class=with-love><i class="fa fa-heart"></i></span>
 <span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
 <script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>
