@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 11 Jun 2023 18:51:26 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/rss.xml" rel="self" type="application/rss+xml"/><item><title>746.使用最小花费爬楼梯</title><link>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:51:26 +0800</pubDate><guid>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄746.使用最小花费爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。&lt;/p>
+&lt;p>你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。&lt;/p>
+&lt;p>请你计算并返回达到楼梯顶部的最低花费。&lt;/p></description></item><item><title>70.爬楼梯</title><link>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:16:36 +0800</pubDate><guid>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄70.爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。&lt;/p>
+&lt;p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？&lt;/p>
+&lt;p>注意：给定 n 是一个&lt;strong>正整数&lt;/strong>。&lt;/p>
+&lt;p>示例 ：&lt;/p>
+&lt;ul>
+&lt;li>输入： 2&lt;/li>
+&lt;li>输出： 2&lt;/li>
+&lt;li>解释： 有两种方法可以爬到楼顶。
+&lt;ul>
+&lt;li>1 阶 + 1 阶&lt;/li>
+&lt;li>2 阶&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>
