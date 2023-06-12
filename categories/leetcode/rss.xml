@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>leetcode on zzzi的小站</title><link>https://zzzicode.github.io/categories/leetcode/</link><description>Recent content in leetcode on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 11 Jun 2023 18:51:26 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/leetcode/rss.xml" rel="self" type="application/rss+xml"/><item><title>746.使用最小花费爬楼梯</title><link>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:51:26 +0800</pubDate><guid>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>leetcode on zzzi的小站</title><link>https://zzzicode.github.io/categories/leetcode/</link><description>Recent content in leetcode on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 12 Jun 2023 18:44:56 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/leetcode/rss.xml" rel="self" type="application/rss+xml"/><item><title>63.不同路径II</title><link>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</link><pubDate>Mon, 12 Jun 2023 18:44:56 +0800</pubDate><guid>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</guid><description>&lt;blockquote>
+&lt;p>😄63.不同路径II&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。&lt;/p>
+&lt;p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？&lt;/p>
+&lt;p>网格中的**障碍物（1）&lt;strong>和&lt;/strong>空位置（0）**分别用 1 和 0 来表示。&lt;/p>
+&lt;blockquote>
+&lt;p>相比于62题，只是多了一个障碍物，相当于有的网格去不了&lt;/p>
+&lt;/blockquote></description></item><item><title>62.不同路径</title><link>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</link><pubDate>Mon, 12 Jun 2023 18:19:22 +0800</pubDate><guid>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</guid><description>&lt;blockquote>
+&lt;p>😄62.不同路径&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能&lt;strong>向下&lt;/strong>或者&lt;strong>向右&lt;/strong>移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。&lt;/p>
+&lt;p>问总共有多少条不同的路径？&lt;/p></description></item><item><title>746.使用最小花费爬楼梯</title><link>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:51:26 +0800</pubDate><guid>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
 &lt;p>😄746.使用最小花费爬楼梯&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。&lt;/p>
