@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>343.整数拆分</title><url>/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 0️⃣343.整数拆分
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>96.不同的二叉搜索树</title><url>/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 🌴96.不同的二叉搜索树
+给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？返回满足题意的二叉搜索树的种数。
+示例 1 2 输入：n = 3 输出：5 思路 基本思想 先从一个节点的树向后推导从而试图找出规律，可以发现n=3时，可以用1，2，3做根节点
+以1做根节点时剩下两个节点全在右子树，两个节点的组合方式与n=2时的组合方式一样（不看节点上的值），以2做根节点时两个节点一左一右，组合方式与n=1的组合方式一样
+所以节点数为n时形成的二叉搜索树最终搜索结果等于分别以1~n的节点为根节点，之后将序列分割成左右子树两部分之后，剩下的节点组成的结果
+在代码中的的描述为：
+1 2 3 4 5 6 7 8 //从前到后遍历最终形成n的结果 for (int i = 1; i &lt;= n; i++) { //对于i个节点，分别与1~i作为根节点 for (int j = 1; j &lt;= i; j++) { //将其分成左右子树两部分 dp[i] += dp[j - 1] * dp[i - j]; } } 执行流程 从前到后遍历，为了最终统计n的结果提供参考
+对于每个节点数i，都以1~i中的每一个节点作为根节点，从而将序列分割成左右两部分，最终节点数i的结果由所有的分割结果相加得到
+最终遍历结束返回n的结果就是最终的答案
+代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 class Solution { public: int numTrees(int n) { vector&lt;int&gt; res(n+1,0); res[0]=1;//初始化 for(int i=1;i&lt;=n;++i){ for(int j=1;j&lt;=i;++j){ //以j为根节点从而将i分割成两部分 res[i]+=res[j-1]*res[i-j]; } } return res[n]; } }; 总结 本题中从前向后遍历，后面的节点数形成的二叉搜索树利用了前面的节点数形成的二叉搜索树，只要两个二叉搜索树的结构一样，不管节点上的数是什么，都算做相同的二叉搜索树
+例如节点23，24形成的二叉搜索树与2，3形成的二叉搜索树结构一样，所以可以直接作为n=2形成的二叉搜索树，明白这个道理之后，就可以得到动态规划方程
+每个数都可以成为根节点，并且成为根节点之后会把序列分成左右子树两部分
+]]></content></entry><entry><title>343.整数拆分</title><url>/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 0️⃣343.整数拆分
 给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
 示例 :
 输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。 说明: 你可以假设 n 不小于 2 且不大于 58。 思路 基本思想 对于整数n拆分之后，形成的最大乘积可以由拆分得到的几个部分的最大乘积相乘得到，所以可以使用动态规划来做
@@ -60,7 +73,7 @@ swap.cpp文件如下：
 直接编译
 1 2 3 4 5 6 7 8 #直接编译main.cpp和src目录下的swap.cpp，之后指定库文件路径 #main文件运行时会调用inlucde目录下的swap.h，swap.h文件会调用src目录下的swap文件 g++ main.cpp src/swap.cpp -Iinclude -o normal_main #此时生成一个a.out文件，可以直接执行，执行结果为： #交换之前： #10 20 #交换之后： #20 10 静态链接，在src目录下进行两步静态链接，之后再执行main.cpp文件
 1 2 3 4 5 6 7 8 9 10 11 #将src目录下的swap.cpp文件编译成静态库文件 #第一步，在src下将swap.cpp编译成swap.o目标文件 g++ -c -I../include swap.cpp -o swap.o #第二步，在src下将swap.o目标文件编译成静态库文件 ar rs libswap.a swap.o #第三步，生成可执行的static_main文件 #-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名 g++ main.cpp -Iinclude -Lsrc -lswap -o static_main 动态链接
-1 2 3 4 5 6 7 8 9 10 11 12 13 #将src目录下的swap.cpp文件编译成动态库文件 #第一步，在src下将swap.cpp编译成swap.o目标文件 #-I../include代表头文件目录 #-fPIC代表与路径无关，因为是动态链接，所以可能被加载到内存的任意地址 g++ -c -I../include -fPIC swap.cpp -o swap.o #第二步，在src下将swap.o目标文件编译成静态库文件 g++ -shared swap.o -o libswao.so #第三步，生成可执行的dynamic_main文件 #-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名 g++ main.cpp -Iinclude -Lsrc -lswap -o static_main 执行两个文件
+1 2 3 4 5 6 7 8 9 10 11 12 13 #将src目录下的swap.cpp文件编译成动态库文件 #第一步，在src下将swap.cpp编译成swap.o目标文件 #-I../include代表头文件目录 #-fPIC代表与路径无关，因为是动态链接，所以可能被加载到内存的任意地址 g++ -c -I../include -fPIC swap.cpp -o swap.o #第二步，在src下将swap.o目标文件编译成静态库文件 g++ -shared swap.o -o libswao.so #第三步，生成可执行的dynamic_main文件 #-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名 g++ main.cpp -Iinclude -Lsrc -lswap -o dynamic_main 执行两个文件
 1 2 3 4 5 6 #执行static_main，直接执行即可 ./static_main #执行dynamic_main，这里有所区别，需要加上动态链接的地址 LD_LIBRARY_PATH=src ./dynamic_main 静态链接和动态链接的区别
 静态链接：在生成可执行文件之前完成所有链接操作
 动态链接：程序执行时才进行链接，所以需要加上位置无关参数-fPIC，这样才可以在任意地方进行动态链接，执行时需要加上链接库的地址才能动态链接上
@@ -79,14 +92,82 @@ gdb [需要调试的可执行文件名]就可以进入GDB调试程序
 调试程序
 display设置想要跟踪的变量 continue继续执行 list显示断点上下五行的代码 ​	一个完整的调试步骤为：
 1 2 3 4 5 6 7 gdb debug_with_g#调试debug_with_g	b 12	#在12行增加一个断点 run	#开始运行代码 display i	#显示跟踪i的值 display sum	#显示跟踪sum的值 continue	#持续执行 #回车	#继续上一条continue指令 可以追踪sum和i的变化情况
+在vscode中配置好launch.json和tasks.json文件之后，就可以使用vscode辅助调试
 VSCode 使用xshell无法直接使用vscode连接centos，所以需要在windows下使用vscode远程连接centos，连接完成之后即可对centos中的文件进行操作
 连接centos 此种方法不需要centos有vscode，只需要远程登录centos即可
 使用vscode远程连接centos设置免密登录出现以连接字样说明远程连接成功
 打开文件夹，直接输入路径即可
 对文件进行编辑
 打开vscode可以看到主要分为以上几个部分，也可以打开linux中的终端进行常规linux操作
+此时可以在终端中使用code+路径在vscode中打开某一个文件夹进行开发
 c++开发还需要配置环境，具体的配置放在插件安装中介绍
-界面介绍 插件安装 快捷键 实战 CMake 实战]]></content></entry><entry><title>63.不同路径II</title><url>/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 😄63.不同路径II
+插件安装 使用vscode在linux下进行开发，一下三款插件必须安装：
+C/C++ 开发时可以智能提示，并且可以调用GDB进行调试
+CMake 编写CMake语言时进行智能提示
+CMake Tools
+插件使用出问题时可以尝试将插件版本降低
+快捷键 列举vscode常用快捷键
+功能 快捷键 功能 快捷键 转到文件 ctrl+p 关闭文件 ctrl+w 打开命令面板 ctrl+shift+p 当前行上移/下移 atl+up/down 打开终端 ctrl+tab 向上/向下复制一行 shift+alt+up/down 关闭侧边栏 ctrl+b 转到定义 f12 代码格式化 alt+w 变量统一重命名 f2 实战 hello 编写hello.cpp文件之后，不像windows下可以直接运行，linux下需要编译生成可执行文件才可运行
+swap 实现一个分文件编写的项目，并进行编译生成可执行文件，编译的过程参考GCC实战中的编译
+编写好swap.h和swap.cpp文件实现对两个数的交换
+交换类写好之后编写main.cpp实现两个数的交换
+编译工程，不需要配置.vscode文件夹，直接使用GCC进行编译
+直接编译
+1 g++ main.cpp src/swap.cpp -Iinclude -o main_normal 静态编译
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 #将src目录下的swap.cpp文件编译成静态库文件 #第一步，在src下将swap.cpp编译成swap.o目标文件 g++ -c -I../include swap.cpp -o swap.o #第二步，在src下将swap.o目标文件编译成静态库文件 ar rs libswap.a swap.o #第三步，生成可执行的main_static文件 #-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名 g++ main.cpp -Iinclude -Lsrc -lswap -o main_static #第四步，运行 ./main_static 动态编译
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #将src目录下的swap.cpp文件编译成动态库文件 #第一步，在src下将swap.cpp编译成swap.o目标文件 #-I../include代表头文件目录 #-fPIC是位置无关编码，代表与路径无关 #因为是动态链接，所以可能被加载到内存的任意地址 g++ -c -I../include -fPIC swap.cpp -o swap.o #第二步，在src下将swap.o目标文件编译成静态库文件 g++ -shared swap.o -o libswao.so #第三步，生成可执行的main_dynamic文件 #-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名 g++ main.cpp -Iinclude -Lsrc -lswap -o main_dynamic #第四步，运行，这里有所区别，需要加上动态链接的地址 LD_LIBRARY_PATH=src ./main_dynamic 最终形成的文件树为：
+CMake 介绍 cmake是一个跨平台的安装编译工具，可以用简单的语句描述所有平台的编译过程
+基本语法
+基本语法格式：指令(参数1 参数2)
+参数使用括号包含 参数之间使用空格或者分号隔开 指令不区分大小写 参数和变量区分大小写 变量使用${}取值，和shell编程一样，if语句中直接使用变量名取值 1 2 3 set(HELLO hello.cpp) add_executable(hello main.cpp hello.cpp) ADD_EXECUTABLE(hello main.cpp ${HELLO}) 指令和变量 重要指令 cmake_minimum_required：指定cmake的最小版本要求
+1 2 #指定最小版本为2.8.3 cmake_minimum_required(VERSION 2.8.3) project：定义工程名称，并且可以指定工程支持的语言
+1 2 #指定工程名为HELLOWORLD project(HELLOWORLD [CXX][C])#后面的[]是可选项 set：显示的定义变量
+1 2 #定义SRC变量的值为hello.cpp，main.cpp set(SRC hello.cpp main.cpp) include_directories：添加工程编译时的头文件搜索路径
+1 2 3 #将/usr/include/myfolder和./include两个路径加入工程的头文件搜索路径 #头文件在这两个目录下查找 include_directories(/usr/include/myfolder ./include) link_directories：添加工程链接时的库文件搜索路径
+1 2 #将/usr/lib/mylib 和./lib添加到工程的库文件搜索路径 link_directories(/usr/lib/mylib ./lib) 库文件和头文件的区别：库文件链接时使用，无法直接阅读，头文件编译时使用，可以直接阅读
+add_library：生成动态链接库文件
+1 2 3 #通过SRC路径生成一个libhello.so的动态链接库文件 #SHARED表示动态链接，STATIC表示静态链接，hello是最后生成的库文件名称 add_library(hello SHARED ${SRC}) add_compile_options：添加编译参数
+1 2 #编译时产生警告信息，指定std版本，并对代码进行优化(-o2) add_compile_options(-wall -std=c++11 -o2) add_executable：生成可执行文件
+1 2 #编译main.cpp文件生成可执行的main文件 ad_executable(main main.cpp) target_link_libraries：为target添加需要链接的共享库，相当于-l参数
+1 2 #将hello动态库文件连接到可执行文件main上 target_link_libraries(main hello) add_subdirectory：给工程添加存放源文件的子目录
+1 2 #添加src子目录，src下面需要有CMakeLists.txt文件 add_subdirectory(src) aux_source_directory：将一个目录中的所有源文件存储在一个变量中，被用来临时构建源文件列表
+1 2 3 4 5 #定义SRC变量，存放当前目录下的所有源文件，SRC指代当前目录下的所有源文件 aux_source_directory(./ SRC) #编译SRC代表的全部源文件，这样就不用依次一个一个的编译源文件了 #编译之后生成一个main可执行文件 aux_source_directory(main ${SRC}) 常用变量 CMAKE_C_FLAGS：gcc编译选项
+CMAKE_CXX_FLAGS：g++编译选项
+1 2 #在CMAKE_CXX_FLAGS编译选项之后追加一个-std=c++11，并重新赋值给CMAKE_CXX_FLAGS set(CMAKE_CXX_FLAGS &#34;CMAKE_CXX_FLAGS -std=c++11&#34;) CMAKE_BUILD_TYPE：编译类型(debug,release)
+1 2 3 4 #设定编译类型为debug，调试时需要选择debug set(CMAKE_BUILD_TYPE Debug) #设定编译类型为release，发布时需要选择release set(CMAKE_BUILD_TYPE Release) CMAKE_C_COMPILER：指定C编译器
+CMAKE_CXX_COMPILER：指定C++编译器
+EXECUTABLE_OUTPUT_PATH：可执行文件输出的存放路径
+LIBRARY_OUTPUT_PATH：库文件输出的存放路径
+如果需要对项目尽进行有条件的编译时，需要用到if-else语句
+编译工程 两种方式设置编译规则：
+包含源文件的子文件夹包含CMakeLists.txt文件，主目录的CMakeLists.txt通过add_subdirectory 添加子目录即可
+包含源文件的子文件夹自己写编译规则，在主文件下只需要简单添加子目录即可
+包含源文件的子文件夹未包含CMakeLists.txt文件，子目录编译规则体现在主目录的 CMakeLists.txt中；
+包含源文件的子文件夹编译规则不自己写，全部交给主文件编写
+对于每一个包含源文件的目录都可以编写一个CMakeLists.txt，最后在主文件中包含它们
+编译主文件中的CMakeLists.txt就可以对整个工程进行编译
+编译过程 自定义CMakeLists.txt文件，使用前面介绍的语法制定编译规则 执行cmake PATH命令产生MakeFile(PATH是主文件下的CMakeLists.txt所在的路径) 按照生成的MakeFile中规则执行make命令进行编译cpp文件，最终生成可执行文件 构建方式 内部构建：直接在当前目录下编译CMakeLists.txt文件生成MakeFile文件，这些所有的文件都会存放到当前目录下，变得臃肿
+外部构建：新建一个build文件夹，之后在这个build文件夹中译CMakeLists.txt文件生成MakeFile文件，这些所有文件都会存放到build文件夹中，使得项目变得清爽
+一个是将MakeFile散落放在当前目录下，一个是将MakeFile打包放在专门的build目录下
+实战 基于hello和swap项目来进行实战，编写CMakeLists.txt文件，使用cmake PATH 生成MakeFile文件，最终使用make进行编译
+最终的实现效果与执行g++命令是一样的
+hello 单文件的项目直接编写CMakeLists.txt
+编写CMakeLists.txt
+1 2 3 4 5 6 7 8 #指定cmake的最小版本 cmake_minimum_required(VERSION 2.8) #执行项目名称 project(HELLOWORLD) #多文件项目指定头文件搜索路径 #include_directories(./include) #编译指定的cpp文件 add_executable(helloworld_cmake hello.cpp) 生成MakeFile文件，使用外部构建方式，将生成的中间文件全部放到build文件夹中
+执行make命令生成可执行文件 swap 多文件的项目需要指定头文件的搜索路径，其余的步骤与hello项目中一样，指定项目名称，编译cpp文件生成可执行文件即可
+实战 编写一个多文件的项目进行编译，项目的结构为：
+直接编译
+使用CMakeLists.txt文件编译
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 cmake_minimum_required(VERSION 2.8) project(TEST) #添加编译参数，-g是为了生成可以调试的文件 set(CMAKE_CXX_FLAGS &#34;${CMAKE_CXX_FLAGS} -std=c++11 -g&#34;) include_directories(${CMAKE_SOURCE_DIR}/include) #设置变量 set( SRC main.cpp src/gun.cpp src/soldier.cpp ) add_executable(main_cmake ${SRC}) 最终形成的文件树为
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 [root@iZ0jl2zspvl2lcwsxfru86Z vscode_test]# tree . . ├── build │ ├── CMakeCache.txt │ ├── CMakeFiles │ │ ├── 2.8.12.2 │ │ │ ├── CMakeCCompiler.cmake │ │ │ ├── CMakeCXXCompiler.cmake │ │ │ ├── CMakeDetermineCompilerABI_C.bin │ │ │ ├── CMakeDetermineCompilerABI_CXX.bin │ │ │ ├── CMakeSystem.cmake │ │ │ ├── CompilerIdC │ │ │ │ ├── a.out │ │ │ │ └── CMakeCCompilerId.c │ │ │ └── CompilerIdCXX │ │ │ ├── a.out │ │ │ └── CMakeCXXCompilerId.cpp │ │ ├── cmake.check_cache │ │ ├── CMakeDirectoryInformation.cmake │ │ ├── CMakeOutput.log │ │ ├── CMakeTmp │ │ ├── main_cmake.dir │ │ │ ├── build.make │ │ │ ├── cmake_clean.cmake │ │ │ ├── CXX.includecache │ │ │ ├── DependInfo.cmake │ │ │ ├── depend.internal │ │ │ ├── depend.make │ │ │ ├── flags.make │ │ │ ├── link.txt │ │ │ ├── main.cpp.o │ │ │ ├── progress.make │ │ │ └── src │ │ │ ├── gun.cpp.o │ │ │ └── soldier.cpp.o │ │ ├── Makefile2 │ │ ├── Makefile.cmake │ │ ├── progress.marks │ │ └── TargetDirectories.txt │ ├── cmake_install.cmake │ ├── main_cmake │ └── Makefile ├── CMakeLists.txt ├── include │ ├── gun.h │ └── soldier.h ├── main.cpp ├── main_normal └── src ├── gun.cpp └── soldier.cpp 10 directories, 39 files 使用vscode进行调试 需要配置launch.json和tasks.json文件，其中launch.json文件中最重要的两个参数是program和preLaunchTask
+其中program指向了想要调试和运行的可执行文件，一般存放在./build文件夹下
+preLaunchTask指向了tasks.json文件中的某一个任务，在launch.json文件执行之前执行什么任务，一般设置一个cmake和make对项目进行重新编译，这样可以实时的进行调试，不用每次都手动编译
+提供一个tasks.json供参考：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 { &#34;version&#34;: &#34;2.0.0&#34;, &#34;options&#34;: { &#34;cwd&#34;: &#34;${workspaceFolder}/build&#34; }, &#34;tasks&#34;: [ { &#34;type&#34;: &#34;shell&#34;, &#34;label&#34;: &#34;cmake&#34;, &#34;command&#34;: &#34;cmake&#34;, //相当于执行cmake.. 对cpp文件编译生成MakeFile文件 &#34;args&#34;: [ &#34;..&#34; ] }, { &#34;label&#34;: &#34;make&#34;, &#34;group&#34;: { &#34;kind&#34;: &#34;build&#34;, &#34;isDefault&#34;: true }, &#34;command&#34;: &#34;make&#34;, &#34;args&#34;: [ ] }, { &#34;label&#34;: &#34;Build&#34;, &#34;dependsOrder&#34;: &#34;sequence&#34;, // 按列出的顺序执行任务依赖项 //先进行cmake..在进行make，相当于写了一个自动化脚本 &#34;dependsOn&#34;:[ &#34;cmake&#34;, &#34;make&#34; ] } ] } 配置好这两个文件之后，每次调试运行都会自动执行cmake..和make命令对项目进行重新编译，从而实时的对项目进行调试运行
+总结 在linux中安装GCC和GDB之后就可以在linux中编写c++项目，对其运行和调试，其中GCC负责项目的编译运行，可以使用g++命令将cpp文件编译成可执行文件，GDB可以对项目进行调试
+CMake可以编写编译的规则，将大型项目编译的管理集成到一个CMakeLists.txt文件中，实现自动化的编译
+vscode中远程连接到linux中之后，可以直接用快捷键对其进行编译和调试，主要是需要配置launch.json和tasks.json文件，并且知道他们两个之间的关系，配置好后每次都实时的重新编译运行项目从而实现直接对项目进行调试
+]]></content></entry><entry><title>63.不同路径II</title><url>/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 😄63.不同路径II
 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。
 现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
@@ -194,7 +275,7 @@ level%3=0，此时只需要统计余3得2的层中有多少节点即可 level%3=
 改变tasks.json文件中的args配置
 配置文件 tasks.json
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 { &#34;tasks&#34;: [ { &#34;type&#34;: &#34;cppbuild&#34;, &#34;label&#34;: &#34;C/C++: g++.exe 生成活动文件&#34;, &#34;command&#34;: &#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe&#34;,//自己的路径 &#34;args&#34;: [ &#34;-fdiagnostics-color=always&#34;, &#34;-g&#34;, //新增如下两项 &#34;-fexec-charset=GBK&#34;, // 处理mingw中文编码问题 &#34;-finput-charset=UTF-8&#34;,// 处理mingw中文编码问题 &#34;${file}&#34;, &#34;-o&#34;, //&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34; &#34;${fileDirname}\\test.exe&#34;//更改这一项 ], &#34;options&#34;: { &#34;cwd&#34;: &#34;${fileDirname}&#34; }, &#34;problemMatcher&#34;: [ &#34;$gcc&#34; ], &#34;group&#34;: { &#34;kind&#34;: &#34;build&#34;, &#34;isDefault&#34;: true }, &#34;detail&#34;: &#34;调试器生成的任务。&#34; } ], &#34;version&#34;: &#34;2.0.0&#34; } launch.json
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 { // 使用 IntelliSense 了解相关属性。 // 悬停以查看现有属性的描述。 // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387 &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;g++.exe - 生成和调试活动文件&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, // &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34; &#34;program&#34;: &#34;${fileDirname}\\test.exe&#34;,//修改这一项 &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${fileDirname}&#34;, &#34;environment&#34;: [], &#34;externalConsole&#34;: true,//false改为true &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe&#34;, &#34;setupCommands&#34;: [ { &#34;description&#34;: &#34;为 gdb 启用整齐打印&#34;, &#34;text&#34;: &#34;-enable-pretty-printing&#34;, &#34;ignoreFailures&#34;: true } ], &#34;preLaunchTask&#34;: &#34;C/C++: g++.exe 生成活动文件&#34; } ] } 总结 确保编译器的路径正确，之后文件可以自动生成，并且可以运行中文文件，但是无法调试中文文件
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 { // 使用 IntelliSense 了解相关属性。 // 悬停以查看现有属性的描述。 // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387 &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;g++.exe - 生成和调试活动文件&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, // &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34; //指向项目生成的可执行文件才可以进行调试运行 &#34;program&#34;: &#34;${fileDirname}\\test.exe&#34;,//修改这一项 &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${fileDirname}&#34;, &#34;environment&#34;: [], //在窗口显示 &#34;externalConsole&#34;: true,//false改为true &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe&#34;, &#34;setupCommands&#34;: [ { &#34;description&#34;: &#34;为 gdb 启用整齐打印&#34;, &#34;text&#34;: &#34;-enable-pretty-printing&#34;, &#34;ignoreFailures&#34;: true } ], //在执行launch文件之前执行什么 &#34;preLaunchTask&#34;: &#34;C/C++: g++.exe 生成活动文件&#34; } ] } 总结 确保编译器的路径正确，之后文件可以自动生成，并且可以运行中文文件，但是无法调试中文文件
 ]]></content></entry><entry><title>763.划分字母区间</title><url>/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/</url><categories><category>leetcode</category></categories><tags><tag>贪心算法</tag></tags><content type="html"><![CDATA[ 🆎763.划分字母区间
 字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。
 示例：
