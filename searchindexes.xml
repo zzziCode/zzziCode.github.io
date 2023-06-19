@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>2196.根据描述创建二叉树</title><url>/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🌳2196.根据描述创建二叉树
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>解决0 1背包问题的思路</title><url>/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag><tag>0-1背包</tag></tags><content type="html"><![CDATA[ 🎒解决0-1背包问题的思路
+分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案
+核心就是确定递推公式和初始化方案
+引言 0-1背包就是当前背包总容量为n，有一堆物品，每个物品的重量为weight[i]，每个物品的价值为value[i]，最终目的是为了让背包中的物品尽可能的价值大，某些性价比不高的物品可以丢弃不装入背包，选择性的装一些价值尽可能大，重量尽可能小的物品
+当前背包容量下形成的最大价值与小容量下形成的最大价值有关
+存放最终的背包价值的dp数组有两种，二维和一维，先分析二维再将二维降成一维
+前期准备 物品
+二维dp数组初始化
+一维dp数组初始化
+代码 直接提供代码来进行分析
+整个代码是针对每个物品，对于不同的背包容量来统计最后的价值，当所有物品都尝试过之后，返回最终的结果（dp数组最后的值）
+二维dp 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 void test_2_wei_bag_problem1() { vector&lt;int&gt; weight = {1, 3, 4}; vector&lt;int&gt; value = {15, 20, 30}; int bagweight = 4; // 二维数组 //dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。 vector&lt;vector&lt;int&gt;&gt; dp(weight.size(), vector&lt;int&gt;(bagweight + 1, 0)); // 初始化，一旦能放下物品0，就先只放物品0 for (int j = weight[0]; j &lt;= bagweight; j++) { dp[0][j] = value[0]; } // weight数组的大小 就是物品个数 for (int i = 1; i &lt; weight.size(); i++) { // 遍历物品 for (int j = 1; j &lt;= bagweight; j++) { // 遍历背包容量，从1开始才有意义 if (j &lt; weight[i])//当前背包放不下当前物品 dp[i][j] = dp[i - 1][j]; else{//当前背包放得下当前物品，主要看放下之后价值是否增加 int weight_not=dp[i - 1][j]; int weight_put=dp[i - 1][j - weight[i]] + value[i]; dp[i][j] = max(weight_not, weight_put); } } } cout &lt;&lt; dp[weight.size() - 1][bagweight] &lt;&lt; endl;//返回右下角的结果 } 执行流程 递推公式为： $$ dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]) $$
+对dp数组进行初始化，其中dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。
+对每一个物品，看不同的背包容量形成的价值是多少，装入物品时分为两种情况：
+当前背包容量放不下当前物品，那么当前位置的dp就是不放当前物品的价值，也就是：
+dp[i][j] = dp[i - 1][j]
+当前背包容量放得下当前物品，此时又分为两种情况：
+剩余容量可以直接装下当前物品i,直接放，价值肯定增加，比如容量为4时放物品1，即使背包中有了物品0也可以再放一个物品1 剩余容量无法直接装下当前物品i，例如容量为3时放物品1，此时背包中已经有了物品0，需要将物品0取出来 两种情况都将放入当前物品的价值与不放当前物品的价值进行比较，取最大值
+1 2 3 int weight_not=dp[i - 1][j];//不放当前物品 int weight_put=dp[i - 1][j - weight[i]] + value[i];//放当前物品 dp[i][j] = max(weight_not, weight_put); 最大值取不放当前物品的价值说明当前背包容量无法直接容纳当前物品，取出之前的物品放入当前物品之后的价值还不如不放，因为价值没有变大
+最大值取放当前物品的价值有两种情况：
+当前背包可以直接装下当前物品，不用取出任何物品，肯定价值会变大 当前背包无法直接装下当前物品，但是取出一些物品之后装入当前物品，价值也变大 一维dp 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 void test_1_wei_bag_problem() { vector&lt;int&gt; weight = {1, 3, 4}; vector&lt;int&gt; value = {15, 20, 30}; int bagWeight = 4; // 初始化 vector&lt;int&gt; dp(bagWeight + 1, 0); for (int i = 0; i &lt; weight.size(); i++) { // 遍历物品 //一旦背包初始容量小于当前物品重量，一定装不下，当前物品直接舍弃 //即拿出来判断的物品一定是可以装下的 for (int j = bagWeight; j &gt;= weight[i]; j--) { // 遍历背包容量，背包容量从大到小 dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); } } cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;//返回最大容量的结果 } 执行流程 递推公式为： $$ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]) $$
+初始化dp数组全为0，代表不管背包容量多大都不放物品
+从后向前递减背包容量，不从前向后的原因是为了防止物品被多次放入，因为放入当前物品时如果可以直接放入，那么背包之前的价值会被累加，也就是： $$ dp[1] = dp[1 - weight[0]] + value[0] = 15 \dp[2] = dp[2 - weight[0]] + value[0] = 30 $$ 背包容量为2时物品1可以直接放入，从前向后遍历的话剩下的空间还会放入一次物品1，而从后向前遍历的话即使剩余空间可以放入物品1，由于dp初始化为0，还没来得及更新为15，所以不放入
+不理解的话可以正向和反向debug一遍
+对每一个物品，都判断产生的价值，存放物品有两种情况：
+当前物品可以直接放下，背包价值直接递增
+当前物品不能直接放下，背包中的部分物品需要取出，然后在判断取出之后装入当前物品的价值谁大
+形成的代码判断逻辑为：
+1 2 3 int weight_not = dp[capacity]; int weight_put = dp[capacity - weight[stuff]] + value[stuff]; dp[capacity] = max(weight_not, weight_put); 相比与二维dp来说，只要背包的初始容量小于当前物品的容量，就直接舍弃当前物品，因为无论如何当前物品都装不下
+总结 0-1背包问题主要是判断当前物品能不能放进当前背包，放进去之后能不能增加背包的整体价值
+对于二维dp来说，当前物品的判断逻辑很复杂
+如果无法理解就直接debug上面的代码，重点注意背包容量为3时放物品1，背包容量为4时放物品1，背包容量为3时放物品2
+背包容量为3时放物品1是将背包中原有的物品0取出来放入物品1，因为虽然无法直接装下物品1，但是取出一些物品之后装入当前物品，价值变大为20
+背包容量为4时放物品1是可以直接将物品1放入，此时背包中有物品0和物品1，价值肯定增大
+背包容量为3时放物品2是怎样都无法放入，直接不放，调用递推公式dp[i][j] = dp[i - 1][j]
+对于一维dp来说，当前物品只有如何放不放的问题，因为拿出来判断的物品一定是可以放下的，我们只需要关心当前物品放入之后价值是否会增加
+所以最终的递推公式为： $$ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]) $$ 核心就是确定递推公式以及初始化方案，一维dp中背包容量从大到小是为了防止物品重复装入
+]]></content></entry><entry><title>2196.根据描述创建二叉树</title><url>/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🌳2196.根据描述创建二叉树
 给你一个二维整数数组 descriptions ，其中 descriptions[i] = [parenti, childi, isLefti] 表示 parenti 是 childi 在 二叉树 中的 父节点，二叉树中各节点的值 互不相同 。此外：
 如果 isLefti == 1 ，那么 childi 就是 parenti 的左子节点。 如果 isLefti == 0 ，那么 childi 就是 parenti 的右子节点。 请你根据 descriptions 的描述来构造二叉树并返回其 根节点 。
 测试用例会保证可以构造出 有效 的二叉树。
@@ -783,11 +820,11 @@ back可以通过finish-1获得
 扩充的过程中，会调用拷贝构造函数复制原来的元素到新的内存中，并且原有空间的元素需要调用析构函数删除
 获取五个属性使用迭代器，迭代器又实用萃取器判断迭代器的类型是类还是指针，从而间接获得五个属性
 array深度探索 容器在初始化时必须指定大小，因为他无法扩充内存，其余实现与上面类似，使用萃取器得到五个属性，返回给迭代器，外部使用迭代器就可以访问五个属性
-deque深度探索 deque对外号称连续，其实内部是分段连续的，使用vector存储每一段的指针，扩充内存时，前面不够就在前面申请一块新的连续空间，并将指向这块内存的指针加入vector，后面不够就在后面申请一块连续的空间，并将指向这块内存的指针加入vector
+deque深度探索 deque对外号称连续，其实内部是分段连续的，使用vector存储每一段的指针，扩充内存时，前面不够就在前面申请一块新的连续空间，并将指向这块内存的指针加入中控器，后面不够就在后面申请一块连续的空间，并将指向这块内存的指针加入中控器,具体的中控器是由map实现的，每一个map中的节点指向一块缓存区，也就是一块连续空间
 其中开始和结束迭代器有九个属性，五个是最开始介绍的其余容器也有的五个，剩下四个分别是cur、first、last、node。node指向存放所有分段的vector，node移动说明访问的分段不同，而first和last指向node所指分段的开始和接触，cur指向当前的元素
 分段中的每一段称为一个缓冲区，那么deque是如何将这些分段的缓冲区联系起来，让人以为他是连续的呢
 将node进行移动，就可以在不同的分段之间移动
-主要是元素的移动，cur移动一次，看是不是到了当前分段的末尾，是的话就将node移动一次，切换到下一分段，之后让cur指向下一分段的first，就可以实现连续的访问，其余的访问逻辑相似
+主要是元素的移动，cur移动一次，看是不是到了当前分段的末尾，是的话就将node移动一次，切换到下一分段，之后让cur指向下一分段的first，就可以实现连续的访问，其余的访问逻辑相似，实际上是在分段的连续空间中移动
 以自增和自减为例，可以清楚的看到迭代器的移动
 将分段连续的空间变得看起来一致连续，主要是node的移动和cur的移动在起作用
 stack和queue底层的实现都是deque，只不过对于deque做了一定限制
