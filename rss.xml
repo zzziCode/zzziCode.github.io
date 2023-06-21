@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 19 Jun 2023 18:26:08 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>解决0 1背包问题的思路</title><link>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</link><pubDate>Mon, 19 Jun 2023 18:26:08 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 21 Jun 2023 20:44:34 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>494.目标和</title><link>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</link><pubDate>Wed, 21 Jun 2023 20:44:34 +0800</pubDate><guid>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🎯494.目标和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums 和一个整数 target 。&lt;/p>
+&lt;p>向数组中的每个整数前添加 &amp;lsquo;+&amp;rsquo; 或 &amp;lsquo;-&amp;rsquo; ，然后串联起所有整数，可以构造一个 表达式 ：&lt;/p>
+&lt;p>例如，nums = [2, 1] ，可以在 2 之前添加 &amp;lsquo;+&amp;rsquo; ，在 1 之前添加 &amp;lsquo;-&amp;rsquo; ，然后串联起来得到表达式 &amp;ldquo;+2-1&amp;rdquo; 。
+返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。&lt;/p></description></item><item><title>1049.最后一块石头的重量II</title><link>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</link><pubDate>Wed, 21 Jun 2023 20:01:23 +0800</pubDate><guid>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</guid><description>&lt;blockquote>
+&lt;p>🌑1049.最后一块石头的重量II&lt;/p>
+&lt;/blockquote>
+&lt;p>有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。&lt;/p>
+&lt;p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &amp;lt;= y。那么粉碎的可能结果如下：&lt;/p>
+&lt;p>如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块 石头。返回此石头 &lt;strong>最小&lt;/strong>的可能重量 。如果没有石头剩下，就返回 0。&lt;/p></description></item><item><title>416.分割等和子集</title><link>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 20 Jun 2023 19:24:19 +0800</pubDate><guid>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>😄416.分割等和子集&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个 &lt;strong>只包含正整数&lt;/strong> 的 &lt;strong>非空&lt;/strong> 数组 &lt;code>nums&lt;/code> 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。&lt;/p></description></item><item><title>解决01背包问题的思路</title><link>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</link><pubDate>Mon, 19 Jun 2023 18:26:08 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
 &lt;p>🎒解决0-1背包问题的思路&lt;/p>
 &lt;/blockquote>
 &lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
