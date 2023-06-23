@@ -1,11 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>494.目标和</title><url>/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 🎯494.目标和
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>518.零钱兑换II</title><url>/post/518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2ii/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 💴518.零钱兑换II
+给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
+请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。
+假设每一种面额的硬币有无限个。
+题目数据保证结果符合 32 位带符号整数。
+思路 基本思想 典型的完全背包问题，并且求解的是恰能装满背包的方案数，而不是最大价值
+所以有两点需要注意：
+背包容量从小到大遍历，先更新小容量，大容量依赖于小容量，从而物品可以被放入任意次
+递推方程不一样，采用累加的方式 $$ dp[j]+=d[j-weight[i]] $$ 代表加入不同的物品，背包的容量有不同的变化，从而有不同的方案，最终将所有的方案累加
+执行流程 初始化dp数组，注意dp[0]=1,代表总金额为0有一种方案就是什么都不加 按照完全背包的方式遍历 按照递推方程更新dp数组 返回最终结果 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 class Solution { public: int change(int amount, vector&lt;int&gt;&amp; coins) { vector&lt;int&gt; dp(amount+1,0); dp[0]=1; for(int i=0;i&lt;coins.size();++i){ for(int j=coins[i];j&lt;=amount;++j){ dp[j]+=dp[j-coins[i]]; } } return dp[amount]; } }; 总结 有三点需要注意：
+完全背包容量的遍历顺序从小到大，这样大容量才能依赖小容量，也就是物品可以重复加入 求解的是恰能装满背包的所有方案数，而不是最大价值，所以需要累加所有可能的方案 dp[0]=1，代表总金额为0时方案数为1，什么都不加 ]]></content></entry><entry><title>474.一和零</title><url>/post/474.%E4%B8%80%E5%92%8C%E9%9B%B6/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 1️⃣474.一和零
+给你一个二进制字符串数组 strs 和两个整数 m 和 n 。
+请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。
+如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。
+思路 基本思想 每次选择集合中的元素时，选择0和1尽量少的元素。
+背包的容量是m，n二维，放进一个字符串，背包的容量变成m-zeroNum，n-oneNum，所以需要统计每一个字符串的0,1数量，判断当前字符串加入到背包中价值是否更大
+递推方程为： $$ dp[i][j]=max(dp[i][j],dp[i-zeroNum][j-oneNum]+1) $$ 判断当前字符串是否加入背包中，背包初始化全为0
+执行流程 dp[i][j]代表可以放i个0，j个1时背包最多可以装下多少个字符串元素
+初始化背包，二维dp数组全为0 对于每一个字符串，统计出现的0,1数量 应用递推方程判断当前字符串是否加入 返回dp[m][n]作为最终结果 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 class Solution { public: int findMaxForm(vector&lt;string&gt;&amp; strs, int m, int n) { //初始化dp数组全为0 vector&lt;vector&lt;int&gt;&gt; dp(m+1,vector&lt;int&gt;(n+1,0)); for(auto s:strs){ int zeroNum=0; int oneNum=0; for(auto c:s){//统计字符串出现的0，1个数 if(c==&#39;0&#39;) ++zeroNum; else ++oneNum; } //对于每一个字符串，更新dp数组 for(int i=m;i&gt;=zeroNum;--i){//从后向前减小背包容量 for(int j=n;j&gt;=oneNum;--j){ dp[i][j]=max(dp[i][j],dp[i-zeroNum][j-oneNum]+1); } } } return dp[m][n]; } }; 总结 主要是知道如何将问题转化为背包问题，知道m，n共同组成了背包的容量，然后应用背包问题的流程解决当前问题
+当前物品依次加入背包中，对于当前物品来说，背包的容量逐渐减小，分别对应外层和内层循环
+]]></content></entry><entry><title>494.目标和</title><url>/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag></tags><content type="html"><![CDATA[ 🎯494.目标和
 给你一个整数数组 nums 和一个整数 target 。
 向数组中的每个整数前添加 &lsquo;+&rsquo; 或 &lsquo;-&rsquo; ，然后串联起所有整数，可以构造一个 表达式 ：
 例如，nums = [2, 1] ，可以在 2 之前添加 &lsquo;+&rsquo; ，在 1 之前添加 &lsquo;-&rsquo; ，然后串联起来得到表达式 &ldquo;+2-1&rdquo; 。 返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。
 思路 基本思想 由于需要最终获得target，肯定是一部分数为正一部分数为负，那么我们可以先将target拿出来，剩下的数等分成两半，一半为正一半为负，这样相加抵消肯定为0，对target没有影响
 将target拿出来之后剩下的数记为sum-target，其中sum是nums求和得到的，之后将sum-target分成两半得到的数为： $$ capacity=\frac{sum-target}{2} $$ capacity作为背包的容量，然后看nums中有哪些方案可以将背包刚好填满，记录这些方案数即可
 现在的问题就是如何记录所有的方案数，dp[j]代表和为j的方案数
-已经有一个1（nums[i]） 的话，有 dp[4]种方法 凑成 容量为5的背包。 已经有一个2（nums[i]） 的话，有 dp[3]种方法 凑成 容量为5的背包。 已经有一个3（nums[i]） 的话，有 dp[2]中方法 凑成 容量为5的背包 已经有一个4（nums[i]） 的话，有 dp[1]中方法 凑成 容量为5的背包 已经有一个5 （nums[i]）的话，有 dp[0]中方法 凑成 容量为5的背包 将上面的情况累加，所以最终的公式为： $$ dp[j] += dp[j - nums[i]] $$ 可以理解为依次向背包中放入nums[i]，剩下的dp[j-nums[i]]继续求解方案数，不同的nums[i]形成了不同的方案数，所以需要累加
+已经有一个1（nums[i]） 的话，有 dp[4]种方法 凑成 容量为5的背包。 已经有一个2（nums[i]） 的话，有 dp[3]种方法 凑成 容量为5的背包。 已经有一个3（nums[i]） 的话，有 dp[2]中方法 凑成 容量为5的背包 已经有一个4（nums[i]） 的话，有 dp[1]中方法 凑成 容量为5的背包 已经有一个5 （nums[i]）的话，有 dp[0]中方法 凑成 容量为5的背包 将上面的情况累加，所以最终的公式为： $$ dp[j] += dp[j - nums[i]] $$ 可以理解为依次向当前背包中放入nums[i]，剩下的dp[j-nums[i]]继续求解方案数，不同的nums[i]形成了不同的方案数，所以需要累加
 注意有两种情况问题无解
 数组求和都小于target，肯定无法形成target 按照公式1求解的capacity不是整数，数组中的数组合都是整数，不符合要求 执行流程 计算背包容量
 初始化dp数组，要记住dp数组的含义
@@ -48,16 +70,18 @@ sum是正整数，就让背包的容量为sum，此时正常执行01背包问题
 代码 根据以上分析，得出以下代码：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 class Solution { public: bool canPartition(vector&lt;int&gt;&amp; nums) { int temp=accumulate(nums.begin(),nums.end(),0); if(temp%2==1){//奇数除以2不是正整数，无法分割，直接返回false return false; } int sum=temp/2; //初始化dp数组 vector&lt;int&gt; dp(sum+1,0); //开始动态规划 for(int i=0;i&lt;nums.size();++i){ //只有能装下才有意义 for(int j=sum;j&gt;=nums[i];--j){ dp[j]=max(dp[j],dp[j-nums[i]]+nums[i]); } } //遍历结束看看是不是刚好装满 return dp[sum]==sum; } }; 总结 主要是求的背包的容量，最后判断背包刚好被装满就说明可以分割，知道这两点其余的步骤就是0-1背包的步骤
 注意0-1背包中当前元素不放进去形成的价值为dp[j]而不是dp[j-1]，因为j代表的是背包的容量，不像是二维dp[i-1][j],i-1代表上一个物品，要明白这一点
-]]></content></entry><entry><title>解决01背包问题的思路</title><url>/post/%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag><tag>01背包</tag></tags><content type="html"><![CDATA[ 🎒解决0-1背包问题的思路
+]]></content></entry><entry><title>解决背包问题的思路</title><url>/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag><tag>背包问题</tag></tags><content type="html"><![CDATA[ 🎒解决0-1背包问题的思路
 分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案
+之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次
 核心就是确定递推公式和初始化方案
 引言 0-1背包就是当前背包总容量为n，有一堆物品，每个物品的重量为weight[i]，每个物品的价值为value[i]，最终目的是为了让背包中的物品尽可能的价值大，某些性价比不高的物品可以丢弃不装入背包，选择性的装一些价值尽可能大，重量尽可能小的物品
 当前背包容量下形成的最大价值与小容量下形成的最大价值有关
 存放最终的背包价值的dp数组有两种，二维和一维，先分析二维再将二维降成一维
+完全背包与01背包唯一的区别就是物品可以装入任意次
 前期准备 物品
 二维dp数组初始化
 一维dp数组初始化
-代码 直接提供代码来进行分析
+0-1背包 直接提供代码来进行分析
 整个代码是针对每个物品，对于不同的背包容量来统计最后的价值，当所有物品都尝试过之后，返回最终的结果（dp数组最后的值）
 二维dp 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 void test_2_wei_bag_problem1() { vector&lt;int&gt; weight = {1, 3, 4}; vector&lt;int&gt; value = {15, 20, 30}; int bagweight = 4; // 二维数组 //dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。 vector&lt;vector&lt;int&gt;&gt; dp(weight.size(), vector&lt;int&gt;(bagweight + 1, 0)); // 初始化，一旦能放下物品0，就先只放物品0 for (int j = weight[0]; j &lt;= bagweight; j++) { dp[0][j] = value[0]; } // weight数组的大小 就是物品个数 for (int i = 1; i &lt; weight.size(); i++) { // 遍历物品 for (int j = 1; j &lt;= bagweight; j++) { // 遍历背包容量，从1开始才有意义 if (j &lt; weight[i])//当前背包放不下当前物品 dp[i][j] = dp[i - 1][j]; else{//当前背包放得下当前物品，主要看放下之后价值是否增加 int weight_not=dp[i - 1][j]; int weight_put=dp[i - 1][j - weight[i]] + value[i]; dp[i][j] = max(weight_not, weight_put); } } } cout &lt;&lt; dp[weight.size() - 1][bagweight] &lt;&lt; endl;//返回右下角的结果 } 执行流程 递推公式为： $$ dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]) $$
 对dp数组进行初始化，其中dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。
@@ -70,13 +94,22 @@ dp[i][j] = dp[i - 1][j]
 最大值取放当前物品的价值有两种情况：
 当前背包可以直接装下当前物品，不用取出任何物品，肯定价值会变大 当前背包无法直接装下当前物品，但是取出一些物品之后装入当前物品，价值也变大 一维dp 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 void test_1_wei_bag_problem() { vector&lt;int&gt; weight = {1, 3, 4}; vector&lt;int&gt; value = {15, 20, 30}; int bagWeight = 4; //dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]。 vector&lt;int&gt; dp(bagWeight + 1, 0); for (int i = 0; i &lt; weight.size(); i++) { // 遍历物品 //一旦背包初始容量小于当前物品重量，一定装不下，当前物品直接舍弃 //即拿出来判断的物品一定是可以装下的 for (int j = bagWeight; j &gt;= weight[i]; j--) { // 遍历背包容量，背包容量从大到小 dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); } } cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;//返回最大容量的结果 } 执行流程 递推公式为： $$ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]) $$
 初始化dp数组全为0，代表不管背包容量多大都不放物品
-从后向前递减背包容量，不从前向后的原因是为了防止物品被多次放入，因为放入当前物品时如果可以直接放入，那么背包之前的价值会被累加，也就是： $$ dp[1] = dp[1 - weight[0]] + value[0] = 15 \dp[2] = dp[2 - weight[0]] + value[0] = 30 $$ 背包容量为2时物品1可以直接放入，从前向后遍历的话剩下的空间还会放入一次物品1，而从后向前遍历的话即使剩余空间可以放入物品1，由于dp初始化为0，还没来得及更新为15，所以不放入
+从后向前递减背包容量，不从前向后的原因是为了防止物品被多次放入，因为放入当前物品时如果可以直接放入，那么背包之前的价值会被累加，也就是： $$ dp[1] = dp[1 - weight[0]] + value[0] = 15 \dp[2] = dp[2 - weight[0]] + value[0] = 30 $$ 背包容量为2时物品1可以直接放入，从前向后遍历的话剩下的空间还会放入一次物品1，而从后向前遍历的话即使剩余空间可以放入物品1，由于dp初始化为0，还没来得及更新为15，所以不放入,体现在公式中为： $$ dp[2] = dp[2 - weight[0]] + value[0] = 15\
+dp[1] = dp[1 - weight[0]] + value[0] = 15 $$ 由于dp[2 - weight[0]]初始化为0，代表物品1不被装入
 不理解的话可以正向和反向debug一遍
 对每一个物品，都判断产生的价值，存放物品有两种情况：
 当前物品可以直接放下，背包价值直接递增
 当前物品不能直接放下，背包中的部分物品需要取出，然后在判断取出之后装入当前物品的价值谁大
 形成的代码判断逻辑为：
 1 2 3 int weight_not = dp[capacity]; int weight_put = dp[capacity - weight[stuff]] + value[stuff]; dp[capacity] = max(weight_not, weight_put); 相比与二维dp来说，只要背包的初始容量小于当前物品的容量，就直接舍弃当前物品，因为无论如何当前物品都装不下
+完全背包 代码 1 2 3 4 5 6 7 8 9 10 11 12 void test_CompletePack() { vector&lt;int&gt; weight = {1, 3, 4}; vector&lt;int&gt; value = {15, 20, 30}; int bagWeight = 4; vector&lt;int&gt; dp(bagWeight + 1, 0); for(int i = 0; i &lt; weight.size(); i++) { // 遍历物品 for(int j = weight[i]; j &lt;= bagWeight; j++) { // 遍历背包容量 dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); } } cout &lt;&lt; dp[bagWeight] &lt;&lt; endl; } 执行流程 在0-1背包中的一维dp中，背包的容量是从大到小，先更新大的再更新小的，目的是为了防止物品重复被放入
+这个重复被放入在推导的过程中体现在： $$ dp[1] = dp[1 - weight[0]] + value[0] = 15 \dp[2] = dp[2 - weight[0]] + value[0] = 30 $$ 容量从小到大遍历的话，小的更新之后，大的会用到小的形成的结果，在公式中体现为物品1被放入多次
+0-1背包需要避免这种情况
+完全背包就需要这种情况，所以完全背包的背包容量从小到大
+至于背包和物品谁先遍历，0-1背包的一维版本需要在外层遍历物品，内层遍历容量
+完全背包先遍历谁都可以，只要保证物品可以重复加入即可
+重复加入就是大容量的价值依赖于小容量的价值，如果从前到后遍历，那么小容量就会先更新，累积到大容量之后大容量还可以放下物品时，物品就会被重复放入
+如果从后向前遍历，即使大大容量放了物品，由于从后向前小容量还没有更新，并且小容量的价值只依赖于更小容量的价值，所以物品不会被重复放入
 总结 0-1背包问题主要是判断当前物品能不能放进当前背包，放进去之后能不能增加背包的整体价值
 对于二维dp来说，当前物品的判断逻辑很复杂
 如果无法理解就直接debug上面的代码，重点注意背包容量为3时放物品1，背包容量为4时放物品1，背包容量为3时放物品2
@@ -85,6 +118,7 @@ dp[i][j] = dp[i - 1][j]
 背包容量为3时放物品2是怎样都无法放入，直接不放，调用递推公式dp[i][j] = dp[i - 1][j]
 对于一维dp来说，当前物品只有如何放不放的问题，因为拿出来判断的物品一定是可以放下的，我们只需要关心当前物品放入之后价值是否会增加
 所以最终的递推公式为： $$ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]) $$ 核心就是确定递推公式以及初始化方案，一维dp中背包容量从大到小是为了防止物品重复装入，并且不放当前元素的价值为dp[j]，而不是dp[j-1]
+完全背包唯一的区别就是改变了背包容量的遍历方向，变成了从小到大
 ]]></content></entry><entry><title>2196.根据描述创建二叉树</title><url>/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🌳2196.根据描述创建二叉树
 给你一个二维整数数组 descriptions ，其中 descriptions[i] = [parenti, childi, isLefti] 表示 parenti 是 childi 在 二叉树 中的 父节点，二叉树中各节点的值 互不相同 。此外：
 如果 isLefti == 1 ，那么 childi 就是 parenti 的左子节点。 如果 isLefti == 0 ，那么 childi 就是 parenti 的右子节点。 请你根据 descriptions 的描述来构造二叉树并返回其 根节点 。
@@ -1850,7 +1884,13 @@ HEU
 HaErBin
 📙 ✅
 《C++Primer》
-📙 ⬜
+📙 ✅
 《STL源码剖析》
+📙 ⬜
+《TCP/IP网络编程》
+📙 ⬜
+《Linux高性能服务端编程》
+📙 ⬜
+《Effective C++》
 🧐 Try to find a good job 🤔 論文を出版したい</content></entry><entry><title>站点示例</title><url>/flinks.html</url><categories/><tags/><content type="html">如想交换本站友情链接，请在评论区留下你的站点信息，格式参考如下：
 1 2 3 4 - name: Hugo-NexT desc: Hugo NexT 官方预览网站。 avatar: https://hugo-next.eu.org/imgs/hugo_next_avatar.png link: https://hugo-next.eu.org</content></entry></search>
