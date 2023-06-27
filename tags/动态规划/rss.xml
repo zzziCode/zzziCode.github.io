@@ -104,4 +104,16 @@
 &lt;li>2 阶&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>121.买卖股票的最佳时机</title><link>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link><pubDate>Wed, 31 May 2023 18:30:03 +0800</pubDate><guid>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid><description>&lt;blockquote>
+&lt;p>💰121.买卖股票的最佳时机&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。&lt;/p>
+&lt;p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。&lt;/p>
+&lt;p>尽可能地在最低点买入，然后在之后的最高点卖出，只买卖一次&lt;/p>
+&lt;p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。&lt;/p></description></item><item><title>122.买卖股票的最佳时机II</title><link>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link><pubDate>Wed, 31 May 2023 18:20:37 +0800</pubDate><guid>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid><description>&lt;blockquote>
+&lt;p>💰122.买卖股票的最佳时机II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。&lt;/p>
+&lt;p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候&lt;strong>最多&lt;/strong>只能持有 一股 股票。你也可以先购买，然后在同一天出售。&lt;/p>
+&lt;p>多次买卖，且买卖时间不能重合，但是卖和买可以在同一天，所以需要将多次买卖的利润求和&lt;/p>
+&lt;p>返回 你能获得的&lt;strong>最大&lt;/strong>利润 。&lt;/p></description></item></channel></rss>
