@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>53.最大子数组和</title><url>/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag><tag>贪心算法</tag></tags><content type="html"><![CDATA[ 😄53.最大子数组和
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>Kubeadm和二进制方式搭建k8s集群的对比</title><url>/post/kubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AF%B9%E6%AF%94/</url><categories><category>学习笔记</category></categories><tags><tag>k8s</tag></tags><content type="html"> 😄kubeadm和二进制方式搭建k8s集群的对比
+Kubeadm方式 安装虚拟机，在虚拟机安装Linux操作系统【3台虚拟机】
+对操作系统初始化操作
+所有节点安装Docker、kubeadm、kubelet、kubectl【包含master和slave节点】
+安装docker、使用yum，不指定版本默认安装最新的docker版本 修改docker仓库地址，yum源地址，改为阿里云地址 安装kubeadm，kubelet 和 kubectl k8s已经发布最新的1.19版本，可以指定版本安装，不指定安装最新版本 yum install -y kubelet kubeadm kubectl 在master节点执行初始化命令操作
+kubeadm init 默认拉取镜像地址 K8s.gcr.io国内地址，需要使用国内地址 安装网络插件(CNI)
+kubectl apply -f kube-flannel.yml 在所有的node节点上，使用join命令，把node添加到master节点上
+测试kubernetes集群
+二进制方式 安装虚拟机和操作系统，对操作系统进行初始化操作 生成cfssl 自签证书 ca-key.pem、ca.pem server-key.pem、server.pem 部署Etcd集群 部署的本质，就是把etcd集群交给 systemd 管理 把生成的证书复制过来，启动，设置开机启动 为apiserver自签证书，生成过程和etcd类似 部署master组件，主要包含以下组件 apiserver controller-manager scheduler 交给systemd管理，并设置开机启动 如果要安装最新的1.19版本，下载二进制文件进行安装 部署node组件 docker kubelet kube-proxy【需要批准kubelet证书申请加入集群】 交给systemd管理组件- 组件启动，设置开机启动 批准kubelet证书申请 并加入集群 部署CNI网络插件 测试Kubernets集群【安装nginx测试】</content></entry><entry><title>53.最大子数组和</title><url>/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>动态规划</tag><tag>贪心算法</tag></tags><content type="html"><![CDATA[ 😄53.最大子数组和
 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 子数组 是数组中的一个连续部分。
 思路 贪心基本思想 当前元素加上之后只要和不为负数，就可以对后面的元素产生正面的影响，至少相加之后不会拖后面元素后腿，所以只要是正数就一直加
