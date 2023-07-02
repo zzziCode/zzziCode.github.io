@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 01 Jul 2023 21:04:28 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>72.编辑距离</title><link>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Sat, 01 Jul 2023 21:04:28 +0800</pubDate><guid>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 02 Jul 2023 16:22:06 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>集群环境搭建</title><link>https://zzzicode.github.io/post/%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Sun, 02 Jul 2023 16:22:06 +0800</pubDate><guid>https://zzzicode.github.io/post/%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;blockquote>
+&lt;p>😄集群环境搭建&lt;/p>
+&lt;/blockquote></description></item><item><title>Kubernetes完整版笔记</title><link>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 02 Jul 2023 15:25:12 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes&lt;/p>
+&lt;/blockquote>
+&lt;p>kubernetes的完整学习笔记，与黑马课堂笔记一样&lt;/p></description></item><item><title>Kubernetes集群管理工具kubectl</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</link><pubDate>Sun, 02 Jul 2023 14:36:06 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes集群管理工具kubectl&lt;/p>
+&lt;/blockquote></description></item><item><title>72.编辑距离</title><link>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Sat, 01 Jul 2023 21:04:28 +0800</pubDate><guid>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;blockquote>
 &lt;p>😄72.编辑距离&lt;/p>
 &lt;/blockquote>
 &lt;p>给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 。&lt;/p>
@@ -44,17 +51,10 @@
 两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。&lt;/p></description></item><item><title>使用kubeadm搭建k8s集群</title><link>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</link><pubDate>Fri, 30 Jun 2023 14:58:50 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
 &lt;p>😄使用kubeadm搭建k8s集群&lt;/p>
 &lt;/blockquote>
-&lt;p>使用kubeadm工具搭建k8s集群，屏蔽搭建集群时的一些细节，使得搭建集群变得简单&lt;/p></description></item><item><title>准备搭建k8s集群</title><link>https://zzzicode.github.io/post/%E5%87%86%E5%A4%87%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</link><pubDate>Fri, 30 Jun 2023 14:56:27 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%87%86%E5%A4%87%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
-&lt;p>😄准备搭建k8s集群&lt;/p>
-&lt;/blockquote>
-&lt;p>介绍搭建k8s集群的一些硬性要求，包括主机的硬件配置，以及一些软件配置&lt;/p></description></item><item><title>Kubernetes简介</title><link>https://zzzicode.github.io/post/kubernetes%E7%AE%80%E4%BB%8B/</link><pubDate>Fri, 30 Jun 2023 14:53:21 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E7%AE%80%E4%BB%8B/</guid><description>&lt;blockquote>
+&lt;p>使用kubeadm工具搭建k8s集群，屏蔽搭建集群时的一些细节，使得搭建集群变得简单&lt;/p></description></item><item><title>Kubernetes简介</title><link>https://zzzicode.github.io/post/kubernetes%E4%BB%8B%E7%BB%8D/</link><pubDate>Fri, 30 Jun 2023 14:53:21 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E4%BB%8B%E7%BB%8D/</guid><description>&lt;blockquote>
 &lt;p>😄Kubernetes简介&lt;/p>
 &lt;/blockquote>
-&lt;p>对Kunbernetes的一些基础介绍，文章来源：
-&lt;a href="https://gitee.com/moxi159753/LearningNotes/tree/master/K8S" title="Gitee" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
-Gitee
-&lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>&lt;/p></description></item><item><title>718.最长重复子数组</title><link>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 29 Jun 2023 20:24:52 +0800</pubDate><guid>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>对Kunbernetes的一些基础介绍&lt;/p></description></item><item><title>718.最长重复子数组</title><link>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 29 Jun 2023 20:24:52 +0800</pubDate><guid>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
 &lt;p>😄718.最长重复子数组&lt;/p>
 &lt;/blockquote>
 &lt;p>给两个整数数组 &lt;code>nums1&lt;/code> 和 &lt;code>nums2&lt;/code> ，返回 &lt;em>两个数组中 &lt;strong>公共的&lt;/strong> 、长度最长的子数组的长度&lt;/em> 。&lt;/p></description></item><item><title>674.最长连续递增子序列</title><link>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Thu, 29 Jun 2023 19:42:54 +0800</pubDate><guid>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
