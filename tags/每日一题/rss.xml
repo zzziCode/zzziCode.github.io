@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>每日一题 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link><description>Recent content in 每日一题 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 18 Jun 2023 17:47:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/rss.xml" rel="self" type="application/rss+xml"/><item><title>2196.根据描述创建二叉树</title><link>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Sun, 18 Jun 2023 17:47:49 +0800</pubDate><guid>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>每日一题 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link><description>Recent content in 每日一题 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 05 Jul 2023 20:34:22 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/rss.xml" rel="self" type="application/rss+xml"/><item><title>941.有效的山脉数组</title><link>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</link><pubDate>Wed, 05 Jul 2023 20:34:22 +0800</pubDate><guid>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>⛰ 941.有效的山脉数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 arr，如果它是有效的山脉数组就返回 true，否则返回 false。&lt;/p>
+&lt;p>让我们回顾一下，如果 arr 满足下述条件，那么它是一个山脉数组：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>arr.length &amp;gt;= 3&lt;/code>&lt;/li>
+&lt;li>在 &lt;code>0 &amp;lt; i &amp;lt; arr.length - 1&lt;/code> 条件下，存在 i 使得：
+&lt;ul>
+&lt;li>&lt;code>arr[0] &amp;lt; arr[1] &amp;lt; ... arr[i-1] &amp;lt; arr[i]&lt;/code>&lt;/li>
+&lt;li>&lt;code>arr[i] &amp;gt; arr[i+1] &amp;gt; ... &amp;gt; arr[arr.length - 1]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>1365.有多少小于当前数字的数字</title><link>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</link><pubDate>Tue, 04 Jul 2023 21:52:08 +0800</pubDate><guid>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>󠀼󠀼👌1365.有多少小于当前数字的数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。&lt;/p>
+&lt;p>换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] &amp;lt; nums[i]&lt;/p>
+&lt;p>以数组形式返回答案。&lt;/p></description></item><item><title>2196.根据描述创建二叉树</title><link>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Sun, 18 Jun 2023 17:47:49 +0800</pubDate><guid>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;blockquote>
 &lt;p>🌳2196.根据描述创建二叉树&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个二维整数数组 descriptions ，其中 descriptions[i] = [parenti, childi, isLefti] 表示 parenti 是 childi 在 二叉树 中的 父节点，二叉树中各节点的值 互不相同 。此外：&lt;/p>

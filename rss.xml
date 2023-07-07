@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Jul 2023 21:19:25 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>496.下一个元素I</title><link>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</link><pubDate>Mon, 03 Jul 2023 21:19:25 +0800</pubDate><guid>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 05 Jul 2023 20:34:22 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>941.有效的山脉数组</title><link>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</link><pubDate>Wed, 05 Jul 2023 20:34:22 +0800</pubDate><guid>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>⛰ 941.有效的山脉数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 arr，如果它是有效的山脉数组就返回 true，否则返回 false。&lt;/p>
+&lt;p>让我们回顾一下，如果 arr 满足下述条件，那么它是一个山脉数组：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>arr.length &amp;gt;= 3&lt;/code>&lt;/li>
+&lt;li>在 &lt;code>0 &amp;lt; i &amp;lt; arr.length - 1&lt;/code> 条件下，存在 i 使得：
+&lt;ul>
+&lt;li>&lt;code>arr[0] &amp;lt; arr[1] &amp;lt; ... arr[i-1] &amp;lt; arr[i]&lt;/code>&lt;/li>
+&lt;li>&lt;code>arr[i] &amp;gt; arr[i+1] &amp;gt; ... &amp;gt; arr[arr.length - 1]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>2.集群环境搭建</title><link>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Wed, 05 Jul 2023 16:22:06 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;blockquote>
+&lt;p>😄2.集群环境搭建&lt;/p>
+&lt;/blockquote></description></item><item><title>1365.有多少小于当前数字的数字</title><link>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</link><pubDate>Tue, 04 Jul 2023 21:52:08 +0800</pubDate><guid>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>󠀼󠀼👌1365.有多少小于当前数字的数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。&lt;/p>
+&lt;p>换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] &amp;lt; nums[i]&lt;/p>
+&lt;p>以数组形式返回答案。&lt;/p></description></item><item><title>503.下一个更大元素II</title><link>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</link><pubDate>Tue, 04 Jul 2023 20:57:45 +0800</pubDate><guid>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</guid><description>&lt;blockquote>
+&lt;p>🧭 503.下一个更大元素II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个循环数组 nums （ nums[nums.length - 1] 的下一个元素是 nums[0] ），返回 nums 中每个元素的 下一个更大元素 。&lt;/p>
+&lt;p>数字 x 的 下一个更大的元素 是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1 。&lt;/p></description></item><item><title>496.下一个元素I</title><link>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</link><pubDate>Mon, 03 Jul 2023 21:19:25 +0800</pubDate><guid>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</guid><description>&lt;blockquote>
 &lt;p>👾 496.下一个元素I&lt;/p>
 &lt;/blockquote>
 &lt;p>nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。&lt;/p>
@@ -10,9 +34,10 @@
 &lt;/blockquote></description></item><item><title>739.每日温度</title><link>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</link><pubDate>Mon, 03 Jul 2023 19:17:35 +0800</pubDate><guid>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</guid><description>&lt;blockquote>
 &lt;p>🌡️ 739.每日温度&lt;/p>
 &lt;/blockquote>
-&lt;p>给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，在该位置用 0 来代替。&lt;/p></description></item><item><title>Kubernetes集群完整搭建步骤</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 03 Jul 2023 10:17:52 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
-&lt;p>😄kubernetes集群完整搭建步骤&lt;/p>
-&lt;/blockquote></description></item><item><title>3.资源管理</title><link>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 02 Jul 2023 21:12:15 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，在该位置用 0 来代替。&lt;/p></description></item><item><title>Kubernetes集群完整搭建步骤</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 03 Jul 2023 10:12:03 +0700</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
+&lt;p>kubernetes集群完整搭建步骤&lt;/p>
+&lt;/blockquote>
+&lt;p>使用Ubuntu搭建k8s集群的完整步骤，包含常见错误解决办法&lt;/p></description></item><item><title>3.资源管理</title><link>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 02 Jul 2023 21:12:15 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</guid><description>&lt;blockquote>
 &lt;p>😄3.资源管理&lt;/p>
 &lt;/blockquote></description></item><item><title>516.最长回文子序列</title><link>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Sun, 02 Jul 2023 20:42:56 +0800</pubDate><guid>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
 &lt;p>🔄516.最长回文子序列&lt;/p>
@@ -44,9 +69,7 @@
 &lt;li>
 &lt;p>替换一个字符&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>2.集群环境搭建</title><link>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 01 Jul 2023 16:22:06 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;blockquote>
-&lt;p>😄2.集群环境搭建&lt;/p>
-&lt;/blockquote></description></item><item><title>583.两个字符串的删除操作</title><link>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 01 Jul 2023 00:35:17 +0800</pubDate><guid>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
+&lt;/ul></description></item><item><title>583.两个字符串的删除操作</title><link>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 01 Jul 2023 00:35:17 +0800</pubDate><guid>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
 &lt;p>😄583.两个字符串的删除操作&lt;/p>
 &lt;/blockquote>
 &lt;p>给定两个单词 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> ，返回使得 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> &lt;strong>相同&lt;/strong>所需的&lt;strong>最小步数&lt;/strong>。&lt;/p>
