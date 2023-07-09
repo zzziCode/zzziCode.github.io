@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 08 Jul 2023 20:17:37 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>922.按奇偶排序数组II</title><link>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</link><pubDate>Sat, 08 Jul 2023 20:17:37 +0800</pubDate><guid>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Jul 2023 18:47:58 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>141.环形链表</title><link>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:47:58 +0800</pubDate><guid>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🍩 141.环形链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个链表的头节点 head ，判断链表中是否有环。&lt;/p>
+&lt;p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。&lt;/p>
+&lt;p>如果链表中存在环 ，则返回 true 。 否则，返回 false 。&lt;/p>
+&lt;img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img" style="zoom:50%;" /></description></item><item><title>143.重排链表</title><link>https://zzzicode.github.io/post/143.%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:30:09 +0800</pubDate><guid>https://zzzicode.github.io/post/143.%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>⛓︎ 143.重排链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个单链表 L 的头节点 head ，单链表 L 表示为：&lt;/p>
+&lt;p>&lt;code>L0 → L1 → … → Ln - 1 → Ln&lt;/code>
+请将其重新排列后变为：&lt;/p>
+&lt;p>&lt;code>L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …&lt;/code>
+不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。&lt;/p></description></item><item><title>24.两两交换链表中的节点</title><link>https://zzzicode.github.io/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link><pubDate>Sun, 09 Jul 2023 17:14:05 +0800</pubDate><guid>https://zzzicode.github.io/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid><description>&lt;blockquote>
+&lt;p>🔀 24.两两交换链表中的节点&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。&lt;/p></description></item><item><title>922.按奇偶排序数组II</title><link>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</link><pubDate>Sat, 08 Jul 2023 20:17:37 +0800</pubDate><guid>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</guid><description>&lt;blockquote>
 &lt;p>#️ 922.按奇偶排序数组II&lt;/p>
 &lt;/blockquote>
 &lt;p>给定一个非负整数数组 nums， nums 中一半整数是 奇数 ，一半整数是 偶数 。&lt;/p>

@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>922.按奇偶排序数组II</title><url>/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ #️ 922.按奇偶排序数组II
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>141.环形链表</title><url>/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🍩 141.环形链表
+给你一个链表的头节点 head ，判断链表中是否有环。
+如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。
+如果链表中存在环 ，则返回 true 。 否则，返回 false 。
+思路 基本思想 如果链表中存在环，那么遍历之后一定会回到遍历过的位置，这里可以采用多种方式，遍历过得节点打上标记，一旦遍历到有标记的节点，那么就说明有环
+本文中采用快慢指针的方式，快指针一次走两步，慢指针一次走一步，如果存在环，快指针总会追上慢指针，也就是说当快慢指针相遇，则说明有环，当便利的过程中走到了链表的尾部，说明无环，具体的判断逻辑为：
+1 2 3 4 5 6 7 8 ListNode* fast=head-&gt;next; ListNode* slow=head; while(fast!=nullptr&amp;&amp;fast-&gt;next!=nullptr){ if(fast==slow) return true; fast=fast-&gt;next-&gt;next; slow=slow-&gt;next; } 需要注意的是fast!=nullptr&amp;&amp;fast-&gt;next!=nullptr缺一不可，fast!=nullptr是保证了fast-&gt;next的存在，并且其至少为nullptr，此时才能有fast-&gt;next的语句出现，不会出现空指针异常的情况
+fast-&gt;next!=nullptr是为了保证fast-&gt;next-&gt;next的存在，并且至少为nullptr，不会出现空指针异常
+并且fast!=nullptr需要出现在fast-&gt;next!=nullptr的前面。先确保fast-&gt;next的存在
+执行流程 去除空链表和只有一个节点的情况 定义快慢指针 循环遍历，查看快慢指针是否相遇 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Solution { public: //使用快慢指针的方法，快指针一次走两步，慢指针一次走一步 //如果有环，那么快慢指针一定会相遇 bool hasCycle(ListNode *head) { if(head==nullptr||head-&gt;next==nullptr) return false; ListNode* fast=head-&gt;next; ListNode* slow=head; while(fast!=nullptr&amp;&amp;fast-&gt;next!=nullptr){ if(fast==slow) return true; fast=fast-&gt;next-&gt;next; slow=slow-&gt;next; } return false; } }; 总结 主要是知道快慢指针的原理，并且明白fast!=nullptr&amp;&amp;fast-&gt;next!=nullptr缺一不可，并且出现的前后顺序不能改变
+]]></content></entry><entry><title>143.重排链表</title><url>/post/143.%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ ⛓︎ 143.重排链表
+给定一个单链表 L 的头节点 head ，单链表 L 表示为：
+L0 → L1 → … → Ln - 1 → Ln 请将其重新排列后变为：
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → … 不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+示例 示例 1：
+1 2 输入：head = [1,2,3,4] 输出：[1,4,2,3] 示例 2：
+1 2 输入：head = [1,2,3,4,5] 输出：[1,5,2,4,3] 思路 基本思想 根据题目的描述，需要将链表的节点取下来组成一个新的链表，并且取节点的顺序有限制，必须头先取一个插入新链表，之后尾部取一个插入新链表，插入的顺序为尾插法，知道这个流程之后就是使用代码模拟
+为了不出现空指针，先给新链表中擦干入一个节点，并且为了可以首尾取节点，也就是随机访问，需要先遍历一遍链表，将链表转化为数组，从而实现随机访问
+为了首尾取节点，使用双指针法遍历数组，当数组中只剩下一个元素时，需要单独处理，防止重复加入，并且最后需要将链表尾置空，这样才能成为一个真正的新链表
+知道上述这些细节之后，接下来的工作就是模拟插入的过程
+执行流程 判断链表是否为空，为空不用处理 将链表转化为数组 新链表中插入一个节点，方便后续操作 剩下的节点依次从头尾各取一个插入新链表中 判断是不是有一个单独的节点需要处理，防止重复加入 链表尾部置空 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 class Solution { public: void reorderList(ListNode* head) { if(head==nullptr) return; //到这里链表中至少有一个节点 vector&lt;ListNode*&gt; node; //将链表转化为vector，这样就可以随机访问 while(head!=nullptr){ node.push_back(head); head=head-&gt;next; } int i=1,j=node.size()-1; ListNode *temp=new ListNode(0); head=node[0];//先加入一个节点 temp=head; while(i&lt;j){ temp-&gt;next=node[j]; temp=temp-&gt;next; temp-&gt;next=node[i]; temp=temp-&gt;next; i++; j--; } if(i==j){ temp-&gt;next=node[i]; temp=temp-&gt;next; } //不要忘记链表的尾部置空 temp-&gt;next=nullptr; } }; 总结 重点是模拟插入的过程，不能出现空指针，并且head的位置不能变，所以需要加入一个新指针辅助节点的插入，并且需要先加入一个节点，方便统一后面节点的插入过程，以新增一个虚拟头结点是一样的道理
+]]></content></entry><entry><title>24.两两交换链表中的节点</title><url>/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🔀 24.两两交换链表中的节点
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
+示例 示例 1：
+1 2 输入：head = [1,2,3,4] 输出：[2,1,4,3] 示例 2：
+1 2 输入：head = [] 输出：[] 示例 3：
+输入：head = [1]输出：[1] 思路 基本思想 相当于两两交换节点，两个为一组，进行交换，所以可以申请一个虚拟头结点指向给定的链表
+申请虚拟头结点的目的是为了解决第一个节点的逆置问题，这样可以让首元结点与后面的节点处理方式一样，申请虚拟头结点的方式为：
+1 ListNode *node=new ListNode(0); 这样才能申请一个正常的节点，之后就是两两逆置的思路，需要使用两个指针，完成逆置
+逆置的代码为：
+1 2 3 4 5 6 7 8 9 10 11 12 p=node; q=node-&gt;next; while(p-&gt;next!=nullptr&amp;&amp;q-&gt;next!=nullptr){ //节点的两两逆转 p-&gt;next=q-&gt;next; q-&gt;next=q-&gt;next-&gt;next; p-&gt;next-&gt;next=q; //节点的向后移动 p=q; q=q-&gt;next; } 必须加上p-&gt;next!=nullptr，否则会报错，举例为[1,2,3,4]，因为交换两次之后，p指向4，q指向nullptr，nullptr无法访问next，就会出现空指针异常，所以两个判断条件都需要同时满足
+执行流程 初始化指针，分别为虚拟头结点以及两个辅助节点 执行逆置操作 返回虚拟头结点的下一个节点为最终的结果 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 class Solution { public: ListNode* swapPairs(ListNode* head) { if(head==nullptr) return head; ListNode *node=new ListNode(0); node-&gt;next=head; ListNode *p=nullptr; ListNode *q=nullptr; p=node; q=node-&gt;next; while(p-&gt;next!=nullptr&amp;&amp;q-&gt;next!=nullptr){ //节点的两两逆转 p-&gt;next=q-&gt;next; q-&gt;next=q-&gt;next-&gt;next; p-&gt;next-&gt;next=q; //节点的向后移动 p=q; q=q-&gt;next; } return node-&gt;next; } }; 总结 主要有两个需要注意的地方：
+申请一个虚拟头结点用来让首元结点与其他节点的操作逻辑一样 弄清楚逆置的逻辑，while的循环条件缺一不可 ]]></content></entry><entry><title>922.按奇偶排序数组II</title><url>/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ #️ 922.按奇偶排序数组II
 给定一个非负整数数组 nums， nums 中一半整数是 奇数 ，一半整数是 偶数 。
 对数组进行排序，以便当 nums[i] 为奇数时，i 也是 奇数 ；当 nums[i] 为偶数时， i 也是 偶数 。
 你可以返回 任何满足上述条件的数组作为答案 。
