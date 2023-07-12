@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on zzzi的小站</title><link>https://zzzicode.github.io/post/</link><description>Recent content in Posts on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Jul 2023 18:47:58 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>141.环形链表</title><link>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:47:58 +0800</pubDate><guid>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on zzzi的小站</title><link>https://zzzicode.github.io/post/</link><description>Recent content in Posts on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 10 Jul 2023 19:32:59 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>Windows主机加入k8s集群</title><link>https://zzzicode.github.io/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</link><pubDate>Mon, 10 Jul 2023 19:32:59 +0800</pubDate><guid>https://zzzicode.github.io/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
+&lt;p>windows主机加入k8s集群&lt;/p>
+&lt;/blockquote>
+&lt;p>本文在
+&lt;a href="https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/" title="Kubernetes集群完整搭建步骤" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+Kubernetes集群完整搭建步骤
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>的基础上，将windows主机当成工作节点加入到k8s集群中&lt;/p></description></item><item><title>205.同构字符串</title><link>https://zzzicode.github.io/post/205.%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link><pubDate>Mon, 10 Jul 2023 18:48:14 +0800</pubDate><guid>https://zzzicode.github.io/post/205.%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🔡 205.同构字符串&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个字符串 s 和 t ，判断它们是否是同构的。&lt;/p>
+&lt;p>如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。&lt;/p>
+&lt;p>每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。&lt;strong>不同字符不能映射到同一个字符上&lt;/strong>，相同字符只能映射到同一个字符上，字符可以映射到自己本身。&lt;/p></description></item><item><title>141.环形链表</title><link>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:47:58 +0800</pubDate><guid>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
 &lt;p>🍩 141.环形链表&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个链表的头节点 head ，判断链表中是否有环。&lt;/p>
