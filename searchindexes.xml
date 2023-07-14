@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>Windows主机加入k8s集群</title><url>/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</url><categories><category>学习笔记</category></categories><tags><tag>k8s</tag></tags><content type="html"><![CDATA[ windows主机加入k8s集群
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>129.求根节点到叶节点数字之和</title><url>/post/129.%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[ 🌴 129.求根节点到叶节点数字之和
+给你一个二叉树的根节点 root ，树中每个节点都存放有一个 0 到 9 之间的数字。 每条从根节点到叶节点的路径都代表一个数字：
+例如，从根节点到叶节点的路径 1 -&gt; 2 -&gt; 3 表示数字 123 。 计算从根节点到叶节点生成的 所有数字之和 。
+叶节点 是指没有子节点的节点。
+示例 示例 1：
+1 2 输入：root = [1,2,3] 输出：25 解释： 从根到叶子节点路径 1-&gt;2 代表数字 12 从根到叶子节点路径 1-&gt;3 代表数字 13 因此，数字总和 = 12 + 13 = 25 示例 2：
+1 2 输入：root = [4,9,0,5,1] 输出：1026 解释： 从根到叶子节点路径 4-&gt;9-&gt;5 代表数字 495 从根到叶子节点路径 4-&gt;9-&gt;1 代表数字 491 从根到叶子节点路径 4-&gt;0 代表数字 40 因此，数字总和 = 495 + 491 + 40 = 1026
+思路 基本思想 根节点到每一个叶子结点都会形成一个路径，路径上的数会组成一个数，将这些路径上组成的数全部加在一起即可
+所以想到了回溯法，往下一层，形成的数多一位，往回一层，形成的数就会变少一位，但是都是在末尾进行操作，所以可以使用回溯法的模版处理问题
+由于从根节点向下，为了能够判断是叶子节点，并且好回溯，向下递归时传递的是root-&gt;left和root-&gt;right，而不是root，这是有原因的，因为当回溯到这一层时，如果传递的是root，就无法回溯，传递的是下一层的节点，回溯之后自然就回到了当前层节点
+并且回溯之后，需要将形成的数字最后一位删除，一旦遇到叶子结点，就是形成了一个数，需要将其累加到sum中，sum不能丢失原来的值，所以定义为全局变量
+回溯的模版就是先遍历这一层的一个节点，拿着这一层的一个去遍历下一层的所有节点，这个节点组合下一层的所有节点的情况都搜索完成，再拿当前层的下一个节点去统计下一层的所有节点。。。
+这样一直搜索，最终可以将整棵树搜索完毕，每一个叶子结点都可以遍历到
+执行流程 将根节点加入，否则根节点无法统计到 遇到叶子结点直接将形成的数累加到sum中 不是叶子结点，需要进行递归，并且当前节点的值需要加到形成的数中，具体的递归就是去搜索当前节点的左右孩子节点 当遍历了所有节点，统计完毕 返回sum当成最终的结果 代码 根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 class Solution { public: int sum=0; int sumNumbers(TreeNode* root) { if(root==nullptr) return sum; //从根节点开始统计 f(root,to_string(root-&gt;val)); return sum; } void f(TreeNode *root,string s){ if(root-&gt;left==nullptr&amp;&amp;root-&gt;right==nullptr){ sum+=stoi(s); return; } //到这里root肯定不是叶子节点，至少有一个孩子节点 //从根节点开始统计 if(root-&gt;left!=nullptr){ s+=to_string(root-&gt;left-&gt;val);//向下一层增加 f(root-&gt;left,s); s.pop_back();//向上一层回溯!!! } if(root-&gt;right!=nullptr){ s+=to_string(root-&gt;right-&gt;val);//向下一层增加 f(root-&gt;right,s); s.pop_back();//向上一层回溯！！！ } } }; 总结 主要是回溯法形成的搜索路径，每遇到一个叶子结点说明形成了一个完整的路径，此时可以进行累加，一条完整的路径形成之后，需要搜索其他的路径，此时需要回溯，回溯时需要将当前数的后几位删除，可能是一位，可能是多位，取决于回溯了几步
+当整棵树搜索完毕时，直接返回
+]]></content></entry><entry><title>Windows主机加入k8s集群</title><url>/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</url><categories><category>学习笔记</category></categories><tags><tag>k8s</tag></tags><content type="html"><![CDATA[ windows主机加入k8s集群
 本文在Kubernetes集群完整搭建步骤的基础上，将windows主机当成工作节点加入到k8s集群中
 前言 k8s集群中现在已有一个master节点，两个工作节点，三个节点的linux系统版本为Ubuntu 22.04.2 LTS，windows主机加入集群之后，当成一个工作节点，主机规划如下：
 主机名 主机ip 子网掩码 master 192.168.1.24 255.255.255.0 node1 192.168.1.25 255.255.255.0 node2 192.168.1.27 255.255.255.0 node3 192.168.1.26 255.255.255.0 linux节点中，docker版本为v19.03.3，kubenetes版本为v1.23.10
