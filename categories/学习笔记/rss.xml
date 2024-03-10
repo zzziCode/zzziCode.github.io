@@ -57,8 +57,8 @@
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中&lt;/p></description></item><item><title>Small_spring12</title><link>https://zzzicode.github.io/post/small_spring12/</link><pubDate>Sun, 12 Nov 2023 13:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring12/</guid><description>&lt;blockquote>
-&lt;p>🥒 small_spring12&lt;/p>
+&lt;/a>中&lt;/p></description></item><item><title>12.包扫描和属性占位符</title><link>https://zzzicode.github.io/post/12.%E5%8C%85%E6%89%AB%E6%8F%8F%E5%92%8C%E5%B1%9E%E6%80%A7%E5%8D%A0%E4%BD%8D%E7%AC%A6/</link><pubDate>Sun, 12 Nov 2023 13:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/12.%E5%8C%85%E6%89%AB%E6%8F%8F%E5%92%8C%E5%B1%9E%E6%80%A7%E5%8D%A0%E4%BD%8D%E7%AC%A6/</guid><description>&lt;blockquote>
+&lt;p>🥒 包扫描和属性占位符&lt;/p>
 &lt;/blockquote>
 &lt;p>​ 本节实现了另外一种bean的配置方式，并且对于bean的属性来说，配置的时候还可以使用占位符的形式从属性文件中读取，做到一次配置，多次使用的目的，文章中涉及到的代码放到了
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">

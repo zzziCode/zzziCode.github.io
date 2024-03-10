@@ -447,7 +447,7 @@ ConnectionHolder类中保存SimpleConnectionHandler对象，内部保存数据�
 主要是在refresh函数中进行属性占位符的替换，然后在空bean创建之后，属性填充之前将属性列表构造好直接填充，然后在属性填充时只需要填充xml文件中配置的bean属性
 思路
 ​ 为了在自动扫描注册之后引入注解属性填充的功能，肯定需要在bean的生命周期中进行改造，本节中为了引入注解属性填充的功能，需要在空bean创建之后，属性填充之前执行注解属性填充的功能，从而加载通过注解配置的属性来进行填充，之后再进行正常的xml配置文件中的属性填充。在xml文件读取的过程中，一旦配置了包扫描路径，此时就会执行bean的自动扫描注册，注册表中bean的BeanDefinition中的PropertyValues为空，之后再读取xml配置文件，如果此时还配置了bean，就会读取一份新的PropertyValues，将其存入注册表中时会更新注册表，从而此时的bean的BeanDefinition存储了两部分数据，第一部分是xml直接配置的属性，不为空，第二部分是使用注解配置的属性，为空。
-​ 下面的步骤就是将执行占位符替换，如果xml配置属性的过程中存在占位符，就在这一步进行替换，然后就是空bean的创建，下一步就是注解属性填充的部分，根据注解中配置的属性直接填充空bean中的属性， …</content></entry><entry><title>Small_spring12</title><url>/post/small_spring12/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥒 small_spring12
+​ 下面的步骤就是将执行占位符替换，如果xml配置属性的过程中存在占位符，就在这一步进行替换，然后就是空bean的创建，下一步就是注解属性填充的部分，根据注解中配置的属性直接填充空bean中的属性， …</content></entry><entry><title>12.包扫描和属性占位符</title><url>/post/12.%E5%8C%85%E6%89%AB%E6%8F%8F%E5%92%8C%E5%B1%9E%E6%80%A7%E5%8D%A0%E4%BD%8D%E7%AC%A6/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥒 包扫描和属性占位符
 ​ 本节实现了另外一种bean的配置方式，并且对于bean的属性来说，配置的时候还可以使用占位符的形式从属性文件中读取，做到一次配置，多次使用的目的，文章中涉及到的代码放到了
 仓库
 中，主要分为自动扫描bean的注册以及修改bean属性的配置方式。
@@ -455,7 +455,7 @@ ConnectionHolder类中保存SimpleConnectionHandler对象，内部保存数据�
 ​ 经过之前的设计，spring中的IOC和AOP已经大致有了雏形，但其更像是一个初级的spring，因为bean的配置获取还处于最原始的编写xml配置文件的方式，并不能通过使用注解从而自动扫描，并且bean的属性配置如果需要变化，必须修改xml配置文件，所以针对这两点的不足，本节中做出了改进：
 使用注解和包扫描的方式实现bean的自动注册，省去配置xml文件的繁琐步骤，包路径下所有使用了@Component注解的类都会被注册成功Bean，并且可以配置多个包扫描路径，路径之间使用“,”分割，之后就是扫描到所有的beanDefinition，然后将其放入beanDefinitionMap中，相当于不同的beanDefinition获取方式，不管是什么形式得到的beanDefinition都放入了beanDefinitionMap中，但是本节中只是引入了component-scan得到使用了@Component注解的bean的功能，还没有引入使用注解注入属性的功能，这个功能在下一节实现 使用占位符的方式将bean的属性配置更改到属性文件中，做到一次配置，多次使用，属性注入时直接从属性文件中读取需要的属性值，其实本质上在配置文件解析的过程中，是不管有没有占位符的，之后 思路
 ​ 在实现上面的两个目标之前，首先需要明确这些模块都是加入到了bean的生命周期中，从而可以增强spring中对于bean的管理。对于第一个目标来说，首先需要实现包扫描的功能，然后将包扫描到的bean都注册到注册表中，就替代了xml文件中一个一个配置的步骤，后面的依据注册表创建bean的步骤与原来一致，而包扫描的机制在xml配置文件读取的过程中。 一旦有包扫描路径的配置就会触发包扫描的机制从而完成自动注册，关于自动注册的流程如下：
-对于红框来说，会针对每一个包扫描路径做一次，对于绿框来说，会针对每一个BeanDefinition做一次，最后将所有包扫描路径下的所有BeanDefinition都保存到注册表中，而自动 …</content></entry><entry><title/><url>/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥔 在bean的生命周期中加入AOP
+对于红框来说，会针对每一个包扫描路径做一次，对于绿框来说，会针对每一个BeanDefinition做一次，最后将所有包扫描路径下的所有BeanDefinition都保存到注册表中，而自动注册的引入 …</content></entry><entry><title/><url>/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥔 在bean的生命周期中加入AOP
 ​ 在上一节中我们将IOC的部分彻底补充完整，现在的简易spring框架已经有了bean定义，注册，属性填充依赖注入，xml文件解析，应用上下文，修改，初始化和销毁，感知注入容器资源，多种方式多种类型创建bean以及事件机制，本节中在原有项目的基础上增加了AOP的功能，将从AOP的实现到将AOP融入现有spring框架中进行介绍，相关的代码我放到了
 仓库
 中
