@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图床配置 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/</link><description>Recent content in 图床配置 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 22 May 2023 22:34:28 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/rss.xml" rel="self" type="application/rss+xml"/><item><title>Typora PicGo GitHub无痛使用</title><link>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 22 May 2023 22:34:28 +0800</pubDate><guid>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</guid><description>&lt;blockquote>
+&lt;p>Typora-PicGo-GitHub无痛使用&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>
+&lt;a href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here" title="PicGo" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+PicGo
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>: 一个用于快速上传图片并获取图片 URL 链接的工具&lt;/strong>&lt;/p>
+&lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item></channel></rss>

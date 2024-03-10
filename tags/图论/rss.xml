@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图论 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%9B%BE%E8%AE%BA/</link><description>Recent content in 图论 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 06 Sep 2023 19:49:50 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%9B%BE%E8%AE%BA/rss.xml" rel="self" type="application/rss+xml"/><item><title>127.单词接龙</title><link>https://zzzicode.github.io/post/127.%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/</link><pubDate>Wed, 06 Sep 2023 19:49:50 +0800</pubDate><guid>https://zzzicode.github.io/post/127.%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/</guid><description>&lt;blockquote>
+&lt;p>🐉 127.单词接龙&lt;/p>
+&lt;/blockquote>
+&lt;p>字典 &lt;code>wordList&lt;/code> 中从单词 &lt;code>beginWord&lt;/code> 和 &lt;code>endWord&lt;/code> 的 &lt;strong>转换序列&lt;/strong> 是一个按下述规格形成的序列 &lt;code>beginWord -&amp;gt; s1 -&amp;gt; s2 -&amp;gt; ... -&amp;gt; sk&lt;/code>：&lt;/p>
+&lt;ul>
+&lt;li>每一对相邻的单词只差一个字母。&lt;/li>
+&lt;li>对于 &lt;code>1 &amp;lt;= i &amp;lt;= k&lt;/code> 时，每个 &lt;code>si&lt;/code> 都在 &lt;code>wordList&lt;/code> 中。注意， &lt;code>beginWord&lt;/code> 不需要在 &lt;code>wordList&lt;/code> 中。&lt;/li>
+&lt;li>&lt;code>sk == endWord&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>给你两个单词 &lt;code>beginWord&lt;/code> 和 &lt;code>endWord&lt;/code> 和一个字典 &lt;code>wordList&lt;/code> ，返回 &lt;em>从 &lt;code>beginWord&lt;/code> 到 &lt;code>endWord&lt;/code> 的 &lt;strong>最短转换序列&lt;/strong> 中的 &lt;strong>单词数目&lt;/strong>&lt;/em> 。如果不存在这样的转换序列，返回 &lt;code>0&lt;/code> 。&lt;/p></description></item><item><title>1020.飞地的数量</title><link>https://zzzicode.github.io/post/1020.%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F/</link><pubDate>Mon, 04 Sep 2023 19:44:36 +0800</pubDate><guid>https://zzzicode.github.io/post/1020.%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F/</guid><description>&lt;blockquote>
+&lt;p>🕹︎ 1020.飞地的数量&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>m x n&lt;/code> 的二进制矩阵 &lt;code>grid&lt;/code> ，其中 &lt;code>0&lt;/code> 表示一个海洋单元格、&lt;code>1&lt;/code> 表示一个陆地单元格。&lt;/p>
+&lt;p>一次 &lt;strong>移动&lt;/strong> 是指从一个陆地单元格走到另一个相邻（&lt;strong>上、下、左、右&lt;/strong>）的陆地单元格或跨过 &lt;code>grid&lt;/code> 的边界。&lt;/p>
+&lt;p>返回网格中 &lt;strong>无法&lt;/strong> 在任意次数的移动中离开网格边界的陆地单元格的数量。&lt;/p></description></item><item><title>827.最大人工岛</title><link>https://zzzicode.github.io/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/</link><pubDate>Mon, 04 Sep 2023 18:43:54 +0800</pubDate><guid>https://zzzicode.github.io/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/</guid><description>&lt;blockquote>
+&lt;p>👷 827.最大人工岛&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>n x n&lt;/code> 二进制矩阵 &lt;code>grid&lt;/code> 。&lt;strong>最多&lt;/strong> 只能将一格 &lt;code>0&lt;/code> 变成 &lt;code>1&lt;/code> 。&lt;/p>
+&lt;p>返回执行此操作后，&lt;code>grid&lt;/code> 中最大的岛屿面积是多少？&lt;/p>
+&lt;p>&lt;strong>岛屿&lt;/strong> 由一组上、下、左、右四个方向相连的 &lt;code>1&lt;/code> 形成。&lt;/p></description></item><item><title>695.岛屿的最大面积</title><link>https://zzzicode.github.io/post/695.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/</link><pubDate>Sun, 03 Sep 2023 20:25:28 +0800</pubDate><guid>https://zzzicode.github.io/post/695.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/</guid><description>&lt;blockquote>
+&lt;p>👏 695.岛屿的最大面积&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>m x n&lt;/code> 的二进制矩阵 &lt;code>grid&lt;/code> 。&lt;/p>
+&lt;p>&lt;strong>岛屿&lt;/strong> 是由一些相邻的 &lt;code>1&lt;/code> (代表土地) 构成的组合，这里的「相邻」要求两个 &lt;code>1&lt;/code> 必须在 &lt;strong>水平或者竖直的四个方向上&lt;/strong> 相邻。你可以假设 &lt;code>grid&lt;/code> 的四个边缘都被 &lt;code>0&lt;/code>（代表水）包围着。&lt;/p>
+&lt;p>岛屿的面积是岛上值为 &lt;code>1&lt;/code> 的单元格的数目。&lt;/p>
+&lt;p>计算并返回 &lt;code>grid&lt;/code> 中最大的岛屿面积。如果没有岛屿，则返回面积为 &lt;code>0&lt;/code> 。&lt;/p></description></item><item><title>463.岛屿的周长</title><link>https://zzzicode.github.io/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/</link><pubDate>Sat, 02 Sep 2023 21:28:21 +0800</pubDate><guid>https://zzzicode.github.io/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/</guid><description>&lt;blockquote>
+&lt;p>👦 463.岛屿的周长&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 &lt;code>row x col&lt;/code> 的二维网格地图 &lt;code>grid&lt;/code> ，其中：&lt;code>grid[i][j] = 1&lt;/code> 表示陆地， &lt;code>grid[i][j] = 0&lt;/code> 表示水域。&lt;/p>
+&lt;p>网格中的格子 &lt;strong>水平和垂直&lt;/strong> 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。&lt;/p>
+&lt;p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。&lt;/p></description></item><item><title>200.岛屿数量</title><link>https://zzzicode.github.io/post/200.%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link><pubDate>Sat, 02 Sep 2023 20:45:29 +0800</pubDate><guid>https://zzzicode.github.io/post/200.%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid><description>&lt;blockquote>
+&lt;p>🏝 200.岛屿数量&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个由 &lt;code>'1'&lt;/code>（陆地）和 &lt;code>'0'&lt;/code>（水）组成的的二维网格，请你计算网格中岛屿的数量。&lt;/p>
+&lt;p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。&lt;/p>
+&lt;p>此外，你可以假设该网格的四条边均被水包围。&lt;/p>
+&lt;blockquote>
+&lt;p>也就是一旦出现一个陆地，就需要将相邻（上下左右）的陆地全部统计出来，形成一座岛&lt;/p>
+&lt;/blockquote></description></item><item><title>797.所有可能的路径</title><link>https://zzzicode.github.io/post/797.%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/</link><pubDate>Fri, 01 Sep 2023 19:14:46 +0800</pubDate><guid>https://zzzicode.github.io/post/797.%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/</guid><description>&lt;blockquote>
+&lt;p>🚧 797.所有可能的路径&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个有 &lt;code>n&lt;/code> 个节点的 &lt;strong>有向无环图（DAG）&lt;/strong>，请你找出所有从节点 &lt;code>0&lt;/code> 到节点 &lt;code>n-1&lt;/code> 的路径并输出（&lt;strong>不要求按特定顺序&lt;/strong>）&lt;/p>
+&lt;p>&lt;code>graph[i]&lt;/code> 是一个从节点 &lt;code>i&lt;/code> 可以访问的所有节点的列表（即从节点 &lt;code>i&lt;/code> 到节点 &lt;code>graph[i][j]&lt;/code>存在一条有向边）。&lt;/p></description></item></channel></rss>

@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 06 Mar 2024 12:40:17 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>微服务保护之Sentinel</title><link>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</link><pubDate>Wed, 06 Mar 2024 12:40:17 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</guid><description>&lt;blockquote>
+&lt;p>😏 微服务保护之Sentinel&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中介绍一种微服务保护的中间件技术Sentinel，他可以控制访问微服务的请求，包括流量控制，熔断降级以及请求授权等主要内容&lt;/p></description></item><item><title>Elasticsearch学习笔记3</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</link><pubDate>Tue, 05 Mar 2024 20:44:59 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</guid><description>&lt;blockquote>
+&lt;p>🖐️ elasticsearch学习笔记3&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是延续前两节笔记中的内容继续介绍elasticsearch中的剩余内容，主要包含数据聚合，elasticsearch搜索时自动补全，elasticsearch集群之间的数据同步等知识&lt;/p></description></item><item><title>2537.统计好子数组的数目</title><link>https://zzzicode.github.io/post/2537.%E7%BB%9F%E8%AE%A1%E5%A5%BD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%95%B0%E7%9B%AE/</link><pubDate>Tue, 05 Mar 2024 20:16:21 +0800</pubDate><guid>https://zzzicode.github.io/post/2537.%E7%BB%9F%E8%AE%A1%E5%A5%BD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%95%B0%E7%9B%AE/</guid><description>&lt;blockquote>
+&lt;p>💫 2537.统计好子数组的数目&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> 和一个整数 &lt;code>k&lt;/code> ，请你返回 &lt;code>nums&lt;/code> 中 &lt;strong>好&lt;/strong> 子数组的数目。&lt;/p>
+&lt;p>一个子数组 &lt;code>arr&lt;/code> 如果有 &lt;strong>至少&lt;/strong> &lt;code>k&lt;/code> 对下标 &lt;code>(i, j)&lt;/code> 满足 &lt;code>i &amp;lt; j&lt;/code> 且 &lt;code>arr[i] == arr[j]&lt;/code> ，那么称它是一个 &lt;strong>好&lt;/strong> 子数组。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 是原数组中一段连续 &lt;strong>非空&lt;/strong> 的元素序列。&lt;/p></description></item><item><title>2063.所有子字符串中的元音</title><link>https://zzzicode.github.io/post/2063.%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3/</link><pubDate>Tue, 05 Mar 2024 19:20:25 +0800</pubDate><guid>https://zzzicode.github.io/post/2063.%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3/</guid><description>&lt;blockquote>
+&lt;p>🏁 2063.所有子字符串中的元音&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 &lt;code>word&lt;/code> ，返回 &lt;code>word&lt;/code> 的所有子字符串中 &lt;strong>元音的总数&lt;/strong> ，元音是指 &lt;code>'a'&lt;/code>、&lt;code>'e'&lt;/code>&lt;em>、&lt;/em>&lt;code>'i'&lt;/code>&lt;em>、&lt;/em>&lt;code>'o'&lt;/code> 和 &lt;code>'u'&lt;/code> &lt;em>。&lt;/em>&lt;/p>
+&lt;p>&lt;strong>子字符串&lt;/strong> 是字符串中一个连续（非空）的字符序列。&lt;/p>
+&lt;p>**注意：**由于对 &lt;code>word&lt;/code> 长度的限制比较宽松，答案可能超过有符号 32 位整数的范围。计算时需当心。&lt;/p></description></item><item><title>2976.转换字符串的最小成本I</title><link>https://zzzicode.github.io/post/2976.%E8%BD%AC%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E6%88%90%E6%9C%ACi/</link><pubDate>Mon, 04 Mar 2024 20:06:14 +0800</pubDate><guid>https://zzzicode.github.io/post/2976.%E8%BD%AC%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E6%88%90%E6%9C%ACi/</guid><description>&lt;blockquote>
+&lt;p>🎠 2976.转换字符串的最小成本I&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两个下标从 &lt;strong>0&lt;/strong> 开始的字符串 &lt;code>source&lt;/code> 和 &lt;code>target&lt;/code> ，它们的长度均为 &lt;code>n&lt;/code> 并且由 &lt;strong>小写&lt;/strong> 英文字母组成。&lt;/p>
+&lt;p>另给你两个下标从 &lt;strong>0&lt;/strong> 开始的字符数组 &lt;code>original&lt;/code> 和 &lt;code>changed&lt;/code> ，以及一个整数数组 &lt;code>cost&lt;/code> ，其中 &lt;code>cost[i]&lt;/code> 代表将字符 &lt;code>original[i]&lt;/code> 更改为字符 &lt;code>changed[i]&lt;/code> 的成本。&lt;/p>
+&lt;p>你从字符串 &lt;code>source&lt;/code> 开始。在一次操作中，&lt;strong>如果&lt;/strong> 存在 &lt;strong>任意&lt;/strong> 下标 &lt;code>j&lt;/code> 满足 &lt;code>cost[j] == z&lt;/code> 、&lt;code>original[j] == x&lt;/code> 以及 &lt;code>changed[j] == y&lt;/code> 。你就可以选择字符串中的一个字符 &lt;code>x&lt;/code> 并以 &lt;code>z&lt;/code> 的成本将其更改为字符 &lt;code>y&lt;/code> 。&lt;/p>
+&lt;p>返回将字符串 &lt;code>source&lt;/code> 转换为字符串 &lt;code>target&lt;/code> 所需的 &lt;strong>最小&lt;/strong> 成本。如果不可能完成转换，则返回 &lt;code>-1&lt;/code>&lt;/p></description></item><item><title>Redis面经</title><link>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</link><pubDate>Mon, 04 Mar 2024 12:57:25 +0800</pubDate><guid>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>🛅 redis面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一些redis的常见面试题，文章长期更新，面试答案参考小林coding的
+&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+图解系列
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
+&lt;p>🔍 elasticsearch学习笔记2&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要介绍elasticsearch中的文档搜索功能，这也是它最重要的一个知识点&lt;/p></description></item><item><title>875.爱吃香蕉的珂珂</title><link>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</link><pubDate>Fri, 01 Mar 2024 19:36:57 +0800</pubDate><guid>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</guid><description>&lt;blockquote>
+&lt;p>🍌 875.爱吃香蕉的珂珂&lt;/p>
+&lt;/blockquote>
+&lt;p>珂珂喜欢吃香蕉。这里有 &lt;code>n&lt;/code> 堆香蕉，第 &lt;code>i&lt;/code> 堆中有 &lt;code>piles[i]&lt;/code> 根香蕉。警卫已经离开了，将在 &lt;code>h&lt;/code> 小时后回来。&lt;/p>
+&lt;p>珂珂可以决定她吃香蕉的速度 &lt;code>k&lt;/code> （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 &lt;code>k&lt;/code> 根。如果这堆香蕉少于 &lt;code>k&lt;/code> 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。&lt;/p>
+&lt;p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。&lt;/p>
+&lt;p>返回她可以在 &lt;code>h&lt;/code> 小时内吃掉所有香蕉的最小速度 &lt;code>k&lt;/code>（&lt;code>k&lt;/code> 为整数）。&lt;/p></description></item><item><title>Elasticsearch学习笔记1</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><pubDate>Thu, 29 Feb 2024 20:30:00 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><description>&lt;blockquote>
+&lt;p>🔍 elasticsearch学习笔记1&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要介绍了elasticsearch中的一些基本概念，并于mysql中的一些概念进行了对比，分析了elasticsearch与mysql适用的场景。并且介绍了elasticsearch中索引库和文档的DSL语句的操作语法，主要是索引库的增删改查以及文档的增删改，关于文档如何进行查询，在下一节中介绍。之后还使用了java封装的RestAPI来使用java代码操作索引库和文档&lt;/p></description></item><item><title>Mysql面经</title><link>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:56:32 +0800</pubDate><guid>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>📈 mysql面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文中主要介绍一些mysql的面试笔记，文章持续更新，面试答案参小林coding的
+&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+图解系列
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>🌸 spring面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文总结一些常见的spring面试题并自己做出总结，文章持续更新&lt;/p></description></item><item><title>1887.使数组元素相等的减少操作次数</title><link>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</link><pubDate>Mon, 15 Jan 2024 20:47:56 +0800</pubDate><guid>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>😃 1887.使数组元素相等的减少操作次数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，你的目标是令 &lt;code>nums&lt;/code> 中的所有元素相等。完成一次减少操作需要遵照下面的几个步骤：&lt;/p>
+&lt;ol>
+&lt;li>找出 &lt;code>nums&lt;/code> 中的 &lt;strong>最大&lt;/strong> 值。记这个值为 &lt;code>largest&lt;/code> 并取其下标 &lt;code>i&lt;/code> （&lt;strong>下标从 0 开始计数&lt;/strong>）。如果有多个元素都是最大值，则取最小的 &lt;code>i&lt;/code> 。&lt;/li>
+&lt;li>找出 &lt;code>nums&lt;/code> 中的 &lt;strong>下一个最大&lt;/strong> 值，这个值 &lt;strong>严格小于&lt;/strong> &lt;code>largest&lt;/code> ，记为 &lt;code>nextLargest&lt;/code> 。&lt;/li>
+&lt;li>将 &lt;code>nums[i]&lt;/code> 减少到 &lt;code>nextLargest&lt;/code> 。&lt;/li>
+&lt;/ol>
+&lt;p>返回使 &lt;code>nums&lt;/code> 中的所有元素相等的操作次数。&lt;/p></description></item><item><title>2750.将数组划分成若干好子数组的方式</title><link>https://zzzicode.github.io/post/2750.%E5%B0%86%E6%95%B0%E7%BB%84%E5%88%92%E5%88%86%E6%88%90%E8%8B%A5%E5%B9%B2%E5%A5%BD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 08 Jan 2024 19:57:40 +0800</pubDate><guid>https://zzzicode.github.io/post/2750.%E5%B0%86%E6%95%B0%E7%BB%84%E5%88%92%E5%88%86%E6%88%90%E8%8B%A5%E5%B9%B2%E5%A5%BD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E5%BC%8F/</guid><description>&lt;blockquote>
+&lt;p>🧑‍🧒 2750.将数组划分成若干好子数组的方式&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个二元数组 &lt;code>nums&lt;/code> 。&lt;/p>
+&lt;p>如果数组中的某个子数组 &lt;strong>恰好&lt;/strong> 只存在 &lt;strong>一&lt;/strong> 个值为 &lt;code>1&lt;/code> 的元素，则认为该子数组是一个 &lt;strong>好子数组&lt;/strong> 。&lt;/p>
+&lt;p>请你统计将数组 &lt;code>nums&lt;/code> 划分成若干 &lt;strong>好子数组&lt;/strong> 的方法数，并以整数形式返回。由于数字可能很大，返回其对 &lt;code>109 + 7&lt;/code> &lt;strong>取余&lt;/strong> 之后的结果。&lt;/p>
+&lt;p>子数组是数组中的一个连续 &lt;strong>非空&lt;/strong> 元素序列。&lt;/p></description></item><item><title>1252.奇数值单元格的数目</title><link>https://zzzicode.github.io/post/1252.%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE/</link><pubDate>Sun, 07 Jan 2024 19:22:19 +0800</pubDate><guid>https://zzzicode.github.io/post/1252.%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE/</guid><description>&lt;blockquote>
+&lt;p>😀 1252.奇数值单元格的数目&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个 &lt;code>m x n&lt;/code> 的矩阵，最开始的时候，每个单元格中的值都是 &lt;code>0&lt;/code>。&lt;/p>
+&lt;p>另有一个二维索引数组 &lt;code>indices&lt;/code>，&lt;code>indices[i] = [ri, ci]&lt;/code> 指向矩阵中的某个位置，其中 &lt;code>ri&lt;/code> 和 &lt;code>ci&lt;/code> 分别表示指定的行和列（&lt;strong>从 &lt;code>0&lt;/code> 开始编号&lt;/strong>）。&lt;/p>
+&lt;p>对 &lt;code>indices[i]&lt;/code> 所指向的每个位置，应同时执行下述增量操作：&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>ri&lt;/code> 行上的所有单元格，加 &lt;code>1&lt;/code> 。&lt;/li>
+&lt;li>&lt;code>ci&lt;/code> 列上的所有单元格，加 &lt;code>1&lt;/code> 。&lt;/li>
+&lt;/ol>
+&lt;p>给你 &lt;code>m&lt;/code>、&lt;code>n&lt;/code> 和 &lt;code>indices&lt;/code> 。请你在执行完所有 &lt;code>indices&lt;/code> 指定的增量操作后，返回矩阵中 &lt;strong>奇数值单元格&lt;/strong> 的数目。&lt;/p></description></item><item><title>780.到达终点</title><link>https://zzzicode.github.io/post/780.%E5%88%B0%E8%BE%BE%E7%BB%88%E7%82%B9/</link><pubDate>Mon, 01 Jan 2024 19:50:54 +0800</pubDate><guid>https://zzzicode.github.io/post/780.%E5%88%B0%E8%BE%BE%E7%BB%88%E7%82%B9/</guid><description>&lt;blockquote>
+&lt;p>🏁 780.到达终点&lt;/p>
+&lt;/blockquote>
+&lt;p>给定四个整数 &lt;code>sx&lt;/code> , &lt;code>sy&lt;/code> ，&lt;code>tx&lt;/code> 和 &lt;code>ty&lt;/code>，如果通过一系列的&lt;strong>转换&lt;/strong>可以从起点 &lt;code>(sx, sy)&lt;/code> 到达终点 &lt;code>(tx, ty)&lt;/code>，则返回 &lt;code>true&lt;/code>，否则返回 &lt;code>false&lt;/code>。&lt;/p>
+&lt;p>从点 &lt;code>(x, y)&lt;/code> 可以&lt;strong>转换&lt;/strong>到 &lt;code>(x, x+y)&lt;/code> 或者 &lt;code>(x+y, y)&lt;/code>。&lt;/p></description></item><item><title>RabbitMQ学习笔记</title><link>https://zzzicode.github.io/post/rabbitmq%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 31 Dec 2023 13:43:30 +0800</pubDate><guid>https://zzzicode.github.io/post/rabbitmq%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🐇RabbitMQ学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一个&lt;strong>异步&lt;/strong>通信的消息队列技术：&lt;code>RabbitMQ&lt;/code>，在项目中使用这项技术可以使得微服务之间进行异步通信，提高项目的消息处理效率，在&lt;code>spring&lt;/code>项目中还对这项技术进行了集成，从而可以更加方便的使用&lt;code>RabbitMQTemplate&lt;/code>调用接口从而快速地收发消息&lt;/p></description></item><item><title>526.优美的排列</title><link>https://zzzicode.github.io/post/526.%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97/</link><pubDate>Wed, 27 Dec 2023 21:08:32 +0800</pubDate><guid>https://zzzicode.github.io/post/526.%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>🏐 526.优美的排列&lt;/p>
+&lt;/blockquote>
+&lt;p>假设有从 1 到 n 的 n 个整数。用这些整数构造一个数组 &lt;code>perm&lt;/code>（&lt;strong>下标从 1 开始&lt;/strong>），只要满足下述条件 &lt;strong>之一&lt;/strong> ，该数组就是一个 &lt;strong>优美的排列&lt;/strong> ：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>perm[i]&lt;/code> 能够被 &lt;code>i&lt;/code> 整除&lt;/li>
+&lt;li>&lt;code>i&lt;/code> 能够被 &lt;code>perm[i]&lt;/code> 整除&lt;/li>
+&lt;/ul>
+&lt;p>给你一个整数 &lt;code>n&lt;/code> ，返回可以构造的 &lt;strong>优美排列&lt;/strong> 的 &lt;strong>数量&lt;/strong> 。&lt;/p></description></item><item><title>1771.由子序列构造的最长回文串的长度</title><link>https://zzzicode.github.io/post/1771.%E7%94%B1%E5%AD%90%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E7%9A%84%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6/</link><pubDate>Tue, 26 Dec 2023 20:03:34 +0800</pubDate><guid>https://zzzicode.github.io/post/1771.%E7%94%B1%E5%AD%90%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E7%9A%84%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6/</guid><description>&lt;blockquote>
+&lt;p>📎 1771.由子序列构造的最长回文串的长度&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两个字符串 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> ，请你按下述方法构造一个字符串：&lt;/p>
+&lt;ul>
+&lt;li>从 &lt;code>word1&lt;/code> 中选出某个 &lt;strong>非空&lt;/strong> 子序列 &lt;code>subsequence1&lt;/code> 。&lt;/li>
+&lt;li>从 &lt;code>word2&lt;/code> 中选出某个 &lt;strong>非空&lt;/strong> 子序列 &lt;code>subsequence2&lt;/code> 。&lt;/li>
+&lt;li>连接两个子序列 &lt;code>subsequence1 + subsequence2&lt;/code> ，得到字符串。&lt;/li>
+&lt;/ul>
+&lt;p>返回可按上述方法构造的最长 &lt;strong>回文串&lt;/strong> 的 &lt;strong>长度&lt;/strong> 。如果无法构造回文串，返回 &lt;code>0&lt;/code> 。&lt;/p>
+&lt;p>字符串 &lt;code>s&lt;/code> 的一个 &lt;strong>子序列&lt;/strong> 是通过从 &lt;code>s&lt;/code> 中删除一些（也可能不删除）字符而不更改其余字符的顺序生成的字符串。&lt;/p>
+&lt;p>&lt;strong>回文串&lt;/strong> 是正着读和反着读结果一致的字符串。&lt;/p></description></item><item><title>Docker学习笔记</title><link>https://zzzicode.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 26 Dec 2023 14:59:48 +0800</pubDate><guid>https://zzzicode.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🐳 docker学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>本节介绍微服务中关于docker的一些知识，主要包括docker的基本操作，然后就是如何使用DockerFile来自定义镜像，使用Docker-Compose来部署容器，最后构造自己的镜像仓库&lt;/p></description></item><item><title>Springcloud学习笔记</title><link>https://zzzicode.github.io/post/springcloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 26 Dec 2023 13:08:01 +0800</pubDate><guid>https://zzzicode.github.io/post/springcloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🦓 springcloud学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>主要介绍&lt;code>springcloud&lt;/code>集成的一些关于微服务的技术，例如&lt;code>eureka&lt;/code>，&lt;code>ribbon&lt;/code>，&lt;code>nacos&lt;/code>，&lt;code>feign&lt;/code>，&lt;code>gateway&lt;/code>㩐技术，并初步介绍这些技术的使用方式&lt;/p></description></item><item><title>1711.大餐计数</title><link>https://zzzicode.github.io/post/1711.%E5%A4%A7%E9%A4%90%E8%AE%A1%E6%95%B0/</link><pubDate>Mon, 25 Dec 2023 20:44:47 +0800</pubDate><guid>https://zzzicode.github.io/post/1711.%E5%A4%A7%E9%A4%90%E8%AE%A1%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>🍽 1711.大餐计数&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>大餐&lt;/strong> 是指 &lt;strong>恰好包含两道不同餐品&lt;/strong> 的一餐，其美味程度之和等于 2 的幂。&lt;/p>
+&lt;p>你可以搭配 &lt;strong>任意&lt;/strong> 两道餐品做一顿大餐。&lt;/p>
+&lt;p>给你一个整数数组 &lt;code>deliciousness&lt;/code> ，其中 &lt;code>deliciousness[i]&lt;/code> 是第 &lt;code>i&lt;/code> 道餐品的美味程度，返回你可以用数组中的餐品做出的不同 &lt;strong>大餐&lt;/strong> 的数量。结果需要对 &lt;code>10000000007&lt;/code> 取余。&lt;/p>
+&lt;p>注意，只要餐品下标不同，就可以认为是不同的餐品，即便它们的美味程度相同。&lt;/p></description></item><item><title>802.找到最终的安全状态</title><link>https://zzzicode.github.io/post/802.%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/</link><pubDate>Fri, 22 Dec 2023 13:53:27 +0800</pubDate><guid>https://zzzicode.github.io/post/802.%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/</guid><description>&lt;blockquote>
+&lt;p>🦺 802.找到最终的安全状态&lt;/p>
+&lt;/blockquote>
+&lt;p>有一个有 &lt;code>n&lt;/code> 个节点的有向图，节点按 &lt;code>0&lt;/code> 到 &lt;code>n - 1&lt;/code> 编号。图由一个 &lt;strong>索引从 0 开始&lt;/strong> 的 2D 整数数组 &lt;code>graph&lt;/code>表示， &lt;code>graph[i]&lt;/code>是与节点 &lt;code>i&lt;/code> 相邻的节点的整数数组，这意味着从节点 &lt;code>i&lt;/code> 到 &lt;code>graph[i]&lt;/code>中的每个节点都有一条边。&lt;/p>
+&lt;p>如果一个节点没有连出的有向边，则该节点是 &lt;strong>终端节点&lt;/strong> 。如果从该节点开始的所有可能路径都通向 &lt;strong>终端节点&lt;/strong> ，则该节点为 &lt;strong>安全节点&lt;/strong> 。&lt;/p>
+&lt;p>返回一个由图中所有 &lt;strong>安全节点&lt;/strong> 组成的数组作为答案。答案数组中的元素应当按 &lt;strong>升序&lt;/strong> 排列。&lt;/p></description></item><item><title>迷路的机器人</title><link>https://zzzicode.github.io/post/%E8%BF%B7%E8%B7%AF%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA/</link><pubDate>Thu, 21 Dec 2023 20:36:09 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%BF%B7%E8%B7%AF%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA/</guid><description>&lt;blockquote>
+&lt;p>🤖 迷路的机器人&lt;/p>
+&lt;/blockquote>
+&lt;p>设想有个机器人坐在一个网格的左上角，网格 r 行 c 列。机器人只能向下或向右移动，但不能走到一些被禁止的网格（有障碍物）。设计一种算法，寻找机器人从左上角移动到右下角的路径。&lt;/p>
+&lt;p>网格中的障碍物和空位置分别用 &lt;code>1&lt;/code> 和 &lt;code>0&lt;/code> 来表示。&lt;/p>
+&lt;p>返回一条可行的路径，路径由经过的网格的行号和列号组成。左上角为 0 行 0 列。如果没有可行的路径，返回空数组。&lt;/p></description></item><item><title>165.解密数字</title><link>https://zzzicode.github.io/post/165.%E8%A7%A3%E5%AF%86%E6%95%B0%E5%AD%97/</link><pubDate>Wed, 20 Dec 2023 20:34:20 +0800</pubDate><guid>https://zzzicode.github.io/post/165.%E8%A7%A3%E5%AF%86%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>🔓 165.解密数字&lt;/p>
+&lt;/blockquote>
+&lt;p>现有一串神秘的密文 &lt;code>ciphertext&lt;/code>，经调查，密文的特点和规则如下：&lt;/p>
+&lt;ul>
+&lt;li>密文由非负整数组成&lt;/li>
+&lt;li>数字 0-25 分别对应字母 a-z&lt;/li>
+&lt;/ul>
+&lt;p>请根据上述规则将密文 &lt;code>ciphertext&lt;/code> 解密为字母，并返回共有多少种解密结果。&lt;/p></description></item><item><title>1144.递减元素使数组呈锯齿状</title><link>https://zzzicode.github.io/post/1144.%E9%80%92%E5%87%8F%E5%85%83%E7%B4%A0%E4%BD%BF%E6%95%B0%E7%BB%84%E5%91%88%E9%94%AF%E9%BD%BF%E7%8A%B6/</link><pubDate>Wed, 20 Dec 2023 19:47:28 +0800</pubDate><guid>https://zzzicode.github.io/post/1144.%E9%80%92%E5%87%8F%E5%85%83%E7%B4%A0%E4%BD%BF%E6%95%B0%E7%BB%84%E5%91%88%E9%94%AF%E9%BD%BF%E7%8A%B6/</guid><description>&lt;blockquote>
+&lt;p>🪑 1144.递减元素使数组呈锯齿状&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code>，每次 &lt;strong>操作&lt;/strong> 会从中选择一个元素并 &lt;strong>将该元素的值减少 1&lt;/strong>。&lt;/p>
+&lt;p>如果符合下列情况之一，则数组 &lt;code>A&lt;/code> 就是 &lt;strong>锯齿数组&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>每个偶数索引对应的元素都大于相邻的元素，即 &lt;code>A[0] &amp;gt; A[1] &amp;lt; A[2] &amp;gt; A[3] &amp;lt; A[4] &amp;gt; ...&lt;/code>&lt;/li>
+&lt;li>或者，每个奇数索引对应的元素都大于相邻的元素，即 &lt;code>A[0] &amp;lt; A[1] &amp;gt; A[2] &amp;lt; A[3] &amp;gt; A[4] &amp;lt; ...&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>返回将数组 &lt;code>nums&lt;/code> 转换为锯齿数组所需的最小操作次数。&lt;/p></description></item><item><title>120.三角形最小路径和</title><link>https://zzzicode.github.io/post/120.%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link><pubDate>Wed, 13 Dec 2023 19:55:00 +0800</pubDate><guid>https://zzzicode.github.io/post/120.%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🔽 120.三角形最小路径和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个三角形 &lt;code>triangle&lt;/code> ，找出自顶向下的最小路径和。&lt;/p>
+&lt;p>每一步只能移动到下一行中相邻的结点上。&lt;strong>相邻的结点&lt;/strong> 在这里指的是 &lt;strong>下标&lt;/strong> 与 &lt;strong>上一层结点下标&lt;/strong> 相同或者等于 &lt;strong>上一层结点下标 + 1&lt;/strong> 的两个结点。也就是说，如果正位于当前行的下标 &lt;code>i&lt;/code> ，那么下一步可以移动到下一行的下标 &lt;code>i&lt;/code> 或 &lt;code>i + 1&lt;/code> 。&lt;/p></description></item><item><title>Spring相关知识</title><link>https://zzzicode.github.io/post/spring%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Mon, 11 Dec 2023 15:23:51 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;blockquote>
+&lt;p>🤔 spring相关知识&lt;/p>
+&lt;/blockquote>
+&lt;p>本文总结了spring框架中的一些核心知识，由于是一个不连续的学习过程，笔记中的内容也不是连续的，但是每一个知识点都值得分析，后期会对新的知识点进行补充&lt;/p></description></item><item><title>事务相关知识</title><link>https://zzzicode.github.io/post/%E4%BA%8B%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Mon, 11 Dec 2023 13:41:34 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BA%8B%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;blockquote>
+&lt;p>🤑 事务相关知识&lt;/p>
+&lt;/blockquote>
+&lt;p>本文中记录了spring中事务的相关知识点，可能总结的不够全面，后去如果遇到新的知识点会对文章进行补充，主要围绕事务的实现来展开讲解事务中的知识点&lt;/p></description></item><item><title>373.查找和最小的k对数字</title><link>https://zzzicode.github.io/post/373.%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9C%80%E5%B0%8F%E7%9A%84k%E5%AF%B9%E6%95%B0%E5%AD%97/</link><pubDate>Fri, 08 Dec 2023 21:13:18 +0800</pubDate><guid>https://zzzicode.github.io/post/373.%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9C%80%E5%B0%8F%E7%9A%84k%E5%AF%B9%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>✨ 373.查找和最小的k对数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个以 &lt;strong>非递减顺序排列&lt;/strong> 的整数数组 &lt;code>nums1&lt;/code> 和 &lt;code>nums2&lt;/code> , 以及一个整数 &lt;code>k&lt;/code> 。&lt;/p>
+&lt;p>定义一对值 &lt;code>(u,v)&lt;/code>，其中第一个元素来自 &lt;code>nums1&lt;/code>，第二个元素来自 &lt;code>nums2&lt;/code> 。&lt;/p>
+&lt;p>请找到和最小的 &lt;code>k&lt;/code> 个数对 &lt;code>(u1,v1)&lt;/code>, &lt;code> (u2,v2)&lt;/code> &amp;hellip; &lt;code>(uk,vk)&lt;/code> 。&lt;/p></description></item><item><title>快速排序和堆排序</title><link>https://zzzicode.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</link><pubDate>Tue, 05 Dec 2023 20:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</guid><description>&lt;blockquote>
+&lt;p>🍖 快速排序和堆排序&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍数组中的快速排序和堆排序的执行流程，介绍这两个算法的原理，针对快速排序来说，就是每一趟确定一个元素的位置，针对堆排序来说，就是每一次调整都找到一个最值元素&lt;/p></description></item><item><title>918.环形子数组的最大和</title><link>https://zzzicode.github.io/post/918.%E7%8E%AF%E5%BD%A2%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/</link><pubDate>Mon, 04 Dec 2023 20:46:18 +0800</pubDate><guid>https://zzzicode.github.io/post/918.%E7%8E%AF%E5%BD%A2%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>➰️ 918.环形子数组的最大和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个长度为 &lt;code>n&lt;/code> 的&lt;strong>环形整数数组&lt;/strong> &lt;code>nums&lt;/code> ，返回 &lt;em>&lt;code>nums&lt;/code> 的非空 &lt;strong>子数组&lt;/strong> 的最大可能和&lt;/em> 。&lt;/p>
+&lt;p>&lt;strong>环形数组&lt;/strong> 意味着数组的末端将会与开头相连呈环状。形式上， &lt;code>nums[i]&lt;/code> 的下一个元素是 &lt;code>nums[(i + 1) % n]&lt;/code> ， &lt;code>nums[i]&lt;/code> 的前一个元素是 &lt;code>nums[(i - 1 + n) % n]&lt;/code> 。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 最多只能包含固定缓冲区 &lt;code>nums&lt;/code> 中的每个元素一次。形式上，对于子数组 &lt;code>nums[i], nums[i + 1], ..., nums[j]&lt;/code> ，不存在 &lt;code>i &amp;lt;= k1, k2 &amp;lt;= j&lt;/code> 其中 &lt;code>k1 % n == k2 % n&lt;/code> 。&lt;/p></description></item><item><title>443.最小基因变化</title><link>https://zzzicode.github.io/post/443.%E6%9C%80%E5%B0%8F%E5%9F%BA%E5%9B%A0%E5%8F%98%E5%8C%96/</link><pubDate>Thu, 30 Nov 2023 21:07:33 +0800</pubDate><guid>https://zzzicode.github.io/post/443.%E6%9C%80%E5%B0%8F%E5%9F%BA%E5%9B%A0%E5%8F%98%E5%8C%96/</guid><description>&lt;blockquote>
+&lt;p>🧬 443.最小基因变化&lt;/p>
+&lt;/blockquote>
+&lt;p>基因序列可以表示为一条由 8 个字符组成的字符串，其中每个字符都是 &lt;code>'A'&lt;/code>、&lt;code>'C'&lt;/code>、&lt;code>'G'&lt;/code> 和 &lt;code>'T'&lt;/code> 之一。&lt;/p>
+&lt;p>假设我们需要调查从基因序列 &lt;code>start&lt;/code> 变为 &lt;code>end&lt;/code> 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。&lt;/p>
+&lt;ul>
+&lt;li>例如，&lt;code>&amp;quot;AACCGGTT&amp;quot; --&amp;gt; &amp;quot;AACCGGTA&amp;quot;&lt;/code> 就是一次基因变化。&lt;/li>
+&lt;/ul>
+&lt;p>另有一个基因库 &lt;code>bank&lt;/code> 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。（变化后的基因必须位于基因库 &lt;code>bank&lt;/code> 中）&lt;/p>
+&lt;p>给你两个基因序列 &lt;code>start&lt;/code> 和 &lt;code>end&lt;/code> ，以及一个基因库 &lt;code>bank&lt;/code> ，请你找出并返回能够使 &lt;code>start&lt;/code> 变化为 &lt;code>end&lt;/code> 所需的最少变化次数。如果无法完成此基因变化，返回 &lt;code>-1&lt;/code> 。&lt;/p>
+&lt;p>注意：起始基因序列 &lt;code>start&lt;/code> 默认是有效的，但是它并不一定会出现在基因库中。&lt;/p></description></item><item><title>909.蛇梯棋</title><link>https://zzzicode.github.io/post/909.%E8%9B%87%E6%A2%AF%E6%A3%8B/</link><pubDate>Tue, 28 Nov 2023 20:31:07 +0800</pubDate><guid>https://zzzicode.github.io/post/909.%E8%9B%87%E6%A2%AF%E6%A3%8B/</guid><description>&lt;blockquote>
+&lt;p>🐍 909.蛇梯棋&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>n x n&lt;/code> 的整数矩阵 &lt;code>board&lt;/code> ，方格按从 &lt;code>1&lt;/code> 到 &lt;code>n2&lt;/code> 编号，编号遵循
+&lt;a href="https://baike.baidu.com/item/%e7%89%9b%e8%80%95%e5%bc%8f%e8%bd%ac%e8%a1%8c%e4%b9%a6%e5%86%99%e6%b3%95/17195786" title="转行交替方式" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+转行交替方式
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a> ，&lt;strong>从左下角开始&lt;/strong> （即，从 &lt;code>board[n - 1][0]&lt;/code> 开始）每一行交替方向。&lt;/p>
+&lt;p>玩家从棋盘上的方格 &lt;code>1&lt;/code> （总是在最后一行、第一列）开始出发。&lt;/p>
+&lt;p>每一回合，玩家需要从当前方格 &lt;code>curr&lt;/code> 开始出发，按下述要求前进：&lt;/p>
+&lt;ul>
+&lt;li>选定目标方格&lt;code>next&lt;/code>，目标方格的编号符合范围&lt;code>[curr + 1, min(curr + 6, n2)]&lt;/code>&lt;/li>
+&lt;li>该选择模拟了掷 &lt;strong>六面体骰子&lt;/strong> 的情景，无论棋盘大小如何，玩家最多只能有 6 个目的地。&lt;/li>
+&lt;li>传送玩家：如果目标方格 &lt;code>next&lt;/code> 处存在蛇或梯子，那么玩家会传送到蛇或梯子的目的地。否则，玩家传送到目标方格 &lt;code>next&lt;/code> 。&lt;/li>
+&lt;li>当玩家到达编号 &lt;code>n2&lt;/code> 的方格时，游戏结束。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>r&lt;/code> 行 &lt;code>c&lt;/code> 列的棋盘，按前述方法编号，棋盘格中可能存在 “蛇” 或 “梯子”；如果 &lt;code>board[r][c] != -1&lt;/code>，那个蛇或梯子的目的地将会是 &lt;code>board[r][c]&lt;/code>。编号为 &lt;code>1&lt;/code> 和 &lt;code>n2&lt;/code> 的方格上没有蛇或梯子。&lt;/p>
+&lt;p>注意，玩家在每回合的前进过程中最多只能爬过蛇或梯子一次：就算目的地是另一条蛇或梯子的起点，玩家也 &lt;strong>不能&lt;/strong> 继续移动。&lt;/p>
+&lt;ul>
+&lt;li>举个例子，假设棋盘是 &lt;code>[[-1,4],[-1,3]]&lt;/code> ，第一次移动，玩家的目标方格是 &lt;code>2&lt;/code> 。那么这个玩家将会顺着梯子到达方格 &lt;code>3&lt;/code> ，但 &lt;strong>不能&lt;/strong> 顺着方格 &lt;code>3&lt;/code> 上的梯子前往方格 &lt;code>4&lt;/code> 。&lt;/li>
+&lt;/ul>
+&lt;p>返回达到编号为 &lt;code>n2&lt;/code> 的方格所需的最少移动次数，如果不可能，则返回 &lt;code>-1&lt;/code>。&lt;/p></description></item><item><title>Small_spring17</title><link>https://zzzicode.github.io/post/small_spring17/</link><pubDate>Mon, 20 Nov 2023 16:18:50 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring17/</guid><description>&lt;blockquote>
+&lt;p>🥩 small_spring17&lt;/p>
+&lt;/blockquote>
+&lt;p>在之前的章节中我们彻底完成了spring的核心功能，将整个bean声明周期中涉及到的核心方法都进行了完善，使得bean的创建可以更加灵活，在本节中我们进一步扩充现有spring的功能，将jdbc的功能整合到现有的spring项目中，使其具有查询数据库的功能，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring16</title><link>https://zzzicode.github.io/post/small_spring16/</link><pubDate>Sun, 19 Nov 2023 13:23:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring16/</guid><description>&lt;blockquote>
+&lt;p>🍖 small_spring16&lt;/p>
+&lt;/blockquote>
+&lt;p>在之前的章节中，我们实现了&lt;code>spring&lt;/code>中最重要的&lt;code>IOC&lt;/code>和&lt;code>AOP&lt;/code>的相关核心功能，并且利用三级缓存解决了循环依赖的问题，但是在属性填充的过程中，一直都是直接将字符串传递给bean中对应的属性，这会导致一些类型转换的问题，并且并不是所有属性都是&lt;code>string&lt;/code>的类型，所以本节中我们将会解决bean属性填充中类型转换的问题，以&lt;code>applyPropertyValues&lt;/code>方法为入口，相关代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring15</title><link>https://zzzicode.github.io/post/small_spring15/</link><pubDate>Thu, 16 Nov 2023 14:02:08 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring15/</guid><description>&lt;blockquote>
+&lt;p>🥬 small_spring15&lt;/p>
+&lt;/blockquote>
+&lt;p>经过之前的编码，spring最核心的IOC和AOP的内容已经基本搭建完成，IOC章节中实现了bean的定义和注册，属性填充，读取配置文件，应用上下文，修改，初始化，销毁，aware感知，&lt;code>FactoryBean&lt;/code>，事件监听。AOP章节中实现了对普通bean进行增强，自动扫描bean的注册，代理对象注入属性的内容。但是到目前为止，一个关键的问题还没有解决，那就是循环依赖，本节中就来解决这个问题，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring14</title><link>https://zzzicode.github.io/post/small_spring14/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring14/</guid><description>&lt;blockquote>
+&lt;p>🍟 small_spring14&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是&lt;code>null&lt;/code>，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个&lt;code>target&lt;/code>，&lt;code>target&lt;/code>的内部属性不为空，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring13</title><link>https://zzzicode.github.io/post/small_spring13/</link><pubDate>Mon, 13 Nov 2023 09:43:01 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring13/</guid><description>&lt;blockquote>
+&lt;p>🌶️ small_spring13&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 上一节中我们新增了一中bean的注册方式：包扫描+&lt;code>@Component&lt;/code>注解。这种方式实现了只用指定扫描哪些包，程序自动将这些包下使用了&lt;code>@Component&lt;/code>注解的bean注册到注册表中，同时bean还可以使用了占位符的形式从属性文件中读取属性值来填充，但是这两部分是分开的，所以本节中在bean自动注册过程中引入了注解进行属性注入的模块，可以使用&lt;code>@Value&lt;/code>注解可以注入普通属性，使用&lt;code>@Autowired&lt;/code>和&lt;code>@Qualifier&lt;/code>注解注入bean对象，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring12</title><link>https://zzzicode.github.io/post/small_spring12/</link><pubDate>Sun, 12 Nov 2023 13:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring12/</guid><description>&lt;blockquote>
+&lt;p>🥒 small_spring12&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 本节实现了另外一种bean的配置方式，并且对于bean的属性来说，配置的时候还可以使用占位符的形式从属性文件中读取，做到一次配置，多次使用的目的，文章中涉及到的代码放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中，主要分为自动扫描bean的注册以及修改bean属性的配置方式。&lt;/p></description></item><item><title/><link>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</link><pubDate>Fri, 10 Nov 2023 15:39:52 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</guid><description>&lt;blockquote>
+&lt;p>🥔 在bean的生命周期中加入AOP&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中我们将IOC的部分彻底补充完整，现在的简易spring框架已经有了bean定义，注册，属性填充依赖注入，xml文件解析，应用上下文，修改，初始化和销毁，感知注入容器资源，多种方式多种类型创建bean以及事件机制，本节中在原有项目的基础上增加了&lt;code>AOP&lt;/code>的功能，将从&lt;code>AOP&lt;/code>的实现到将&lt;code>AOP&lt;/code>融入现有spring框架中进行介绍，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>76.最小覆盖子串</title><link>https://zzzicode.github.io/post/76.%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/</link><pubDate>Wed, 08 Nov 2023 21:51:45 +0800</pubDate><guid>https://zzzicode.github.io/post/76.%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🏜️ 76.最小覆盖子串&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 &lt;code>s&lt;/code> 、一个字符串 &lt;code>t&lt;/code> 。返回 &lt;code>s&lt;/code> 中涵盖 &lt;code>t&lt;/code> 所有字符的最小子串。如果 &lt;code>s&lt;/code> 中不存在涵盖 &lt;code>t&lt;/code> 所有字符的子串，则返回空字符串 &lt;code>&amp;quot;&amp;quot;&lt;/code> 。&lt;/p></description></item><item><title>引入事件机制</title><link>https://zzzicode.github.io/post/10.%E5%BC%95%E5%85%A5%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</link><pubDate>Tue, 07 Nov 2023 14:34:18 +0800</pubDate><guid>https://zzzicode.github.io/post/10.%E5%BC%95%E5%85%A5%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</guid><description>&lt;blockquote>
+&lt;p>🍆 引入事件机制&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了多种类型多种方式创建bean多种类型的bean对象，本节中在此基础上，添加了事件功能，也就是当某些事件发生时，程序能够立马做出一些反应，就好像是一直在等着某些事件的发生。例如用户注册完成时，系统会给当前注册用户发送一些新人优惠福利。用户上线将自动给好友推送其上线消息等。本节中涉及到的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>11.盛水最多的容器</title><link>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</link><pubDate>Mon, 06 Nov 2023 21:20:49 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>🥕11.盛水最多的容器&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个长度为 &lt;code>n&lt;/code> 的整数数组 &lt;code>height&lt;/code> 。有 &lt;code>n&lt;/code> 条垂线，第 &lt;code>i&lt;/code> 条线的两个端点是 &lt;code>(i, 0)&lt;/code> 和 &lt;code>(i, height[i])&lt;/code> 。&lt;/p>
+&lt;p>找出其中的两条线，使得它们与 &lt;code>x&lt;/code> 轴共同构成的容器可以容纳最多的水。&lt;/p>
+&lt;p>返回容器可以储存的最大水量。&lt;/p>
+&lt;p>**说明：**你不能倾斜容器。&lt;/p></description></item><item><title>原型bean和FactoryBean</title><link>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</link><pubDate>Mon, 06 Nov 2023 18:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</guid><description>&lt;blockquote>
+&lt;p>🍑 原型bean和&lt;code>FactoryBean&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了向bean中注入容器资源的功能，注入时不用关心配置文件中，需要什么就实现什么资源接口即可，之后资源的注入统一在初始化时执行。这使得bean的功能更强大也更灵活。但是至今为止，我们还只是创建单例的bean，没有实现如何创建原型模式的bean，并且bean的创建只能从配置文件中获取，一旦bean涉及到的配置太多，xml文件的编写就会异常复杂，是否可以使用更方便的java代码编写bean的配置并控制bean的实例化呢？所以本节中有两个目标：&lt;/p>
+&lt;ol>
+&lt;li>创建多种模式的bean（单例或者原型）&lt;/li>
+&lt;li>以多种方式创建bean对象（xml或者java代码）&lt;/li>
+&lt;/ol>
+&lt;p>​ 本节涉及到的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>使用回调机制注入资源</title><link>https://zzzicode.github.io/post/8.%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%E6%B3%A8%E5%85%A5%E8%B5%84%E6%BA%90/</link><pubDate>Mon, 06 Nov 2023 13:09:13 +0800</pubDate><guid>https://zzzicode.github.io/post/8.%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%E6%B3%A8%E5%85%A5%E8%B5%84%E6%BA%90/</guid><description>&lt;blockquote>
+&lt;p>🍍 使用回调机制注入资源&lt;/p>
+&lt;/blockquote>
+&lt;p>在上一节中，我们在原有项目的基础上增加了初始化和销毁模块，并且实现方式有两种，分别是xml配置和实现接口，在初始化和销毁时可以进行资源的管理。本节中我们进一步&lt;strong>扩展&lt;/strong>bean的功能，使其可以获取到spring中的一些容器资源，为了获得这些容器资源，需要一些成员变量接收，然后在生命周期中增加这些变量的注入代码，最后bean对象就可以使用这些容器资源了，具体的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>6.N字形变换</title><link>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link><pubDate>Sat, 04 Nov 2023 19:31:25 +0800</pubDate><guid>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</guid><description>&lt;blockquote>
+&lt;p>🎈 6.N字形变换&lt;/p>
+&lt;/blockquote>
+&lt;p>将一个给定字符串 &lt;code>s&lt;/code> 根据给定的行数 &lt;code>numRows&lt;/code> ，以从上往下、从左到右进行 Z 字形排列。&lt;/p>
+&lt;p>比如输入字符串为 &lt;code>&amp;quot;PAYPALISHIRING&amp;quot;&lt;/code> 行数为 &lt;code>3&lt;/code> 时，排列如下：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>P A H N
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A P L S I I G
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Y I R
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：&lt;code>&amp;quot;PAHNAPLSIIGYIR&amp;quot;&lt;/code>。&lt;/p>
+&lt;p>请你实现这个将字符串进行指定行数变换的函数：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>string &lt;span style="color:#a6e22e">convert&lt;/span>&lt;span style="color:#f92672">(&lt;/span>string s&lt;span style="color:#f92672">,&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> numRows&lt;span style="color:#f92672">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>引入初始化和销毁逻辑</title><link>https://zzzicode.github.io/post/7.%E5%BC%95%E5%85%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%94%80%E6%AF%81%E9%80%BB%E8%BE%91/</link><pubDate>Fri, 03 Nov 2023 18:42:11 +0800</pubDate><guid>https://zzzicode.github.io/post/7.%E5%BC%95%E5%85%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%94%80%E6%AF%81%E9%80%BB%E8%BE%91/</guid><description>&lt;blockquote>
+&lt;p>🥭 引入初始化和销毁逻辑&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了应用上下文，并且在应用上下文中加入了修改模块，主要是在bean的生命周期的实例化之前和之后分别加入修改逻辑，本节中继续在这个项目的基础上增加一个模块：&lt;strong>初始化和销毁模块&lt;/strong>，分别用于初始化bean内部所需要的一些信息，以及在bean使用完毕之后，销毁bean的实例化信息，使得项目向着标准的spring框架更进一步，本节中涉及到的代码放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>整数和罗马数字之间的转换</title><link>https://zzzicode.github.io/post/%E6%95%B4%E6%95%B0%E5%92%8C%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</link><pubDate>Thu, 02 Nov 2023 22:08:10 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%95%B4%E6%95%B0%E5%92%8C%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/</guid><description>&lt;blockquote>
+&lt;p>⛑️ 整数和罗马数字之间的转换&lt;/p>
+&lt;/blockquote>
+&lt;p>罗马数字包含以下七种字符： &lt;code>I&lt;/code>， &lt;code>V&lt;/code>， &lt;code>X&lt;/code>， &lt;code>L&lt;/code>，&lt;code>C&lt;/code>，&lt;code>D&lt;/code> 和 &lt;code>M&lt;/code>。&lt;/p>
+&lt;blockquote>
+&lt;p>字符 数值
+I 1
+V 5
+X 10
+L 50
+C 100
+D 500
+M 1000&lt;/p>
+&lt;/blockquote>
+&lt;p>例如， 罗马数字 2 写做 &lt;code>II&lt;/code> ，即为两个并列的 1。12 写做 &lt;code>XII&lt;/code> ，即为 &lt;code>X&lt;/code> + &lt;code>II&lt;/code> 。 27 写做 &lt;code>XXVII&lt;/code>, 即为 &lt;code>XX&lt;/code> + &lt;code>V&lt;/code> + &lt;code>II&lt;/code> 。&lt;/p>
+&lt;p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 &lt;code>IIII&lt;/code>，而是 &lt;code>IV&lt;/code>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 &lt;code>IX&lt;/code>。这个特殊的规则只适用于以下六种情况：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>I&lt;/code> 可以放在 &lt;code>V&lt;/code> (5) 和 &lt;code>X&lt;/code> (10) 的左边，来表示 4 和 9。&lt;/li>
+&lt;li>&lt;code>X&lt;/code> 可以放在 &lt;code>L&lt;/code> (50) 和 &lt;code>C&lt;/code> (100) 的左边，来表示 40 和 90。&lt;/li>
+&lt;li>&lt;code>C&lt;/code> 可以放在 &lt;code>D&lt;/code> (500) 和 &lt;code>M&lt;/code> (1000) 的左边，来表示 400 和 900。&lt;/li>
+&lt;/ul>
+&lt;p>给你一个整数，将其转为罗马数字。&lt;/p></description></item><item><title>引入ApplicationContext和后置处理器</title><link>https://zzzicode.github.io/post/6.%E5%BC%95%E5%85%A5applicationcontext%E5%92%8C%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/</link><pubDate>Thu, 02 Nov 2023 18:35:38 +0800</pubDate><guid>https://zzzicode.github.io/post/6.%E5%BC%95%E5%85%A5applicationcontext%E5%92%8C%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>🍏 引入&lt;code>ApplicationContext&lt;/code>和后置处理器&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上节中，我们实现了从配置文件中读取bean的配置信息，也就是说在实例化之前增加了一个配置文件的读取和利用的模块，但资源文件读取还是要手动调用&lt;code>loadBeanDefinitions&lt;/code>方法，没有模拟出spring中真正的配置文件加载过程。所以，本节中我们继续完善spring框架，对外提供&lt;strong>修改&lt;/strong>的接口，可以在bean 对象注册后但未实例化之前，对 Bean 的定义信息 &lt;code>BeanDefinition&lt;/code> 执行修改操作。还可以在bean对象实例化之后进行修改。并且将bean对象的配置文件加载，注册，实例化，修改等操作都融合到一个&lt;strong>上下文操作类&lt;/strong>中，本节中主要是将之前的一些操作都进行封装，&lt;u>对外只暴露这个上下文操作类&lt;/u>，使其更加符合spring框架的特点。本节中涉及到的代码放在了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>将bean的注册信息放入配置文件</title><link>https://zzzicode.github.io/post/5.%E5%B0%86bean%E7%9A%84%E6%B3%A8%E5%86%8C%E4%BF%A1%E6%81%AF%E6%94%BE%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link><pubDate>Wed, 01 Nov 2023 09:21:26 +0800</pubDate><guid>https://zzzicode.github.io/post/5.%E5%B0%86bean%E7%9A%84%E6%B3%A8%E5%86%8C%E4%BF%A1%E6%81%AF%E6%94%BE%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid><description>&lt;blockquote>
+&lt;p>🍒 将bean的注册信息放入配置文件&lt;/p>
+&lt;/blockquote>
+&lt;p>之前几节已经实现了将bean的创建交给IOC容器，并且创建和属性填充已经分开，但是bean的定义、注册、属性填充、对象调用都是&lt;strong>手动&lt;/strong>在测试方法中实现的，这与真正的spring并不相符，所以本节在之前的基础上将spring中bean的定义，注册，属性填充等都配置到&lt;strong>配置文件&lt;/strong>中，然后编写代码读取配置文件中的信息，完成定义，注册，属性填充等操作，使其变得更&lt;strong>像&lt;/strong>一个spring框架，详细的代码在
+&lt;a href="https://github.com/zzziCode/small-spring.git" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>380.线性时间时间插入、删除和获取随机元素</title><link>https://zzzicode.github.io/post/380.%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0/</link><pubDate>Tue, 31 Oct 2023 21:29:42 +0800</pubDate><guid>https://zzzicode.github.io/post/380.%E7%BA%BF%E6%80%A7%E6%97%B6%E9%97%B4%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0/</guid><description>&lt;blockquote>
+&lt;p>🍅 380.线性时间时间插入、删除和获取随机元素&lt;/p>
+&lt;/blockquote>
+&lt;p>实现&lt;code>RandomizedSet&lt;/code> 类：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>RandomizedSet()&lt;/code> 初始化 &lt;code>RandomizedSet&lt;/code> 对象&lt;/li>
+&lt;li>&lt;code>bool insert(int val)&lt;/code> 当元素 &lt;code>val&lt;/code> 不存在时，向集合中插入该项，并返回 &lt;code>true&lt;/code> ；否则，返回 &lt;code>false&lt;/code> 。&lt;/li>
+&lt;li>&lt;code>bool remove(int val)&lt;/code> 当元素 &lt;code>val&lt;/code> 存在时，从集合中移除该项，并返回 &lt;code>true&lt;/code> ；否则，返回 &lt;code>false&lt;/code> 。&lt;/li>
+&lt;li>&lt;code>int getRandom()&lt;/code> 随机返回现有集合中的一项（测试用例保证调用此方法时集合中至少存在一个元素）。每个元素应该有 &lt;strong>相同的概率&lt;/strong> 被返回。&lt;/li>
+&lt;/ul>
+&lt;p>你必须实现类的所有函数，并满足每个函数的 &lt;strong>平均&lt;/strong> 时间复杂度为 &lt;code>O(1)&lt;/code> 。&lt;/p></description></item><item><title>bean的实例化和属性填充分离</title><link>https://zzzicode.github.io/post/4.bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%92%8C%E5%B1%9E%E6%80%A7%E5%A1%AB%E5%85%85%E5%88%86%E7%A6%BB/</link><pubDate>Tue, 31 Oct 2023 16:33:05 +0800</pubDate><guid>https://zzzicode.github.io/post/4.bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%92%8C%E5%B1%9E%E6%80%A7%E5%A1%AB%E5%85%85%E5%88%86%E7%A6%BB/</guid><description>&lt;blockquote>
+&lt;p>🍐 bean的实例化和属性填充分离&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是修改上一节中留下来的小问题，上一节中实现了带参的bean对象创建，但是一旦当前bean对象依赖另一个bean对象时，这种创建方式就会失效，因为上一节的带参bean对象创建需要先得到所有的参数。也就是说，当内部依赖另外一个bean对象时，需要先将这个bean对象new出来，然后将其当成参数传递给getBean方法，但是这又不符合bean对象的设计模式了，我们前面千辛万苦将bean的创建交给了IOC容器，现在不能将bean的创建工作交给自己，所以这里需要另辟蹊径，来实现bean的另外一种创建模式（先创建再属性填充），具体的代码在
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>JDK中的动态代理</title><link>https://zzzicode.github.io/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link><pubDate>Tue, 31 Oct 2023 10:21:12 +0800</pubDate><guid>https://zzzicode.github.io/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>🐇 JDK中的动态代理&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程&lt;/p></description></item><item><title>创建带参bean对象</title><link>https://zzzicode.github.io/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</link><pubDate>Mon, 30 Oct 2023 20:51:28 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</guid><description>&lt;blockquote>
+&lt;p>🍈 创建带参bean对象&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要是在上一章的基础上对上一章中代码存在的问题进行改造，上一章中将bean对象的创建交给了IOC容器，利用反射创建bean对象并保存到IOC容器中，但是忽略了一点，上章中代码只能创建不携带参数的bean对象，所以这一章主要解决的问题就是创建有参数的bean对象，正常的spring创建带参的bean对象时，参数应该注册到了BeanDefinition中，然后先创建然后属性填充，但是本节中我们直接一步到位，简化bean的创建过程。具体的代码在
+&lt;a href="https://github.com/zzziCode/small-spring.git" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>H指数</title><link>https://zzzicode.github.io/post/h%E6%8C%87%E6%95%B0/</link><pubDate>Mon, 30 Oct 2023 20:02:05 +0800</pubDate><guid>https://zzzicode.github.io/post/h%E6%8C%87%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>🏞️ H指数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>citations&lt;/code> ，其中 &lt;code>citations[i]&lt;/code> 表示研究者的第 &lt;code>i&lt;/code> 篇论文被引用的次数。计算并返回该研究者的 &lt;strong>&lt;code>h&lt;/code> 指数&lt;/strong>。&lt;/p>
+&lt;p>根据维基百科上
+&lt;a href="https://baike.baidu.com/item/h-index/3991452?fr=aladdin" title="h 指数的定义" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+h 指数的定义
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>：&lt;code>h&lt;/code> 代表“高引用次数” ，一名科研人员的 &lt;code>h&lt;/code> &lt;strong>指数&lt;/strong> 是指他（她）至少发表了 &lt;code>h&lt;/code> 篇论文，并且每篇论文 &lt;strong>至少&lt;/strong> 被引用 &lt;code>h&lt;/code> 次。如果 &lt;code>h&lt;/code> 有多种可能的值，&lt;strong>&lt;code>h&lt;/code> 指数&lt;/strong> 是其中最大的那个。&lt;/p></description></item><item><title>自动创建bean对象</title><link>https://zzzicode.github.io/post/2.%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1/</link><pubDate>Mon, 30 Oct 2023 09:51:25 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1/</guid><description>&lt;blockquote>
+&lt;p>🤔 自动创建bean对象&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是以上一节为基础，并对上一节制作的IOC容器进行改良，上一节中，bean对象的实例化是手动new出来的，这一节中将bean对象的创建交给IOC容器本身，并且为了考虑扩展性，尽可能的使得每一个类都只执行一个职责，最终让整个项目变得更加健壮，本节中创建的bean默认单例。关于项目的源码存放在
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>创建spring容器</title><link>https://zzzicode.github.io/post/1.%E5%88%9B%E5%BB%BAspring%E5%AE%B9%E5%99%A8/</link><pubDate>Mon, 30 Oct 2023 08:50:31 +0800</pubDate><guid>https://zzzicode.github.io/post/1.%E5%88%9B%E5%BB%BAspring%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>😀 创建spring容器&lt;/p>
+&lt;/blockquote>
+&lt;p>本文介绍small_spring的第一节知识，简单的实现一个最基础的spring中的容器，包括定义、存储、获取这个容器中的bean对象，相比于真正的spring源码只是一个简化版本，后面的章节会慢慢的对这个容器进行扩充，文章中涉及到的代码在
+&lt;a href="https://github.com/zzziCode/small_spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>80.删除有序数组中的重复项II</title><link>https://zzzicode.github.io/post/80.%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/</link><pubDate>Sun, 29 Oct 2023 18:35:35 +0800</pubDate><guid>https://zzzicode.github.io/post/80.%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/</guid><description>&lt;blockquote>
+&lt;p>🕯 80.删除有序数组中的重复项II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个有序数组 &lt;code>nums&lt;/code> ，请你**
+&lt;a href="http://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95" title=" 原地" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+原地
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>** 删除重复出现的元素，使得出现次数超过两次的元素&lt;strong>只出现两次&lt;/strong> ，返回删除后数组的新长度。&lt;/p>
+&lt;p>不要使用额外的数组空间，你必须在 &lt;strong>
+&lt;a href="https://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95" title="原地 " rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+原地
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>修改输入数组&lt;/strong> 并在使用 O(1) 额外空间的条件下完成。&lt;/p></description></item><item><title>278.寻找重复数</title><link>https://zzzicode.github.io/post/278.%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</link><pubDate>Sat, 28 Oct 2023 21:16:20 +0800</pubDate><guid>https://zzzicode.github.io/post/278.%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>🕊︎ 278.寻找重复数&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个包含 &lt;code>n + 1&lt;/code> 个整数的数组 &lt;code>nums&lt;/code> ，其数字都在 &lt;code>[1, n]&lt;/code> 范围内（包括 &lt;code>1&lt;/code> 和 &lt;code>n&lt;/code>），可知至少存在一个重复的整数。&lt;/p>
+&lt;p>假设 &lt;code>nums&lt;/code> 只有 &lt;strong>一个重复的整数&lt;/strong> ，返回 &lt;strong>这个重复的数&lt;/strong> 。&lt;/p>
+&lt;p>你设计的解决方案必须 &lt;strong>不修改&lt;/strong> 数组 &lt;code>nums&lt;/code> 且只用常量级 &lt;code>O(1)&lt;/code> 的额外空间。&lt;/p></description></item><item><title>31.下一个排列</title><link>https://zzzicode.github.io/post/31.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/</link><pubDate>Sat, 28 Oct 2023 20:20:24 +0800</pubDate><guid>https://zzzicode.github.io/post/31.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>🧤 31.下一个排列&lt;/p>
+&lt;/blockquote>
+&lt;p>整数数组的一个 &lt;strong>排列&lt;/strong> 就是将其所有成员以序列或线性顺序排列。&lt;/p>
+&lt;ul>
+&lt;li>例如，&lt;code>arr = [1,2,3]&lt;/code> ，以下这些都可以视作 &lt;code>arr&lt;/code> 的排列：&lt;code>[1,2,3]&lt;/code>、&lt;code>[1,3,2]&lt;/code>、&lt;code>[3,1,2]&lt;/code>、&lt;code>[2,3,1]&lt;/code> 。&lt;/li>
+&lt;/ul>
+&lt;p>整数数组的 &lt;strong>下一个排列&lt;/strong> 是指其整数的下一个字典序更大的排列。更正式地，如果数组的所有排列根据其字典顺序从小到大排列在一个容器中，那么数组的 &lt;strong>下一个排列&lt;/strong> 就是在这个有序容器中排在它后面的那个排列。如果不存在下一个更大的排列，那么这个数组必须重排为字典序最小的排列（即，其元素按升序排列）。&lt;/p>
+&lt;ul>
+&lt;li>例如，&lt;code>arr = [1,2,3]&lt;/code> 的下一个排列是 &lt;code>[1,3,2]&lt;/code> 。&lt;/li>
+&lt;li>类似地，&lt;code>arr = [2,3,1]&lt;/code> 的下一个排列是 &lt;code>[3,1,2]&lt;/code> 。&lt;/li>
+&lt;li>而 &lt;code>arr = [3,2,1]&lt;/code> 的下一个排列是 &lt;code>[1,2,3]&lt;/code> ，因为 &lt;code>[3,2,1]&lt;/code> 不存在一个字典序更大的排列。&lt;/li>
+&lt;/ul>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，找出 &lt;code>nums&lt;/code> 的下一个排列。&lt;/p>
+&lt;p>必须**
+&lt;a href="https://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95" title=" 原地 " rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+原地
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>**修改，只允许使用额外常数空间。&lt;/p></description></item><item><title>数据库和java中的乐观锁</title><link>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</link><pubDate>Sat, 28 Oct 2023 14:38:13 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</guid><description>&lt;blockquote>
+&lt;p>数据库和java中的乐观锁&lt;/p>
+&lt;/blockquote>
+&lt;p>本文介绍&lt;code>mybatis plus&lt;/code>和java代码中的乐观锁使用的不同，主要是针对代码层面进行分析&lt;/p>
+&lt;p>先介绍&lt;code>mybatis plus&lt;/code>实现乐观锁的流程，然后介绍传统java代码中乐观锁的执行流程&lt;/p></description></item><item><title>152.乘积最大子数组</title><link>https://zzzicode.github.io/post/152.%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Mon, 23 Oct 2023 19:34:50 +0800</pubDate><guid>https://zzzicode.github.io/post/152.%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>152.乘积最大子数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。&lt;/p>
+&lt;p>测试用例的答案是一个 &lt;strong>32-位&lt;/strong> 整数。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 是数组的连续子序列。&lt;/p></description></item><item><title>Mybatisplus</title><link>https://zzzicode.github.io/post/mybatisplus/</link><pubDate>Sat, 21 Oct 2023 21:45:11 +0800</pubDate><guid>https://zzzicode.github.io/post/mybatisplus/</guid><description>&lt;blockquote>
+&lt;p>😻 mybatisplus&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一些mybatisplus的基础知识，之后直接引入一个标准CRUD的程序，之后介绍mybatisplus中的多条件查询以及多记录操作，最后介绍一个乐观锁以及代码生成器&lt;/p></description></item><item><title>Springboot</title><link>https://zzzicode.github.io/post/springboot/</link><pubDate>Wed, 18 Oct 2023 21:37:45 +0800</pubDate><guid>https://zzzicode.github.io/post/springboot/</guid><description>&lt;blockquote>
+&lt;p>👹 springboot&lt;/p>
+&lt;/blockquote>
+&lt;p>本文中介绍了&lt;code>springboot&lt;/code>的基础知识，包括&lt;code>springboot&lt;/code>是什么，&lt;code>springboot&lt;/code>的配置文件，&lt;code>springboot&lt;/code>类似于&lt;code>spring&lt;/code>的整合&lt;code>junit&lt;/code>，整合&lt;code>mybatis&lt;/code>，最后将&lt;code>spring&lt;/code>中的一个项目转换成&lt;code>springboot&lt;/code>的项目&lt;/p></description></item><item><title>Maven高级</title><link>https://zzzicode.github.io/post/maven%E9%AB%98%E7%BA%A7/</link><pubDate>Mon, 16 Oct 2023 16:57:56 +0800</pubDate><guid>https://zzzicode.github.io/post/maven%E9%AB%98%E7%BA%A7/</guid><description>&lt;blockquote>
+&lt;p>🤠 maven高级&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍maven的相关知识，重点内容是依赖管理还有聚合与继承，从项目的角度对maven的相关知识进行了介绍最后还介绍了如何搭建一套自己的私服，实现依赖的统一上传下载&lt;/p></description></item><item><title>Springmvc02</title><link>https://zzzicode.github.io/post/springmvc02/</link><pubDate>Sat, 14 Oct 2023 16:52:19 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc02/</guid><description>&lt;blockquote>
+&lt;p>🤩 springmvc02&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍ssm整合以及将后端处理的数据如何统一封装返回给前端，之后全局的异常如何处理，前后端联调的过程以及最后的拦截器使用&lt;/p></description></item><item><title>215.数组中的第k个最大元素</title><link>https://zzzicode.github.io/post/215.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACk%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/</link><pubDate>Fri, 13 Oct 2023 21:31:44 +0800</pubDate><guid>https://zzzicode.github.io/post/215.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACk%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/</guid><description>&lt;blockquote>
+&lt;p>🍇 215.数组中的第k个最大元素&lt;/p>
+&lt;/blockquote>
+&lt;p>给定整数数组 &lt;code>nums&lt;/code> 和整数 &lt;code>k&lt;/code>，请返回数组中第 &lt;code>**k**&lt;/code> 个最大的元素。&lt;/p>
+&lt;p>请注意，你需要找的是数组排序后的第 &lt;code>k&lt;/code> 个最大的元素，而不是第 &lt;code>k&lt;/code> 个不同的元素。&lt;/p>
+&lt;p>你必须设计并实现时间复杂度为 &lt;code>O(n)&lt;/code> 的算法解决此问题。&lt;/p></description></item><item><title>Springmvc01</title><link>https://zzzicode.github.io/post/springmvc01/</link><pubDate>Thu, 12 Oct 2023 16:45:52 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc01/</guid><description>&lt;blockquote>
+&lt;p>✊ springmvc01&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍spring中的springmvc知识，介绍前后端交互的流程，postman工具的使用，以及主流的Rest风格&lt;/p></description></item><item><title>79.单词搜索</title><link>https://zzzicode.github.io/post/79.%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</link><pubDate>Sun, 08 Oct 2023 21:21:05 +0800</pubDate><guid>https://zzzicode.github.io/post/79.%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/</guid><description>&lt;blockquote>
+&lt;p>🏳️‍🌈 79.单词搜索&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 &lt;code>m x n&lt;/code> 二维字符网格 &lt;code>board&lt;/code> 和一个字符串单词 &lt;code>word&lt;/code> 。如果 &lt;code>word&lt;/code> 存在于网格中，返回 &lt;code>true&lt;/code> ；否则，返回 &lt;code>false&lt;/code> 。&lt;/p>
+&lt;p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。&lt;/p></description></item><item><title>Java的移位操作符</title><link>https://zzzicode.github.io/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</link><pubDate>Sun, 08 Oct 2023 19:40:38 +0800</pubDate><guid>https://zzzicode.github.io/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</guid><description>&lt;blockquote>
+&lt;p>🧢 Java的移位操作符&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍&lt;/p></description></item><item><title>Spring03</title><link>https://zzzicode.github.io/post/spring03/</link><pubDate>Sun, 08 Oct 2023 16:40:26 +0800</pubDate><guid>https://zzzicode.github.io/post/spring03/</guid><description>&lt;blockquote>
+&lt;p>🧒 spring03&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍spring中的面向切面编程AOP，实现不侵入源代码的情况下对代码进行增强处理，从入门到最后的配置以及案例进行讲解&lt;/p></description></item><item><title>22.括号生成</title><link>https://zzzicode.github.io/post/22.%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</link><pubDate>Sat, 07 Oct 2023 20:21:15 +0800</pubDate><guid>https://zzzicode.github.io/post/22.%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</guid><description>&lt;blockquote>
+&lt;p>🏧 22.括号生成&lt;/p>
+&lt;/blockquote>
+&lt;p>数字 &lt;code>n&lt;/code> 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 &lt;strong>有效的&lt;/strong> 括号组合。&lt;/p></description></item><item><title>Spring02</title><link>https://zzzicode.github.io/post/spring02/</link><pubDate>Thu, 05 Oct 2023 16:33:25 +0800</pubDate><guid>https://zzzicode.github.io/post/spring02/</guid><description>&lt;blockquote>
+&lt;p>👋 spring02&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍如何使用IOC和DI管理Bean，并且了解什么是spring中的注解开发，最后将mybatis和junit整合到spring中&lt;/p></description></item><item><title>208.实现前缀树</title><link>https://zzzicode.github.io/post/208.%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%BC%80%E6%A0%91/</link><pubDate>Wed, 04 Oct 2023 20:45:51 +0800</pubDate><guid>https://zzzicode.github.io/post/208.%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%BC%80%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌴 208.实现前缀树&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>
+&lt;a href="https://baike.baidu.com/item/%e5%ad%97%e5%85%b8%e6%a0%91/9825209?fr=aladdin" title="Trie" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+Trie
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>&lt;/strong>（发音类似 &amp;ldquo;try&amp;rdquo;）或者说 &lt;strong>前缀树&lt;/strong> 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。&lt;/p>
+&lt;p>请你实现 Trie 类：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Trie()&lt;/code> 初始化前缀树对象。&lt;/li>
+&lt;li>&lt;code>void insert(String word)&lt;/code> 向前缀树中插入字符串 &lt;code>word&lt;/code> 。&lt;/li>
+&lt;li>&lt;code>boolean search(String word)&lt;/code> 如果字符串 &lt;code>word&lt;/code> 在前缀树中，返回 &lt;code>true&lt;/code>（即，在检索之前已经插入）；否则，返回 &lt;code>false&lt;/code> 。&lt;/li>
+&lt;li>&lt;code>boolean startsWith(String prefix)&lt;/code> 如果之前已经插入的字符串 &lt;code>word&lt;/code> 的前缀之一为 &lt;code>prefix&lt;/code> ，返回 &lt;code>true&lt;/code> ；否则，返回 &lt;code>false&lt;/code> 。&lt;/li>
+&lt;/ul></description></item><item><title>207.课程表</title><link>https://zzzicode.github.io/post/207.%E8%AF%BE%E7%A8%8B%E8%A1%A8/</link><pubDate>Tue, 03 Oct 2023 21:20:03 +0800</pubDate><guid>https://zzzicode.github.io/post/207.%E8%AF%BE%E7%A8%8B%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🧑‍💻 207.课程表&lt;/p>
+&lt;/blockquote>
+&lt;p>你这个学期必须选修 &lt;code>numCourses&lt;/code> 门课程，记为 &lt;code>0&lt;/code> 到 &lt;code>numCourses - 1&lt;/code> 。&lt;/p>
+&lt;p>在选修某些课程之前需要一些先修课程。 先修课程按数组 &lt;code>prerequisites&lt;/code> 给出，其中 &lt;code>prerequisites[i] = [ai, bi]&lt;/code> ，表示如果要学习课程 &lt;code>ai&lt;/code> 则 &lt;strong>必须&lt;/strong> 先学习课程 &lt;code>bi&lt;/code> 。&lt;/p>
+&lt;ul>
+&lt;li>例如，先修课程对 &lt;code>[0, 1]&lt;/code> 表示：想要学习课程 &lt;code>0&lt;/code> ，你需要先完成课程 &lt;code>1&lt;/code> 。&lt;/li>
+&lt;/ul>
+&lt;p>请你判断是否可能完成所有课程的学习？如果可以，返回 &lt;code>true&lt;/code> ；否则，返回 &lt;code>false&lt;/code> 。&lt;/p></description></item><item><title>994.腐烂的橘子</title><link>https://zzzicode.github.io/post/994.%E8%85%90%E7%83%82%E7%9A%84%E6%A9%98%E5%AD%90/</link><pubDate>Mon, 02 Oct 2023 21:30:29 +0800</pubDate><guid>https://zzzicode.github.io/post/994.%E8%85%90%E7%83%82%E7%9A%84%E6%A9%98%E5%AD%90/</guid><description>&lt;blockquote>
+&lt;p>🍊 994.腐烂的橘子&lt;/p>
+&lt;/blockquote>
+&lt;p>在给定的 &lt;code>m x n&lt;/code> 网格 &lt;code>grid&lt;/code> 中，每个单元格可以有以下三个值之一：&lt;/p>
+&lt;ul>
+&lt;li>值 &lt;code>0&lt;/code> 代表空单元格；&lt;/li>
+&lt;li>值 &lt;code>1&lt;/code> 代表新鲜橘子；&lt;/li>
+&lt;li>值 &lt;code>2&lt;/code> 代表腐烂的橘子。&lt;/li>
+&lt;/ul>
+&lt;p>每分钟，腐烂的橘子 &lt;strong>周围 4 个方向上相邻&lt;/strong> 的新鲜橘子都会腐烂。&lt;/p>
+&lt;p>返回 &lt;em>直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 &lt;code>-1&lt;/code>&lt;/em> 。&lt;/p></description></item><item><title>236.二叉树的最近公共祖先</title><link>https://zzzicode.github.io/post/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</link><pubDate>Sun, 01 Oct 2023 20:54:57 +0800</pubDate><guid>https://zzzicode.github.io/post/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</guid><description>&lt;blockquote>
+&lt;p>🍇 236.二叉树的最近公共祖先&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。&lt;/p>
+&lt;p>
+&lt;a href="https://baike.baidu.com/item/%e6%9c%80%e8%bf%91%e5%85%ac%e5%85%b1%e7%a5%96%e5%85%88/8918834?fr=aladdin" title="百度百科" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+百度百科
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（&lt;strong>一个节点也可以是它自己的祖先&lt;/strong>）。”&lt;/p></description></item><item><title>Spring01</title><link>https://zzzicode.github.io/post/spring01/</link><pubDate>Sun, 01 Oct 2023 16:19:30 +0800</pubDate><guid>https://zzzicode.github.io/post/spring01/</guid><description>&lt;blockquote>
+&lt;p>🦳 spring01&lt;/p>
+&lt;/blockquote>
+&lt;p>主要介绍了spring的基础知识，包括IOC控制反转和DI依赖注入&lt;/p></description></item><item><title>124.二叉树中的最大路径和</title><link>https://zzzicode.github.io/post/124.%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</link><pubDate>Sat, 30 Sep 2023 21:47:52 +0800</pubDate><guid>https://zzzicode.github.io/post/124.%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🍃 124.二叉树中的最大路径和&lt;/p>
+&lt;/blockquote>
+&lt;p>二叉树中的 &lt;strong>路径&lt;/strong> 被定义为一条节点序列，序列中每对相邻节点之间都存在一条边。同一个节点在一条路径序列中 &lt;strong>至多出现一次&lt;/strong> 。该路径 &lt;strong>至少包含一个&lt;/strong> 节点，且不一定经过根节点。&lt;/p>
+&lt;p>&lt;strong>路径和&lt;/strong> 是路径中各节点值的总和。&lt;/p>
+&lt;p>给你一个二叉树的根节点 &lt;code>root&lt;/code> ，返回其 &lt;strong>最大路径和&lt;/strong> 。&lt;/p></description></item><item><title>114.二叉树展开为链表</title><link>https://zzzicode.github.io/post/114.%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link><pubDate>Sat, 30 Sep 2023 21:07:06 +0800</pubDate><guid>https://zzzicode.github.io/post/114.%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🌳 114.二叉树展开为链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给你二叉树的根结点 &lt;code>root&lt;/code> ，请你将它展开为一个单链表：&lt;/p>
+&lt;ul>
+&lt;li>展开后的单链表应该同样使用 &lt;code>TreeNode&lt;/code> ，其中 &lt;code>right&lt;/code> 子指针指向链表中下一个结点，而左子指针始终为 &lt;code>null&lt;/code> 。&lt;/li>
+&lt;li>展开后的单链表应该与二叉树
+&lt;a href="https://baike.baidu.com/item/%e5%85%88%e5%ba%8f%e9%81%8d%e5%8e%86/6442839?fr=aladdin" title="&amp;lt;strong&amp;gt;先序遍历&amp;lt;/strong&amp;gt;" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+&lt;strong>先序遍历&lt;/strong>
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a> 顺序相同。&lt;/li>
+&lt;/ul></description></item><item><title>25.k个一组翻转链表</title><link>https://zzzicode.github.io/post/25.k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</link><pubDate>Mon, 25 Sep 2023 21:19:33 +0800</pubDate><guid>https://zzzicode.github.io/post/25.k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🍍 25.k个一组翻转链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给你链表的头节点 &lt;code>head&lt;/code> ，每 &lt;code>k&lt;/code> 个节点一组进行翻转，请你返回修改后的链表。&lt;/p>
+&lt;p>&lt;code>k&lt;/code> 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 &lt;code>k&lt;/code> 的整数倍，那么请将最后剩余的节点保持原有顺序。&lt;/p>
+&lt;p>你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。&lt;/p>
+&lt;img src="https://assets.leetcode.com/uploads/2020/10/03/reverse_ex2.jpg" alt="img" style="zoom:50%;" />
+&lt;blockquote>
+&lt;p>注意，不足k个的链表不能翻转，也就是上面的&lt;code>[4,5]&lt;/code>不能翻转&lt;/p>
+&lt;/blockquote></description></item><item><title>2.两数相加</title><link>https://zzzicode.github.io/post/2.%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</link><pubDate>Mon, 25 Sep 2023 21:19:04 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid><description>&lt;blockquote>
+&lt;p>2.两数相加&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两个 &lt;strong>非空&lt;/strong> 的链表，表示两个非负的整数。它们每位数字都是按照 &lt;strong>逆序&lt;/strong> 的方式存储的，并且每个节点只能存储 &lt;strong>一位&lt;/strong> 数字。&lt;/p>
+&lt;p>请你将两个数相加，并以相同形式返回一个表示和的链表。&lt;/p>
+&lt;p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。&lt;/p></description></item><item><title>148.排序链表</title><link>https://zzzicode.github.io/post/148.%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 24 Sep 2023 21:33:18 +0800</pubDate><guid>https://zzzicode.github.io/post/148.%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🧭 148.排序链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给你链表的头结点 &lt;code>head&lt;/code> ，请将其按 &lt;strong>升序&lt;/strong> 排列并返回 &lt;strong>排序后的链表&lt;/strong> 。&lt;/p></description></item><item><title>Tcp Ip网络编程</title><link>https://zzzicode.github.io/post/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link><pubDate>Sun, 24 Sep 2023 10:30:07 +0800</pubDate><guid>https://zzzicode.github.io/post/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>🎡 tcp-ip网络编程&lt;/p>
+&lt;/blockquote>
+&lt;p>本文是阅读《TCP/IP网络编程》时所记录的学习笔记，参考了一个
+&lt;a href="https://github.com/riba2534/TCP-IP-NetworkNote" title="github" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+github
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>仓库，并在此基础上增加了自己的理解，做了相应的补充，重点放在了linux的部分，windows的部分只做了部分补充&lt;/p></description></item><item><title>238.除自身以外数组的乘积</title><link>https://zzzicode.github.io/post/238.%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</link><pubDate>Mon, 18 Sep 2023 20:50:12 +0800</pubDate><guid>https://zzzicode.github.io/post/238.%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</guid><description>&lt;blockquote>
+&lt;p>238.除自身以外数组的乘积&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code>，返回 &lt;em>数组 &lt;code>answer&lt;/code> ，其中 &lt;code>answer[i]&lt;/code> 等于 &lt;code>nums&lt;/code> 中除 &lt;code>nums[i]&lt;/code> 之外其余各元素的乘积&lt;/em> 。&lt;/p>
+&lt;p>题目数据 &lt;strong>保证&lt;/strong> 数组 &lt;code>nums&lt;/code>之中任意元素的全部前缀元素和后缀的乘积都在 &lt;strong>32 位&lt;/strong> 整数范围内。&lt;/p>
+&lt;p>请**不要使用除法，**且在 &lt;code>O(*n*)&lt;/code> 时间复杂度内完成此题。&lt;/p></description></item><item><title>239.滑动窗口最大值</title><link>https://zzzicode.github.io/post/239.%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/</link><pubDate>Sun, 17 Sep 2023 21:09:03 +0800</pubDate><guid>https://zzzicode.github.io/post/239.%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/</guid><description>&lt;blockquote>
+&lt;p>🛴 239.滑动窗口最大值&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code>，有一个大小为 &lt;code>k&lt;/code> 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 &lt;code>k&lt;/code> 个数字。滑动窗口每次只向右移动一位。&lt;/p>
+&lt;p>返回 &lt;em>滑动窗口中的最大值&lt;/em> 。&lt;/p></description></item><item><title>560.和为k的子数组</title><link>https://zzzicode.github.io/post/560.%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Fri, 15 Sep 2023 17:32:30 +0800</pubDate><guid>https://zzzicode.github.io/post/560.%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>🦺 560.和为k的子数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> 和一个整数 &lt;code>k&lt;/code> ，请你统计并返回 &lt;em>该数组中和为 &lt;code>k&lt;/code> 的连续子数组的个数&lt;/em> 。&lt;/p>
+&lt;p>子数组是数组中元素的连续非空序列。&lt;/p></description></item><item><title>438.找到字符串中所有字母异位词</title><link>https://zzzicode.github.io/post/438.%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/</link><pubDate>Thu, 14 Sep 2023 21:12:28 +0800</pubDate><guid>https://zzzicode.github.io/post/438.%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/</guid><description>&lt;blockquote>
+&lt;p>🗺 438.找到字符串中所有字母异位词&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个字符串 &lt;code>s&lt;/code> 和 &lt;code>p&lt;/code>，找到 &lt;code>s&lt;/code> 中所有 &lt;code>p&lt;/code> 的 &lt;strong>异位词&lt;/strong> 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。&lt;/p>
+&lt;p>&lt;strong>异位词&lt;/strong> 指由相同字母重排列形成的字符串（包括相同的字符串）。&lt;/p></description></item><item><title>3.无重复字符的最长子串</title><link>https://zzzicode.github.io/post/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</link><pubDate>Thu, 14 Sep 2023 20:53:10 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🌍 3.无重复字符的最长子串&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个字符串 &lt;code>s&lt;/code> ，请你找出其中不含有重复字符的 &lt;strong>最长子串&lt;/strong> 的长度。&lt;/p></description></item><item><title>11.盛最多水的容器</title><link>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</link><pubDate>Tue, 12 Sep 2023 19:10:36 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>🥣 11.盛最多水的容器&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个长度为 &lt;code>n&lt;/code> 的整数数组 &lt;code>height&lt;/code> 。有 &lt;code>n&lt;/code> 条垂线，第 &lt;code>i&lt;/code> 条线的两个端点是 &lt;code>(i, 0)&lt;/code> 和 &lt;code>(i, height[i])&lt;/code> 。&lt;/p>
+&lt;p>找出其中的两条线，使得它们与 &lt;code>x&lt;/code> 轴共同构成的容器可以容纳最多的水。&lt;/p>
+&lt;p>返回容器可以储存的最大水量。&lt;/p>
+&lt;p>**说明：**你不能倾斜容器。&lt;/p></description></item><item><title>128.最长连续序列</title><link>https://zzzicode.github.io/post/128.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/</link><pubDate>Mon, 11 Sep 2023 21:11:09 +0800</pubDate><guid>https://zzzicode.github.io/post/128.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>📏 128.最长连续序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个未排序的整数数组 &lt;code>nums&lt;/code> ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。&lt;/p>
+&lt;p>请你设计并实现时间复杂度为 &lt;code>O(n)&lt;/code> 的算法解决此问题。&lt;/p></description></item><item><title>49.字母异位词分组</title><link>https://zzzicode.github.io/post/49.%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</link><pubDate>Mon, 11 Sep 2023 19:41:56 +0800</pubDate><guid>https://zzzicode.github.io/post/49.%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>🐹 49.字母异位词分组&lt;/p>
+&lt;/blockquote></description></item><item><title>127.单词接龙</title><link>https://zzzicode.github.io/post/127.%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/</link><pubDate>Wed, 06 Sep 2023 19:49:50 +0800</pubDate><guid>https://zzzicode.github.io/post/127.%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/</guid><description>&lt;blockquote>
+&lt;p>🐉 127.单词接龙&lt;/p>
+&lt;/blockquote>
+&lt;p>字典 &lt;code>wordList&lt;/code> 中从单词 &lt;code>beginWord&lt;/code> 和 &lt;code>endWord&lt;/code> 的 &lt;strong>转换序列&lt;/strong> 是一个按下述规格形成的序列 &lt;code>beginWord -&amp;gt; s1 -&amp;gt; s2 -&amp;gt; ... -&amp;gt; sk&lt;/code>：&lt;/p>
+&lt;ul>
+&lt;li>每一对相邻的单词只差一个字母。&lt;/li>
+&lt;li>对于 &lt;code>1 &amp;lt;= i &amp;lt;= k&lt;/code> 时，每个 &lt;code>si&lt;/code> 都在 &lt;code>wordList&lt;/code> 中。注意， &lt;code>beginWord&lt;/code> 不需要在 &lt;code>wordList&lt;/code> 中。&lt;/li>
+&lt;li>&lt;code>sk == endWord&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>给你两个单词 &lt;code>beginWord&lt;/code> 和 &lt;code>endWord&lt;/code> 和一个字典 &lt;code>wordList&lt;/code> ，返回 &lt;em>从 &lt;code>beginWord&lt;/code> 到 &lt;code>endWord&lt;/code> 的 &lt;strong>最短转换序列&lt;/strong> 中的 &lt;strong>单词数目&lt;/strong>&lt;/em> 。如果不存在这样的转换序列，返回 &lt;code>0&lt;/code> 。&lt;/p></description></item><item><title>Jupyter_notebook的使用</title><link>https://zzzicode.github.io/post/jupyter_notebook%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 04 Sep 2023 20:30:41 +0800</pubDate><guid>https://zzzicode.github.io/post/jupyter_notebook%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;blockquote>
+&lt;p>jupyter_notebook的使用&lt;/p>
+&lt;/blockquote>
+&lt;p>本教程旨在&lt;strong>不从零&lt;/strong>开始搭建一个&lt;code>jupyter notebook&lt;/code>的环境并用来学习，默认已经安装了&lt;code>anaconda&lt;/code>，可以解决现有的项目导入&lt;code>jupyter notebook&lt;/code>中时无法指定conda虚拟环境用来隔离python环境的问题，按照教程操作之后，可以实现一个&lt;code>jupyter notebook&lt;/code>对应一个虚拟环境&lt;/p></description></item><item><title>1020.飞地的数量</title><link>https://zzzicode.github.io/post/1020.%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F/</link><pubDate>Mon, 04 Sep 2023 19:44:36 +0800</pubDate><guid>https://zzzicode.github.io/post/1020.%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F/</guid><description>&lt;blockquote>
+&lt;p>🕹︎ 1020.飞地的数量&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>m x n&lt;/code> 的二进制矩阵 &lt;code>grid&lt;/code> ，其中 &lt;code>0&lt;/code> 表示一个海洋单元格、&lt;code>1&lt;/code> 表示一个陆地单元格。&lt;/p>
+&lt;p>一次 &lt;strong>移动&lt;/strong> 是指从一个陆地单元格走到另一个相邻（&lt;strong>上、下、左、右&lt;/strong>）的陆地单元格或跨过 &lt;code>grid&lt;/code> 的边界。&lt;/p>
+&lt;p>返回网格中 &lt;strong>无法&lt;/strong> 在任意次数的移动中离开网格边界的陆地单元格的数量。&lt;/p></description></item><item><title>827.最大人工岛</title><link>https://zzzicode.github.io/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/</link><pubDate>Mon, 04 Sep 2023 18:43:54 +0800</pubDate><guid>https://zzzicode.github.io/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/</guid><description>&lt;blockquote>
+&lt;p>👷 827.最大人工岛&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>n x n&lt;/code> 二进制矩阵 &lt;code>grid&lt;/code> 。&lt;strong>最多&lt;/strong> 只能将一格 &lt;code>0&lt;/code> 变成 &lt;code>1&lt;/code> 。&lt;/p>
+&lt;p>返回执行此操作后，&lt;code>grid&lt;/code> 中最大的岛屿面积是多少？&lt;/p>
+&lt;p>&lt;strong>岛屿&lt;/strong> 由一组上、下、左、右四个方向相连的 &lt;code>1&lt;/code> 形成。&lt;/p></description></item><item><title>695.岛屿的最大面积</title><link>https://zzzicode.github.io/post/695.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/</link><pubDate>Sun, 03 Sep 2023 20:25:28 +0800</pubDate><guid>https://zzzicode.github.io/post/695.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/</guid><description>&lt;blockquote>
+&lt;p>👏 695.岛屿的最大面积&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个大小为 &lt;code>m x n&lt;/code> 的二进制矩阵 &lt;code>grid&lt;/code> 。&lt;/p>
+&lt;p>&lt;strong>岛屿&lt;/strong> 是由一些相邻的 &lt;code>1&lt;/code> (代表土地) 构成的组合，这里的「相邻」要求两个 &lt;code>1&lt;/code> 必须在 &lt;strong>水平或者竖直的四个方向上&lt;/strong> 相邻。你可以假设 &lt;code>grid&lt;/code> 的四个边缘都被 &lt;code>0&lt;/code>（代表水）包围着。&lt;/p>
+&lt;p>岛屿的面积是岛上值为 &lt;code>1&lt;/code> 的单元格的数目。&lt;/p>
+&lt;p>计算并返回 &lt;code>grid&lt;/code> 中最大的岛屿面积。如果没有岛屿，则返回面积为 &lt;code>0&lt;/code> 。&lt;/p></description></item><item><title>463.岛屿的周长</title><link>https://zzzicode.github.io/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/</link><pubDate>Sat, 02 Sep 2023 21:28:21 +0800</pubDate><guid>https://zzzicode.github.io/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/</guid><description>&lt;blockquote>
+&lt;p>👦 463.岛屿的周长&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 &lt;code>row x col&lt;/code> 的二维网格地图 &lt;code>grid&lt;/code> ，其中：&lt;code>grid[i][j] = 1&lt;/code> 表示陆地， &lt;code>grid[i][j] = 0&lt;/code> 表示水域。&lt;/p>
+&lt;p>网格中的格子 &lt;strong>水平和垂直&lt;/strong> 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。&lt;/p>
+&lt;p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。&lt;/p></description></item><item><title>200.岛屿数量</title><link>https://zzzicode.github.io/post/200.%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link><pubDate>Sat, 02 Sep 2023 20:45:29 +0800</pubDate><guid>https://zzzicode.github.io/post/200.%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid><description>&lt;blockquote>
+&lt;p>🏝 200.岛屿数量&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个由 &lt;code>'1'&lt;/code>（陆地）和 &lt;code>'0'&lt;/code>（水）组成的的二维网格，请你计算网格中岛屿的数量。&lt;/p>
+&lt;p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。&lt;/p>
+&lt;p>此外，你可以假设该网格的四条边均被水包围。&lt;/p>
+&lt;blockquote>
+&lt;p>也就是一旦出现一个陆地，就需要将相邻（上下左右）的陆地全部统计出来，形成一座岛&lt;/p>
+&lt;/blockquote></description></item><item><title>797.所有可能的路径</title><link>https://zzzicode.github.io/post/797.%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/</link><pubDate>Fri, 01 Sep 2023 19:14:46 +0800</pubDate><guid>https://zzzicode.github.io/post/797.%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/</guid><description>&lt;blockquote>
+&lt;p>🚧 797.所有可能的路径&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个有 &lt;code>n&lt;/code> 个节点的 &lt;strong>有向无环图（DAG）&lt;/strong>，请你找出所有从节点 &lt;code>0&lt;/code> 到节点 &lt;code>n-1&lt;/code> 的路径并输出（&lt;strong>不要求按特定顺序&lt;/strong>）&lt;/p>
+&lt;p>&lt;code>graph[i]&lt;/code> 是一个从节点 &lt;code>i&lt;/code> 可以访问的所有节点的列表（即从节点 &lt;code>i&lt;/code> 到节点 &lt;code>graph[i][j]&lt;/code>存在一条有向边）。&lt;/p></description></item><item><title>925.长按键入</title><link>https://zzzicode.github.io/post/925.%E9%95%BF%E6%8C%89%E9%94%AE%E5%85%A5/</link><pubDate>Tue, 29 Aug 2023 18:38:20 +0800</pubDate><guid>https://zzzicode.github.io/post/925.%E9%95%BF%E6%8C%89%E9%94%AE%E5%85%A5/</guid><description>&lt;blockquote>
+&lt;p>🏔 925.长按键入&lt;/p>
+&lt;/blockquote>
+&lt;p>你的朋友正在使用键盘输入他的名字 &lt;code>name&lt;/code>。偶尔，在键入字符 &lt;code>c&lt;/code> 时，按键可能会被&lt;em>长按&lt;/em>，而字符可能被输入 1 次或多次。&lt;/p>
+&lt;p>你将会检查键盘输入的字符 &lt;code>typed&lt;/code>。如果它对应的可能是你的朋友的名字（其中一些字符可能被长按），那么就返回 &lt;code>True&lt;/code>。&lt;/p></description></item><item><title>1002.查找共用元素</title><link>https://zzzicode.github.io/post/1002.%E6%9F%A5%E6%89%BE%E5%85%B1%E7%94%A8%E5%85%83%E7%B4%A0/</link><pubDate>Mon, 28 Aug 2023 21:07:18 +0800</pubDate><guid>https://zzzicode.github.io/post/1002.%E6%9F%A5%E6%89%BE%E5%85%B1%E7%94%A8%E5%85%83%E7%B4%A0/</guid><description>&lt;blockquote>
+&lt;p>🏞 1002.查找共用元素&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串数组 &lt;code>words&lt;/code> ，请你找出所有在 &lt;code>words&lt;/code> 的每个字符串中都出现的共用字符（ &lt;strong>包括重复字符&lt;/strong>），并以数组形式返回。你可以按 &lt;strong>任意顺序&lt;/strong> 返回答案。&lt;/p></description></item><item><title>1207.独一无二的出现次数</title><link>https://zzzicode.github.io/post/1207.%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C%E7%9A%84%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/</link><pubDate>Sun, 27 Aug 2023 19:12:33 +0800</pubDate><guid>https://zzzicode.github.io/post/1207.%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C%E7%9A%84%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>🎆 1207.独一无二的出现次数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>arr&lt;/code>，请你帮忙统计数组中每个数的出现次数。&lt;/p>
+&lt;p>如果每个数的出现次数都是独一无二的，就返回 &lt;code>true&lt;/code>；否则返回 &lt;code>false&lt;/code>。&lt;/p>
+&lt;blockquote>
+&lt;p>注意是元素出现的次数独一无二，而不是元素独一无二&lt;/p>
+&lt;/blockquote></description></item><item><title>337.打家劫舍III</title><link>https://zzzicode.github.io/post/337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</link><pubDate>Sun, 20 Aug 2023 20:13:53 +0800</pubDate><guid>https://zzzicode.github.io/post/337.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Diii/</guid><description>&lt;blockquote>
+&lt;p>🤡 337.打家劫舍III&lt;/p>
+&lt;/blockquote>
+&lt;p>小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 &lt;code>root&lt;/code> 。&lt;/p>
+&lt;p>除了 &lt;code>root&lt;/code> 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵&lt;strong>二叉树&lt;/strong>”。 如果 &lt;strong>两个直接相连的房子在同一天晚上被打劫&lt;/strong> ，房屋将自动报警。&lt;/p>
+&lt;p>给定二叉树的 &lt;code>root&lt;/code> 。返回 &lt;em>&lt;strong>在不触动警报的情况下&lt;/strong> ，小偷能够盗取的最高金额&lt;/em> 。&lt;/p>
+&lt;blockquote>
+&lt;p>能够偷盗的房屋形成了一个二叉树&lt;/p>
+&lt;/blockquote></description></item><item><title>17.电话号码的字母组合</title><link>https://zzzicode.github.io/post/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/</link><pubDate>Sun, 13 Aug 2023 18:42:25 +0800</pubDate><guid>https://zzzicode.github.io/post/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/</guid><description>&lt;blockquote>
+&lt;p>☎ 17.电话号码的字母组合&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个仅包含数字 &lt;code>2-9&lt;/code> 的字符串，返回所有它能表示的字母组合。答案可以按 &lt;strong>任意顺序&lt;/strong> 返回。&lt;/p>
+&lt;p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。&lt;/p>
+&lt;p>&lt;img src="https://zzzicode.github.io/imgs/img-lazy-loading.gif" data-src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/11/09/200px-telephone-keypad2svg.png" alt="img" />&lt;/p>
+&lt;p>&lt;strong>提示：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>0 &amp;lt;= digits.length &amp;lt;= 4&lt;/code>&lt;/li>
+&lt;li>&lt;code>digits[i]&lt;/code> 是范围 &lt;code>['2', '9']&lt;/code> 的一个数字。&lt;/li>
+&lt;/ul></description></item><item><title>77.组合</title><link>https://zzzicode.github.io/post/77.%E7%BB%84%E5%90%88/</link><pubDate>Sun, 13 Aug 2023 18:07:55 +0800</pubDate><guid>https://zzzicode.github.io/post/77.%E7%BB%84%E5%90%88/</guid><description>&lt;blockquote>
+&lt;p>🤏 77.组合&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个整数 &lt;code>n&lt;/code> 和 &lt;code>k&lt;/code>，返回范围 &lt;code>[1, n]&lt;/code> 中所有可能的 &lt;code>k&lt;/code> 个数的组合。&lt;/p>
+&lt;p>你可以按 &lt;strong>任何顺序&lt;/strong> 返回答案。&lt;/p></description></item><item><title>236.二叉树的公共祖先</title><link>https://zzzicode.github.io/post/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</link><pubDate>Sat, 12 Aug 2023 19:39:59 +0800</pubDate><guid>https://zzzicode.github.io/post/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</guid><description>&lt;blockquote>
+&lt;p>🦧 236.二叉树的公共祖先&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。&lt;/p>
+&lt;p>
+&lt;a href="https://baike.baidu.com/item/%e6%9c%80%e8%bf%91%e5%85%ac%e5%85%b1%e7%a5%96%e5%85%88/8918834?fr=aladdin" title="百度百科" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+百度百科
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（&lt;strong>一个节点也可以是它自己的祖先&lt;/strong>）。”&lt;/p></description></item><item><title>501.二叉搜索树中的众数</title><link>https://zzzicode.github.io/post/501.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/</link><pubDate>Sat, 12 Aug 2023 17:57:25 +0800</pubDate><guid>https://zzzicode.github.io/post/501.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>🍌 501.二叉搜索树中的众数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个含重复值的二叉搜索树（BST）的根节点 &lt;code>root&lt;/code> ，找出并返回 BST 中的所有
+&lt;a href="https://baike.baidu.com/item/%e4%bc%97%e6%95%b0/44796" title="众数" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+众数
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>（即，出现频率最高的元素）。&lt;/p>
+&lt;p>如果树中有不止一个众数，可以按 &lt;strong>任意顺序&lt;/strong> 返回。&lt;/p>
+&lt;p>假定 BST 满足如下定义：&lt;/p>
+&lt;ul>
+&lt;li>结点左子树中所含节点的值 &lt;strong>小于等于&lt;/strong> 当前节点的值&lt;/li>
+&lt;li>结点右子树中所含节点的值 &lt;strong>大于等于&lt;/strong> 当前节点的值&lt;/li>
+&lt;li>左子树和右子树都是二叉搜索树&lt;/li>
+&lt;/ul></description></item><item><title>347.前k个高频元素</title><link>https://zzzicode.github.io/post/347.%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/</link><pubDate>Wed, 09 Aug 2023 20:24:26 +0800</pubDate><guid>https://zzzicode.github.io/post/347.%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/</guid><description>&lt;blockquote>
+&lt;p>🦝 347.前k个高频元素&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> 和一个整数 &lt;code>k&lt;/code> ，请你返回其中出现频率前 &lt;code>k&lt;/code> 高的元素。你可以按 &lt;strong>任意顺序&lt;/strong> 返回答案。&lt;/p></description></item><item><title>151.反转字符串中的单词</title><link>https://zzzicode.github.io/post/151.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</link><pubDate>Sat, 29 Jul 2023 19:18:52 +0800</pubDate><guid>https://zzzicode.github.io/post/151.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</guid><description>&lt;blockquote>
+&lt;p>🔡 151.反转字符串中的单词&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s ，请你反转字符串中 单词 的顺序。&lt;/p>
+&lt;p>单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。&lt;/p>
+&lt;p>返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。&lt;/p>
+&lt;p>注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。&lt;/p></description></item><item><title>541.反转字符串II</title><link>https://zzzicode.github.io/post/541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2ii/</link><pubDate>Fri, 28 Jul 2023 20:56:59 +0800</pubDate><guid>https://zzzicode.github.io/post/541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2ii/</guid><description>&lt;blockquote>
+&lt;p>🤸 541.反转字符串II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>如果剩余字符少于 k 个，则将剩余字符全部反转。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>18.四数之和</title><link>https://zzzicode.github.io/post/18.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</link><pubDate>Thu, 27 Jul 2023 21:19:39 +0800</pubDate><guid>https://zzzicode.github.io/post/18.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>18.四数之和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为两个四元组重复）：&lt;/p>
+&lt;p>0 &amp;lt;= a, b, c, d &amp;lt; n
+a、b、c 和 d 互不相同
+nums[a] + nums[b] + nums[c] + nums[d] == target
+你可以按 任意顺序 返回答案 。&lt;/p></description></item><item><title>15.三数之和</title><link>https://zzzicode.github.io/post/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link><pubDate>Thu, 27 Jul 2023 20:36:40 +0800</pubDate><guid>https://zzzicode.github.io/post/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>➕︎ 15.三数之和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 &lt;code>i != j、i != k，j != k&lt;/code> ，同时还满足 &lt;code>nums[i] + nums[j] + nums[k] == 0&lt;/code> 。请&lt;/p>
+&lt;p>你返回所有和为 0 且不重复的三元组。&lt;/p>
+&lt;p>注意：答案中不可以包含&lt;strong>重复&lt;/strong>的三元组。&lt;/p></description></item><item><title>454.四数相加</title><link>https://zzzicode.github.io/post/454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0/</link><pubDate>Thu, 27 Jul 2023 19:59:44 +0800</pubDate><guid>https://zzzicode.github.io/post/454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid><description>&lt;blockquote>
+&lt;p>➕︎ 454.四数相加&lt;/p>
+&lt;/blockquote>
+&lt;p>给你四个整数数组 nums1、nums2、nums3 和 nums4 ，数组长度都是 n ，请你计算有多少个元组 (i, j, k, l) 能满足：&lt;/p>
+&lt;p>&lt;code>0 &amp;lt;= i, j, k, l &amp;lt; n&lt;/code>
+&lt;code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0&lt;/code>&lt;/p></description></item><item><title>202.快乐数</title><link>https://zzzicode.github.io/post/202.%E5%BF%AB%E4%B9%90%E6%95%B0/</link><pubDate>Wed, 26 Jul 2023 22:00:02 +0800</pubDate><guid>https://zzzicode.github.io/post/202.%E5%BF%AB%E4%B9%90%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>😹 202.快乐数&lt;/p>
+&lt;/blockquote>
+&lt;p>编写一个算法来判断一个数 n 是不是快乐数。&lt;/p>
+&lt;p>「快乐数」 定义为：&lt;/p>
+&lt;p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。
+然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。
+如果这个过程 结果为 1，那么这个数就是快乐数。
+如果 n 是 快乐数 就返回 true ；不是，则返回 false 。&lt;/p></description></item><item><title>142.环形链表II</title><link>https://zzzicode.github.io/post/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8ii/</link><pubDate>Tue, 25 Jul 2023 19:08:49 +0800</pubDate><guid>https://zzzicode.github.io/post/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8ii/</guid><description>&lt;blockquote>
+&lt;p>➰ 142.环形链表II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个链表的头节点 head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。&lt;/p>
+&lt;p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。&lt;/p>
+&lt;p>不允许修改 链表。&lt;/p></description></item><item><title>19.删除链表的倒数第N个结点</title><link>https://zzzicode.github.io/post/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E7%BB%93%E7%82%B9/</link><pubDate>Sun, 23 Jul 2023 20:45:15 +0800</pubDate><guid>https://zzzicode.github.io/post/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E7%BB%93%E7%82%B9/</guid><description>&lt;blockquote>
+&lt;p>👋 19.删除链表的倒数第N个结点&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个链表，删除链表的倒数第 &lt;code>n&lt;/code> 个结点，并且返回链表的头结点。&lt;/p></description></item><item><title>59.螺旋矩阵II</title><link>https://zzzicode.github.io/post/59.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5ii/</link><pubDate>Fri, 21 Jul 2023 20:18:31 +0800</pubDate><guid>https://zzzicode.github.io/post/59.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5ii/</guid><description>&lt;blockquote>
+&lt;p>😵 59.螺旋矩阵II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个正整数 &lt;code>n&lt;/code> ，生成一个包含 &lt;code>1&lt;/code> 到 &lt;code>n2&lt;/code> 所有元素，且元素按顺时针顺序螺旋排列的 &lt;code>n x n&lt;/code> 正方形矩阵 &lt;code>matrix&lt;/code> 。&lt;/p></description></item><item><title>209.长度最小的数组</title><link>https://zzzicode.github.io/post/209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0%E7%BB%84/</link><pubDate>Fri, 21 Jul 2023 19:51:08 +0800</pubDate><guid>https://zzzicode.github.io/post/209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>🔢 209.长度最小的数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个含有 n 个正整数的数组和一个正整数 target 。&lt;/p>
+&lt;p>找出该数组中满足其和 ≥ target 的长度最小的 &lt;strong>连续&lt;/strong>子数组 [numsl, numsl+1, &amp;hellip;, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。&lt;/p></description></item><item><title>27.移除元素</title><link>https://zzzicode.github.io/post/27.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</link><pubDate>Fri, 21 Jul 2023 18:43:33 +0800</pubDate><guid>https://zzzicode.github.io/post/27.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</guid><description>&lt;blockquote>
+&lt;p>🐵 27.移除元素&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。&lt;/p>
+&lt;p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。&lt;/p>
+&lt;p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。&lt;/p></description></item><item><title>841.钥匙和房间</title><link>https://zzzicode.github.io/post/841.%E9%92%A5%E5%8C%99%E5%92%8C%E6%88%BF%E9%97%B4/</link><pubDate>Wed, 19 Jul 2023 19:38:57 +0800</pubDate><guid>https://zzzicode.github.io/post/841.%E9%92%A5%E5%8C%99%E5%92%8C%E6%88%BF%E9%97%B4/</guid><description>&lt;blockquote>
+&lt;p>🗝️ 841.钥匙和房间&lt;/p>
+&lt;/blockquote>
+&lt;p>有 n 个房间，房间按从 0 到 n - 1 编号。最初，除 0 号房间外的其余所有房间都被锁住。你的目标是进入所有的房间。然而，你不能在没有获得钥匙的时候进入锁住的房间。&lt;/p>
+&lt;p>当你进入一个房间，你可能会在里面找到一套不同的钥匙，每把钥匙上都有对应的房间号，即表示钥匙可以打开的房间。你可以拿上所有钥匙去解锁其他房间。&lt;/p>
+&lt;p>给你一个数组 rooms 其中 rooms[i] 是你进入 i 号房间可以获得的钥匙集合。如果能进入 所有 房间返回 true，否则返回 false。&lt;/p></description></item><item><title>673.最长递增子序列的个数</title><link>https://zzzicode.github.io/post/673.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</link><pubDate>Tue, 18 Jul 2023 19:14:49 +0800</pubDate><guid>https://zzzicode.github.io/post/673.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>📈 673.最长递增子序列的&lt;strong>个数&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个未排序的整数数组 &lt;code>nums&lt;/code> ， &lt;em>返回最长递增子序列的个数&lt;/em> 。&lt;/p>
+&lt;p>&lt;strong>注意&lt;/strong> 这个数列必须是 &lt;strong>严格&lt;/strong> 递增的。&lt;/p></description></item><item><title>131.分割回文串</title><link>https://zzzicode.github.io/post/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/</link><pubDate>Tue, 18 Jul 2023 18:48:47 +0800</pubDate><guid>https://zzzicode.github.io/post/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🖇 131.分割回文串&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 &lt;code>s&lt;/code>，请你将 &lt;code>s&lt;/code> 分割成一些子串，使每个子串都是 &lt;strong>回文串&lt;/strong> 。返回 &lt;code>s&lt;/code> 所有可能的分割方案。&lt;/p>
+&lt;p>&lt;strong>回文串&lt;/strong> 是正着读和反着读都一样的字符串。&lt;/p></description></item><item><title>5.最长回文子串</title><link>https://zzzicode.github.io/post/5.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link><pubDate>Mon, 17 Jul 2023 19:43:08 +0800</pubDate><guid>https://zzzicode.github.io/post/5.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>5.最长回文子串“&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 &lt;code>s&lt;/code>，找到 &lt;code>s&lt;/code> 中&lt;strong>最长&lt;/strong>的回文子串。&lt;/p>
+&lt;p>如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。&lt;/p></description></item><item><title>52.N皇后II</title><link>https://zzzicode.github.io/post/52.n%E7%9A%87%E5%90%8Eii/</link><pubDate>Mon, 17 Jul 2023 18:47:04 +0800</pubDate><guid>https://zzzicode.github.io/post/52.n%E7%9A%87%E5%90%8Eii/</guid><description>&lt;blockquote>
+&lt;p>👑 52.N皇后II&lt;/p>
+&lt;/blockquote>
+&lt;p>n 皇后问题 研究的是如何将 n 个皇后放置在 n × n 的棋盘上，并且使皇后彼此之间不能相互攻击。&lt;/p>
+&lt;p>给你一个整数 n ，返回 n 皇后问题 不同的解决方案的数量。&lt;/p></description></item><item><title>代码托管到github</title><link>https://zzzicode.github.io/post/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%88%B0github/</link><pubDate>Sun, 16 Jul 2023 20:38:51 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%88%B0github/</guid><description>&lt;blockquote>
+&lt;p>🏭 代码托管到github&lt;/p>
+&lt;/blockquote>
+&lt;p>如何将本地代码托管到github仓库中，前提已经安装了git，并且已经连接到了github，添加了公钥&lt;/p></description></item><item><title>100.相同的树</title><link>https://zzzicode.github.io/post/100.%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</link><pubDate>Sun, 16 Jul 2023 20:14:10 +0800</pubDate><guid>https://zzzicode.github.io/post/100.%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌳 100.相同的树&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两棵二叉树的根节点 &lt;code>p&lt;/code> 和 &lt;code>q&lt;/code> ，编写一个函数来检验这两棵树是否相同。&lt;/p>
+&lt;p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。&lt;/p></description></item><item><title>1382.将二叉搜索树变平衡</title><link>https://zzzicode.github.io/post/1382.%E5%B0%86%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%8F%98%E5%B9%B3%E8%A1%A1/</link><pubDate>Sun, 16 Jul 2023 19:56:38 +0800</pubDate><guid>https://zzzicode.github.io/post/1382.%E5%B0%86%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%8F%98%E5%B9%B3%E8%A1%A1/</guid><description>&lt;blockquote>
+&lt;p>🎋 1382.将二叉搜索树变平衡&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一棵二叉搜索树，请你返回一棵 平衡后 的二叉搜索树，新生成的树应该与原来的树有着相同的节点值。如果有多种构造方法，请你返回任意一种。&lt;/p>
+&lt;p>如果一棵二叉搜索树中，每个节点的两棵子树高度差不超过 1 ，我们就称这棵二叉搜索树是 平衡的&lt;/p></description></item><item><title>129.求根节点到叶节点数字之和</title><link>https://zzzicode.github.io/post/129.%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</link><pubDate>Fri, 14 Jul 2023 10:00:04 +0800</pubDate><guid>https://zzzicode.github.io/post/129.%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🌴 129.求根节点到叶节点数字之和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个二叉树的根节点 root ，树中每个节点都存放有一个 0 到 9 之间的数字。
+每条从根节点到叶节点的路径都代表一个数字：&lt;/p>
+&lt;p>例如，从根节点到叶节点的路径 1 -&amp;gt; 2 -&amp;gt; 3 表示数字 123 。
+计算从根节点到叶节点生成的 所有数字之和 。&lt;/p>
+&lt;p>叶节点 是指没有子节点的节点。&lt;/p></description></item><item><title>Windows主机加入k8s集群</title><link>https://zzzicode.github.io/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</link><pubDate>Mon, 10 Jul 2023 19:32:59 +0800</pubDate><guid>https://zzzicode.github.io/post/windows%E4%B8%BB%E6%9C%BA%E5%8A%A0%E5%85%A5k8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
+&lt;p>windows主机加入k8s集群&lt;/p>
+&lt;/blockquote>
+&lt;p>本文在
+&lt;a href="https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/" title="Kubernetes集群完整搭建步骤" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+Kubernetes集群完整搭建步骤
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>的基础上，将windows主机当成工作节点加入到k8s集群中&lt;/p></description></item><item><title>205.同构字符串</title><link>https://zzzicode.github.io/post/205.%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</link><pubDate>Mon, 10 Jul 2023 18:48:14 +0800</pubDate><guid>https://zzzicode.github.io/post/205.%E5%90%8C%E6%9E%84%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🔡 205.同构字符串&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个字符串 s 和 t ，判断它们是否是同构的。&lt;/p>
+&lt;p>如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。&lt;/p>
+&lt;p>每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。&lt;strong>不同字符不能映射到同一个字符上&lt;/strong>，相同字符只能映射到同一个字符上，字符可以映射到自己本身。&lt;/p></description></item><item><title>141.环形链表</title><link>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:47:58 +0800</pubDate><guid>https://zzzicode.github.io/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>🍩 141.环形链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个链表的头节点 head ，判断链表中是否有环。&lt;/p>
+&lt;p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。&lt;/p>
+&lt;p>如果链表中存在环 ，则返回 true 。 否则，返回 false 。&lt;/p>
+&lt;img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img" style="zoom:50%;" /></description></item><item><title>143.重排链表</title><link>https://zzzicode.github.io/post/143.%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</link><pubDate>Sun, 09 Jul 2023 18:30:09 +0800</pubDate><guid>https://zzzicode.github.io/post/143.%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</guid><description>&lt;blockquote>
+&lt;p>⛓︎ 143.重排链表&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个单链表 L 的头节点 head ，单链表 L 表示为：&lt;/p>
+&lt;p>&lt;code>L0 → L1 → … → Ln - 1 → Ln&lt;/code>
+请将其重新排列后变为：&lt;/p>
+&lt;p>&lt;code>L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …&lt;/code>
+不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。&lt;/p></description></item><item><title>24.两两交换链表中的节点</title><link>https://zzzicode.github.io/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link><pubDate>Sun, 09 Jul 2023 17:14:05 +0800</pubDate><guid>https://zzzicode.github.io/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid><description>&lt;blockquote>
+&lt;p>🔀 24.两两交换链表中的节点&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。&lt;/p></description></item><item><title>922.按奇偶排序数组II</title><link>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</link><pubDate>Sat, 08 Jul 2023 20:17:37 +0800</pubDate><guid>https://zzzicode.github.io/post/922.%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84ii/</guid><description>&lt;blockquote>
+&lt;p>#️ 922.按奇偶排序数组II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数数组 nums， nums 中一半整数是 奇数 ，一半整数是 偶数 。&lt;/p>
+&lt;p>对数组进行排序，以便当 nums[i] 为奇数时，i 也是 奇数 ；当 nums[i] 为偶数时， i 也是 偶数 。&lt;/p>
+&lt;p>你可以返回 任何满足上述条件的数组作为答案 。&lt;/p></description></item><item><title>34.在排序数组中查找元素的第一个和最后一个位置</title><link>https://zzzicode.github.io/post/34.%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/</link><pubDate>Sat, 08 Jul 2023 19:14:13 +0800</pubDate><guid>https://zzzicode.github.io/post/34.%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/</guid><description>&lt;blockquote>
+&lt;p>🔢 34.在排序数组中查找元素的第一个和最后一个位置&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。&lt;/p>
+&lt;p>如果数组中不存在目标值 target，返回 [-1, -1]。&lt;/p>
+&lt;p>你必须设计并实现时间复杂度为 &lt;code>O(log n)&lt;/code> 的算法解决此问题。&lt;/p></description></item><item><title>724.寻找数组的中心下标</title><link>https://zzzicode.github.io/post/724.%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E4%B8%8B%E6%A0%87/</link><pubDate>Sat, 08 Jul 2023 18:48:21 +0800</pubDate><guid>https://zzzicode.github.io/post/724.%E5%AF%BB%E6%89%BE%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E5%BF%83%E4%B8%8B%E6%A0%87/</guid><description>&lt;blockquote>
+&lt;p>❤‍🔥 724.寻找数组的中心下标&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums ，请计算数组的 中心下标 。&lt;/p>
+&lt;p>数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。&lt;/p>
+&lt;p>如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。&lt;/p>
+&lt;p>如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1 。&lt;/p></description></item><item><title>189.轮转数组</title><link>https://zzzicode.github.io/post/189.%E8%BD%AE%E8%BD%AC%E6%95%B0%E7%BB%84/</link><pubDate>Fri, 07 Jul 2023 20:37:15 +0800</pubDate><guid>https://zzzicode.github.io/post/189.%E8%BD%AE%E8%BD%AC%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>🔄 189.轮转数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 &lt;code>nums&lt;/code>，将数组中的元素向右轮转 &lt;code>k&lt;/code> 个位置，其中 &lt;code>k&lt;/code> 是非负数。&lt;/p>
+&lt;p>&lt;strong>提示：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>1 &amp;lt;= nums.length &amp;lt;= 105&lt;/code>&lt;/li>
+&lt;li>&lt;code>-231 &amp;lt;= nums[i] &amp;lt;= 231 - 1&lt;/code>&lt;/li>
+&lt;li>&lt;code>0 &amp;lt;= k &amp;lt;= 105&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>941.有效的山脉数组</title><link>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</link><pubDate>Wed, 05 Jul 2023 20:34:22 +0800</pubDate><guid>https://zzzicode.github.io/post/941.%E6%9C%89%E6%95%88%E7%9A%84%E5%B1%B1%E8%84%89%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>⛰ 941.有效的山脉数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 arr，如果它是有效的山脉数组就返回 true，否则返回 false。&lt;/p>
+&lt;p>让我们回顾一下，如果 arr 满足下述条件，那么它是一个山脉数组：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>arr.length &amp;gt;= 3&lt;/code>&lt;/li>
+&lt;li>在 &lt;code>0 &amp;lt; i &amp;lt; arr.length - 1&lt;/code> 条件下，存在 i 使得：
+&lt;ul>
+&lt;li>&lt;code>arr[0] &amp;lt; arr[1] &amp;lt; ... arr[i-1] &amp;lt; arr[i]&lt;/code>&lt;/li>
+&lt;li>&lt;code>arr[i] &amp;gt; arr[i+1] &amp;gt; ... &amp;gt; arr[arr.length - 1]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>2.集群环境搭建</title><link>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Wed, 05 Jul 2023 16:22:06 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;blockquote>
+&lt;p>😄2.集群环境搭建&lt;/p>
+&lt;/blockquote></description></item><item><title>1365.有多少小于当前数字的数字</title><link>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</link><pubDate>Tue, 04 Jul 2023 21:52:08 +0800</pubDate><guid>https://zzzicode.github.io/post/1365.%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>󠀼󠀼👌1365.有多少小于当前数字的数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。&lt;/p>
+&lt;p>换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] &amp;lt; nums[i]&lt;/p>
+&lt;p>以数组形式返回答案。&lt;/p></description></item><item><title>503.下一个更大元素II</title><link>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</link><pubDate>Tue, 04 Jul 2023 20:57:45 +0800</pubDate><guid>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</guid><description>&lt;blockquote>
+&lt;p>🧭 503.下一个更大元素II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个循环数组 nums （ nums[nums.length - 1] 的下一个元素是 nums[0] ），返回 nums 中每个元素的 下一个更大元素 。&lt;/p>
+&lt;p>数字 x 的 下一个更大的元素 是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1 。&lt;/p></description></item><item><title>496.下一个元素I</title><link>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</link><pubDate>Mon, 03 Jul 2023 21:19:25 +0800</pubDate><guid>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</guid><description>&lt;blockquote>
+&lt;p>👾 496.下一个元素I&lt;/p>
+&lt;/blockquote>
+&lt;p>nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。&lt;/p>
+&lt;p>给你两个 没有重复元素 的数组 nums1 和 nums2 ，下标从 0 开始计数，其中nums1 是 nums2 的子集。&lt;/p>
+&lt;p>对于每个 0 &amp;lt;= i &amp;lt; nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。&lt;/p>
+&lt;p>返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。&lt;/p>
+&lt;blockquote>
+&lt;p>相当于在nums2中的元素统计比自己大的第一个元素的同时，增加了判断条件，只有出现在nums1中的元素才需要统计&lt;/p>
+&lt;/blockquote></description></item><item><title>739.每日温度</title><link>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</link><pubDate>Mon, 03 Jul 2023 19:17:35 +0800</pubDate><guid>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</guid><description>&lt;blockquote>
+&lt;p>🌡️ 739.每日温度&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，在该位置用 0 来代替。&lt;/p></description></item><item><title>Kubernetes集群完整搭建步骤</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 03 Jul 2023 10:12:03 +0700</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
+&lt;p>kubernetes集群完整搭建步骤&lt;/p>
+&lt;/blockquote>
+&lt;p>使用Ubuntu搭建k8s集群的完整步骤，包含常见错误解决办法&lt;/p></description></item><item><title>3.资源管理</title><link>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 02 Jul 2023 21:12:15 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>😄3.资源管理&lt;/p>
+&lt;/blockquote></description></item><item><title>516.最长回文子序列</title><link>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Sun, 02 Jul 2023 20:42:56 +0800</pubDate><guid>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>🔄516.最长回文子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s ，找出其中最长的回文&lt;strong>子序列&lt;/strong>，并返回该序列的长度。&lt;/p>
+&lt;p>子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。&lt;/p></description></item><item><title>647.回文子串</title><link>https://zzzicode.github.io/post/647.%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link><pubDate>Sun, 02 Jul 2023 19:34:35 +0800</pubDate><guid>https://zzzicode.github.io/post/647.%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🔄647.回文子串&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。&lt;/p>
+&lt;p>回文字符串 是正着读和倒过来读一样的字符串。&lt;/p>
+&lt;p>子字符串 是字符串中的由连续字符组成的一个序列。&lt;/p>
+&lt;p>具有&lt;strong>不同&lt;/strong>开始位置或结束位置的子串，即使是由&lt;strong>相同&lt;/strong>的字符组成，也会被视作&lt;strong>不同&lt;/strong>的子串。&lt;/p></description></item><item><title>Kubernetes完整版笔记</title><link>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 02 Jul 2023 15:25:12 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes&lt;/p>
+&lt;/blockquote>
+&lt;p>kubernetes的完整学习笔记，与黑马课堂笔记一样&lt;/p></description></item><item><title>Kubernetes集群管理工具kubectl</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</link><pubDate>Sun, 02 Jul 2023 14:36:06 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes集群管理工具kubectl&lt;/p>
+&lt;/blockquote></description></item><item><title>72.编辑距离</title><link>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Sat, 01 Jul 2023 21:04:28 +0800</pubDate><guid>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;blockquote>
+&lt;p>😄72.编辑距离&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 。&lt;/p>
+&lt;p>你可以对一个单词进行如下三种操作：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>插入一个字符&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>删除一个字符&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>替换一个字符&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>583.两个字符串的删除操作</title><link>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 01 Jul 2023 00:35:17 +0800</pubDate><guid>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
+&lt;p>😄583.两个字符串的删除操作&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个单词 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> ，返回使得 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> &lt;strong>相同&lt;/strong>所需的&lt;strong>最小步数&lt;/strong>。&lt;/p>
+&lt;p>&lt;strong>每步&lt;/strong> 可以删除任意一个字符串中的一个字符。&lt;/p></description></item><item><title>392.判断子序列</title><link>https://zzzicode.github.io/post/392.%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Sat, 01 Jul 2023 00:04:00 +0800</pubDate><guid>https://zzzicode.github.io/post/392.%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄392.判断子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。&lt;/p>
+&lt;p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，&amp;ldquo;ace&amp;quot;是&amp;quot;abcde&amp;quot;的一个子序列，而&amp;quot;aec&amp;quot;不是）。&lt;/p></description></item><item><title>Kubeadm和二进制方式搭建k8s集群的对比</title><link>https://zzzicode.github.io/post/kubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AF%B9%E6%AF%94/</link><pubDate>Fri, 30 Jun 2023 21:16:07 +0800</pubDate><guid>https://zzzicode.github.io/post/kubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AF%B9%E6%AF%94/</guid><description>&lt;blockquote>
+&lt;p>😄kubeadm和二进制方式搭建k8s集群的对比&lt;/p>
+&lt;/blockquote></description></item><item><title>53.最大子数组和</title><link>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</link><pubDate>Fri, 30 Jun 2023 19:59:51 +0800</pubDate><guid>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>😄53.最大子数组和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 是数组中的一个&lt;strong>连续&lt;/strong>部分。&lt;/p></description></item><item><title>1035.不相交的线</title><link>https://zzzicode.github.io/post/1035.%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF/</link><pubDate>Fri, 30 Jun 2023 19:42:41 +0800</pubDate><guid>https://zzzicode.github.io/post/1035.%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF/</guid><description>&lt;blockquote>
+&lt;p>🔃1035.不相交的线&lt;/p>
+&lt;/blockquote>
+&lt;p>在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。&lt;/p>
+&lt;p>现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：&lt;/p>
+&lt;p>nums1[i] == nums2[j]
+且绘制的直线不与任何其他连线（非水平线）相交。
+请注意，连线即使在端点也不能相交：每个数字只能属于一条连线。&lt;/p>
+&lt;p>以这种方法绘制线条，并返回可以绘制的最大连线数。&lt;/p></description></item><item><title>1143.最长公共子序列</title><link>https://zzzicode.github.io/post/1143.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Fri, 30 Jun 2023 18:38:24 +0800</pubDate><guid>https://zzzicode.github.io/post/1143.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄1143.最长公共子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。&lt;/p>
+&lt;p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。&lt;/p>
+&lt;p>例如，&amp;ldquo;ace&amp;rdquo; 是 &amp;ldquo;abcde&amp;rdquo; 的子序列，但 &amp;ldquo;aec&amp;rdquo; 不是 &amp;ldquo;abcde&amp;rdquo; 的子序列。
+两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。&lt;/p></description></item><item><title>使用kubeadm搭建k8s集群</title><link>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</link><pubDate>Fri, 30 Jun 2023 14:58:50 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
+&lt;p>😄使用kubeadm搭建k8s集群&lt;/p>
+&lt;/blockquote>
+&lt;p>使用kubeadm工具搭建k8s集群，屏蔽搭建集群时的一些细节，使得搭建集群变得简单&lt;/p></description></item><item><title>1.Kubernetes简介</title><link>https://zzzicode.github.io/post/1.kubernetes%E4%BB%8B%E7%BB%8D/</link><pubDate>Fri, 30 Jun 2023 14:53:21 +0800</pubDate><guid>https://zzzicode.github.io/post/1.kubernetes%E4%BB%8B%E7%BB%8D/</guid><description>&lt;blockquote>
+&lt;p>😄1.Kubernetes简介&lt;/p>
+&lt;/blockquote>
+&lt;p>对Kunbernetes的一些基础介绍&lt;/p></description></item><item><title>718.最长重复子数组</title><link>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 29 Jun 2023 20:24:52 +0800</pubDate><guid>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>😄718.最长重复子数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给两个整数数组 &lt;code>nums1&lt;/code> 和 &lt;code>nums2&lt;/code> ，返回 &lt;em>两个数组中 &lt;strong>公共的&lt;/strong> 、长度最长的子数组的长度&lt;/em> 。&lt;/p></description></item><item><title>674.最长连续递增子序列</title><link>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Thu, 29 Jun 2023 19:42:54 +0800</pubDate><guid>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄674.最长连续递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个未经排序的整数数组，找到最长且 连续递增的子序列，并返回该序列的长度。&lt;/p>
+&lt;p>连续递增的子序列 可以由两个下标 l 和 r（l &amp;lt; r）确定，如果对于每个 l &amp;lt;= i &amp;lt; r，都有 nums[i] &amp;lt; nums[i + 1] ，那么子序列 [nums[l], nums[l + 1], &amp;hellip;, nums[r - 1], nums[r]] 就是连续递增子序列。&lt;/p></description></item><item><title>300.最长递增子序列</title><link>https://zzzicode.github.io/post/300.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Thu, 29 Jun 2023 18:50:46 +0800</pubDate><guid>https://zzzicode.github.io/post/300.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄300.最长递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums ，找到其中最长严格递增&lt;strong>子序列&lt;/strong>的长度。&lt;/p>
+&lt;p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。&lt;/p></description></item><item><title>213.打家劫舍II</title><link>https://zzzicode.github.io/post/213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link><pubDate>Mon, 26 Jun 2023 20:11:12 +0800</pubDate><guid>https://zzzicode.github.io/post/213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid><description>&lt;blockquote>
+&lt;p>😄213.打家劫舍II&lt;/p>
+&lt;/blockquote>
+&lt;p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成&lt;strong>一圈&lt;/strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。&lt;/p>
+&lt;p>给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额。&lt;/p></description></item><item><title>198.打家劫舍</title><link>https://zzzicode.github.io/post/198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link><pubDate>Mon, 26 Jun 2023 19:39:20 +0800</pubDate><guid>https://zzzicode.github.io/post/198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid><description>&lt;blockquote>
+&lt;p>😄198.打家劫舍&lt;/p>
+&lt;/blockquote>
+&lt;p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。&lt;/p>
+&lt;p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。&lt;/p></description></item><item><title>139.单词拆分</title><link>https://zzzicode.github.io/post/139.%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link><pubDate>Sun, 25 Jun 2023 19:16:10 +0800</pubDate><guid>https://zzzicode.github.io/post/139.%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid><description>&lt;blockquote>
+&lt;p>🔠139.单词拆分&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。&lt;/p>
+&lt;p>注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。&lt;/p></description></item><item><title>279.完全平方数</title><link>https://zzzicode.github.io/post/279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</link><pubDate>Sun, 25 Jun 2023 18:26:47 +0800</pubDate><guid>https://zzzicode.github.io/post/279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>2️⃣279.完全平方数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数 n ，返回 和为 n 的完全平方数的最少数量 。&lt;/p>
+&lt;p>完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全平方数，而 3 和 11 不是。&lt;/p></description></item><item><title>322.零钱兑换</title><link>https://zzzicode.github.io/post/322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Sat, 24 Jun 2023 20:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;blockquote>
+&lt;p>💷322.零钱兑换&lt;/p>
+&lt;/blockquote>
+&lt;p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。&lt;/p>
+&lt;p>你可以认为每种硬币的数量是无限的。&lt;/p></description></item><item><title>377.组合总和IV</title><link>https://zzzicode.github.io/post/377.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Civ/</link><pubDate>Sat, 24 Jun 2023 19:10:27 +0800</pubDate><guid>https://zzzicode.github.io/post/377.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Civ/</guid><description>&lt;blockquote>
+&lt;p>😄377.组合总和IV&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个由&lt;strong>不同&lt;/strong>整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。nums中的整数可以&lt;strong>重复选取&lt;/strong>&lt;/p>
+&lt;p>题目数据保证答案符合 32 位整数范围。&lt;/p></description></item><item><title>518.零钱兑换II</title><link>https://zzzicode.github.io/post/518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2ii/</link><pubDate>Fri, 23 Jun 2023 20:01:59 +0800</pubDate><guid>https://zzzicode.github.io/post/518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2ii/</guid><description>&lt;blockquote>
+&lt;p>💴518.零钱兑换II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。&lt;/p>
+&lt;p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。&lt;/p>
+&lt;p>假设每一种面额的硬币有无限个。&lt;/p>
+&lt;p>题目数据保证结果符合 32 位带符号整数。&lt;/p></description></item><item><title>474.一和零</title><link>https://zzzicode.github.io/post/474.%E4%B8%80%E5%92%8C%E9%9B%B6/</link><pubDate>Fri, 23 Jun 2023 19:01:48 +0800</pubDate><guid>https://zzzicode.github.io/post/474.%E4%B8%80%E5%92%8C%E9%9B%B6/</guid><description>&lt;blockquote>
+&lt;p>1️⃣474.一和零&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。&lt;/p>
+&lt;p>请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。&lt;/p>
+&lt;p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。&lt;/p></description></item><item><title>494.目标和</title><link>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</link><pubDate>Wed, 21 Jun 2023 20:44:34 +0800</pubDate><guid>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🎯494.目标和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums 和一个整数 target 。&lt;/p>
+&lt;p>向数组中的每个整数前添加 &amp;lsquo;+&amp;rsquo; 或 &amp;lsquo;-&amp;rsquo; ，然后串联起所有整数，可以构造一个 表达式 ：&lt;/p>
+&lt;p>例如，nums = [2, 1] ，可以在 2 之前添加 &amp;lsquo;+&amp;rsquo; ，在 1 之前添加 &amp;lsquo;-&amp;rsquo; ，然后串联起来得到表达式 &amp;ldquo;+2-1&amp;rdquo; 。
+返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。&lt;/p></description></item><item><title>1049.最后一块石头的重量II</title><link>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</link><pubDate>Wed, 21 Jun 2023 20:01:23 +0800</pubDate><guid>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</guid><description>&lt;blockquote>
+&lt;p>🌑1049.最后一块石头的重量II&lt;/p>
+&lt;/blockquote>
+&lt;p>有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。&lt;/p>
+&lt;p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &amp;lt;= y。那么粉碎的可能结果如下：&lt;/p>
+&lt;p>如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块 石头。返回此石头 &lt;strong>最小&lt;/strong>的可能重量 。如果没有石头剩下，就返回 0。&lt;/p></description></item><item><title>416.分割等和子集</title><link>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 20 Jun 2023 19:24:19 +0800</pubDate><guid>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>😄416.分割等和子集&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个 &lt;strong>只包含正整数&lt;/strong> 的 &lt;strong>非空&lt;/strong> 数组 &lt;code>nums&lt;/code> 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。&lt;/p></description></item><item><title>解决背包问题的思路</title><link>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</link><pubDate>Mon, 19 Jun 2023 18:26:08 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
+&lt;p>🎒解决0-1背包问题的思路&lt;/p>
+&lt;/blockquote>
+&lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
+&lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
+&lt;blockquote>
+&lt;p>核心就是确定递推公式和初始化方案&lt;/p>
+&lt;/blockquote></description></item><item><title>2196.根据描述创建二叉树</title><link>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Sun, 18 Jun 2023 17:47:49 +0800</pubDate><guid>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌳2196.根据描述创建二叉树&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个二维整数数组 descriptions ，其中 descriptions[i] = [parenti, childi, isLefti] 表示 parenti 是 childi 在 二叉树 中的 父节点，二叉树中各节点的值 互不相同 。此外：&lt;/p>
+&lt;p>如果 &lt;code>isLefti == 1&lt;/code> ，那么 childi 就是 parenti 的&lt;strong>左&lt;/strong>子节点。
+如果 &lt;code>isLefti == 0&lt;/code> ，那么 childi 就是 parenti 的&lt;strong>右&lt;/strong>子节点。
+请你根据 descriptions 的描述来构造二叉树并返回其 根节点 。&lt;/p>
+&lt;p>测试用例会保证可以构造出 有效 的二叉树。&lt;/p></description></item><item><title>96.不同的二叉搜索树</title><link>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link><pubDate>Sat, 17 Jun 2023 19:13:27 +0800</pubDate><guid>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌴96.不同的二叉搜索树&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数 &lt;code>n&lt;/code> ，求恰由 &lt;code>n&lt;/code> 个节点组成且节点值从 &lt;code>1&lt;/code> 到 &lt;code>n&lt;/code> 互不相同的 &lt;strong>二叉搜索树&lt;/strong> 有多少种？返回满足题意的二叉搜索树的种数。&lt;/p></description></item><item><title>343.整数拆分</title><link>https://zzzicode.github.io/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</link><pubDate>Tue, 13 Jun 2023 18:14:49 +0800</pubDate><guid>https://zzzicode.github.io/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</guid><description>&lt;blockquote>
+&lt;p>0️⃣343.整数拆分&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个正整数 n，将其拆分为&lt;strong>至少&lt;/strong>两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。&lt;/p>
+&lt;p>示例 :&lt;/p>
+&lt;ul>
+&lt;li>输入: 10&lt;/li>
+&lt;li>输出: 36&lt;/li>
+&lt;li>解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。&lt;/li>
+&lt;li>说明: 你可以假设 n &lt;strong>不小于&lt;/strong> 2 且&lt;strong>不大于&lt;/strong> 58。&lt;/li>
+&lt;/ul></description></item><item><title>基于VSCode和CMake进行C++开发</title><link>https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/</link><pubDate>Tue, 13 Jun 2023 08:59:36 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/</guid><description>&lt;blockquote>
+&lt;p>😄基于VSCode和CMake进行C++开发&lt;/p>
+&lt;/blockquote></description></item><item><title>63.不同路径II</title><link>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</link><pubDate>Mon, 12 Jun 2023 18:44:56 +0800</pubDate><guid>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</guid><description>&lt;blockquote>
+&lt;p>😄63.不同路径II&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。&lt;/p>
+&lt;p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？&lt;/p>
+&lt;p>网格中的**障碍物（1）&lt;strong>和&lt;/strong>空位置（0）**分别用 1 和 0 来表示。&lt;/p>
+&lt;blockquote>
+&lt;p>相比于62题，只是多了一个障碍物，相当于有的网格去不了&lt;/p>
+&lt;/blockquote></description></item><item><title>62.不同路径</title><link>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</link><pubDate>Mon, 12 Jun 2023 18:19:22 +0800</pubDate><guid>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</guid><description>&lt;blockquote>
+&lt;p>😄62.不同路径&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能&lt;strong>向下&lt;/strong>或者&lt;strong>向右&lt;/strong>移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。&lt;/p>
+&lt;p>问总共有多少条不同的路径？&lt;/p></description></item><item><title>746.使用最小花费爬楼梯</title><link>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:51:26 +0800</pubDate><guid>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄746.使用最小花费爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。&lt;/p>
+&lt;p>你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。&lt;/p>
+&lt;p>请你计算并返回达到楼梯顶部的最低花费。&lt;/p></description></item><item><title>70.爬楼梯</title><link>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:16:36 +0800</pubDate><guid>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄70.爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。&lt;/p>
+&lt;p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？&lt;/p>
+&lt;p>注意：给定 n 是一个&lt;strong>正整数&lt;/strong>。&lt;/p>
+&lt;p>示例 ：&lt;/p>
+&lt;ul>
+&lt;li>输入： 2&lt;/li>
+&lt;li>输出： 2&lt;/li>
+&lt;li>解释： 有两种方法可以爬到楼顶。
+&lt;ul>
+&lt;li>1 阶 + 1 阶&lt;/li>
+&lt;li>2 阶&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>968.监控二叉树</title><link>https://zzzicode.github.io/post/968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Fri, 09 Jun 2023 17:53:37 +0800</pubDate><guid>https://zzzicode.github.io/post/968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌲968.监控二叉树&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个二叉树，我们在树的节点上安装摄像头。&lt;/p>
+&lt;p>节点上的每个摄影头都可以监视其父对象、自身及其直接子对象。&lt;/p>
+&lt;p>计算监控树的所有节点所需的最小摄像头数量。&lt;/p></description></item><item><title>738.单调递增的数字</title><link>https://zzzicode.github.io/post/738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/</link><pubDate>Thu, 08 Jun 2023 18:49:14 +0800</pubDate><guid>https://zzzicode.github.io/post/738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97/</guid><description>&lt;blockquote>
+&lt;p>🔺738.单调递增的数字&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。&lt;/p>
+&lt;p>示例 1:&lt;/p>
+&lt;ul>
+&lt;li>输入: N = 1234&lt;/li>
+&lt;li>输出: 1234&lt;/li>
+&lt;/ul>
+&lt;p>示例 2:&lt;/p>
+&lt;ul>
+&lt;li>输入: N = 332&lt;/li>
+&lt;li>输出: 299&lt;/li>
+&lt;/ul></description></item><item><title>56.合并区间</title><link>https://zzzicode.github.io/post/56.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</link><pubDate>Thu, 08 Jun 2023 18:25:35 +0800</pubDate><guid>https://zzzicode.github.io/post/56.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</guid><description>&lt;blockquote>
+&lt;p>😄56.合并区间&lt;/p>
+&lt;/blockquote>
+&lt;p>给出一个区间的集合，请合并所有重叠的区间。&lt;/p>
+&lt;p>示例 1:&lt;/p>
+&lt;ul>
+&lt;li>输入: intervals = [[1,3],[2,6],[8,10],[15,18]]&lt;/li>
+&lt;li>输出: [[1,6],[8,10],[15,18]]&lt;/li>
+&lt;li>解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].&lt;/li>
+&lt;/ul>
+&lt;p>示例 2:&lt;/p>
+&lt;ul>
+&lt;li>输入: intervals = [[1,4],[4,5]]&lt;/li>
+&lt;li>输出: [[1,5]]&lt;/li>
+&lt;li>解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。&lt;/li>
+&lt;li>注意：输入类型已于2019年4月15日更改。 请重置默认代码定义以获取新方法签名。&lt;/li>
+&lt;/ul></description></item><item><title>Vscode文件夹配置</title><link>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</link><pubDate>Wed, 07 Jun 2023 21:26:34 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%96%87%E4%BB%B6%E5%A4%B9%E9%85%8D%E7%BD%AE/</guid><description>&lt;blockquote>
+&lt;p>😄vscode文件夹配置&lt;/p>
+&lt;/blockquote>
+&lt;p>配置&lt;code>.vscode&lt;/code>文件夹之后，实现cpp文件的编译和调试&lt;/p></description></item><item><title>763.划分字母区间</title><link>https://zzzicode.github.io/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/</link><pubDate>Wed, 07 Jun 2023 19:02:45 +0800</pubDate><guid>https://zzzicode.github.io/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/</guid><description>&lt;blockquote>
+&lt;p>🆎763.划分字母区间&lt;/p>
+&lt;/blockquote>
+&lt;p>字符串 S 由小写字母组成。我们要把这个字符串划分为&lt;strong>尽可能多&lt;/strong>的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。&lt;/p>
+&lt;p>示例：&lt;/p>
+&lt;ul>
+&lt;li>输入：S = &amp;ldquo;ababcbacadefegdehijhklij&amp;rdquo;&lt;/li>
+&lt;li>输出：[9,7,8] 解释： 划分结果为 &amp;ldquo;ababcbaca&amp;rdquo;, &amp;ldquo;defegde&amp;rdquo;, &amp;ldquo;hijhklij&amp;rdquo;。 每个字母最多出现在一个片段中。 像 &amp;ldquo;ababcbacadefegde&amp;rdquo;, &amp;ldquo;hijhklij&amp;rdquo; 的划分是错误的，因为划分的片段数较少&lt;/li>
+&lt;/ul></description></item><item><title>435.无重叠区间</title><link>https://zzzicode.github.io/post/435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/</link><pubDate>Wed, 07 Jun 2023 18:31:23 +0800</pubDate><guid>https://zzzicode.github.io/post/435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/</guid><description>&lt;blockquote>
+&lt;p>😄435.无重叠区间&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。&lt;/p>
+&lt;p>注意: 可以认为区间的终点总是大于它的起点。 区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。&lt;/p></description></item><item><title>452.用最少数量的箭引爆气球</title><link>https://zzzicode.github.io/post/452.%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83/</link><pubDate>Tue, 06 Jun 2023 16:22:09 +0800</pubDate><guid>https://zzzicode.github.io/post/452.%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83/</guid><description>&lt;blockquote>
+&lt;p>💣452.用最少数量的箭引爆气球&lt;/p>
+&lt;/blockquote>
+&lt;p>在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以纵坐标并不重要，因此只要知道开始和结束的横坐标就足够了。开始坐标总是小于结束坐标。&lt;/p>
+&lt;p>一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足 &lt;code>xstart ≤ x ≤ xend&lt;/code>，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。&lt;/p>
+&lt;p>给你一个数组 points ，其中 points [i] = [xstart,xend] ，返回引爆所有气球所必须射出的最小弓箭数。&lt;/p></description></item><item><title>406.根据身高重建队列</title><link>https://zzzicode.github.io/post/406.%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/</link><pubDate>Mon, 05 Jun 2023 18:05:19 +0800</pubDate><guid>https://zzzicode.github.io/post/406.%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>📏406.根据身高重建队列&lt;/p>
+&lt;/blockquote>
+&lt;p>假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。&lt;/p>
+&lt;p>请你重新构造并返回输入数组 people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[j] = [hj, kj] 是队列中第 j 个人的属性（queue[0] 是排在队列前面的人）。&lt;/p>
+&lt;blockquote>
+&lt;p>将给定的二维数组重新排列,使其符合 [hi, ki]的要求&lt;/p>
+&lt;/blockquote></description></item><item><title>860.柠檬水找零</title><link>https://zzzicode.github.io/post/860.%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/</link><pubDate>Sun, 04 Jun 2023 16:11:37 +0800</pubDate><guid>https://zzzicode.github.io/post/860.%E6%9F%A0%E6%AA%AC%E6%B0%B4%E6%89%BE%E9%9B%B6/</guid><description>&lt;blockquote>
+&lt;p>🍋860.柠檬水找零&lt;/p>
+&lt;/blockquote>
+&lt;p>在柠檬水摊上，每一杯柠檬水的售价为 5 美元。&lt;/p>
+&lt;p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。&lt;/p>
+&lt;p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。&lt;/p>
+&lt;p>注意，一开始你手头没有任何零钱。&lt;/p>
+&lt;p>如果你能给每位顾客正确找零，返回 true ，否则返回 false 。&lt;/p></description></item><item><title>135.分发糖果</title><link>https://zzzicode.github.io/post/135.%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/</link><pubDate>Sun, 04 Jun 2023 15:03:43 +0800</pubDate><guid>https://zzzicode.github.io/post/135.%E5%88%86%E5%8F%91%E7%B3%96%E6%9E%9C/</guid><description>&lt;blockquote>
+&lt;p>🍬135.分发糖果&lt;/p>
+&lt;/blockquote>
+&lt;p>老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。&lt;/p>
+&lt;p>你需要按照以下要求，帮助老师给这些孩子分发糖果：&lt;/p>
+&lt;ul>
+&lt;li>每个孩子至少分配到 1 个糖果。&lt;/li>
+&lt;li>相邻的孩子中，评分高的孩子必须获得更多的糖果。&lt;/li>
+&lt;li>相邻孩子评分相同是可以分配相同的糖果&lt;/li>
+&lt;/ul>
+&lt;p>那么这样下来，老师至少需要准备多少颗糖果呢？&lt;/p></description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Sun, 04 Jun 2023 09:15:23 +0800</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
+&lt;p>😄C++11-14新标准&lt;/p>
+&lt;/blockquote>
+&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item><item><title>134.加油站</title><link>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</link><pubDate>Sat, 03 Jun 2023 19:06:25 +0800</pubDate><guid>https://zzzicode.github.io/post/134.%E5%8A%A0%E6%B2%B9%E7%AB%99/</guid><description>&lt;blockquote>
+&lt;p>⛽134.加油站&lt;/p>
+&lt;/blockquote>
+&lt;p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 &lt;code>gas[i]&lt;/code> 升。&lt;/p>
+&lt;p>你有一辆油箱容量无限的的汽车，从第 &lt;code>i&lt;/code> 个加油站开往第 &lt;code>i+1&lt;/code> 个加油站需要消耗汽油 &lt;code>cost[i]&lt;/code> 升。你从其中的一个加油站出发，开始时油箱为空。&lt;/p>
+&lt;p>如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。&lt;/p>
+&lt;blockquote>
+&lt;p>要保证油箱中的油大于需要消耗的汽油&lt;/p>
+&lt;p>基本思想就是最开始要积累足够多的剩余汽油，才够后面消耗&lt;/p>
+&lt;/blockquote></description></item><item><title>1005.K次取反后最大化的数组和</title><link>https://zzzicode.github.io/post/1005.k%E6%AC%A1%E5%8F%96%E5%8F%8D%E5%90%8E%E6%9C%80%E5%A4%A7%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84%E5%92%8C/</link><pubDate>Fri, 02 Jun 2023 19:02:54 +0800</pubDate><guid>https://zzzicode.github.io/post/1005.k%E6%AC%A1%E5%8F%96%E5%8F%8D%E5%90%8E%E6%9C%80%E5%A4%A7%E5%8C%96%E7%9A%84%E6%95%B0%E7%BB%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>😉1005.K次取反后最大化的数组和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 A，我们只能用以下方法修改该数组：我们选择某个索引 i 并将 A[i] 替换为 -A[i]，然后总共重复这个过程 K 次。（我们可以多次选择同一个索引 i。）&lt;/p>
+&lt;p>以这种方式修改数组后，返回数组可能的最大和。&lt;/p></description></item><item><title>45.跳跃游戏II</title><link>https://zzzicode.github.io/post/45.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8Fii/</link><pubDate>Thu, 01 Jun 2023 19:26:43 +0800</pubDate><guid>https://zzzicode.github.io/post/45.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8Fii/</guid><description>&lt;blockquote>
+&lt;p>🚶‍♂️45.跳跃游戏II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p>
+&lt;p>数组中的每个元素代表你在该位置可以跳跃的最大长度。&lt;/p>
+&lt;p>你的目标是使用最少的跳跃次数到达数组的最后一个位置。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [2,3,1,1,4]&lt;/li>
+&lt;li>输出: 2&lt;/li>
+&lt;li>解释: 跳到最后一个位置的最小跳跃数是 2。从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。&lt;/li>
+&lt;/ul>
+&lt;p>说明: 假设你总是可以到达数组的最后一个位置&lt;/p></description></item><item><title>55.跳跃游戏</title><link>https://zzzicode.github.io/post/55.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</link><pubDate>Thu, 01 Jun 2023 18:52:01 +0800</pubDate><guid>https://zzzicode.github.io/post/55.%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</guid><description>&lt;blockquote>
+&lt;p>🏃‍♂️55.跳跃游戏&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p>
+&lt;p>数组中的每个元素代表你在该位置可以跳跃的最大长度。&lt;/p>
+&lt;p>判断你是否能够到达最后一个位置。&lt;/p></description></item><item><title>121.买卖股票的最佳时机</title><link>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link><pubDate>Wed, 31 May 2023 18:30:03 +0800</pubDate><guid>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid><description>&lt;blockquote>
+&lt;p>💰121.买卖股票的最佳时机&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。&lt;/p>
+&lt;p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。&lt;/p>
+&lt;p>尽可能地在最低点买入，然后在之后的最高点卖出，只买卖一次&lt;/p>
+&lt;p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。&lt;/p></description></item><item><title>122.买卖股票的最佳时机II</title><link>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link><pubDate>Wed, 31 May 2023 18:20:37 +0800</pubDate><guid>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid><description>&lt;blockquote>
+&lt;p>💰122.买卖股票的最佳时机II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。&lt;/p>
+&lt;p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候&lt;strong>最多&lt;/strong>只能持有 一股 股票。你也可以先购买，然后在同一天出售。&lt;/p>
+&lt;p>多次买卖，且买卖时间不能重合，但是卖和买可以在同一天，所以需要将多次买卖的利润求和&lt;/p>
+&lt;p>返回 你能获得的&lt;strong>最大&lt;/strong>利润 。&lt;/p></description></item><item><title>STL标准库和泛型编程</title><link>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 31 May 2023 18:07:27 +0800</pubDate><guid>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😶STL标准库和泛型编程&lt;/p>
+&lt;/blockquote>
+&lt;p>STL标准库和泛型编程的学习笔记，记录了STL中六大部件之间的关系和部件的实现细节，以及泛型编程的相关知识，逻辑稍微有点乱，后期再修改&lt;/p></description></item><item><title>53.最大子序和</title><link>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</link><pubDate>Tue, 30 May 2023 15:59:20 +0800</pubDate><guid>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>💫53.最大子序和&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [-2,1,-3,4,-1,2,1,-5,4]&lt;/li>
+&lt;li>输出: 6&lt;/li>
+&lt;li>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6&lt;/li>
+&lt;/ul></description></item><item><title>455.分发饼干</title><link>https://zzzicode.github.io/post/455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</link><pubDate>Mon, 29 May 2023 19:52:01 +0800</pubDate><guid>https://zzzicode.github.io/post/455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/</guid><description>&lt;blockquote>
+&lt;p>👶455.分发饼干&lt;/p>
+&lt;/blockquote>
+&lt;p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。&lt;/p>
+&lt;p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &amp;gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。&lt;/p></description></item><item><title>Linux学习笔记</title><link>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 28 May 2023 21:01:03 +0800</pubDate><guid>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>linux学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>linux系统的基本结构、编辑器、一些基本的配置以及linux的实操和扩展，包括文件管理、用户权限、磁盘管理、进程管理以及shell编程&lt;/p></description></item><item><title>37.解数独</title><link>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</link><pubDate>Sun, 28 May 2023 19:05:13 +0800</pubDate><guid>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</guid><description>&lt;blockquote>
+&lt;p>😯37.解数独&lt;/p>
+&lt;/blockquote>
+&lt;p>编写一个程序，通过填充空格来解决数独问题。&lt;/p>
+&lt;p>一个数独的解法需遵循如下规则： 数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。 空白格用 &amp;lsquo;.&amp;rsquo; 表示。&lt;/p></description></item><item><title>51.N皇后</title><link>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</link><pubDate>Sat, 27 May 2023 19:01:06 +0800</pubDate><guid>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</guid><description>&lt;blockquote>
+&lt;p>😱51.N皇后&lt;/p>
+&lt;/blockquote>
+&lt;p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。&lt;/p>
+&lt;p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。&lt;/p>
+&lt;p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 &amp;lsquo;Q&amp;rsquo; 和 &amp;lsquo;.&amp;rsquo; 分别代表了皇后和空位。&lt;/p></description></item><item><title>平衡二叉树和红黑树</title><link>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</link><pubDate>Sat, 27 May 2023 12:38:42 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>😄平衡二叉树和红黑树&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍平衡二叉树的插入和删除操作，红黑树的基础理论以及红黑树的插入和删除&lt;/p></description></item><item><title>332.重新安排行程</title><link>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</link><pubDate>Fri, 26 May 2023 18:17:13 +0800</pubDate><guid>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😭332.重新安排行程&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个机票的字符串二维数组 [from, to]，子数组中的两个成员分别表示飞机出发和降落的机场地点，对该行程进行重新规划排序。所有这些机票都属于一个从 JFK（肯尼迪国际机场）出发的先生，所以该行程必须从 JFK 开始。&lt;/p></description></item><item><title>Git学习笔记</title><link>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 25 May 2023 21:18:49 +0800</pubDate><guid>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄Git学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>Git的基本理论和使用&lt;/p></description></item><item><title>47.全排列II</title><link>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</link><pubDate>Thu, 25 May 2023 19:17:58 +0800</pubDate><guid>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</guid><description>&lt;blockquote>
+&lt;p>😏47.全排列II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。&lt;/p></description></item><item><title>46.全排列</title><link>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</link><pubDate>Thu, 25 May 2023 18:31:19 +0800</pubDate><guid>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😍46.全排列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 没有重复数字的序列，返回其所有可能的&lt;strong>全排列&lt;/strong>。&lt;/p></description></item><item><title>491.递增子序列</title><link>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Wed, 24 May 2023 19:59:32 +0800</pubDate><guid>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😴 491.递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。&lt;/p></description></item><item><title>VSCode无法编译C++中文文件解决办法</title><link>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link><pubDate>Wed, 24 May 2023 16:01:29 +0800</pubDate><guid>https://zzzicode.github.io/post/vscode%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91c++%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid><description>&lt;blockquote>
+&lt;p>😄VSCode无法编译C++中文文件解决办法&lt;/p>
+&lt;/blockquote>
+&lt;p>更新&lt;code>.vscode&lt;/code>文件夹中的配置文件&lt;/p></description></item><item><title>90.子集II</title><link>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</link><pubDate>Tue, 23 May 2023 20:26:33 +0800</pubDate><guid>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</guid><description>&lt;blockquote>
+&lt;p>90.子集II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个&lt;strong>可能包含重复元素&lt;/strong>的整数数组 nums，返回该数组所有可能的子集（幂集）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [1,2,2]&lt;/li>
+&lt;li>输出: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]&lt;/li>
+&lt;/ul></description></item><item><title>78.子集</title><link>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 23 May 2023 19:34:56 +0800</pubDate><guid>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>
+&lt;a href="https://leetcode.cn/problems/subsets/" title="78.子集" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+78.子集
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一组不含重复元素的整数数组 &lt;code>nums&lt;/code>，返回该数组所有可能的子集（&lt;strong>幂集&lt;/strong>）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例: 输入: nums = [1,2,3] 输出: [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]&lt;/p></description></item><item><title>Typora PicGo GitHub无痛使用</title><link>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 22 May 2023 22:34:28 +0800</pubDate><guid>https://zzzicode.github.io/post/typora-picgo-github%E6%97%A0%E7%97%9B%E4%BD%BF%E7%94%A8/</guid><description>&lt;blockquote>
+&lt;p>Typora-PicGo-GitHub无痛使用&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>
+&lt;a href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here" title="PicGo" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+PicGo
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>: 一个用于快速上传图片并获取图片 URL 链接的工具&lt;/strong>&lt;/p>
+&lt;p>使用PicGo解决了Typora书写md文档时插入本地图片之后，部署到GitHub中图片无法显示的问题&lt;/p></description></item><item><title>不从零开始搭建博客</title><link>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 22 May 2023 20:41:29 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/</guid><description>&lt;blockquote>
+&lt;p>不从零开始搭建自己的博客&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;font color=red>重点&lt;/font>是本地博客与GitHub进行连接，主要逻辑是&lt;code>clone&lt;/code>GitHub仓库中的博客源码，然后进行自己的配置，并且明白本地书写博客与发布博客的步骤，最后执行脚本发布即可&lt;/p></description></item><item><title>关于zzzi</title><link>https://zzzicode.github.io/about.html</link><pubDate>Thu, 09 Jun 2022 20:12:52 +0800</pubDate><guid>https://zzzicode.github.io/about.html</guid><description>## 👋👋👋Welcome to zzzi's blog! 🎉🎉🎉 🏫 Studing at @HEU 🏡 Living at @ HaErBin 🌱 Repository at@ zzziCode 🧐 Try to find a good job 🤔 論文を出版したい 1 2 3 4 // Which came first: the chicken or the egg? console.log</description></item><item><title>站点示例</title><link>https://zzzicode.github.io/flinks.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zzzicode.github.io/flinks.html</guid><description>如想交换本站友情链接，请在评论区留下你的站点信息，格式参考如下： 1 2 3 4 - name: Hugo-NexT desc: Hugo NexT 官方预览网站。 avatar: https://hugo-next.eu.org/imgs/hugo_next_avatar.png link: https://hugo-next.eu.org</description></item></channel></rss>

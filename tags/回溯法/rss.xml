@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>回溯法 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</link><description>Recent content in 回溯法 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 May 2023 19:05:13 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/rss.xml" rel="self" type="application/rss+xml"/><item><title>37.解数独</title><link>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</link><pubDate>Sun, 28 May 2023 19:05:13 +0800</pubDate><guid>https://zzzicode.github.io/post/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/</guid><description>&lt;blockquote>
+&lt;p>😯37.解数独&lt;/p>
+&lt;/blockquote>
+&lt;p>编写一个程序，通过填充空格来解决数独问题。&lt;/p>
+&lt;p>一个数独的解法需遵循如下规则： 数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。 空白格用 &amp;lsquo;.&amp;rsquo; 表示。&lt;/p></description></item><item><title>51.N皇后</title><link>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</link><pubDate>Sat, 27 May 2023 19:01:06 +0800</pubDate><guid>https://zzzicode.github.io/post/51.n%E7%9A%87%E5%90%8E/</guid><description>&lt;blockquote>
+&lt;p>😱51.N皇后&lt;/p>
+&lt;/blockquote>
+&lt;p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。&lt;/p>
+&lt;p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。&lt;/p>
+&lt;p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 &amp;lsquo;Q&amp;rsquo; 和 &amp;lsquo;.&amp;rsquo; 分别代表了皇后和空位。&lt;/p></description></item><item><title>332.重新安排行程</title><link>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</link><pubDate>Fri, 26 May 2023 18:17:13 +0800</pubDate><guid>https://zzzicode.github.io/post/332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😭332.重新安排行程&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个机票的字符串二维数组 [from, to]，子数组中的两个成员分别表示飞机出发和降落的机场地点，对该行程进行重新规划排序。所有这些机票都属于一个从 JFK（肯尼迪国际机场）出发的先生，所以该行程必须从 JFK 开始。&lt;/p></description></item><item><title>47.全排列II</title><link>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</link><pubDate>Thu, 25 May 2023 19:17:58 +0800</pubDate><guid>https://zzzicode.github.io/post/47.%E5%85%A8%E6%8E%92%E5%88%97ii/</guid><description>&lt;blockquote>
+&lt;p>😏47.全排列II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。&lt;/p></description></item><item><title>46.全排列</title><link>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</link><pubDate>Thu, 25 May 2023 18:31:19 +0800</pubDate><guid>https://zzzicode.github.io/post/46.%E5%85%A8%E6%8E%92%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😍46.全排列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个 没有重复数字的序列，返回其所有可能的&lt;strong>全排列&lt;/strong>。&lt;/p></description></item><item><title>491.递增子序列</title><link>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Wed, 24 May 2023 19:59:32 +0800</pubDate><guid>https://zzzicode.github.io/post/491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😴 491.递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整型数组, 你的任务是找到所有该数组的递增子序列，递增子序列的长度至少是2。&lt;/p></description></item><item><title>90.子集II</title><link>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</link><pubDate>Tue, 23 May 2023 20:26:33 +0800</pubDate><guid>https://zzzicode.github.io/post/90.%E5%AD%90%E9%9B%86ii/</guid><description>&lt;blockquote>
+&lt;p>90.子集II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个&lt;strong>可能包含重复元素&lt;/strong>的整数数组 nums，返回该数组所有可能的子集（幂集）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>输入: [1,2,2]&lt;/li>
+&lt;li>输出: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]&lt;/li>
+&lt;/ul></description></item><item><title>78.子集</title><link>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 23 May 2023 19:34:56 +0800</pubDate><guid>https://zzzicode.github.io/post/78.%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>
+&lt;a href="https://leetcode.cn/problems/subsets/" title="78.子集" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+78.子集
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一组不含重复元素的整数数组 &lt;code>nums&lt;/code>，返回该数组所有可能的子集（&lt;strong>幂集&lt;/strong>）。&lt;/p>
+&lt;p>说明：解集不能包含重复的子集。&lt;/p>
+&lt;p>示例: 输入: nums = [1,2,3] 输出: [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]&lt;/p></description></item></channel></rss>

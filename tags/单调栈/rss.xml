@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>单调栈 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%8D%95%E8%B0%83%E6%A0%88/</link><description>Recent content in 单调栈 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 04 Jul 2023 20:57:45 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%8D%95%E8%B0%83%E6%A0%88/rss.xml" rel="self" type="application/rss+xml"/><item><title>503.下一个更大元素II</title><link>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</link><pubDate>Tue, 04 Jul 2023 20:57:45 +0800</pubDate><guid>https://zzzicode.github.io/post/502.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0ii/</guid><description>&lt;blockquote>
+&lt;p>🧭 503.下一个更大元素II&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个循环数组 nums （ nums[nums.length - 1] 的下一个元素是 nums[0] ），返回 nums 中每个元素的 下一个更大元素 。&lt;/p>
+&lt;p>数字 x 的 下一个更大的元素 是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1 。&lt;/p></description></item><item><title>496.下一个元素I</title><link>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</link><pubDate>Mon, 03 Jul 2023 21:19:25 +0800</pubDate><guid>https://zzzicode.github.io/post/496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0i/</guid><description>&lt;blockquote>
+&lt;p>👾 496.下一个元素I&lt;/p>
+&lt;/blockquote>
+&lt;p>nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。&lt;/p>
+&lt;p>给你两个 没有重复元素 的数组 nums1 和 nums2 ，下标从 0 开始计数，其中nums1 是 nums2 的子集。&lt;/p>
+&lt;p>对于每个 0 &amp;lt;= i &amp;lt; nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。&lt;/p>
+&lt;p>返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。&lt;/p>
+&lt;blockquote>
+&lt;p>相当于在nums2中的元素统计比自己大的第一个元素的同时，增加了判断条件，只有出现在nums1中的元素才需要统计&lt;/p>
+&lt;/blockquote></description></item><item><title>739.每日温度</title><link>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</link><pubDate>Mon, 03 Jul 2023 19:17:35 +0800</pubDate><guid>https://zzzicode.github.io/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</guid><description>&lt;blockquote>
+&lt;p>🌡️ 739.每日温度&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，在该位置用 0 来代替。&lt;/p></description></item></channel></rss>

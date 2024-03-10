@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态规划 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link><description>Recent content in 动态规划 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Oct 2023 19:34:50 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/rss.xml" rel="self" type="application/rss+xml"/><item><title>152.乘积最大子数组</title><link>https://zzzicode.github.io/post/152.%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Mon, 23 Oct 2023 19:34:50 +0800</pubDate><guid>https://zzzicode.github.io/post/152.%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>152.乘积最大子数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。&lt;/p>
+&lt;p>测试用例的答案是一个 &lt;strong>32-位&lt;/strong> 整数。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 是数组的连续子序列。&lt;/p></description></item><item><title>516.最长回文子序列</title><link>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Sun, 02 Jul 2023 20:42:56 +0800</pubDate><guid>https://zzzicode.github.io/post/516.%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>🔄516.最长回文子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s ，找出其中最长的回文&lt;strong>子序列&lt;/strong>，并返回该序列的长度。&lt;/p>
+&lt;p>子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。&lt;/p></description></item><item><title>647.回文子串</title><link>https://zzzicode.github.io/post/647.%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</link><pubDate>Sun, 02 Jul 2023 19:34:35 +0800</pubDate><guid>https://zzzicode.github.io/post/647.%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
+&lt;p>🔄647.回文子串&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。&lt;/p>
+&lt;p>回文字符串 是正着读和倒过来读一样的字符串。&lt;/p>
+&lt;p>子字符串 是字符串中的由连续字符组成的一个序列。&lt;/p>
+&lt;p>具有&lt;strong>不同&lt;/strong>开始位置或结束位置的子串，即使是由&lt;strong>相同&lt;/strong>的字符组成，也会被视作&lt;strong>不同&lt;/strong>的子串。&lt;/p></description></item><item><title>72.编辑距离</title><link>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link><pubDate>Sat, 01 Jul 2023 21:04:28 +0800</pubDate><guid>https://zzzicode.github.io/post/72.%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</guid><description>&lt;blockquote>
+&lt;p>😄72.编辑距离&lt;/p>
+&lt;/blockquote>
+&lt;p>给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 。&lt;/p>
+&lt;p>你可以对一个单词进行如下三种操作：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>插入一个字符&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>删除一个字符&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>替换一个字符&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>583.两个字符串的删除操作</title><link>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 01 Jul 2023 00:35:17 +0800</pubDate><guid>https://zzzicode.github.io/post/583.%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
+&lt;p>😄583.两个字符串的删除操作&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个单词 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> ，返回使得 &lt;code>word1&lt;/code> 和 &lt;code>word2&lt;/code> &lt;strong>相同&lt;/strong>所需的&lt;strong>最小步数&lt;/strong>。&lt;/p>
+&lt;p>&lt;strong>每步&lt;/strong> 可以删除任意一个字符串中的一个字符。&lt;/p></description></item><item><title>392.判断子序列</title><link>https://zzzicode.github.io/post/392.%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Sat, 01 Jul 2023 00:04:00 +0800</pubDate><guid>https://zzzicode.github.io/post/392.%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄392.判断子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。&lt;/p>
+&lt;p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，&amp;ldquo;ace&amp;quot;是&amp;quot;abcde&amp;quot;的一个子序列，而&amp;quot;aec&amp;quot;不是）。&lt;/p></description></item><item><title>53.最大子数组和</title><link>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</link><pubDate>Fri, 30 Jun 2023 19:59:51 +0800</pubDate><guid>https://zzzicode.github.io/post/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>😄53.最大子数组和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p>
+&lt;p>&lt;strong>子数组&lt;/strong> 是数组中的一个&lt;strong>连续&lt;/strong>部分。&lt;/p></description></item><item><title>1035.不相交的线</title><link>https://zzzicode.github.io/post/1035.%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF/</link><pubDate>Fri, 30 Jun 2023 19:42:41 +0800</pubDate><guid>https://zzzicode.github.io/post/1035.%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF/</guid><description>&lt;blockquote>
+&lt;p>🔃1035.不相交的线&lt;/p>
+&lt;/blockquote>
+&lt;p>在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。&lt;/p>
+&lt;p>现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：&lt;/p>
+&lt;p>nums1[i] == nums2[j]
+且绘制的直线不与任何其他连线（非水平线）相交。
+请注意，连线即使在端点也不能相交：每个数字只能属于一条连线。&lt;/p>
+&lt;p>以这种方法绘制线条，并返回可以绘制的最大连线数。&lt;/p></description></item><item><title>1143.最长公共子序列</title><link>https://zzzicode.github.io/post/1143.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Fri, 30 Jun 2023 18:38:24 +0800</pubDate><guid>https://zzzicode.github.io/post/1143.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄1143.最长公共子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。&lt;/p>
+&lt;p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。&lt;/p>
+&lt;p>例如，&amp;ldquo;ace&amp;rdquo; 是 &amp;ldquo;abcde&amp;rdquo; 的子序列，但 &amp;ldquo;aec&amp;rdquo; 不是 &amp;ldquo;abcde&amp;rdquo; 的子序列。
+两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。&lt;/p></description></item><item><title>718.最长重复子数组</title><link>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 29 Jun 2023 20:24:52 +0800</pubDate><guid>https://zzzicode.github.io/post/718.%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E6%95%B0%E7%BB%84/</guid><description>&lt;blockquote>
+&lt;p>😄718.最长重复子数组&lt;/p>
+&lt;/blockquote>
+&lt;p>给两个整数数组 &lt;code>nums1&lt;/code> 和 &lt;code>nums2&lt;/code> ，返回 &lt;em>两个数组中 &lt;strong>公共的&lt;/strong> 、长度最长的子数组的长度&lt;/em> 。&lt;/p></description></item><item><title>674.最长连续递增子序列</title><link>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Thu, 29 Jun 2023 19:42:54 +0800</pubDate><guid>https://zzzicode.github.io/post/674.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄674.最长连续递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个未经排序的整数数组，找到最长且 连续递增的子序列，并返回该序列的长度。&lt;/p>
+&lt;p>连续递增的子序列 可以由两个下标 l 和 r（l &amp;lt; r）确定，如果对于每个 l &amp;lt;= i &amp;lt; r，都有 nums[i] &amp;lt; nums[i + 1] ，那么子序列 [nums[l], nums[l + 1], &amp;hellip;, nums[r - 1], nums[r]] 就是连续递增子序列。&lt;/p></description></item><item><title>300.最长递增子序列</title><link>https://zzzicode.github.io/post/300.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</link><pubDate>Thu, 29 Jun 2023 18:50:46 +0800</pubDate><guid>https://zzzicode.github.io/post/300.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/</guid><description>&lt;blockquote>
+&lt;p>😄300.最长递增子序列&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums ，找到其中最长严格递增&lt;strong>子序列&lt;/strong>的长度。&lt;/p>
+&lt;p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。&lt;/p></description></item><item><title>213.打家劫舍II</title><link>https://zzzicode.github.io/post/213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</link><pubDate>Mon, 26 Jun 2023 20:11:12 +0800</pubDate><guid>https://zzzicode.github.io/post/213.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8Dii/</guid><description>&lt;blockquote>
+&lt;p>😄213.打家劫舍II&lt;/p>
+&lt;/blockquote>
+&lt;p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成&lt;strong>一圈&lt;/strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。&lt;/p>
+&lt;p>给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额。&lt;/p></description></item><item><title>198.打家劫舍</title><link>https://zzzicode.github.io/post/198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link><pubDate>Mon, 26 Jun 2023 19:39:20 +0800</pubDate><guid>https://zzzicode.github.io/post/198.%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid><description>&lt;blockquote>
+&lt;p>😄198.打家劫舍&lt;/p>
+&lt;/blockquote>
+&lt;p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。&lt;/p>
+&lt;p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。&lt;/p></description></item><item><title>139.单词拆分</title><link>https://zzzicode.github.io/post/139.%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link><pubDate>Sun, 25 Jun 2023 19:16:10 +0800</pubDate><guid>https://zzzicode.github.io/post/139.%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid><description>&lt;blockquote>
+&lt;p>🔠139.单词拆分&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。&lt;/p>
+&lt;p>注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。&lt;/p></description></item><item><title>279.完全平方数</title><link>https://zzzicode.github.io/post/279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</link><pubDate>Sun, 25 Jun 2023 18:26:47 +0800</pubDate><guid>https://zzzicode.github.io/post/279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>2️⃣279.完全平方数&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数 n ，返回 和为 n 的完全平方数的最少数量 。&lt;/p>
+&lt;p>完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全平方数，而 3 和 11 不是。&lt;/p></description></item><item><title>322.零钱兑换</title><link>https://zzzicode.github.io/post/322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link><pubDate>Sat, 24 Jun 2023 20:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid><description>&lt;blockquote>
+&lt;p>💷322.零钱兑换&lt;/p>
+&lt;/blockquote>
+&lt;p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。&lt;/p>
+&lt;p>你可以认为每种硬币的数量是无限的。&lt;/p></description></item><item><title>377.组合总和IV</title><link>https://zzzicode.github.io/post/377.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Civ/</link><pubDate>Sat, 24 Jun 2023 19:10:27 +0800</pubDate><guid>https://zzzicode.github.io/post/377.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8Civ/</guid><description>&lt;blockquote>
+&lt;p>😄377.组合总和IV&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个由&lt;strong>不同&lt;/strong>整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。nums中的整数可以&lt;strong>重复选取&lt;/strong>&lt;/p>
+&lt;p>题目数据保证答案符合 32 位整数范围。&lt;/p></description></item><item><title>518.零钱兑换II</title><link>https://zzzicode.github.io/post/518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2ii/</link><pubDate>Fri, 23 Jun 2023 20:01:59 +0800</pubDate><guid>https://zzzicode.github.io/post/518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2ii/</guid><description>&lt;blockquote>
+&lt;p>💴518.零钱兑换II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。&lt;/p>
+&lt;p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。&lt;/p>
+&lt;p>假设每一种面额的硬币有无限个。&lt;/p>
+&lt;p>题目数据保证结果符合 32 位带符号整数。&lt;/p></description></item><item><title>474.一和零</title><link>https://zzzicode.github.io/post/474.%E4%B8%80%E5%92%8C%E9%9B%B6/</link><pubDate>Fri, 23 Jun 2023 19:01:48 +0800</pubDate><guid>https://zzzicode.github.io/post/474.%E4%B8%80%E5%92%8C%E9%9B%B6/</guid><description>&lt;blockquote>
+&lt;p>1️⃣474.一和零&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。&lt;/p>
+&lt;p>请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。&lt;/p>
+&lt;p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。&lt;/p></description></item><item><title>494.目标和</title><link>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</link><pubDate>Wed, 21 Jun 2023 20:44:34 +0800</pubDate><guid>https://zzzicode.github.io/post/494.%E7%9B%AE%E6%A0%87%E5%92%8C/</guid><description>&lt;blockquote>
+&lt;p>🎯494.目标和&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 nums 和一个整数 target 。&lt;/p>
+&lt;p>向数组中的每个整数前添加 &amp;lsquo;+&amp;rsquo; 或 &amp;lsquo;-&amp;rsquo; ，然后串联起所有整数，可以构造一个 表达式 ：&lt;/p>
+&lt;p>例如，nums = [2, 1] ，可以在 2 之前添加 &amp;lsquo;+&amp;rsquo; ，在 1 之前添加 &amp;lsquo;-&amp;rsquo; ，然后串联起来得到表达式 &amp;ldquo;+2-1&amp;rdquo; 。
+返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。&lt;/p></description></item><item><title>1049.最后一块石头的重量II</title><link>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</link><pubDate>Wed, 21 Jun 2023 20:01:23 +0800</pubDate><guid>https://zzzicode.github.io/post/1049.%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8Fii/</guid><description>&lt;blockquote>
+&lt;p>🌑1049.最后一块石头的重量II&lt;/p>
+&lt;/blockquote>
+&lt;p>有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。&lt;/p>
+&lt;p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &amp;lt;= y。那么粉碎的可能结果如下：&lt;/p>
+&lt;p>如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块 石头。返回此石头 &lt;strong>最小&lt;/strong>的可能重量 。如果没有石头剩下，就返回 0。&lt;/p></description></item><item><title>416.分割等和子集</title><link>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</link><pubDate>Tue, 20 Jun 2023 19:24:19 +0800</pubDate><guid>https://zzzicode.github.io/post/416.%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/</guid><description>&lt;blockquote>
+&lt;p>😄416.分割等和子集&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个 &lt;strong>只包含正整数&lt;/strong> 的 &lt;strong>非空&lt;/strong> 数组 &lt;code>nums&lt;/code> 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。&lt;/p></description></item><item><title>解决背包问题的思路</title><link>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</link><pubDate>Mon, 19 Jun 2023 18:26:08 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
+&lt;p>🎒解决0-1背包问题的思路&lt;/p>
+&lt;/blockquote>
+&lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
+&lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
+&lt;blockquote>
+&lt;p>核心就是确定递推公式和初始化方案&lt;/p>
+&lt;/blockquote></description></item><item><title>96.不同的二叉搜索树</title><link>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link><pubDate>Sat, 17 Jun 2023 19:13:27 +0800</pubDate><guid>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>🌴96.不同的二叉搜索树&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数 &lt;code>n&lt;/code> ，求恰由 &lt;code>n&lt;/code> 个节点组成且节点值从 &lt;code>1&lt;/code> 到 &lt;code>n&lt;/code> 互不相同的 &lt;strong>二叉搜索树&lt;/strong> 有多少种？返回满足题意的二叉搜索树的种数。&lt;/p></description></item><item><title>343.整数拆分</title><link>https://zzzicode.github.io/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</link><pubDate>Tue, 13 Jun 2023 18:14:49 +0800</pubDate><guid>https://zzzicode.github.io/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/</guid><description>&lt;blockquote>
+&lt;p>0️⃣343.整数拆分&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个正整数 n，将其拆分为&lt;strong>至少&lt;/strong>两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。&lt;/p>
+&lt;p>示例 :&lt;/p>
+&lt;ul>
+&lt;li>输入: 10&lt;/li>
+&lt;li>输出: 36&lt;/li>
+&lt;li>解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。&lt;/li>
+&lt;li>说明: 你可以假设 n &lt;strong>不小于&lt;/strong> 2 且&lt;strong>不大于&lt;/strong> 58。&lt;/li>
+&lt;/ul></description></item><item><title>63.不同路径II</title><link>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</link><pubDate>Mon, 12 Jun 2023 18:44:56 +0800</pubDate><guid>https://zzzicode.github.io/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/</guid><description>&lt;blockquote>
+&lt;p>😄63.不同路径II&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。&lt;/p>
+&lt;p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？&lt;/p>
+&lt;p>网格中的**障碍物（1）&lt;strong>和&lt;/strong>空位置（0）**分别用 1 和 0 来表示。&lt;/p>
+&lt;blockquote>
+&lt;p>相比于62题，只是多了一个障碍物，相当于有的网格去不了&lt;/p>
+&lt;/blockquote></description></item><item><title>62.不同路径</title><link>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</link><pubDate>Mon, 12 Jun 2023 18:19:22 +0800</pubDate><guid>https://zzzicode.github.io/post/62.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</guid><description>&lt;blockquote>
+&lt;p>😄62.不同路径&lt;/p>
+&lt;/blockquote>
+&lt;p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。&lt;/p>
+&lt;p>机器人每次只能&lt;strong>向下&lt;/strong>或者&lt;strong>向右&lt;/strong>移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。&lt;/p>
+&lt;p>问总共有多少条不同的路径？&lt;/p></description></item><item><title>746.使用最小花费爬楼梯</title><link>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:51:26 +0800</pubDate><guid>https://zzzicode.github.io/post/746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄746.使用最小花费爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。&lt;/p>
+&lt;p>你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。&lt;/p>
+&lt;p>请你计算并返回达到楼梯顶部的最低花费。&lt;/p></description></item><item><title>70.爬楼梯</title><link>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</link><pubDate>Sun, 11 Jun 2023 18:16:36 +0800</pubDate><guid>https://zzzicode.github.io/post/70.%E7%88%AC%E6%A5%BC%E6%A2%AF/</guid><description>&lt;blockquote>
+&lt;p>😄70.爬楼梯&lt;/p>
+&lt;/blockquote>
+&lt;p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。&lt;/p>
+&lt;p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？&lt;/p>
+&lt;p>注意：给定 n 是一个&lt;strong>正整数&lt;/strong>。&lt;/p>
+&lt;p>示例 ：&lt;/p>
+&lt;ul>
+&lt;li>输入： 2&lt;/li>
+&lt;li>输出： 2&lt;/li>
+&lt;li>解释： 有两种方法可以爬到楼顶。
+&lt;ul>
+&lt;li>1 阶 + 1 阶&lt;/li>
+&lt;li>2 阶&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>121.买卖股票的最佳时机</title><link>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link><pubDate>Wed, 31 May 2023 18:30:03 +0800</pubDate><guid>https://zzzicode.github.io/post/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid><description>&lt;blockquote>
+&lt;p>💰121.买卖股票的最佳时机&lt;/p>
+&lt;/blockquote>
+&lt;p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。&lt;/p>
+&lt;p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。&lt;/p>
+&lt;p>尽可能地在最低点买入，然后在之后的最高点卖出，只买卖一次&lt;/p>
+&lt;p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。&lt;/p></description></item><item><title>122.买卖股票的最佳时机II</title><link>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</link><pubDate>Wed, 31 May 2023 18:20:37 +0800</pubDate><guid>https://zzzicode.github.io/post/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAii/</guid><description>&lt;blockquote>
+&lt;p>💰122.买卖股票的最佳时机II&lt;/p>
+&lt;/blockquote>
+&lt;p>给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。&lt;/p>
+&lt;p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候&lt;strong>最多&lt;/strong>只能持有 一股 股票。你也可以先购买，然后在同一天出售。&lt;/p>
+&lt;p>多次买卖，且买卖时间不能重合，但是卖和买可以在同一天，所以需要将多次买卖的利润求和&lt;/p>
+&lt;p>返回 你能获得的&lt;strong>最大&lt;/strong>利润 。&lt;/p></description></item></channel></rss>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>springmvc on zzzi的小站</title><link>https://zzzicode.github.io/tags/springmvc/</link><description>Recent content in springmvc on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 14 Oct 2023 16:52:19 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/springmvc/rss.xml" rel="self" type="application/rss+xml"/><item><title>Springmvc02</title><link>https://zzzicode.github.io/post/springmvc02/</link><pubDate>Sat, 14 Oct 2023 16:52:19 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc02/</guid><description>&lt;blockquote>
+&lt;p>🤩 springmvc02&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍ssm整合以及将后端处理的数据如何统一封装返回给前端，之后全局的异常如何处理，前后端联调的过程以及最后的拦截器使用&lt;/p></description></item><item><title>Springmvc01</title><link>https://zzzicode.github.io/post/springmvc01/</link><pubDate>Thu, 12 Oct 2023 16:45:52 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc01/</guid><description>&lt;blockquote>
+&lt;p>✊ springmvc01&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍spring中的springmvc知识，介绍前后端交互的流程，postman工具的使用，以及主流的Rest风格&lt;/p></description></item></channel></rss>

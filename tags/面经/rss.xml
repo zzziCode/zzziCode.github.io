@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>面经 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E9%9D%A2%E7%BB%8F/</link><description>Recent content in 面经 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 04 Mar 2024 12:57:25 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E9%9D%A2%E7%BB%8F/rss.xml" rel="self" type="application/rss+xml"/><item><title>Redis面经</title><link>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</link><pubDate>Mon, 04 Mar 2024 12:57:25 +0800</pubDate><guid>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>🛅 redis面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一些redis的常见面试题，文章长期更新，面试答案参考小林coding的
+&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+图解系列
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p></description></item><item><title>Mysql面经</title><link>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:56:32 +0800</pubDate><guid>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>📈 mysql面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文中主要介绍一些mysql的面试笔记，文章持续更新，面试答案参小林coding的
+&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+图解系列
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>🌸 spring面经&lt;/p>
+&lt;/blockquote>
+&lt;p>本文总结一些常见的spring面试题并自己做出总结，文章持续更新&lt;/p></description></item></channel></rss>

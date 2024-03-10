@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>背包问题 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</link><description>Recent content in 背包问题 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 19 Jun 2023 18:26:08 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/rss.xml" rel="self" type="application/rss+xml"/><item><title>解决背包问题的思路</title><link>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</link><pubDate>Mon, 19 Jun 2023 18:26:08 +0800</pubDate><guid>https://zzzicode.github.io/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
+&lt;p>🎒解决0-1背包问题的思路&lt;/p>
+&lt;/blockquote>
+&lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
+&lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
+&lt;blockquote>
+&lt;p>核心就是确定递推公式和初始化方案&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

@@ -1,0 +1,783 @@
+<!doctype html><html lang=zh-cn data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.111.3"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/favicon_next.png><meta itemprop=name content="基于VSCode和CMake进行C++开发"><meta itemprop=description content="基于VSCode和CMake进行C++开发"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://zzzicode.github.io/imgs/avatar.png"><meta itemprop=keywords content="VSCode,CMake"><meta property="og:type" content="article"><meta property="og:title" content="基于VSCode和CMake进行C++开发"><meta property="og:description" content="基于VSCode和CMake进行C++开发"><meta property="og:image" content="/imgs/avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/"><meta property="og:site_name" content="zzzi的小站"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="zzzi"><meta property="article:published_time" content="2023-06-13 08:59:36 +0800 CST"><meta property="article:modified_time" content="2023-06-13 08:59:36 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.4b7f3d9c4ef8db1505229a7dcd2c4e3ab17cd4960dd8a78b503c013770ad56a6.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"js":{"file":"es5/tex-mml-chtml.js","name":"mathjax","version":"3.2.0"},"render":"mathjax"},"path":"%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91","permalink":"https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/","title":"基于VSCode和CMake进行C++开发"}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>基于VSCode和CMake进行C++开发 - zzzi的小站</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>zzzi的小站</h1><i class=logo-line></i></a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about.html class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>217</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#linux介绍>Linux介绍</a><ul><li><a href=#目录结构>目录结构</a></li></ul></li><li><a href=#开发环境>开发环境</a><ul><li><a href=#安装gccgdb>安装GCC,GDB</a></li><li><a href=#安装cmake>安装CMake</a></li></ul></li><li><a href=#gcc>GCC</a><ul><li><a href=#编译过程>编译过程</a></li><li><a href=#编译参数>编译参数</a></li><li><a href=#实战>实战</a></li></ul></li><li><a href=#gdb>GDB</a><ul><li><a href=#编译参数-1>编译参数</a></li><li><a href=#实战-1>实战</a></li></ul></li><li><a href=#vscode>VSCode</a><ul><li><a href=#连接centos>连接centos</a></li><li><a href=#插件安装>插件安装</a></li><li><a href=#快捷键>快捷键</a></li><li><a href=#实战-2>实战</a><ul><li><a href=#hello>hello</a></li><li><a href=#swap>swap</a></li></ul></li></ul></li><li><a href=#cmake>CMake</a><ul><li><a href=#介绍>介绍</a></li><li><a href=#指令和变量>指令和变量</a><ul><li><a href=#重要指令>重要指令</a></li><li><a href=#常用变量>常用变量</a></li></ul></li><li><a href=#编译工程>编译工程</a><ul><li><a href=#编译过程-1>编译过程</a></li><li><a href=#构建方式>构建方式</a></li></ul></li><li><a href=#实战-3>实战</a><ul><li><a href=#hello-1>hello</a></li><li><a href=#swap-1>swap</a></li></ul></li></ul></li><li><a href=#实战-4>实战</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=zzzi src=/imgs/img-lazy-loading.gif data-src=/imgs/avatar.png><p class=site-author-name itemprop=name>zzzi</p><div class=site-description itemprop=description>make_tuple("工作","论文")</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>217</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>5</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>46</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/zzziCode title="Github → https://github.com/zzziCode" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘</a></li></ul></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script>
+<script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/avatar.png"><meta itemprop=name content="zzzi"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="zzzi"><meta itemprop=description content="make_tuple(&#34;工作&#34;,&#34;论文&#34;)"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="基于VSCode和CMake进行C++开发"><meta itemprop=description content="基于VSCode和CMake进行C++开发"></span><header class=post-header><h1 class=post-title itemprop="name headline">基于VSCode和CMake进行C++开发</h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i></span>
+<span class=post-meta-item-text title=发表于>发表于：</span>
+<time title="创建时间：2023-06-13 08:59:36 +0800 CST" itemprop="dateCreated datePublished" datetime="2023-06-13 08:59:36 +0800 CST">2023-06-13</time></span>
+<span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i></span>
+<span class=post-meta-item-text title=分类于>分类于：</span>
+<span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0 itemprop=url rel=index><span itemprop=name>学习笔记</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i></span>
+<span class=post-meta-item-text>字数：</span>
+<span>8353</span></span>
+<span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i></span>
+<span class=post-meta-item-text>阅读：&ap;</span>
+<span>17分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>😄基于VSCode和CMake进行C++开发</p></blockquote><h2 id=linux介绍>Linux介绍
+<a class=header-anchor href=#linux%e4%bb%8b%e7%bb%8d></a></h2><p>linux中一切皆文件</p><h3 id=目录结构>目录结构
+<a class=header-anchor href=#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84></a></h3><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306130908295.png alt=image-20230613090835235 style=zoom:50%><ol><li>bin，含义是二进制，里面的文件都是可以被运行的，</li><li>dev，存放的都是外接设备，例如光盘，到这个目录之后不能直接使用，需要挂载到某个目录中才能正常使用</li><li>etc，存放系统配置文件</li><li>home，除了root用户之外其他用户的家目录</li><li>proc，存储linux运行时的一些进程</li><li>root，root用户自己的家目录</li><li>sbin，存放一些可被执行的二进制文件，执行需要管理员权限</li><li>tmp，存放临时文件</li><li>usr，存放用户自己安装的软件</li><li>var，存放系统或者程序的日志文件</li><li>mnt，添加外部设备时，将外部设备挂载到mnt目录下指定的文件夹下</li></ol><h2 id=开发环境>开发环境
+<a class=header-anchor href=#%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83></a></h2><h3 id=安装gccgdb>安装GCC,GDB
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85gccgdb></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>sudo yum update#更新软件包管理工具
+</span></span><span style=display:flex><span><span style=color:#75715e>#sudo是为了使用root权限</span>
+</span></span><span style=display:flex><span>sudo yum -y install gdb	<span style=color:#75715e>#调试程序的工具</span>
+</span></span><span style=display:flex><span>yum -y install gcc-c++	<span style=color:#75715e>#调用c++编译器的工具</span>
+</span></span><span style=display:flex><span>yum -y install gcc		<span style=color:#75715e>#调用c编译器的工具</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#安装完成之后可以使用gcc --version查看gcc的版本号</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=安装cmake>安装CMake
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85cmake></a></h3><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>yum -y install cmake#安装cmake
+</span></span><span style=display:flex><span>cmake --version	<span style=color:#75715e>#查看版本</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=gcc>GCC
+<a class=header-anchor href=#gcc></a></h2><p>对cpp文件进行编译，不再是使用IDE直接一键运行，而是使用命令控制cpp文件到最终的可执行文件的过程，并了解编译过程中发生了什么</p><h3 id=编译过程>编译过程
+<a class=header-anchor href=#%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b></a></h3><ol><li><p><strong>预处理</strong>，会将头文件的包含，宏定义以及内联函数展开，生成一个<code>.i</code>文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#-E参数指示编译器对输入文件进行预处理</span>
+</span></span><span style=display:flex><span>g++ -E test.cpp -o test.i
+</span></span></code></pre></td></tr></table></div></div><p>对test.cpp文件进行预处理，生成test.i文件</p></li><li><p><strong>编译</strong> 生成<code>.s</code>文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#-S参数指示g++在产生了汇编语言文件之后停止编译</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#产生的文件默认扩展名是.s</span>
+</span></span><span style=display:flex><span>g++ -S test.i -o test.s
+</span></span></code></pre></td></tr></table></div></div><p>将预处理的test.i文件编译成test.s文件</p></li><li><p>**汇编 ** 生成<code>.o</code>文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#-c参数指示g++将源代码汇编成机器语言的目标代码，c是小写</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#产生的文件默认扩展名是.o</span>
+</span></span><span style=display:flex><span>g++ -c test.s -o test.o
+</span></span></code></pre></td></tr></table></div></div><p>将编译产生的test.s文件汇编成test.o</p></li><li><p><strong>链接</strong> 生成<code>.out</code>文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#-o参数指示g++指定文件的名称</span>
+</span></span><span style=display:flex><span>g++ test.o -o test
+</span></span></code></pre></td></tr></table></div></div><p>这一步会生成可执行文件</p></li></ol><blockquote><p>正常的编译过程只需要最后一步，可以直接将被cpp文件编译成可执行文件</p><p>编译指令：<code>g++ [-g] test.cpp -o test </code>，加上-g参数之后使得test可执行文件可以被调试</p><p>直接和运行脚本一样运行即可</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306131029047.png alt=image-20230613102933989 style=zoom:50%><p>按照详细的四步进行编译时，会生成test.i，test.s，test.o，test文件，可以使用vim查看内部文件</p><p>test.i将头文件进行了展开</p><p>test.s生成了汇编语言的代码</p><p>test.o生成了机器语言</p><p>test是可执行文件</p><p>按照<strong>四步</strong>生成的文件和<strong>一步</strong>生成的可执行文件大小一样</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306131043820.png alt=image-20230613104344758 style=zoom:50%><h3 id=编译参数>编译参数
+<a class=header-anchor href=#%e7%bc%96%e8%af%91%e5%8f%82%e6%95%b0></a></h3><ol><li><p><code>-g</code> 编译带调试信息的可执行文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#产生带调试信息的可执行文件test</span>
+</span></span><span style=display:flex><span>g++ -g test.cpp -o test
+</span></span></code></pre></td></tr></table></div></div></li><li><p><code>-O[n]</code> 优化源代码</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#让系统对代码进行优化，去除从未使用的变量等冗余操作</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-O1 默认优化</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-O2 默认优化之后还会进行指令的调整</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-O3 循环展开和其他一些优化工作</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#一般使用-O2就足够了</span>
+</span></span><span style=display:flex><span>g++ test.cpp -O2 -o test
+</span></span></code></pre></td></tr></table></div></div></li><li><p>-l和-L 指定库文件和库文件路径</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#链接，mytest库，并指定库文件</span>
+</span></span><span style=display:flex><span>g++ -L/home/zzzi/mytestlib -lmytest test.cpp -o test
+</span></span></code></pre></td></tr></table></div></div></li><li><p>-I 指定头文件 的搜索目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#如果自定义了头文件，那么就需要指定头文件的搜索目录</span>
+</span></span><span style=display:flex><span>g++ -I/home/zzzi/myinclude test.cpp -o test
+</span></span></code></pre></td></tr></table></div></div></li><li><p>-o 指定输出的可执行文件的名称，不加的话默认输出a.out</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#指定输出的可执行文件名称为test</span>
+</span></span><span style=display:flex><span>g++ test.cpp -o test
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=实战>实战
+<a class=header-anchor href=#%e5%ae%9e%e6%88%98></a></h3><p>实现一个分文件的c++文件运行，头文件是在include目录下的swap.h，源文件是src目录下的swap.cpp文件，主函数是当前目录下的main.cpp</p><p><code>swap.cpp</code>文件如下：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&#34;swap.h&#34;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swap</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>a,<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>b)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> temp<span style=color:#f92672>=</span>a;
+</span></span><span style=display:flex><span>        a<span style=color:#f92672>=</span>b;
+</span></span><span style=display:flex><span>        b<span style=color:#f92672>=</span>temp;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p><code>swp.h</code>文件如下：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swap</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>a,<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>b);
+</span></span></code></pre></td></tr></table></div></div><p><code>main.cpp</code>文件如下：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&#34;swap.h&#34;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> a<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> b<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>;
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;交换之前：&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span>a<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;     &#34;</span><span style=color:#f92672>&lt;&lt;</span>b<span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;交换之后：&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>        swap(a,b);
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span>a<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;     &#34;</span><span style=color:#f92672>&lt;&lt;</span>b<span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306131222616.png alt=image-20230613122202570 style=zoom:50%><blockquote><p>编译方式一共有<strong>三种</strong></p></blockquote><ol><li><p>直接编译</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#直接编译main.cpp和src目录下的swap.cpp，之后指定库文件路径</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#main文件运行时会调用inlucde目录下的swap.h，swap.h文件会调用src目录下的swap文件</span>
+</span></span><span style=display:flex><span>g++ main.cpp src/swap.cpp -Iinclude -o normal_main
+</span></span><span style=display:flex><span><span style=color:#75715e>#此时生成一个a.out文件，可以直接执行，执行结果为：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#交换之前：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#10     20</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#交换之后：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#20     10</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>静态链接，在src目录下进行两步静态链接，之后再执行main.cpp文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#将src目录下的swap.cpp文件编译成静态库文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第一步，在src下将swap.cpp编译成swap.o目标文件</span>
+</span></span><span style=display:flex><span>g++ -c -I../include swap.cpp -o swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第二步，在src下将swap.o目标文件编译成静态库文件</span>
+</span></span><span style=display:flex><span>ar rs libswap.a swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第三步，生成可执行的static_main文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名</span>
+</span></span><span style=display:flex><span>g++ main.cpp -Iinclude -Lsrc -lswap -o static_main
+</span></span></code></pre></td></tr></table></div></div></li><li><p>动态链接</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#将src目录下的swap.cpp文件编译成动态库文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第一步，在src下将swap.cpp编译成swap.o目标文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I../include代表头文件目录</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-fPIC代表与路径无关，因为是动态链接，所以可能被加载到内存的任意地址</span>
+</span></span><span style=display:flex><span>g++ -c -I../include -fPIC swap.cpp  -o swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第二步，在src下将swap.o目标文件编译成动态库文件</span>
+</span></span><span style=display:flex><span>g++ -shared swap.o -o libswao.so
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第三步，生成可执行的dynamic_main文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名</span>
+</span></span><span style=display:flex><span>g++ main.cpp -Iinclude -Lsrc -lswap -o dynamic_main
+</span></span></code></pre></td></tr></table></div></div></li></ol><blockquote><p>执行两个文件</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#执行static_main，直接执行即可</span>
+</span></span><span style=display:flex><span>./static_main
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#执行dynamic_main，这里有所区别，需要加上动态链接的地址</span>
+</span></span><span style=display:flex><span>LD_LIBRARY_PATH<span style=color:#f92672>=</span>src ./dynamic_main
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>静态链接和动态链接的<strong>区别</strong></p><p>静态链接：在生成可执行文件之前完成所有链接操作</p><p>动态链接：程序执行时才进行链接，所以需要加上位置无关参数-fPIC，这样才可以在任意地方进行动态链接，执行时需要加上<strong>链接库的地址</strong>才能动态链接上</p></blockquote><p>最终形成的文件树结构如下：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306131309305.png alt=image-20230613130736072 style=zoom:50%><h2 id=gdb>GDB
+<a class=header-anchor href=#gdb></a></h2><p>了解了cpp文件到可执行文件的过程之后，需要进一步了解程序的调试流程，使用GDB可以用来跟踪程序的运行过程，从而清楚的知道错误产生的地点</p><p>VSCode底层也是调用GDB来实现对C++文件的调试工作</p><p><code>gdb [需要调试的可执行文件名]</code>就可以进入GDB调试程序</p><blockquote><p>前提是生成的可执行文件加上了-g参数才可以被调试</p><p>例如：g++ -g main.cpp -o main，此时main文件<strong>才</strong>可以被调试</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132034405.png alt=image-20230613203411308 style=zoom:50%><h3 id=编译参数-1>编译参数
+<a class=header-anchor href=#%e7%bc%96%e8%af%91%e5%8f%82%e6%95%b0-1></a></h3><p>GDB在使用时需要搭配参数来控制程序的运行</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>## 以下命令后括号内为命令的简化使用，比如run（r），直接输入命令 r 就代表命令run</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>help<span style=color:#f92672>(</span>h<span style=color:#f92672>)</span> <span style=color:#75715e># 查看命令帮助，具体命令查询在gdb中输入help + 命令</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>run<span style=color:#f92672>(</span>r<span style=color:#f92672>)</span> <span style=color:#75715e># 重新开始运行文件（run-text：加载文本文件，run-bin：加载二进制文件）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>start <span style=color:#75715e># 单步执行，运行程序，停在第一行执行语句</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>list<span style=color:#f92672>(</span>l<span style=color:#f92672>)</span> <span style=color:#75715e># 查看原代码（list-n,从第n行开始查看代码。list+ 函数名：查看具体函数）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>set <span style=color:#75715e># 设置变量的值</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>next<span style=color:#f92672>(</span>n<span style=color:#f92672>)</span>   <span style=color:#75715e># 单步调试（逐过程，函数直接执行,不会进入）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>step<span style=color:#f92672>(</span>s<span style=color:#f92672>)</span> <span style=color:#75715e># 单步调试（逐语句：跳入自定义函数内部执行）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>backtrace<span style=color:#f92672>(</span>bt<span style=color:#f92672>)</span> <span style=color:#75715e># 查看函数的调用的栈帧和层级关系</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>frame<span style=color:#f92672>(</span>f<span style=color:#f92672>)</span> <span style=color:#75715e># 切换函数的栈帧</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>info<span style=color:#f92672>(</span>i<span style=color:#f92672>)</span> <span style=color:#75715e># 查看函数内部局部变量的数值</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>finish <span style=color:#75715e># 结束当前函数，返回到函数调用点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)continue</span><span style=color:#f92672>(</span>c<span style=color:#f92672>)</span> <span style=color:#75715e># 继续运行</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>print<span style=color:#f92672>(</span>p<span style=color:#f92672>)</span> <span style=color:#75715e># 打印值及地址</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>quit<span style=color:#f92672>(</span>q<span style=color:#f92672>)</span> <span style=color:#75715e># 退出gdb</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>break+num<span style=color:#f92672>(</span>b<span style=color:#f92672>)</span> <span style=color:#75715e># 在第num行设置断点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>info breakpoints <span style=color:#75715e># 查看当前设置的所有断点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>delete breakpoints num<span style=color:#f92672>(</span>d<span style=color:#f92672>)</span> <span style=color:#75715e># 删除第num个断点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>display <span style=color:#75715e># 追踪查看具体变量值，每一步都会显示这个变量</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>undisplay <span style=color:#75715e># 取消追踪观察变量</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>watch <span style=color:#75715e># 被设置观察点的变量发生修改时，打印显示</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>i watch <span style=color:#75715e># 显示观察点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>enable breakpoints <span style=color:#75715e># 启用断点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>disable breakpoints <span style=color:#75715e># 禁用断点</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>x <span style=color:#75715e># 查看内存x/20xw 显示20个单元，16进制，4字节每单元</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>run argv<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span> argv<span style=color:#f92672>[</span>2<span style=color:#f92672>]</span> <span style=color:#75715e>#调试时命令行传参</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>$(</span>gdb<span style=color:#66d9ef>)</span>set follow-fork-mode child#MakeFile项目管理，选择跟踪父子进程（fork<span style=color:#f92672>()</span>）
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>😄以上命令运行时输入回车代表重复上一命令，例如输入s单步调试，回车代表继续单步调试</p></blockquote><h3 id=实战-1>实战
+<a class=header-anchor href=#%e5%ae%9e%e6%88%98-1></a></h3><p>给出一个了<code>debug.cpp</code>文件用来做GDB调试</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc,<span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>argv)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> N<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> sum<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//计算1加到100
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>while</span>(i<span style=color:#f92672>&lt;=</span>N)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>                sum<span style=color:#f92672>=</span>sum<span style=color:#f92672>+</span>i;
+</span></span><span style=display:flex><span>                i<span style=color:#f92672>=</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;sum=&#34;</span><span style=color:#f92672>&lt;&lt;</span>sum<span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;程序结束！&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><ol><li><p>首先对debug.cpp文件进行编译生成可执行文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>g++ -g debug.cpp -o debug
+</span></span></code></pre></td></tr></table></div></div></li><li><p>进入gdb调试界面</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>gdb debug_with_g
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132039097.png alt=image-20230613203910026 style=zoom:50%><p>此时可以正常调试</p></li><li><p>调试程序</p><ul><li>display设置想要跟踪的变量</li><li>continue继续执行</li><li>list显示断点上下五行的代码</li></ul></li></ol><p>​ 一个完整的调试步骤为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>gdb debug_with_g#调试debug_with_g	
+</span></span><span style=display:flex><span>b 12			<span style=color:#75715e>#在12行增加一个断点</span>
+</span></span><span style=display:flex><span>run				<span style=color:#75715e>#开始运行代码</span>
+</span></span><span style=display:flex><span>display i		<span style=color:#75715e>#显示跟踪i的值</span>
+</span></span><span style=display:flex><span>display sum		<span style=color:#75715e>#显示跟踪sum的值</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>continue</span>		<span style=color:#75715e>#持续执行</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#回车		       #继续上一条continue指令</span>
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132102793.png alt=image-20230613210258719 style=zoom:50%><p>可以追踪<code>sum</code>和<code>i</code>的变化情况</p><p>在vscode中配置好<code>launch.json</code>和<code>tasks.json</code>文件之后，就可以使用vscode辅助调试</p><h2 id=vscode>VSCode
+<a class=header-anchor href=#vscode></a></h2><blockquote><p>使用xshell无法直接使用vscode连接centos，所以需要在windows下使用vscode远程连接centos，连接完成之后即可对centos中的文件进行操作</p></blockquote><h3 id=连接centos>连接centos
+<a class=header-anchor href=#%e8%bf%9e%e6%8e%a5centos></a></h3><p>此种方法不需要centos有vscode，只需要远程登录centos即可</p><ul><li><p><a href=https://www.cnblogs.com/zys2019/p/14810286.html title=使用vscode远程连接centos rel="noopener external nofollow noreferrer" target=_blank class=exturl>使用vscode远程连接centos
+<i class="fa fa-external-link-alt"></i></a></p></li><li><p><a href=https://blog.csdn.net/qq_40477290/article/details/120260225 title=设置免密登录 rel="noopener external nofollow noreferrer" target=_blank class=exturl>设置免密登录
+<i class="fa fa-external-link-alt"></i></a></p></li><li><p>出现以连接字样说明远程连接成功</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132301238.png alt=image-20230613230125180 style=zoom:50%></li><li><p>打开文件夹，直接输入路径即可</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132250802.png alt=image-20230613225015733 style=zoom:50%></li><li><p>对文件进行编辑</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306132307653.png alt=image-20230613230722513 style=zoom:33%><p>打开vscode可以看到主要分为以上几个部分，也可以打开linux中的<strong>终端</strong>进行常规linux操作</p><blockquote><p>此时可以在终端中使用code+路径在vscode中打开某一个文件夹进行开发</p></blockquote></li><li><p><strong>c++开发</strong>还需要<strong>配置环境</strong>，具体的配置放在插件安装中介绍</p></li></ul><h3 id=插件安装>插件安装
+<a class=header-anchor href=#%e6%8f%92%e4%bb%b6%e5%ae%89%e8%a3%85></a></h3><p>使用vscode在linux下进行开发，一下三款插件必须安装：</p><ol><li><p>C/C++ 开发时可以智能提示，并且可以调用GDB进行调试</p></li><li><p>CMake 编写CMake语言时进行智能提示</p></li><li><p>CMake Tools</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306140941741.png alt=image-20230614094112544 style=zoom:33%><blockquote><p>插件使用出问题时可以尝试将插件版本降低</p></blockquote></li></ol><h3 id=快捷键>快捷键
+<a class=header-anchor href=#%e5%bf%ab%e6%8d%b7%e9%94%ae></a></h3><p>列举vscode常用快捷键</p><table><thead><tr><th>功能</th><th>快捷键</th><th>功能</th><th>快捷键</th></tr></thead><tbody><tr><td>转到文件</td><td><code>ctrl+p</code></td><td>关闭文件</td><td><code>ctrl+w</code></td></tr><tr><td>打开命令面板</td><td><code>ctrl+shift+p</code></td><td>当前行上移/下移</td><td><code>atl+up/down</code></td></tr><tr><td>打开终端</td><td><code>ctrl+tab</code></td><td>向上/向下复制一行</td><td><code>shift+alt+up/down</code></td></tr><tr><td>关闭侧边栏</td><td><code>ctrl+b</code></td><td>转到定义</td><td><code>f12</code></td></tr><tr><td>代码格式化</td><td><code>alt+w</code></td><td>变量统一重命名</td><td><code>f2</code></td></tr></tbody></table><h3 id=实战-2>实战
+<a class=header-anchor href=#%e5%ae%9e%e6%88%98-2></a></h3><h4 id=hello>hello
+<a class=header-anchor href=#hello></a></h4><p>编写hello.cpp文件之后，不像windows下可以直接运行，linux下需要编译生成可执行文件才可运行</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306140951863.png alt=image-20230614095110813 style=zoom:50%><h4 id=swap>swap
+<a class=header-anchor href=#swap></a></h4><p>实现一个<strong>分文件</strong>编写的项目，并进行编译生成可执行文件，编译的过程参考<strong>GCC实战</strong>中的编译</p><ol><li><p>编写好swap.h和swap.cpp文件实现对两个数的交换</p></li><li><p>交换类写好之后编写main.cpp实现两个数的交换</p></li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306141014834.png alt=image-20230614101442728 style=zoom:33%><ol start=3><li><p>编译工程，不需要配置<code>.vscode</code>文件夹，直接使用<code>GCC</code>进行编译</p><ul><li><p>直接编译</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>g++ main.cpp src/swap.cpp -Iinclude -o main_normal
+</span></span></code></pre></td></tr></table></div></div></li></ul><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306141018507.png alt=image-20230614101804456 style=zoom:50%><ul><li><p>静态编译</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#将src目录下的swap.cpp文件编译成静态库文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第一步，在src下将swap.cpp编译成swap.o目标文件</span>
+</span></span><span style=display:flex><span>g++ -c -I../include swap.cpp -o swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第二步，在src下将swap.o目标文件编译成静态库文件</span>
+</span></span><span style=display:flex><span>ar rs libswap.a swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第三步，生成可执行的main_static文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名</span>
+</span></span><span style=display:flex><span>g++ main.cpp -Iinclude -Lsrc -lswap -o main_static
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第四步，运行</span>
+</span></span><span style=display:flex><span>./main_static
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306141027207.png alt=image-20230614102739145 style=zoom:50%></li><li><p>动态编译</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#将src目录下的swap.cpp文件编译成动态库文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第一步，在src下将swap.cpp编译成swap.o目标文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I../include代表头文件目录</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-fPIC是位置无关编码，代表与路径无关</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#因为是动态链接，所以可能被加载到内存的任意地址</span>
+</span></span><span style=display:flex><span>g++ -c -I../include -fPIC swap.cpp  -o swap.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第二步，在src下将swap.o目标文件编译成静态库文件</span>
+</span></span><span style=display:flex><span>g++ -shared swap.o -o libswao.so
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第三步，生成可执行的main_dynamic文件</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#-I指定头文件搜索目录，-L指定库文件路径，-l指定库文件，-o指定可执行文件名</span>
+</span></span><span style=display:flex><span>g++ main.cpp -Iinclude -Lsrc -lswap -o main_dynamic
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#第四步，运行，这里有所区别，需要加上动态链接的地址</span>
+</span></span><span style=display:flex><span>LD_LIBRARY_PATH<span style=color:#f92672>=</span>src ./main_dynamic
+</span></span></code></pre></td></tr></table></div></div></li></ul></li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306141033177.png style=zoom:50%><blockquote><p>最终形成的文件树为：</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306141036527.png alt=image-20230614103618470 style=zoom:50%><h2 id=cmake>CMake
+<a class=header-anchor href=#cmake></a></h2><h3 id=介绍>介绍
+<a class=header-anchor href=#%e4%bb%8b%e7%bb%8d></a></h3><p><code>cmake</code>是一个<strong>跨平台</strong>的安装编译工具，可以用简单的语句描述所有平台的编译过程</p><blockquote><p>基本语法</p></blockquote><p>基本语法格式：指令(参数1 参数2)</p><ul><li>参数使用括号包含</li><li>参数之间使用空格或者分号隔开</li><li>指令<strong>不区分</strong>大小写</li><li>参数和变量<strong>区分</strong>大小写</li><li>变量使用<code>${}</code>取值，和shell编程一样，if语句中直接使用变量名取值</li></ul><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span>set(<span style=color:#e6db74>HELLO</span> <span style=color:#e6db74>hello.cpp</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>add_executable(<span style=color:#e6db74>hello</span> <span style=color:#e6db74>main.cpp</span> <span style=color:#e6db74>hello.cpp</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>ADD_EXECUTABLE(<span style=color:#e6db74>hello</span> <span style=color:#e6db74>main.cpp</span> <span style=color:#f92672>${</span>HELLO<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=指令和变量>指令和变量
+<a class=header-anchor href=#%e6%8c%87%e4%bb%a4%e5%92%8c%e5%8f%98%e9%87%8f></a></h3><h4 id=重要指令>重要指令
+<a class=header-anchor href=#%e9%87%8d%e8%a6%81%e6%8c%87%e4%bb%a4></a></h4><ol><li><p><code>cmake_minimum_required</code>：指定cmake的最小版本要求</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#指定最小版本为2.8.3
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>cmake_minimum_required(<span style=color:#e6db74>VERSION</span> <span style=color:#e6db74>2.8.3</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>project</code>：定义工程名称，并且可以指定工程支持的语言</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#指定工程名为HELLOWORLD
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>project(<span style=color:#e6db74>HELLOWORLD</span> <span style=color:#e6db74>[CXX][C]</span>)<span style=color:#75715e>#后面的[]是可选项
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>set</code>：显示的定义变量</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#定义SRC变量的值为hello.cpp，main.cpp
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(<span style=color:#e6db74>SRC</span> <span style=color:#e6db74>hello.cpp</span> <span style=color:#e6db74>main.cpp</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>include_directories</code>：添加工程编译时的头文件搜索路径</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#将/usr/include/myfolder和./include两个路径加入工程的头文件搜索路径
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#头文件在这两个目录下查找
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>include_directories(<span style=color:#e6db74>/usr/include/myfolder</span> <span style=color:#e6db74>./include</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>link_directories</code>：添加工程链接时的库文件搜索路径</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#将/usr/lib/mylib 和./lib添加到工程的库文件搜索路径
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>link_directories(<span style=color:#e6db74>/usr/lib/mylib</span>  <span style=color:#e6db74>./lib</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><blockquote><p>库文件和头文件的区别：库文件<strong>链接</strong>时使用，无法直接阅读，头文件<strong>编译</strong>时使用，可以直接阅读</p></blockquote><ol start=6><li><p><code>add_library</code>：生成动态链接库文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#通过SRC路径生成一个libhello.so的动态链接库文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#SHARED表示动态链接，STATIC表示静态链接，hello是最后生成的库文件名称
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>add_library(<span style=color:#e6db74>hello</span> <span style=color:#e6db74>SHARED</span> <span style=color:#f92672>${</span>SRC<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>add_compile_options</code>：添加编译参数</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#编译时产生警告信息，指定std版本，并对代码进行优化(-o2)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>add_compile_options(<span style=color:#e6db74>-wall</span> <span style=color:#e6db74>-std=c++11</span> <span style=color:#e6db74>-o2</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>add_executable</code>：生成可执行文件</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#编译main.cpp文件生成可执行的main文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>ad_executable(<span style=color:#e6db74>main</span> <span style=color:#e6db74>main.cpp</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>target_link_libraries</code>：为target添加需要链接的共享库，相当于-l参数</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#将hello动态库文件连接到可执行文件main上
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>target_link_libraries(<span style=color:#e6db74>main</span> <span style=color:#e6db74>hello</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>add_subdirectory</code>：给工程添加存放源文件的子目录</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#添加src子目录，src下面需要有CMakeLists.txt文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>add_subdirectory(<span style=color:#e6db74>src</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>aux_source_directory</code>：将一个目录中的所有源文件存储在一个变量中，被用来临时构建源文件列表</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#定义SRC变量，存放当前目录下的所有源文件，SRC指代当前目录下的所有源文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>aux_source_directory(<span style=color:#e6db74>./</span> <span style=color:#e6db74>SRC</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e>#编译SRC代表的全部源文件，这样就不用依次一个一个的编译源文件了
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#编译之后生成一个main可执行文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>aux_source_directory(<span style=color:#e6db74>main</span> <span style=color:#f92672>${</span>SRC<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=常用变量>常用变量
+<a class=header-anchor href=#%e5%b8%b8%e7%94%a8%e5%8f%98%e9%87%8f></a></h4><ol><li><p><code>CMAKE_C_FLAGS</code>：gcc编译选项</p></li><li><p><code>CMAKE_CXX_FLAGS</code>：g++编译选项</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#在CMAKE_CXX_FLAGS编译选项之后追加一个-std=c++11，并重新赋值给CMAKE_CXX_FLAGS
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(<span style=color:#e6db74>CMAKE_CXX_FLAGS</span> <span style=color:#e6db74>&#34;CMAKE_CXX_FLAGS -std=c++11&#34;</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>CMAKE_BUILD_TYPE</code>：编译类型(debug,release)</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#75715e>#设定编译类型为debug，调试时需要选择debug
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(<span style=color:#e6db74>CMAKE_BUILD_TYPE</span> <span style=color:#e6db74>Debug</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e>#设定编译类型为release，发布时需要选择release
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(<span style=color:#e6db74>CMAKE_BUILD_TYPE</span> <span style=color:#e6db74>Release</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p><code>CMAKE_C_COMPILER</code>：指定C编译器</p></li><li><p><code>CMAKE_CXX_COMPILER</code>：指定C++编译器</p></li><li><p><code>EXECUTABLE_OUTPUT_PATH</code>：可执行文件输出的存放路径</p></li><li><p><code>LIBRARY_OUTPUT_PATH</code>：库文件输出的存放路径</p></li></ol><blockquote><p>如果需要对项目尽进行有条件的编译时，需要用到if-else语句</p></blockquote><h3 id=编译工程>编译工程
+<a class=header-anchor href=#%e7%bc%96%e8%af%91%e5%b7%a5%e7%a8%8b></a></h3><p>两种方式设置编译规则：</p><ol><li><p>包含源文件的子文件夹<strong>包含</strong>CMakeLists.txt文件，主目录的CMakeLists.txt通过add_subdirectory 添加子目录即可</p><blockquote><p>包含源文件的子文件夹自己写编译规则，在主文件下只需要简单添加子目录即可</p></blockquote></li><li><p>包含源文件的子文件夹<strong>未包含</strong>CMakeLists.txt文件，子目录编译规则体现在主目录的 CMakeLists.txt中；</p><blockquote><p>包含源文件的子文件夹编译规则不自己写，全部交给主文件编写</p></blockquote></li></ol><blockquote><p>对于每一个包含源文件的目录都可以编写一个CMakeLists.txt，最后在主文件中包含它们</p><p>编译主文件中的CMakeLists.txt就可以对<strong>整个</strong>工程进行编译</p></blockquote><h4 id=编译过程-1>编译过程
+<a class=header-anchor href=#%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b-1></a></h4><ol><li>自定义<code>CMakeLists.txt</code>文件，使用前面介绍的语法制定编译规则</li><li>执行<code>cmake PATH</code>命令产生MakeFile(PATH是<strong>主文件</strong>下的CMakeLists.txt所在的路径)</li><li>按照生成的MakeFile中规则执行<code>make</code>命令进行编译cpp文件，最终生成可执行文件</li></ol><h4 id=构建方式>构建方式
+<a class=header-anchor href=#%e6%9e%84%e5%bb%ba%e6%96%b9%e5%bc%8f></a></h4><ol><li><p>内部构建：直接在当前目录下编译CMakeLists.txt文件生成MakeFile文件，这些所有的文件都会存放到当前目录下，变得臃肿</p></li><li><p><font color=red>外部构建</font>：新建一个<code>build</code>文件夹，之后在这个build文件夹中译CMakeLists.txt文件生成MakeFile文件，这些所有文件都会存放到build文件夹中，使得项目变得清爽</p><blockquote><p>一个是将MakeFile<strong>散落</strong>放在当前目录下，一个是将MakeFile<strong>打包</strong>放在专门的build目录下</p></blockquote></li></ol><h3 id=实战-3>实战
+<a class=header-anchor href=#%e5%ae%9e%e6%88%98-3></a></h3><p>基于hello和swap项目来进行实战，编写CMakeLists.txt文件，使用cmake PATH 生成MakeFile文件，最终使用make进行编译</p><p>最终的实现效果与执行g++命令是一样的</p><h4 id=hello-1>hello
+<a class=header-anchor href=#hello-1></a></h4><p>单文件的项目直接编写CMakeLists.txt</p><ol><li><p>编写CMakeLists.txt</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#指定cmake的最小版本</span>
+</span></span><span style=display:flex><span>cmake_minimum_required<span style=color:#f92672>(</span>VERSION 2.8<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#执行项目名称</span>
+</span></span><span style=display:flex><span>project<span style=color:#f92672>(</span>HELLOWORLD<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#多文件项目指定头文件搜索路径</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#include_directories(./include)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#编译指定的cpp文件</span>
+</span></span><span style=display:flex><span>add_executable<span style=color:#f92672>(</span>helloworld_cmake hello.cpp<span style=color:#f92672>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>生成MakeFile文件，使用外部构建方式，将生成的中间文件全部放到<code>build</code>文件夹中</p></li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306172039385.png alt=image-20230617203808540 style=zoom:33%><ol start=2><li>执行<code>make</code>命令生成可执行文件</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306172039366.png alt=image-20230617203844171 style=zoom:33%><h4 id=swap-1>swap
+<a class=header-anchor href=#swap-1></a></h4><p>多文件的项目需要指定头文件的搜索路径，其余的步骤与hello项目中一样，指定项目名称，编译cpp文件生成可执行文件即可</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306172054853.png alt=image-20230617205307343 style=zoom:50%><h2 id=实战-4>实战
+<a class=header-anchor href=#%e5%ae%9e%e6%88%98-4></a></h2><p>编写一个多文件的项目进行编译，项目的结构为：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306172132676.png alt=image-20230617213212607 style=zoom:50%><ol><li><p>直接编译</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202306172136423.png alt=image-20230617213628358 style=zoom:43%></li><li><p>使用CMakeLists.txt文件编译</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-CMAKE data-lang=CMAKE><span style=display:flex><span>cmake_minimum_required(<span style=color:#e6db74>VERSION</span> <span style=color:#e6db74>2.8</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>project(<span style=color:#e6db74>TEST</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e>#添加编译参数，-g是为了生成可以调试的文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(<span style=color:#e6db74>CMAKE_CXX_FLAGS</span> <span style=color:#e6db74>&#34;${CMAKE_CXX_FLAGS} -std=c++11 -g&#34;</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>include_directories(<span style=color:#f92672>${</span>CMAKE_SOURCE_DIR<span style=color:#f92672>}</span><span style=color:#e6db74>/include</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e>#设置变量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>set(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>SRC</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>main.cpp</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>src/gun.cpp</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>src/soldier.cpp</span>
+</span></span><span style=display:flex><span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>add_executable(<span style=color:#e6db74>main_cmake</span> <span style=color:#f92672>${</span>SRC<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></td></tr></table></div></div><p>最终形成的文件树为</p></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@iZ0jl2zspvl2lcwsxfru86Z vscode_test<span style=color:#f92672>]</span><span style=color:#75715e># tree .</span>
+</span></span><span style=display:flex><span>.
+</span></span><span style=display:flex><span>├── build
+</span></span><span style=display:flex><span>│   ├── CMakeCache.txt
+</span></span><span style=display:flex><span>│   ├── CMakeFiles
+</span></span><span style=display:flex><span>│   │   ├── 2.8.12.2
+</span></span><span style=display:flex><span>│   │   │   ├── CMakeCCompiler.cmake
+</span></span><span style=display:flex><span>│   │   │   ├── CMakeCXXCompiler.cmake
+</span></span><span style=display:flex><span>│   │   │   ├── CMakeDetermineCompilerABI_C.bin
+</span></span><span style=display:flex><span>│   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+</span></span><span style=display:flex><span>│   │   │   ├── CMakeSystem.cmake
+</span></span><span style=display:flex><span>│   │   │   ├── CompilerIdC
+</span></span><span style=display:flex><span>│   │   │   │   ├── a.out
+</span></span><span style=display:flex><span>│   │   │   │   └── CMakeCCompilerId.c
+</span></span><span style=display:flex><span>│   │   │   └── CompilerIdCXX
+</span></span><span style=display:flex><span>│   │   │       ├── a.out
+</span></span><span style=display:flex><span>│   │   │       └── CMakeCXXCompilerId.cpp
+</span></span><span style=display:flex><span>│   │   ├── cmake.check_cache
+</span></span><span style=display:flex><span>│   │   ├── CMakeDirectoryInformation.cmake
+</span></span><span style=display:flex><span>│   │   ├── CMakeOutput.log
+</span></span><span style=display:flex><span>│   │   ├── CMakeTmp
+</span></span><span style=display:flex><span>│   │   ├── main_cmake.dir
+</span></span><span style=display:flex><span>│   │   │   ├── build.make
+</span></span><span style=display:flex><span>│   │   │   ├── cmake_clean.cmake
+</span></span><span style=display:flex><span>│   │   │   ├── CXX.includecache
+</span></span><span style=display:flex><span>│   │   │   ├── DependInfo.cmake
+</span></span><span style=display:flex><span>│   │   │   ├── depend.internal
+</span></span><span style=display:flex><span>│   │   │   ├── depend.make
+</span></span><span style=display:flex><span>│   │   │   ├── flags.make
+</span></span><span style=display:flex><span>│   │   │   ├── link.txt
+</span></span><span style=display:flex><span>│   │   │   ├── main.cpp.o
+</span></span><span style=display:flex><span>│   │   │   ├── progress.make
+</span></span><span style=display:flex><span>│   │   │   └── src
+</span></span><span style=display:flex><span>│   │   │       ├── gun.cpp.o
+</span></span><span style=display:flex><span>│   │   │       └── soldier.cpp.o
+</span></span><span style=display:flex><span>│   │   ├── Makefile2
+</span></span><span style=display:flex><span>│   │   ├── Makefile.cmake
+</span></span><span style=display:flex><span>│   │   ├── progress.marks
+</span></span><span style=display:flex><span>│   │   └── TargetDirectories.txt
+</span></span><span style=display:flex><span>│   ├── cmake_install.cmake
+</span></span><span style=display:flex><span>│   ├── main_cmake
+</span></span><span style=display:flex><span>│   └── Makefile
+</span></span><span style=display:flex><span>├── CMakeLists.txt
+</span></span><span style=display:flex><span>├── include
+</span></span><span style=display:flex><span>│   ├── gun.h
+</span></span><span style=display:flex><span>│   └── soldier.h
+</span></span><span style=display:flex><span>├── main.cpp
+</span></span><span style=display:flex><span>├── main_normal
+</span></span><span style=display:flex><span>└── src
+</span></span><span style=display:flex><span>    ├── gun.cpp
+</span></span><span style=display:flex><span>    └── soldier.cpp
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>10</span> directories, <span style=color:#ae81ff>39</span> files
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>使用vscode进行调试</li></ol><p>需要配置<code>launch.json</code>和<code>tasks.json</code>文件，其中launch.json文件中最重要的两个参数是program和preLaunchTask</p><p>其中<code>program</code>指向了想要调试和运行的可执行文件，一般存放在./build文件夹下</p><p><code>preLaunchTask</code>指向了tasks.json文件中的某一个任务，在launch.json文件执行之前执行什么任务，一般设置一个cmake和make对项目进行重新编译，这样可以实时的进行调试，不用每次都手动编译</p><p>提供一个tasks.json供参考：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span>{   
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;2.0.0&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;options&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;cwd&#34;</span>: <span style=color:#e6db74>&#34;${workspaceFolder}/build&#34;</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;tasks&#34;</span>: [
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;shell&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;label&#34;</span>: <span style=color:#e6db74>&#34;cmake&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;command&#34;</span>: <span style=color:#e6db74>&#34;cmake&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//相当于执行cmake..  对cpp文件编译生成MakeFile文件
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;args&#34;</span>: [
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;..&#34;</span>
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;label&#34;</span>: <span style=color:#e6db74>&#34;make&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;group&#34;</span>: {
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;kind&#34;</span>: <span style=color:#e6db74>&#34;build&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;isDefault&#34;</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;command&#34;</span>: <span style=color:#e6db74>&#34;make&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;args&#34;</span>: [
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;label&#34;</span>: <span style=color:#e6db74>&#34;Build&#34;</span>,
+</span></span><span style=display:flex><span>			<span style=color:#f92672>&#34;dependsOrder&#34;</span>: <span style=color:#e6db74>&#34;sequence&#34;</span>, <span style=color:#75715e>// 按列出的顺序执行任务依赖项
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//先进行cmake..在进行make，相当于写了一个自动化脚本
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;dependsOn&#34;</span>:[
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;cmake&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;make&#34;</span>
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>配置好这两个文件之后，每次调试运行都会自动执行<code>cmake..</code>和<code>make</code>命令对项目进行重新编译，从而实时的对项目进行调试运行</p><h2 id=总结>总结
+<a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>在linux中安装GCC和GDB之后就可以在linux中编写c++项目，对其运行和调试，其中GCC负责项目的<strong>编译运行</strong>，可以使用<code>g++</code>命令将cpp文件编译成可执行文件，GDB可以对项目进行<strong>调试</strong></p><p>CMake可以编写编译的规则，将大型项目编译的管理<strong>集成</strong>到一个CMakeLists.txt文件中，实现自动化的编译</p><p>vscode中远程连接到linux中之后，可以直接用快捷键对其进行编译和调试，主要是需要配置launch.json和tasks.json文件，并且知道他们两个之间的关系，配置好后每次都实时的重新编译运行项目从而实现<strong>直接</strong>对项目进行调试</p></div><footer class=post-footer><div class=post-tags><a href=/tags/vscode>VSCode</a>
+<a href=/tags/cmake>CMake</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/343.%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86/ rel=next title=343.整数拆分><i class="fa fa-chevron-left"></i> 343.整数拆分</a></div><div class="post-nav-prev post-nav-item"><a href=/post/63.%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84ii/ rel=prev title=63.不同路径II>63.不同路径II
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2023 - 2024</span>
+<span class=with-love><i class="fa fa-heart"></i></span>
+<span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>
+<script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":false,"save":"manual"},"copybtn":true,"darkmode":false,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://zzzicode.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":null,"views":null},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"right","width":256},"statis":{"enable":true,"plugin":"busuanzi"},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"comment":true,"emoji":false,"imguploader":false,"pageview":true,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":"https://walinejs.comment.lithub.cc","sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0e26367f0461fb41ac6f947dc2af3620375dc44aa8945e6c2b1480d342c65d1.js defer></script>
+<script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>

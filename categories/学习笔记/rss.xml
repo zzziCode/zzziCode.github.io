@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习笔记 on zzzi的小站</title><link>https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><description>Recent content in 学习笔记 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 06 Mar 2024 12:40:17 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>微服务保护之Sentinel</title><link>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</link><pubDate>Wed, 06 Mar 2024 12:40:17 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</guid><description>&lt;blockquote>
+&lt;p>😏 微服务保护之Sentinel&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中介绍一种微服务保护的中间件技术Sentinel，他可以控制访问微服务的请求，包括流量控制，熔断降级以及请求授权等主要内容&lt;/p></description></item><item><title>Elasticsearch学习笔记3</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</link><pubDate>Tue, 05 Mar 2024 20:44:59 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</guid><description>&lt;blockquote>
+&lt;p>🖐️ elasticsearch学习笔记3&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是延续前两节笔记中的内容继续介绍elasticsearch中的剩余内容，主要包含数据聚合，elasticsearch搜索时自动补全，elasticsearch集群之间的数据同步等知识&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
+&lt;p>🔍 elasticsearch学习笔记2&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要介绍elasticsearch中的文档搜索功能，这也是它最重要的一个知识点&lt;/p></description></item><item><title>Elasticsearch学习笔记1</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><pubDate>Thu, 29 Feb 2024 20:30:00 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><description>&lt;blockquote>
+&lt;p>🔍 elasticsearch学习笔记1&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要介绍了elasticsearch中的一些基本概念，并于mysql中的一些概念进行了对比，分析了elasticsearch与mysql适用的场景。并且介绍了elasticsearch中索引库和文档的DSL语句的操作语法，主要是索引库的增删改查以及文档的增删改，关于文档如何进行查询，在下一节中介绍。之后还使用了java封装的RestAPI来使用java代码操作索引库和文档&lt;/p></description></item><item><title>RabbitMQ学习笔记</title><link>https://zzzicode.github.io/post/rabbitmq%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 31 Dec 2023 13:43:30 +0800</pubDate><guid>https://zzzicode.github.io/post/rabbitmq%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🐇RabbitMQ学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一个&lt;strong>异步&lt;/strong>通信的消息队列技术：&lt;code>RabbitMQ&lt;/code>，在项目中使用这项技术可以使得微服务之间进行异步通信，提高项目的消息处理效率，在&lt;code>spring&lt;/code>项目中还对这项技术进行了集成，从而可以更加方便的使用&lt;code>RabbitMQTemplate&lt;/code>调用接口从而快速地收发消息&lt;/p></description></item><item><title>Docker学习笔记</title><link>https://zzzicode.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 26 Dec 2023 14:59:48 +0800</pubDate><guid>https://zzzicode.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🐳 docker学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>本节介绍微服务中关于docker的一些知识，主要包括docker的基本操作，然后就是如何使用DockerFile来自定义镜像，使用Docker-Compose来部署容器，最后构造自己的镜像仓库&lt;/p></description></item><item><title>Springcloud学习笔记</title><link>https://zzzicode.github.io/post/springcloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 26 Dec 2023 13:08:01 +0800</pubDate><guid>https://zzzicode.github.io/post/springcloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>🦓 springcloud学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>主要介绍&lt;code>springcloud&lt;/code>集成的一些关于微服务的技术，例如&lt;code>eureka&lt;/code>，&lt;code>ribbon&lt;/code>，&lt;code>nacos&lt;/code>，&lt;code>feign&lt;/code>，&lt;code>gateway&lt;/code>㩐技术，并初步介绍这些技术的使用方式&lt;/p></description></item><item><title>快速排序和堆排序</title><link>https://zzzicode.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</link><pubDate>Tue, 05 Dec 2023 20:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</guid><description>&lt;blockquote>
+&lt;p>🍖 快速排序和堆排序&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍数组中的快速排序和堆排序的执行流程，介绍这两个算法的原理，针对快速排序来说，就是每一趟确定一个元素的位置，针对堆排序来说，就是每一次调整都找到一个最值元素&lt;/p></description></item><item><title>Small_spring17</title><link>https://zzzicode.github.io/post/small_spring17/</link><pubDate>Mon, 20 Nov 2023 16:18:50 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring17/</guid><description>&lt;blockquote>
+&lt;p>🥩 small_spring17&lt;/p>
+&lt;/blockquote>
+&lt;p>在之前的章节中我们彻底完成了spring的核心功能，将整个bean声明周期中涉及到的核心方法都进行了完善，使得bean的创建可以更加灵活，在本节中我们进一步扩充现有spring的功能，将jdbc的功能整合到现有的spring项目中，使其具有查询数据库的功能，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring16</title><link>https://zzzicode.github.io/post/small_spring16/</link><pubDate>Sun, 19 Nov 2023 13:23:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring16/</guid><description>&lt;blockquote>
+&lt;p>🍖 small_spring16&lt;/p>
+&lt;/blockquote>
+&lt;p>在之前的章节中，我们实现了&lt;code>spring&lt;/code>中最重要的&lt;code>IOC&lt;/code>和&lt;code>AOP&lt;/code>的相关核心功能，并且利用三级缓存解决了循环依赖的问题，但是在属性填充的过程中，一直都是直接将字符串传递给bean中对应的属性，这会导致一些类型转换的问题，并且并不是所有属性都是&lt;code>string&lt;/code>的类型，所以本节中我们将会解决bean属性填充中类型转换的问题，以&lt;code>applyPropertyValues&lt;/code>方法为入口，相关代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring15</title><link>https://zzzicode.github.io/post/small_spring15/</link><pubDate>Thu, 16 Nov 2023 14:02:08 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring15/</guid><description>&lt;blockquote>
+&lt;p>🥬 small_spring15&lt;/p>
+&lt;/blockquote>
+&lt;p>经过之前的编码，spring最核心的IOC和AOP的内容已经基本搭建完成，IOC章节中实现了bean的定义和注册，属性填充，读取配置文件，应用上下文，修改，初始化，销毁，aware感知，&lt;code>FactoryBean&lt;/code>，事件监听。AOP章节中实现了对普通bean进行增强，自动扫描bean的注册，代理对象注入属性的内容。但是到目前为止，一个关键的问题还没有解决，那就是循环依赖，本节中就来解决这个问题，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring14</title><link>https://zzzicode.github.io/post/small_spring14/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring14/</guid><description>&lt;blockquote>
+&lt;p>🍟 small_spring14&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是&lt;code>null&lt;/code>，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个&lt;code>target&lt;/code>，&lt;code>target&lt;/code>的内部属性不为空，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring13</title><link>https://zzzicode.github.io/post/small_spring13/</link><pubDate>Mon, 13 Nov 2023 09:43:01 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring13/</guid><description>&lt;blockquote>
+&lt;p>🌶️ small_spring13&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 上一节中我们新增了一中bean的注册方式：包扫描+&lt;code>@Component&lt;/code>注解。这种方式实现了只用指定扫描哪些包，程序自动将这些包下使用了&lt;code>@Component&lt;/code>注解的bean注册到注册表中，同时bean还可以使用了占位符的形式从属性文件中读取属性值来填充，但是这两部分是分开的，所以本节中在bean自动注册过程中引入了注解进行属性注入的模块，可以使用&lt;code>@Value&lt;/code>注解可以注入普通属性，使用&lt;code>@Autowired&lt;/code>和&lt;code>@Qualifier&lt;/code>注解注入bean对象，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>Small_spring12</title><link>https://zzzicode.github.io/post/small_spring12/</link><pubDate>Sun, 12 Nov 2023 13:19:10 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring12/</guid><description>&lt;blockquote>
+&lt;p>🥒 small_spring12&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 本节实现了另外一种bean的配置方式，并且对于bean的属性来说，配置的时候还可以使用占位符的形式从属性文件中读取，做到一次配置，多次使用的目的，文章中涉及到的代码放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中，主要分为自动扫描bean的注册以及修改bean属性的配置方式。&lt;/p></description></item><item><title/><link>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</link><pubDate>Fri, 10 Nov 2023 15:39:52 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</guid><description>&lt;blockquote>
+&lt;p>🥔 在bean的生命周期中加入AOP&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中我们将IOC的部分彻底补充完整，现在的简易spring框架已经有了bean定义，注册，属性填充依赖注入，xml文件解析，应用上下文，修改，初始化和销毁，感知注入容器资源，多种方式多种类型创建bean以及事件机制，本节中在原有项目的基础上增加了&lt;code>AOP&lt;/code>的功能，将从&lt;code>AOP&lt;/code>的实现到将&lt;code>AOP&lt;/code>融入现有spring框架中进行介绍，相关的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>引入事件机制</title><link>https://zzzicode.github.io/post/10.%E5%BC%95%E5%85%A5%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</link><pubDate>Tue, 07 Nov 2023 14:34:18 +0800</pubDate><guid>https://zzzicode.github.io/post/10.%E5%BC%95%E5%85%A5%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</guid><description>&lt;blockquote>
+&lt;p>🍆 引入事件机制&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了多种类型多种方式创建bean多种类型的bean对象，本节中在此基础上，添加了事件功能，也就是当某些事件发生时，程序能够立马做出一些反应，就好像是一直在等着某些事件的发生。例如用户注册完成时，系统会给当前注册用户发送一些新人优惠福利。用户上线将自动给好友推送其上线消息等。本节中涉及到的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>原型bean和FactoryBean</title><link>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</link><pubDate>Mon, 06 Nov 2023 18:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</guid><description>&lt;blockquote>
+&lt;p>🍑 原型bean和&lt;code>FactoryBean&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了向bean中注入容器资源的功能，注入时不用关心配置文件中，需要什么就实现什么资源接口即可，之后资源的注入统一在初始化时执行。这使得bean的功能更强大也更灵活。但是至今为止，我们还只是创建单例的bean，没有实现如何创建原型模式的bean，并且bean的创建只能从配置文件中获取，一旦bean涉及到的配置太多，xml文件的编写就会异常复杂，是否可以使用更方便的java代码编写bean的配置并控制bean的实例化呢？所以本节中有两个目标：&lt;/p>
+&lt;ol>
+&lt;li>创建多种模式的bean（单例或者原型）&lt;/li>
+&lt;li>以多种方式创建bean对象（xml或者java代码）&lt;/li>
+&lt;/ol>
+&lt;p>​ 本节涉及到的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>使用回调机制注入资源</title><link>https://zzzicode.github.io/post/8.%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%E6%B3%A8%E5%85%A5%E8%B5%84%E6%BA%90/</link><pubDate>Mon, 06 Nov 2023 13:09:13 +0800</pubDate><guid>https://zzzicode.github.io/post/8.%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%E6%B3%A8%E5%85%A5%E8%B5%84%E6%BA%90/</guid><description>&lt;blockquote>
+&lt;p>🍍 使用回调机制注入资源&lt;/p>
+&lt;/blockquote>
+&lt;p>在上一节中，我们在原有项目的基础上增加了初始化和销毁模块，并且实现方式有两种，分别是xml配置和实现接口，在初始化和销毁时可以进行资源的管理。本节中我们进一步&lt;strong>扩展&lt;/strong>bean的功能，使其可以获取到spring中的一些容器资源，为了获得这些容器资源，需要一些成员变量接收，然后在生命周期中增加这些变量的注入代码，最后bean对象就可以使用这些容器资源了，具体的代码我放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>引入初始化和销毁逻辑</title><link>https://zzzicode.github.io/post/7.%E5%BC%95%E5%85%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%94%80%E6%AF%81%E9%80%BB%E8%BE%91/</link><pubDate>Fri, 03 Nov 2023 18:42:11 +0800</pubDate><guid>https://zzzicode.github.io/post/7.%E5%BC%95%E5%85%A5%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%94%80%E6%AF%81%E9%80%BB%E8%BE%91/</guid><description>&lt;blockquote>
+&lt;p>🥭 引入初始化和销毁逻辑&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上一节中，我们实现了应用上下文，并且在应用上下文中加入了修改模块，主要是在bean的生命周期的实例化之前和之后分别加入修改逻辑，本节中继续在这个项目的基础上增加一个模块：&lt;strong>初始化和销毁模块&lt;/strong>，分别用于初始化bean内部所需要的一些信息，以及在bean使用完毕之后，销毁bean的实例化信息，使得项目向着标准的spring框架更进一步，本节中涉及到的代码放到了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>引入ApplicationContext和后置处理器</title><link>https://zzzicode.github.io/post/6.%E5%BC%95%E5%85%A5applicationcontext%E5%92%8C%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/</link><pubDate>Thu, 02 Nov 2023 18:35:38 +0800</pubDate><guid>https://zzzicode.github.io/post/6.%E5%BC%95%E5%85%A5applicationcontext%E5%92%8C%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>🍏 引入&lt;code>ApplicationContext&lt;/code>和后置处理器&lt;/p>
+&lt;/blockquote>
+&lt;p>​ 在上节中，我们实现了从配置文件中读取bean的配置信息，也就是说在实例化之前增加了一个配置文件的读取和利用的模块，但资源文件读取还是要手动调用&lt;code>loadBeanDefinitions&lt;/code>方法，没有模拟出spring中真正的配置文件加载过程。所以，本节中我们继续完善spring框架，对外提供&lt;strong>修改&lt;/strong>的接口，可以在bean 对象注册后但未实例化之前，对 Bean 的定义信息 &lt;code>BeanDefinition&lt;/code> 执行修改操作。还可以在bean对象实例化之后进行修改。并且将bean对象的配置文件加载，注册，实例化，修改等操作都融合到一个&lt;strong>上下文操作类&lt;/strong>中，本节中主要是将之前的一些操作都进行封装，&lt;u>对外只暴露这个上下文操作类&lt;/u>，使其更加符合spring框架的特点。本节中涉及到的代码放在了
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>将bean的注册信息放入配置文件</title><link>https://zzzicode.github.io/post/5.%E5%B0%86bean%E7%9A%84%E6%B3%A8%E5%86%8C%E4%BF%A1%E6%81%AF%E6%94%BE%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link><pubDate>Wed, 01 Nov 2023 09:21:26 +0800</pubDate><guid>https://zzzicode.github.io/post/5.%E5%B0%86bean%E7%9A%84%E6%B3%A8%E5%86%8C%E4%BF%A1%E6%81%AF%E6%94%BE%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid><description>&lt;blockquote>
+&lt;p>🍒 将bean的注册信息放入配置文件&lt;/p>
+&lt;/blockquote>
+&lt;p>之前几节已经实现了将bean的创建交给IOC容器，并且创建和属性填充已经分开，但是bean的定义、注册、属性填充、对象调用都是&lt;strong>手动&lt;/strong>在测试方法中实现的，这与真正的spring并不相符，所以本节在之前的基础上将spring中bean的定义，注册，属性填充等都配置到&lt;strong>配置文件&lt;/strong>中，然后编写代码读取配置文件中的信息，完成定义，注册，属性填充等操作，使其变得更&lt;strong>像&lt;/strong>一个spring框架，详细的代码在
+&lt;a href="https://github.com/zzziCode/small-spring.git" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>bean的实例化和属性填充分离</title><link>https://zzzicode.github.io/post/4.bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%92%8C%E5%B1%9E%E6%80%A7%E5%A1%AB%E5%85%85%E5%88%86%E7%A6%BB/</link><pubDate>Tue, 31 Oct 2023 16:33:05 +0800</pubDate><guid>https://zzzicode.github.io/post/4.bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%92%8C%E5%B1%9E%E6%80%A7%E5%A1%AB%E5%85%85%E5%88%86%E7%A6%BB/</guid><description>&lt;blockquote>
+&lt;p>🍐 bean的实例化和属性填充分离&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是修改上一节中留下来的小问题，上一节中实现了带参的bean对象创建，但是一旦当前bean对象依赖另一个bean对象时，这种创建方式就会失效，因为上一节的带参bean对象创建需要先得到所有的参数。也就是说，当内部依赖另外一个bean对象时，需要先将这个bean对象new出来，然后将其当成参数传递给getBean方法，但是这又不符合bean对象的设计模式了，我们前面千辛万苦将bean的创建交给了IOC容器，现在不能将bean的创建工作交给自己，所以这里需要另辟蹊径，来实现bean的另外一种创建模式（先创建再属性填充），具体的代码在
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>JDK中的动态代理</title><link>https://zzzicode.github.io/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link><pubDate>Tue, 31 Oct 2023 10:21:12 +0800</pubDate><guid>https://zzzicode.github.io/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>🐇 JDK中的动态代理&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程&lt;/p></description></item><item><title>创建带参bean对象</title><link>https://zzzicode.github.io/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</link><pubDate>Mon, 30 Oct 2023 20:51:28 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</guid><description>&lt;blockquote>
+&lt;p>🍈 创建带参bean对象&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要是在上一章的基础上对上一章中代码存在的问题进行改造，上一章中将bean对象的创建交给了IOC容器，利用反射创建bean对象并保存到IOC容器中，但是忽略了一点，上章中代码只能创建不携带参数的bean对象，所以这一章主要解决的问题就是创建有参数的bean对象，正常的spring创建带参的bean对象时，参数应该注册到了BeanDefinition中，然后先创建然后属性填充，但是本节中我们直接一步到位，简化bean的创建过程。具体的代码在
+&lt;a href="https://github.com/zzziCode/small-spring.git" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>自动创建bean对象</title><link>https://zzzicode.github.io/post/2.%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1/</link><pubDate>Mon, 30 Oct 2023 09:51:25 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1/</guid><description>&lt;blockquote>
+&lt;p>🤔 自动创建bean对象&lt;/p>
+&lt;/blockquote>
+&lt;p>本节中主要是以上一节为基础，并对上一节制作的IOC容器进行改良，上一节中，bean对象的实例化是手动new出来的，这一节中将bean对象的创建交给IOC容器本身，并且为了考虑扩展性，尽可能的使得每一个类都只执行一个职责，最终让整个项目变得更加健壮，本节中创建的bean默认单例。关于项目的源码存放在
+&lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>创建spring容器</title><link>https://zzzicode.github.io/post/1.%E5%88%9B%E5%BB%BAspring%E5%AE%B9%E5%99%A8/</link><pubDate>Mon, 30 Oct 2023 08:50:31 +0800</pubDate><guid>https://zzzicode.github.io/post/1.%E5%88%9B%E5%BB%BAspring%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
+&lt;p>😀 创建spring容器&lt;/p>
+&lt;/blockquote>
+&lt;p>本文介绍small_spring的第一节知识，简单的实现一个最基础的spring中的容器，包括定义、存储、获取这个容器中的bean对象，相比于真正的spring源码只是一个简化版本，后面的章节会慢慢的对这个容器进行扩充，文章中涉及到的代码在
+&lt;a href="https://github.com/zzziCode/small_spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+仓库
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>中&lt;/p></description></item><item><title>数据库和java中的乐观锁</title><link>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</link><pubDate>Sat, 28 Oct 2023 14:38:13 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</guid><description>&lt;blockquote>
+&lt;p>数据库和java中的乐观锁&lt;/p>
+&lt;/blockquote>
+&lt;p>本文介绍&lt;code>mybatis plus&lt;/code>和java代码中的乐观锁使用的不同，主要是针对代码层面进行分析&lt;/p>
+&lt;p>先介绍&lt;code>mybatis plus&lt;/code>实现乐观锁的流程，然后介绍传统java代码中乐观锁的执行流程&lt;/p></description></item><item><title>Mybatisplus</title><link>https://zzzicode.github.io/post/mybatisplus/</link><pubDate>Sat, 21 Oct 2023 21:45:11 +0800</pubDate><guid>https://zzzicode.github.io/post/mybatisplus/</guid><description>&lt;blockquote>
+&lt;p>😻 mybatisplus&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍一些mybatisplus的基础知识，之后直接引入一个标准CRUD的程序，之后介绍mybatisplus中的多条件查询以及多记录操作，最后介绍一个乐观锁以及代码生成器&lt;/p></description></item><item><title>Springboot</title><link>https://zzzicode.github.io/post/springboot/</link><pubDate>Wed, 18 Oct 2023 21:37:45 +0800</pubDate><guid>https://zzzicode.github.io/post/springboot/</guid><description>&lt;blockquote>
+&lt;p>👹 springboot&lt;/p>
+&lt;/blockquote>
+&lt;p>本文中介绍了&lt;code>springboot&lt;/code>的基础知识，包括&lt;code>springboot&lt;/code>是什么，&lt;code>springboot&lt;/code>的配置文件，&lt;code>springboot&lt;/code>类似于&lt;code>spring&lt;/code>的整合&lt;code>junit&lt;/code>，整合&lt;code>mybatis&lt;/code>，最后将&lt;code>spring&lt;/code>中的一个项目转换成&lt;code>springboot&lt;/code>的项目&lt;/p></description></item><item><title>Maven高级</title><link>https://zzzicode.github.io/post/maven%E9%AB%98%E7%BA%A7/</link><pubDate>Mon, 16 Oct 2023 16:57:56 +0800</pubDate><guid>https://zzzicode.github.io/post/maven%E9%AB%98%E7%BA%A7/</guid><description>&lt;blockquote>
+&lt;p>🤠 maven高级&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍maven的相关知识，重点内容是依赖管理还有聚合与继承，从项目的角度对maven的相关知识进行了介绍最后还介绍了如何搭建一套自己的私服，实现依赖的统一上传下载&lt;/p></description></item><item><title>Springmvc02</title><link>https://zzzicode.github.io/post/springmvc02/</link><pubDate>Sat, 14 Oct 2023 16:52:19 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc02/</guid><description>&lt;blockquote>
+&lt;p>🤩 springmvc02&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍ssm整合以及将后端处理的数据如何统一封装返回给前端，之后全局的异常如何处理，前后端联调的过程以及最后的拦截器使用&lt;/p></description></item><item><title>Springmvc01</title><link>https://zzzicode.github.io/post/springmvc01/</link><pubDate>Thu, 12 Oct 2023 16:45:52 +0800</pubDate><guid>https://zzzicode.github.io/post/springmvc01/</guid><description>&lt;blockquote>
+&lt;p>✊ springmvc01&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍spring中的springmvc知识，介绍前后端交互的流程，postman工具的使用，以及主流的Rest风格&lt;/p></description></item><item><title>Java的移位操作符</title><link>https://zzzicode.github.io/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</link><pubDate>Sun, 08 Oct 2023 19:40:38 +0800</pubDate><guid>https://zzzicode.github.io/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</guid><description>&lt;blockquote>
+&lt;p>🧢 Java的移位操作符&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍&lt;/p></description></item><item><title>Spring03</title><link>https://zzzicode.github.io/post/spring03/</link><pubDate>Sun, 08 Oct 2023 16:40:26 +0800</pubDate><guid>https://zzzicode.github.io/post/spring03/</guid><description>&lt;blockquote>
+&lt;p>🧒 spring03&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍spring中的面向切面编程AOP，实现不侵入源代码的情况下对代码进行增强处理，从入门到最后的配置以及案例进行讲解&lt;/p></description></item><item><title>Spring02</title><link>https://zzzicode.github.io/post/spring02/</link><pubDate>Thu, 05 Oct 2023 16:33:25 +0800</pubDate><guid>https://zzzicode.github.io/post/spring02/</guid><description>&lt;blockquote>
+&lt;p>👋 spring02&lt;/p>
+&lt;/blockquote>
+&lt;p>本文主要介绍如何使用IOC和DI管理Bean，并且了解什么是spring中的注解开发，最后将mybatis和junit整合到spring中&lt;/p></description></item><item><title>Spring01</title><link>https://zzzicode.github.io/post/spring01/</link><pubDate>Sun, 01 Oct 2023 16:19:30 +0800</pubDate><guid>https://zzzicode.github.io/post/spring01/</guid><description>&lt;blockquote>
+&lt;p>🦳 spring01&lt;/p>
+&lt;/blockquote>
+&lt;p>主要介绍了spring的基础知识，包括IOC控制反转和DI依赖注入&lt;/p></description></item><item><title>Tcp Ip网络编程</title><link>https://zzzicode.github.io/post/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link><pubDate>Sun, 24 Sep 2023 10:30:07 +0800</pubDate><guid>https://zzzicode.github.io/post/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>🎡 tcp-ip网络编程&lt;/p>
+&lt;/blockquote>
+&lt;p>本文是阅读《TCP/IP网络编程》时所记录的学习笔记，参考了一个
+&lt;a href="https://github.com/riba2534/TCP-IP-NetworkNote" title="github" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+github
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>仓库，并在此基础上增加了自己的理解，做了相应的补充，重点放在了linux的部分，windows的部分只做了部分补充&lt;/p></description></item><item><title>2.集群环境搭建</title><link>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Wed, 05 Jul 2023 16:22:06 +0800</pubDate><guid>https://zzzicode.github.io/post/2.%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;blockquote>
+&lt;p>😄2.集群环境搭建&lt;/p>
+&lt;/blockquote></description></item><item><title>3.资源管理</title><link>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 02 Jul 2023 21:12:15 +0800</pubDate><guid>https://zzzicode.github.io/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/</guid><description>&lt;blockquote>
+&lt;p>😄3.资源管理&lt;/p>
+&lt;/blockquote></description></item><item><title>Kubernetes完整版笔记</title><link>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 02 Jul 2023 15:25:12 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E5%AE%8C%E6%95%B4%E7%89%88%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes&lt;/p>
+&lt;/blockquote>
+&lt;p>kubernetes的完整学习笔记，与黑马课堂笔记一样&lt;/p></description></item><item><title>Kubernetes集群管理工具kubectl</title><link>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</link><pubDate>Sun, 02 Jul 2023 14:36:06 +0800</pubDate><guid>https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/</guid><description>&lt;blockquote>
+&lt;p>😄kubernetes集群管理工具kubectl&lt;/p>
+&lt;/blockquote></description></item><item><title>Kubeadm和二进制方式搭建k8s集群的对比</title><link>https://zzzicode.github.io/post/kubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AF%B9%E6%AF%94/</link><pubDate>Fri, 30 Jun 2023 21:16:07 +0800</pubDate><guid>https://zzzicode.github.io/post/kubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AF%B9%E6%AF%94/</guid><description>&lt;blockquote>
+&lt;p>😄kubeadm和二进制方式搭建k8s集群的对比&lt;/p>
+&lt;/blockquote></description></item><item><title>使用kubeadm搭建k8s集群</title><link>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</link><pubDate>Fri, 30 Jun 2023 14:58:50 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BD%BF%E7%94%A8kubeadm%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/</guid><description>&lt;blockquote>
+&lt;p>😄使用kubeadm搭建k8s集群&lt;/p>
+&lt;/blockquote>
+&lt;p>使用kubeadm工具搭建k8s集群，屏蔽搭建集群时的一些细节，使得搭建集群变得简单&lt;/p></description></item><item><title>1.Kubernetes简介</title><link>https://zzzicode.github.io/post/1.kubernetes%E4%BB%8B%E7%BB%8D/</link><pubDate>Fri, 30 Jun 2023 14:53:21 +0800</pubDate><guid>https://zzzicode.github.io/post/1.kubernetes%E4%BB%8B%E7%BB%8D/</guid><description>&lt;blockquote>
+&lt;p>😄1.Kubernetes简介&lt;/p>
+&lt;/blockquote>
+&lt;p>对Kunbernetes的一些基础介绍&lt;/p></description></item><item><title>基于VSCode和CMake进行C++开发</title><link>https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/</link><pubDate>Tue, 13 Jun 2023 08:59:36 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%9F%BA%E4%BA%8Evscode%E5%92%8Ccmake%E8%BF%9B%E8%A1%8Cc++%E5%BC%80%E5%8F%91/</guid><description>&lt;blockquote>
+&lt;p>😄基于VSCode和CMake进行C++开发&lt;/p>
+&lt;/blockquote></description></item><item><title>C++11-14新标准</title><link>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</link><pubDate>Sun, 04 Jun 2023 09:15:23 +0800</pubDate><guid>https://zzzicode.github.io/post/c++11-14%E6%96%B0%E6%A0%87%E5%87%86/</guid><description>&lt;blockquote>
+&lt;p>😄C++11-14新标准&lt;/p>
+&lt;/blockquote>
+&lt;p>记录C++11&amp;amp;14中出现的新特性，主要分为语言和标准库两部分&lt;/p></description></item><item><title>STL标准库和泛型编程</title><link>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</link><pubDate>Wed, 31 May 2023 18:07:27 +0800</pubDate><guid>https://zzzicode.github.io/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</guid><description>&lt;blockquote>
+&lt;p>😶STL标准库和泛型编程&lt;/p>
+&lt;/blockquote>
+&lt;p>STL标准库和泛型编程的学习笔记，记录了STL中六大部件之间的关系和部件的实现细节，以及泛型编程的相关知识，逻辑稍微有点乱，后期再修改&lt;/p></description></item><item><title>Linux学习笔记</title><link>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Sun, 28 May 2023 21:01:03 +0800</pubDate><guid>https://zzzicode.github.io/post/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>linux学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>linux系统的基本结构、编辑器、一些基本的配置以及linux的实操和扩展，包括文件管理、用户权限、磁盘管理、进程管理以及shell编程&lt;/p></description></item><item><title>平衡二叉树和红黑树</title><link>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</link><pubDate>Sat, 27 May 2023 12:38:42 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/</guid><description>&lt;blockquote>
+&lt;p>😄平衡二叉树和红黑树&lt;/p>
+&lt;/blockquote>
+&lt;p>介绍平衡二叉树的插入和删除操作，红黑树的基础理论以及红黑树的插入和删除&lt;/p></description></item><item><title>Git学习笔记</title><link>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Thu, 25 May 2023 21:18:49 +0800</pubDate><guid>https://zzzicode.github.io/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;blockquote>
+&lt;p>😄Git学习笔记&lt;/p>
+&lt;/blockquote>
+&lt;p>Git的基本理论和使用&lt;/p></description></item></channel></rss>

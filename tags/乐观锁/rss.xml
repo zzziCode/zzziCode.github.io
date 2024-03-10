@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>乐观锁 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E4%B9%90%E8%A7%82%E9%94%81/</link><description>Recent content in 乐观锁 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 28 Oct 2023 14:38:13 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E4%B9%90%E8%A7%82%E9%94%81/rss.xml" rel="self" type="application/rss+xml"/><item><title>数据库和java中的乐观锁</title><link>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</link><pubDate>Sat, 28 Oct 2023 14:38:13 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8Cjava%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81/</guid><description>&lt;blockquote>
+&lt;p>数据库和java中的乐观锁&lt;/p>
+&lt;/blockquote>
+&lt;p>本文介绍&lt;code>mybatis plus&lt;/code>和java代码中的乐观锁使用的不同，主要是针对代码层面进行分析&lt;/p>
+&lt;p>先介绍&lt;code>mybatis plus&lt;/code>实现乐观锁的流程，然后介绍传统java代码中乐观锁的执行流程&lt;/p></description></item></channel></rss>
