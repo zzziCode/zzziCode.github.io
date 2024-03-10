@@ -484,23 +484,7 @@ ConnectionHolder类中保存SimpleConnectionHandler对象，内部保存数据�
 ​ 在之前的基础上，我们实现了关于IOC的很多功能，包括bean的定义，注册，获取，属性填充，加载配置文件，应用上下文，修改，初始化和销毁，Aware注入容器资源，以不同的方式创建不同种类的的bean对象等。但是现在还缺一个核心功能：事件。
 ​ 当某些事件发生时，系统希望做出一些反映，例如当应用上下文刷新完成时，系统希望打印出刷新的时间，某些事件发生时，用户希望做出一些自定义的反映。这些都需要spring中的事件机制来解决，而一般的事件解决分为三个步骤：
 事件类应该继承 ApplicationEvent 事件的发布者应该注入ApplicationEventPublisher 事件监听者应该实现ApplicationListener ​ 本节中为了实现事件机制，将其分成了几步：
-定义事件时继承ApplicationContextEvent类，其终极父类是EventObject 事件监听器实现了ApplicationListener接口，其终极父类是EventListener 事件发布者最终都是调用ApplicationEventPublisher接口中的publishEvent发布事件，为了能够调用publishEvent方法，需要实现这个接口，相当于注入 为了事件发布之后对应的监听器能够被触发，所有的监听器被保存到了一个广播器的容器中，并且事件发布时调用的publishEvent方法内部调用的是广播器的multicastEvent方法，内部根据事件类型匹配到保存的监听器，从而进行触发，这个广播器可以说衔接了事件的发布和监听器的触发，是一个核心组件，事件通过广播器发布之后，广播器内部根据事件的类型找到监听此事件类型的事件监听器，从而依次触发这些监听器的监听逻辑，看起来就像是事件一发布监听器就执行了监听逻辑，好像一直在监听，其实上是广播器通知监听器执行的。 ​ 经历以上几步，现有的项目中就加入了事件机制，新的项 …</content></entry><entry><title>11.盛水最多的容器</title><url>/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🥕11.盛水最多的容器
-给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
-找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
-返回容器可以储存的最大水量。
-**说明：**你不能倾斜容器。
-思路
-示例
-示例 1：
-1 2 3 输入：[1,8,6,2,5,4,8,3,7] 输出：49 解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。 示例 2：
-1 2 输入：height = [1,1] 输出：1 基本思想
-为了找出最大的容器，肯定容器的边界越大越好，所以容器的边界需要从两边开始向中间收缩，收缩的过程中记录下最大的容量，收缩到中点之后，就得到了最大的容量
-需要注意的细节就是，每次收缩时，收缩尽可能小的边，并且更新时，需要保留大的容量
-执行流程
-从两边向中间收缩，遇到了中点收缩完毕 收缩的过程中，每次搜索较小的一边，也就是缩小短板，才能有出现更高边界的情况出现 收缩的过程中记录最大的容量 代码
-根据以上分析，得出以下代码：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Solution { public int maxArea(int[] height) { int res=0; int start=0,end=height.length-1; while(start&amp;lt;end){ int high=Math.min(height[start],height[end]); int weight=end-start; res=Math.max(res,high*weight); //尽可能的收缩小的边 if(height[start]&amp;lt;height[end]) ++start; else --end; } return res; } } 总结
-为了得到最大容量，尽可能的保留最宽的范围，也就是需要从两边向中间收缩，并且收缩的过程中尽可能去掉短板，才能有希望找到长板，从而提高容量</content></entry><entry><title>9.原型bean和FactoryBean</title><url>/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍑 9.原型bean和FactoryBean
+定义事件时继承ApplicationContextEvent类，其终极父类是EventObject 事件监听器实现了ApplicationListener接口，其终极父类是EventListener 事件发布者最终都是调用ApplicationEventPublisher接口中的publishEvent发布事件，为了能够调用publishEvent方法，需要实现这个接口，相当于注入 为了事件发布之后对应的监听器能够被触发，所有的监听器被保存到了一个广播器的容器中，并且事件发布时调用的publishEvent方法内部调用的是广播器的multicastEvent方法，内部根据事件类型匹配到保存的监听器，从而进行触发，这个广播器可以说衔接了事件的发布和监听器的触发，是一个核心组件，事件通过广播器发布之后，广播器内部根据事件的类型找到监听此事件类型的事件监听器，从而依次触发这些监听器的监听逻辑，看起来就像是事件一发布监听器就执行了监听逻辑，好像一直在监听，其实上是广播器通知监听器执行的。 ​ 经历以上几步，现有的项目中就加入了事件机制，新的项 …</content></entry><entry><title>9.原型bean和FactoryBean</title><url>/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍑 9.原型bean和FactoryBean
 ​ 在上一节中，我们实现了向bean中注入容器资源的功能，注入时不用关心配置文件中，需要什么就实现什么资源接口即可，之后资源的注入统一在初始化时执行。这使得bean的功能更强大也更灵活。但是至今为止，我们还只是创建单例的bean，没有实现如何创建原型模式的bean，并且bean的创建只能从配置文件中获取，一旦bean涉及到的配置太多，xml文件的编写就会异常复杂，是否可以使用更方便的java代码编写bean的配置并控制bean的实例化呢？所以本节中有两个目标：
 创建多种模式的bean（单例或者原型） 以多种方式创建bean对象（xml或者java代码） ​ 本节涉及到的代码我放到了
 仓库

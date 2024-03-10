@@ -252,13 +252,7 @@
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中&lt;/p></description></item><item><title>11.盛水最多的容器</title><link>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</link><pubDate>Mon, 06 Nov 2023 21:20:49 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
-&lt;p>🥕11.盛水最多的容器&lt;/p>
-&lt;/blockquote>
-&lt;p>给定一个长度为 &lt;code>n&lt;/code> 的整数数组 &lt;code>height&lt;/code> 。有 &lt;code>n&lt;/code> 条垂线，第 &lt;code>i&lt;/code> 条线的两个端点是 &lt;code>(i, 0)&lt;/code> 和 &lt;code>(i, height[i])&lt;/code> 。&lt;/p>
-&lt;p>找出其中的两条线，使得它们与 &lt;code>x&lt;/code> 轴共同构成的容器可以容纳最多的水。&lt;/p>
-&lt;p>返回容器可以储存的最大水量。&lt;/p>
-&lt;p>**说明：**你不能倾斜容器。&lt;/p></description></item><item><title>9.原型bean和FactoryBean</title><link>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</link><pubDate>Mon, 06 Nov 2023 18:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</guid><description>&lt;blockquote>
+&lt;/a>中&lt;/p></description></item><item><title>9.原型bean和FactoryBean</title><link>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</link><pubDate>Mon, 06 Nov 2023 18:19:26 +0800</pubDate><guid>https://zzzicode.github.io/post/9.%E5%8E%9F%E5%9E%8Bbean%E5%92%8Cfactorybean/</guid><description>&lt;blockquote>
 &lt;p>🍑 9.原型bean和&lt;code>FactoryBean&lt;/code>&lt;/p>
 &lt;/blockquote>
 &lt;p>​ 在上一节中，我们实现了向bean中注入容器资源的功能，注入时不用关心配置文件中，需要什么就实现什么资源接口即可，之后资源的注入统一在初始化时执行。这使得bean的功能更强大也更灵活。但是至今为止，我们还只是创建单例的bean，没有实现如何创建原型模式的bean，并且bean的创建只能从配置文件中获取，一旦bean涉及到的配置太多，xml文件的编写就会异常复杂，是否可以使用更方便的java代码编写bean的配置并控制bean的实例化呢？所以本节中有两个目标：&lt;/p>

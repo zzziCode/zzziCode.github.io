@@ -149,13 +149,7 @@
 &lt;p>返回达到编号为 &lt;code>n2&lt;/code> 的方格所需的最少移动次数，如果不可能，则返回 &lt;code>-1&lt;/code>。&lt;/p></description></item><item><title>76.最小覆盖子串</title><link>https://zzzicode.github.io/post/76.%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/</link><pubDate>Wed, 08 Nov 2023 21:51:45 +0800</pubDate><guid>https://zzzicode.github.io/post/76.%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/</guid><description>&lt;blockquote>
 &lt;p>🏜️ 76.最小覆盖子串&lt;/p>
 &lt;/blockquote>
-&lt;p>给你一个字符串 &lt;code>s&lt;/code> 、一个字符串 &lt;code>t&lt;/code> 。返回 &lt;code>s&lt;/code> 中涵盖 &lt;code>t&lt;/code> 所有字符的最小子串。如果 &lt;code>s&lt;/code> 中不存在涵盖 &lt;code>t&lt;/code> 所有字符的子串，则返回空字符串 &lt;code>&amp;quot;&amp;quot;&lt;/code> 。&lt;/p></description></item><item><title>11.盛水最多的容器</title><link>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</link><pubDate>Mon, 06 Nov 2023 21:20:49 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E7%9B%9B%E6%B0%B4%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AE%B9%E5%99%A8/</guid><description>&lt;blockquote>
-&lt;p>🥕11.盛水最多的容器&lt;/p>
-&lt;/blockquote>
-&lt;p>给定一个长度为 &lt;code>n&lt;/code> 的整数数组 &lt;code>height&lt;/code> 。有 &lt;code>n&lt;/code> 条垂线，第 &lt;code>i&lt;/code> 条线的两个端点是 &lt;code>(i, 0)&lt;/code> 和 &lt;code>(i, height[i])&lt;/code> 。&lt;/p>
-&lt;p>找出其中的两条线，使得它们与 &lt;code>x&lt;/code> 轴共同构成的容器可以容纳最多的水。&lt;/p>
-&lt;p>返回容器可以储存的最大水量。&lt;/p>
-&lt;p>**说明：**你不能倾斜容器。&lt;/p></description></item><item><title>6.N字形变换</title><link>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link><pubDate>Sat, 04 Nov 2023 19:31:25 +0800</pubDate><guid>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</guid><description>&lt;blockquote>
+&lt;p>给你一个字符串 &lt;code>s&lt;/code> 、一个字符串 &lt;code>t&lt;/code> 。返回 &lt;code>s&lt;/code> 中涵盖 &lt;code>t&lt;/code> 所有字符的最小子串。如果 &lt;code>s&lt;/code> 中不存在涵盖 &lt;code>t&lt;/code> 所有字符的子串，则返回空字符串 &lt;code>&amp;quot;&amp;quot;&lt;/code> 。&lt;/p></description></item><item><title>6.N字形变换</title><link>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link><pubDate>Sat, 04 Nov 2023 19:31:25 +0800</pubDate><guid>https://zzzicode.github.io/post/6.n%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</guid><description>&lt;blockquote>
 &lt;p>🎈 6.N字形变换&lt;/p>
 &lt;/blockquote>
 &lt;p>将一个给定字符串 &lt;code>s&lt;/code> 根据给定的行数 &lt;code>numRows&lt;/code> ，以从上往下、从左到右进行 Z 字形排列。&lt;/p>
