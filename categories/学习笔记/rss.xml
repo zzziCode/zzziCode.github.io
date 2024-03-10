@@ -64,7 +64,7 @@
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中，主要分为自动扫描bean的注册以及修改bean属性的配置方式。&lt;/p></description></item><item><title/><link>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</link><pubDate>Fri, 10 Nov 2023 15:39:52 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</guid><description>&lt;blockquote>
+&lt;/a>中，主要分为自动扫描bean的注册以及修改bean属性的配置方式。&lt;/p></description></item><item><title>11.在bean的生命周期中加入AOP</title><link>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</link><pubDate>Fri, 10 Nov 2023 15:39:52 +0800</pubDate><guid>https://zzzicode.github.io/post/11.%E5%9C%A8bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%8A%A0%E5%85%A5aop/</guid><description>&lt;blockquote>
 &lt;p>🥔 11.在bean的生命周期中加入AOP&lt;/p>
 &lt;/blockquote>
 &lt;p>​ 在上一节中我们将IOC的部分彻底补充完整，现在的简易spring框架已经有了bean定义，注册，属性填充依赖注入，xml文件解析，应用上下文，修改，初始化和销毁，感知注入容器资源，多种方式多种类型创建bean以及事件机制，本节中在原有项目的基础上增加了&lt;code>AOP&lt;/code>的功能，将从&lt;code>AOP&lt;/code>的实现到将&lt;code>AOP&lt;/code>融入现有spring框架中进行介绍，相关的代码我放到了
