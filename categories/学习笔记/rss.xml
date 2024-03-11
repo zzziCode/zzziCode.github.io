@@ -46,10 +46,10 @@
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中&lt;/p></description></item><item><title>Small_spring14</title><link>https://zzzicode.github.io/post/small_spring14/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring14/</guid><description>&lt;blockquote>
-&lt;p>🍟 small_spring14&lt;/p>
+&lt;/a>中&lt;/p></description></item><item><title>14.给代理对象的属性设置值</title><link>https://zzzicode.github.io/post/small_spring14/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring14/</guid><description>&lt;blockquote>
+&lt;p>🍟 14.给代理对象的属性设置值&lt;/p>
 &lt;/blockquote>
-&lt;p>​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是&lt;code>null&lt;/code>，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个&lt;code>target&lt;/code>，&lt;code>target&lt;/code>的内部属性不为空，相关的代码我放到了
+&lt;p>​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是&lt;code>null&lt;/code>，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的被代理对象的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个&lt;code>target&lt;/code>，&lt;code>target&lt;/code>的内部属性不为空，相关的代码我放到了
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
