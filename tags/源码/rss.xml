@@ -12,14 +12,14 @@
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中&lt;/p></description></item><item><title>Small_spring15</title><link>https://zzzicode.github.io/post/small_spring15/</link><pubDate>Thu, 16 Nov 2023 14:02:08 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring15/</guid><description>&lt;blockquote>
-&lt;p>🥬 small_spring15&lt;/p>
+&lt;/a>中&lt;/p></description></item><item><title>15.三级缓存解决循环依赖</title><link>https://zzzicode.github.io/post/15.%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link><pubDate>Thu, 16 Nov 2023 14:02:08 +0800</pubDate><guid>https://zzzicode.github.io/post/15.%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</guid><description>&lt;blockquote>
+&lt;p>🥬 15.三级缓存解决循环依赖&lt;/p>
 &lt;/blockquote>
-&lt;p>经过之前的编码，spring最核心的IOC和AOP的内容已经基本搭建完成，IOC章节中实现了bean的定义和注册，属性填充，读取配置文件，应用上下文，修改，初始化，销毁，aware感知，&lt;code>FactoryBean&lt;/code>，事件监听。AOP章节中实现了对普通bean进行增强，自动扫描bean的注册，代理对象注入属性的内容。但是到目前为止，一个关键的问题还没有解决，那就是循环依赖，本节中就来解决这个问题，相关的代码我放到了
+&lt;p>经过之前的编码，spring最核心的IOC和AOP的内容已经基本搭建完成，IOC章节中实现了bean的定义和注册，属性填充，读取配置文件，应用上下文，修改，初始化，销毁，aware感知，&lt;code>FactoryBean&lt;/code>，事件监听。AOP章节中实现了对普通bean进行增强，自动扫描bean的注册，代理对象注入属性的内容。但是到目前为止，一个关键的问题还没有解决，那就是&lt;strong>循环依赖&lt;/strong>，本节中就来解决这个问题，相关的代码我放到了
 &lt;a href="https://github.com/zzziCode/small-spring" title="仓库" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 仓库
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>中&lt;/p></description></item><item><title>14.给代理对象的属性设置值</title><link>https://zzzicode.github.io/post/small_spring14/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/small_spring14/</guid><description>&lt;blockquote>
+&lt;/a>中&lt;/p></description></item><item><title>14.给代理对象的属性设置值</title><link>https://zzzicode.github.io/post/14.%E7%BB%99%E4%BB%A3%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E5%80%BC/</link><pubDate>Mon, 13 Nov 2023 20:35:39 +0800</pubDate><guid>https://zzzicode.github.io/post/14.%E7%BB%99%E4%BB%A3%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E5%80%BC/</guid><description>&lt;blockquote>
 &lt;p>🍟 14.给代理对象的属性设置值&lt;/p>
 &lt;/blockquote>
 &lt;p>​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是&lt;code>null&lt;/code>，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的被代理对象的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个&lt;code>target&lt;/code>，&lt;code>target&lt;/code>的内部属性不为空，相关的代码我放到了

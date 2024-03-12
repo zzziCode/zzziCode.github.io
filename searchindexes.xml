@@ -471,7 +471,7 @@ ConnectionHolder类中保存SimpleConnectionHandler对象，内部保存数据�
 类型转换服务的属性填充完毕之后，触发了这个bean的初始化方法afterPropertiesSet，内部创建了一个DefaultConversionService类型转换服务的对象，并且将xml配置文件中配置的类型转换器保存到这个类型转换服务的converts容器中便于后期使用
 之后将这个拿到的类型转换服务的对象保存到AbstractBeanFactory类中的conversionService中，后期属性填充时直接拿到这个类型转换服务中的类型转换器来进行类型转换，也就是拿到着之前保存到DefaultConversionService的converts中的类型转换器
 执行其余的正常bean的创建过程，重点在属性填充的过程中，下面以husband的创建为例介绍如何进行类型的转换：
-属性填充时拿到当前bean的所有需要填充的属性，如果当 …</content></entry><entry><title>Small_spring15</title><url>/post/small_spring15/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥬 small_spring15
+属性填充时拿到当前bean的所有需要填充的属性，如果当 …</content></entry><entry><title>15.三级缓存解决循环依赖</title><url>/post/15.%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🥬 15.三级缓存解决循环依赖
 经过之前的编码，spring最核心的IOC和AOP的内容已经基本搭建完成，IOC章节中实现了bean的定义和注册，属性填充，读取配置文件，应用上下文，修改，初始化，销毁，aware感知，FactoryBean，事件监听。AOP章节中实现了对普通bean进行增强，自动扫描bean的注册，代理对象注入属性的内容。但是到目前为止，一个关键的问题还没有解决，那就是循环依赖，本节中就来解决这个问题，相关的代码我放到了
 仓库
 中
@@ -480,7 +480,7 @@ ConnectionHolder类中保存SimpleConnectionHandler对象，内部保存数据�
 但是三种循环依赖的本质上是一样的，都是在创建过程中依赖一个正在创建的bean，这样相互依赖导致bean无法创建成功，本节中来解决这些问题
 思路
 ​ 为了解决循环依赖的问题，spring引入了三级缓存的概念，其中每一级缓存都各司其职从而解决了循环依赖的问题，下面就以第二种A和B创建过程中互相依赖的情况来描述三级缓存如何解决循环依赖：
-创建A，此时会先创建一个空bean，然后将这个空bean保存到三级缓存中，不管后面是否能用到，之后进行属性填充 在属性填充的过程中，需要填充B，此时就会去一级缓存中找对应的B，发现B不存在，再去二级缓存中找，也没找到，再去三级缓存中找，还是没找到，此时新建B 创建B的时候也会先创建一个空bean，然后也将这个空bean保存到三级缓存中，之后进行属性填充 在属性填充的过程中，需要填充A的属性，此时就会去一级缓存中找对应的A，发现A不存在，再去二级缓存中找，也没找到，再去三级缓存中找，找到之前注册的空A，然后就判断这个A是否需要AOP，需要的话就创建一个代理对象，不需要的话就是普通对象，然后将这个对象放到二级缓存中并填充给B中A属性 B执行其他的属性填充，其他的工作，然后完成B的创建，此时B中的A还是一个空壳子 完成创建之后，将这个B保存到一级缓存中，然后将其从三级缓存中删除 之后继续A属性的填充，此时由于三级缓存中提前保存了未实例化完成的A，于是B可以创建完成，A也就可以用这个B进行属性填充，从而完 …</content></entry><entry><title>14.给代理对象的属性设置值</title><url>/post/small_spring14/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍟 14.给代理对象的属性设置值
+创建A，此时会先创建一个空bean，然后将这个空bean保存到三级缓存中，不管后面是否能用到，之后进行属性填充 在属性填充的过程中，需要填充B，此时就会去一级缓存中找对应的B，发现B不存在，再去二级缓存中找，也没找到，再去三级缓存中找，还是没找到，此时新建B 创建B的时候也会先创建一个空bean，然后也将这个空bean保存到三级缓存中，之后进行属性填充 在属性填充的过程中，需要填充A的属性，此时就会去一级缓存中找对应的A，发现A不存在，再去二级缓存中找，也没找到，再去三级缓存中找，找到之前注册的空A，然后就判断这个A是否需要AOP，需要的话就创建一个代理对象，不需要的话就是普通对象，然后将这个对象放到二级缓存中并填充给B中A属性 B执行其他的属性填充，其他的工作，然后完成B的创建，此时B中的A还是一个空壳子 完成创建之后，将这个B保存到一级缓存中，然后将其从三级缓存中删除 之后继续A属性的填充，此时由于三级缓存中提前保存了未实例化完成的A，于是B可以创建完成，A也就可以用这个B进行属性填充，从而完成 …</content></entry><entry><title>14.给代理对象的属性设置值</title><url>/post/14.%E7%BB%99%E4%BB%A3%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E5%80%BC/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍟 14.给代理对象的属性设置值
 ​ 上一节中使用注解的形式进行属性填充，但是填充的是普通的bean，也就是说代理对象的属性还都是null，这一节中我们就来解决这个问题，改变代理对象的创建时机，使得创建的bean代理对象内部的被代理对象的属性也不为空，但是并不是直接让代理对象本身的属性不为空，而是增加一个target，target的内部属性不为空，相关的代码我放到了
 仓库
 中
