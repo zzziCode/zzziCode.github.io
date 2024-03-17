@@ -7,23 +7,27 @@
 结尾为00 结尾为25 结尾为50 结尾为75 本身是0 对于第五种很好理解，第一种是该数有100这个因子，而100又是25的倍数，故以00结尾的数是25的倍数，其余三种举例来说，例如9925可拆成9900+25，而9900有100的因子，转换成情况1，而25本身就是25的倍数
 问题转换成如何将数转换成以上5种情况步数最少，现在有两种解法：
 解法一1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Solution { int ans; public int minimumOperations(String num) { ans=num.length(); if(num.contains(&amp;#34;0&amp;#34;)) ans=ans-1; index(num,&amp;#34;25&amp;#34;); index(num,&amp;#34;50&amp;#34;); index(num,&amp;#34;75&amp;#34;); index(num,&amp;#34;00&amp;#34;); return ans; } //找到指定尾部元素的位置 public void index(String num,String tail){ int i=num.lastIndexOf(tail.charAt(1)); if(i&amp;lt;0) return; i=num.lastIndexOf(tail.charAt(0),i-1); if(i&amp;lt;0) return; ans=Math.min(ans,num.length()-i-2); } } 这种解法就是排除为0之后，硬求要达到结尾是以上四种情况的步数，取最小的，先求出最后一位在哪，有了最后一位再求倒 …  ]]></content></entry><entry><title>异步通信MQ</title><url>/post/%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1mq/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>RabbitMQ</tag></tags><content type="html"> 异步通信MQ
-本节中我们学习异步通信的剩下知识，并且介绍RabbitMQ的一些更高级的使用
-1.消息可靠性
+本节中我们学习异步通信的剩下知识，并且介绍RabbitMQ的一些更高级的特性，也就是解决利用RabbitMQ来进行收发消息的时候，如何解决遇到的一些问题
 消息队列在使用过程中，面临着很多实际问题需要思考：
+针对消息可靠性，MQ有多种解决办法，在第一节中介绍四种，针对延迟消息问题，在第二节中介绍一个死信交换机来实现延迟消息。针对消息堆积问题，第三节中提出了惰性队列，最后就是使用MQ集群来实现高可用
+1.消息可靠性
 消息从发送，到消费者接收，会经理多个过程：
 其中的每一步都可能导致消息丢失，常见的丢失原因包括：
-发送时丢失： 生产者发送的消息未送达exchange 消息到达exchange后未到达queue MQ宕机，queue将消息丢失 consumer接收到消息后未消费就宕机 针对这些问题，RabbitMQ分别给出了解决方案：
+发送时丢失： 生产者发送的消息未送达exchange 消息到达exchange后未到达queue MQ宕机，queue将消息丢失 consume r接收到消息后未消费就宕机 上面这些问题都导致了消息的不可靠
+针对这些问题，RabbitMQ分别给出了解决方案：
 生产者确认机制 mq持久化 消费者确认机制 失败重试机制 下面我们就通过案例来演示每一个步骤。
-首先，导入课前资料提供的demo工程：
-项目结构如下：
 1.1.生产者消息确认
+确保消息到达MQ
 RabbitMQ提供了publisher confirm机制来避免消息发送到MQ过程中丢失。这种机制必须给每个消息指定一个唯一ID。消息发送到MQ以后，会返回一个结果给发送者，表示消息是否处理成功。
 返回结果有两种方式：
-publisher-confirm，发送者确认 消息成功投递到交换机，返回ack 消息未投递到交换机，返回nack publisher-return，发送者回执 消息投递到交换机了，但是没有路由到队列。返回ACK，及路由失败原因。 注意：
-1.1.1.修改配置
+publisher-confirm，发送者确认，确认消息是否到交换机
+消息成功投递到交换机，返回ack 消息未投递到交换机，返回nack 到这里就是成功了一半，还没有到队列，不算真正的成功
+publisher-return，发送者回执，确认消息是否到队列
+消息投递到交换机了，但是没有路由到队列。返回ACK，及路由失败原因。 注意：
+相当于生产者确认有三种状态：
+成功到达交换机：publish-confirm ack 不成功到达交换机：publish-confirm nack 成功到达交换机但是不成功到达队列：publish-return ack 1.1.1.修改配置
 首先，修改publisher服务中的application.yml文件，添加下面的内容：
-1 2 3 4 5 6 7 spring: rabbitmq: publisher-confirm-type: correlated publisher-returns: true template: mandatory: true 说明：
-publish-confirm-type：开启publisher-confirm，这里支持两种类型： simple：同步等待confirm结果，直到超时 correlated：异步回调，定义ConfirmCallback，MQ返回结果时会回调这个ConfirmCallback publish-returns：开启publish-return功能，同样是基于callback机制，不过是定义ReturnCallback template.mandatory：定义消息路由失败时的策略。true，则调 …</content></entry><entry><title>多级缓存</title><url>/post/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>多级缓存</tag></tags><content type="html"> 🙌 多级缓存
+1 2 3 4 5 6 spring: rabbitmq: publisher-confirm-type: correlated # 生产者确认类型 publisher-returns: …</content></entry><entry><title>多级缓存</title><url>/post/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>多级缓存</tag></tags><content type="html"> 🙌 多级缓存
 本节中介绍一种亿级流量的缓存方案，也就是多级缓存，将请求分为多种类型，然后一步一步的进行缓存，经过多级缓存都没找到数据最终才会到达数据库中
 1.什么是多级缓存
 传统的缓存策略一般是请求到达Tomcat后，先查询Redis，如果未命中则查询数据库，如图：
@@ -84,14 +88,13 @@ TCP/IP的层数
 建立连接之后将数据进行封装，加上TCP头部（端口和序列号），进一步交给ip层
 ip层将数据封装成网络包，加上IP头部（源IP和目标IP），可能进行分片
 之后对数据包加上MAC头部，主要加上MAC地址信息，包括发送方和接收方，此时需要用到ARP协议，填入MAC地址就知道数据先发送给哪个设备
-当客户端和服务器不在同一个子网中时，得到的MAC地址就是发送端所在子网的路由器MAC地址，在同一个子网时，此时MAC地址就是接收方的MAC地址
+当客户端和服务器不在同一个子网中时，得到的MAC地址就是发送端所在子网的路由器MAC地址，在同一个子网时，此时MAC地址就是接收方的MAC地址，反正是直连设备的mac地址
 数据封装好之后，经由发送方的网卡发送出去
 发送方网卡发送的消息先到达交换机，判断该消息从交换机哪个端口转发出去，这根据交换机中缓存的mac地址与端口的映射表
 找不到端口的映射，就发送给所有的端口（除了来时的端口）
 从端口出来到达路由器，路由器判断这个包自己需不需要转发（MAC地址是否一样）
 需要转发就去掉数据的MAC头信息，根据内部的IP头信息进行转发
-最终消息在网络上传输，这里根据ip地址进行转发，看接收方ip在哪个网段就转发给路由器的哪个端口
-都没有匹配的就转发给 …</content></entry><entry><title>分布式事务Seata</title><url>/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>分布式事务</tag><tag>Seata</tag></tags><content type="html"> 😝 分布式事务Seata
+最终消息在网络上传输，这里根据ip地址进行转发，看接收方ip在哪个网段就转发给路由器的哪 …</content></entry><entry><title>分布式事务Seata</title><url>/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>分布式事务</tag><tag>Seata</tag></tags><content type="html"> 😝 分布式事务Seata
 本节中我们介绍分布式事务的相关知识，并且引入Seata框架简单介绍其使用方法
 1.分布式事务问题
 1.1.本地事务
