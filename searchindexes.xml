@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>生成特殊数字的最少操作</title><url>/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 2844.生成特殊数字的最少操作
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>1509.三次操作后的最大值与最小值</title><url>/post/1509.%E4%B8%89%E6%AC%A1%E6%93%8D%E4%BD%9C%E5%90%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%E4%B8%8E%E6%9C%80%E5%B0%8F%E5%80%BC/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   🧀 1509.三次操作后的最大值与最小值
+给你一个数组 nums 。
+每次操作你可以选择 nums 中的任意一个元素并将它改成 任意值 。
+在 执行最多三次移动后 ，返回 nums 中最大值与最小值的最小差值。
+思路基本思想只能修改三个，必须找到一个目标值修改，修改之后要求最值之间的差最小，第一想法就是排序，然后要么将最大值改小，要么把最小值改大，这样可以使得最值之间的差变小
+修改时，需要注意要把尽可能小和尽可能大的数进行修改，所以有以下四种情况：
+修改3小0大 修改2小1大 修改1小2大 修改0小3大 修改之后分别对应的最值为：
+1 2 3 4 5 //nums已经拍过序 int res1=nums[nums.length-1]-nums[3]; int res2=nums[nums.length-2]-nums[2]; int res3=nums[nums.length-3]-nums[1]; int res4=nums[nums.length-4]-nums[0]; 如果看不明白，可以把修改看成删除，因为修改之后的元素变成某一个目标元素，此时最值变到了新的位置，例如删除1小2大之后，最小值变到了nums[1]的位置，最大值变到了nums[nums.length-3]的位置，此时直接计算二者的差即可，最后返回四种情况的最小值
+执行流程将数组排序 计算四种情况的结果 返回四种结果中的最小值 代码根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 class Solution { //要么大变小，要么小变大（考虑的不全面） //变化其实可以理解为删除，所以： //要么删除3小0大 //要么删除2小1大 //要么删除1小2大 //要么删除0小3大 public int minDifference(int[] nums) { //少于5个数时，三步之内一定可以变成全相同的数 if(nums.length&lt;5) return 0; //要么大变小，要么小变大，这种思路很暴力 Arrays.sort(nums); int res1=nums[nums.length-1]-nums[3]; int res2=nums[nums.length-2]-nums[2]; int res3=nums[nums.length-3]-nums[1]; int res4=nums[nums.length-4]-nums[0]; //返回四种情况的最小值 int res=Integer.MAX_VALUE; res=res&gt;res1?res1:res; res=res&gt;res2?res2:res; res=res&gt;res3?res3:res; res=res&gt;res4?res4:res; return res; } } 总结主要是要有贪心的思想，修改的只能是最值，不然差距不可能变小，因为最终的结果是由当前的最值计算得到的
+  ]]></content></entry><entry><title>系统面经</title><url>/post/%E7%B3%BB%E7%BB%9F%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>面经</tag><tag>操作系统</tag></tags><content type="html"> 🥽 系统面经
+本文中主要介绍一些操作系统相关的面试题，资料来源于
+小林coding
+，文章长期更新
+冯诺依曼模型
+运算器，控制器，存储器，输入输出设备
+内存
+基本存储单位为字节，1字节等于8位 内存地址从0开始编号，类似于数组，读写任何一个数据速度一样 中央处理器CPU
+32位cpu一次最多可以处理四个字节（32位），能计算的最大整数就是2^32=4,294,967,296 64位cpu一次最多可以处理8个字节（64位） 一个地址单元就有8bit，所以64位一次只能处理一个地址单元，32位两次才能处理一个 32位cpu能表示的最大值为2^32，也就是超过4GB的数据就无法表示了，64位机器只用了48位来表示虚拟内存的大小，也就是258T cpu内部的控制单元：负责控制cpu工作 逻辑运算单元负责运算 寄存器分为几种： 通用寄存器：存放需要运算的数据 程序计数器：存储下一条指令的地址 指令寄存器：保存正在执行的指令 总线
+用于CPU和其他设备之间的通信
+地址总线：指定CPU要操作的内存地址 数据总线：读写内存中的数据 控制总线：发送和接受各种信号，cpu收到信号之后进行响应，例如中断，设备复位 线路位宽和CPU位宽
+一个地址单元大小为8bit，也就是1Byte
+电压高表示1，电压低表示0，所以可以通过操作电压传输数据
+线路位宽表示地址总线能访问的内存地址范围大小，1条总线能表示0,1，两条总线能表示00,01,10,11个地址,32条总线能标识2^32=4G大小范围，一个地址单元大小为8bit，也就是能访问4GB数据
+这里只是说能访问的范围是4GB，但是32位机器每次只能处理4B，64位机器每次只能处理8B
+CPU位宽表示能处理的数据范围大小，CPU位宽最好不要小于线路位宽，否则读取到了这么大的数据cpu也无法一次处理，并且32位CPU只能处理4GB范围内的数据，超过范围的无法表示这么大的地址
+程序执行的基本过程
+程序执行时需要翻译成汇编代码，最后变成机器码
+数据和指令分开存放，数据存放到数据段，指令存放到正文段
+程序被翻译成汇编代码，最终变成机器码变成指令 CPU根据程序计数器的内存地址拿到将要执行的指令 将拿到的指令放入指令寄存器中 根据指令类型将指令交给不同的单元执行，例如计算指令交给运算器 程序计数器根据指令的长度自增，便于拿到后面的指令 上面的过程会不断循 …</content></entry><entry><title>生成特殊数字的最少操作</title><url>/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 2844.生成特殊数字的最少操作
 给你一个下标从 0 开始的字符串 num ，表示一个非负整数。
 在一次操作中，您可以选择 num 的任意一位数字并将其删除。请注意，如果你删除 num 中的所有数字，则 num 变为 0。
 返回最少需要多少次操作可以使 num 变成特殊数字。
