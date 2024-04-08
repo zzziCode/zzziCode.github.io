@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>2385.感染二叉树需要的总时间</title><url>/post/2385.%E6%84%9F%E6%9F%93%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9C%80%E8%A6%81%E7%9A%84%E6%80%BB%E6%97%B6%E9%97%B4/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ☣ 2385.感染二叉树需要的总时间
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>埃氏筛和线性筛</title><url>/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</url><categories><category>学习笔记</category></categories><tags><tag>质数</tag><tag>埃氏筛</tag><tag>线性筛</tag></tags><content type="html"><![CDATA[   🍇埃氏筛和线性筛
+本文中介绍两种快速求出给定范围内所有质数的快速办法，不用再逐个判断，大大缩短了质数的求解时间，可以用来解决很多算法问题
+埃氏筛埃氏筛的 核心就是从小开始，遇到一个质数就向后去掉所有当前质数的倍数，走到当前数字时，如果当前数字没有被去掉，说明比当前数字小的数中不存在当前数的因子，也就是当前数是质数
+为了判断某一个数是否被去掉，可以使用一个辅助数组flag来记录，当前数X是质数时需要划掉他的倍数，我们可以从x^2开始遍历，每次都X步，因为x到x^2之间的数如果其不是质数，那么一定会被小于x的质数划掉，这里优化一小部分，得到的代码为：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); //去掉当前质数的所有倍数 for (int j = i * i; j &lt;= right; j += i) { flag[j] = false; } } } } 从2开始，直到达到给定的范围，此时一定可以求出所有的质数
+如果给定的范围right过大，那么就将去除倍数的起点变成i+i，防止平方数过大越界
+线性筛（欧拉筛）​	线性筛的思想是为了改进埃氏筛中一个数被划掉多次的情况，为了划掉所有不是质数的数，我们在每个数的基础上乘以小于这个数，并且不是这个数的因子的质数，这样划掉的数可以保证是被它的最小质因子划掉
+​	例如当前数为4，比当前数小的质数由2和3，由于2是4的因子，所以只能划掉2*4=8，不能划掉3*4=12，因为这个12会被6划掉，不能划掉多次
+​	相当于我们在划掉所有不符合要求的数时，要保证当前数只能被自己的最小质因子划掉，也就是12不能被3划掉，只能被2划掉，为了找到这个最小质因子，就要保证当前数的因子出现后，就不能进行划分，最后得到的代码为：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); } //针对当前数来说，只划掉能划掉的数 for (int j = 0; j &lt; prime.size(); ++j) { if (i * prime.get(j) &gt; right) break; //划掉当前数的倍数 flag[i * prime.get(j)] = false; //出现了最小质因子 if (i % prime.get(j) == 0) break; } } } 如果无法理解线性筛，埃氏筛也能解决大部分问题，因为埃氏筛的思想就是一旦出现一个质数，就将当前范围内质数的所有倍数全部划掉，线性筛只是埃氏筛的优化版，基本原理还是划掉不是质数的数
+  ]]></content></entry><entry><title>2385.感染二叉树需要的总时间</title><url>/post/2385.%E6%84%9F%E6%9F%93%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9C%80%E8%A6%81%E7%9A%84%E6%80%BB%E6%97%B6%E9%97%B4/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ☣ 2385.感染二叉树需要的总时间
 给你一棵二叉树的根节点 root ，二叉树中节点的值 互不相同 。另给你一个整数 start 。在第 0 分钟，感染 将会从值为 start 的节点开始爆发。
 每分钟，如果节点满足以下全部条件，就会被感染：
 节点此前还没有感染。 节点与一个已感染节点相邻。 返回感染整棵树需要的分钟数*。*
