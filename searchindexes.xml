@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>埃氏筛和线性筛</title><url>/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</url><categories><category>学习笔记</category></categories><tags><tag>质数</tag><tag>埃氏筛</tag><tag>线性筛</tag></tags><content type="html"><![CDATA[   🍇埃氏筛和线性筛
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>372.超级次方</title><url>/post/372.%E8%B6%85%E7%BA%A7%E6%AC%A1%E6%96%B9/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍈 372.超级次方
+你的任务是计算 a^b 对 1337 取模，a 是一个正整数，b 是一个非常大的正整数且会以数组形式给出。
+思路
+基本思想
+题目的意思很好理解，就是计算两个数的幂，但是不管是底数还是指数都有可能很大，如果直接计算的话，必定会超过数据范围从而溢出，所以需要将数字进行拆分，然后在每一步都余上题目所说的1337
+以7^1569次方举例，化简成公式为： $$ 7^{1569}=7^{1000}*7^{500}*7^{60}*7^{9} $$ 根据题目中给出的要求，质数按照数组给出，所以我们每次取数组最末尾的元素计算快速幂，每次这样每次指数的大小会被控制到10以内，底数在计算过程中余上1337也不会很大，所以就不会越界
+当计算完7^9之后，剩下的7^1560可以分为： $$ 7^{1560}=(7^{10})^{156} $$ 也就是去掉1560后面的0，将变大即可，底数变大的过程中也需要余上1337，这样指数和底数都会慢慢的分解，不会一下变得很大，从而不会超过数据范围
+执行流程
+从尾部遍历b，每次取出一个最低位的指数计算快速幂 计算完快速幂之后，将底数变大，计算底数的10次幂，目的是为了将1560形式的指数分解为156 针对156这样的指数继续选择一个最低位的计算快速幂，不停地将快速幂的答案加到结果中 剩下的150继续拆分成15*10，将底数变大 计算每一个快速幂的过程中都要余上1337防止越界 代码
+根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 class Solution { public int superPow(int a, int[] b) { // 针对每一个数位 int res = 1; int x = a % 1337; for (int i = b.length - 1; i &amp;gt;= 0; --i) { res = (res * myPow(x, b[i])) % 1337; //将指数1560变成156，然后继续取低位 x = myPow(x, 10) % 1337;//底数变大 } return res; } //快速幂的计算方式 public int myPow(int x, int pow) { int res = 1; while (pow != 0) { if (pow % 2 != 0) { res = (res * x) % 1337; } x *= x; x %= 1337; pow /= 2; } return res; } } 总结
+主要是要学会将很大的指数慢慢变小，一边变小的同时也不会超出数据范围，核心店就是将1569拆成1000+500+60+9，之后拆出9之后，剩下的1560将底数计算10次幂，指数变成156之后继续拆成100+50+6，以此类推，不直接利用很大的指数计算幂</content></entry><entry><title>埃氏筛和线性筛</title><url>/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</url><categories><category>学习笔记</category></categories><tags><tag>质数</tag><tag>埃氏筛</tag><tag>线性筛</tag></tags><content type="html"><![CDATA[   🍇埃氏筛和线性筛
 本文中介绍两种快速求出给定范围内所有质数的快速办法，不用再逐个判断，大大缩短了质数的求解时间，可以用来解决很多算法问题
 埃氏筛埃氏筛的 核心就是从小开始，遇到一个质数就向后去掉所有当前质数的倍数，走到当前数字时，如果当前数字没有被去掉，说明比当前数字小的数中不存在当前数的因子，也就是当前数是质数
 为了判断某一个数是否被去掉，可以使用一个辅助数组flag来记录，当前数X是质数时需要划掉他的倍数，我们可以从x^2开始遍历，每次都X步，因为x到x^2之间的数如果其不是质数，那么一定会被小于x的质数划掉，这里优化一小部分，得到的代码为：
