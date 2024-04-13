@@ -341,14 +341,12 @@ ioc的实现机制
 工厂设计模式（getBean获取bean对象时）+反射（bean的实例化时利用传递的类名实例化）
 IOC和DI的区别
 IOC是控制反转，控制了对象的创建和使用，这是一种设计思想。DI是依赖注入，当我们需要一个bean对象时，必须要spring注入才能使用，或者说将一个对象所依赖的的其他对象自动注入到这个对象中，也就是DI是IOC的一种实现方式，二者并不能等同
-紧耦合和松耦合
+依赖注入的方式
+属性注入，也就是使用@AutoWired或者@Resource直接注入属性对象， 前者先byType后byName，一个类型存在多个bean就需要使用@quelifier或者@primary指定先注入谁，并且autowired还可以作用在构造方法上用来推断构造函数 后者先byName再byType，指定name之后只按照name注入 spring中如何推断构造函数
+有默认先用默认 没有默认就使用@Autowired指定的构造函数 两者都没有就按照构造函数的参数类型使用 都没有就报错 紧耦合和松耦合
 紧耦合：类之间高度依赖，当依赖关系过多时，一个类修改，那么所有类都要跟着修改
 松耦合：类之间的依赖关系较低，一个类修改时其余类可以不变，类的职责变得单一
-例如多个service层依赖mapper层，紧耦合就是直接在service中new出这个maper的对象，当后期想要修改mapper时，每个类都需要改变，但是利用spring就可以实现松耦合，我们只需要将依赖的mapper对象进行改变即可，service中自动注入新的mapper对象
-beanFactory的作用
-用来生产bean，通过调用getBean传入一个标识来生产，内部有多种形式的getBean方法来生产bean
-beanDefinition的作用
-保存了bean的定义信息，或者说保存了bean在生产前的配置信息。后续在生产bean时就会以来这些信息来创 …</content></entry><entry><title>1887.使数组元素相等的减少操作次数</title><url>/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 1887.使数组元素相等的减少操作次数
+例如多个service层依赖mapper层，紧耦合就是直接 …</content></entry><entry><title>1887.使数组元素相等的减少操作次数</title><url>/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 1887.使数组元素相等的减少操作次数
 给你一个整数数组 nums ，你的目标是令 nums 中的所有元素相等。完成一次减少操作需要遵照下面的几个步骤：
 找出 nums 中的 最大 值。记这个值为 largest 并取其下标 i （下标从 0 开始计数）。如果有多个元素都是最大值，则取最小的 i 。 找出 nums 中的 下一个最大 值，这个值 严格小于 largest ，记为 nextLargest 。 将 nums[i] 减少到 nextLargest 。 返回使 nums 中的所有元素相等的操作次数。
 思路基本思想读完题目之后，发现数组的变化过程是一个分阶梯一步一步累加得到的，对于数组整体而言，是从最大值变为倒数第二的最大值，然后从倒数第二变成倒数第三，当所有的数都变成最小的数时就可以得到最终的答案，在这个变化过程中，有的数经历了几个阶梯的变化，但是这是有规律的
