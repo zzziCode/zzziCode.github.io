@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>372.超级次方</title><url>/post/372.%E8%B6%85%E7%BA%A7%E6%AC%A1%E6%96%B9/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍈 372.超级次方
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>873.最长的斐波那契子序列的长度</title><url>/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍉 873.最长的斐波那契子序列的长度
+如果序列 X_1, X_2, ..., X_n 满足下列条件，就说它是 斐波那契式 的：
+n &amp;amp;gt;= 3 对于所有 i + 2 &amp;amp;lt;= n，都有 X_i + X_{i+1} = X_{i+2} 给定一个严格递增的正整数数组形成序列 arr ，找到 arr 中最长的斐波那契式的子序列的长度。如果一个不存在，返回 0 。
+（回想一下，子序列是从原序列 arr 中派生出来的，它从 arr 中删掉任意数量的元素（也可以不删），而不改变其余元素的顺序。例如， [3, 5, 8] 是 [3, 4, 5, 6, 7, 8] 的一个子序列）
+思路
+基本思想
+​ 看到这种求子序列的题目，第一想法是按照滑动窗口进行处理，但是题目描述序列中可以删除一些元素，也就是不是连续序列，所以此时滑动窗口这种求连续序列的方法就无法使用，进而使用动态规划来做；
+​ 动态规划最重要的就是确定dp数组的含义，本题中为了找到一个最长的斐波那契数列，需要不断进行累加，也就是不断在原有斐波那契数列末尾arr[k]的基础上增加两个元素arr[i]和arr[j]，使得这三者符合斐波那契数列的特点，所以dp[i][j]的含义就是以arr[i]和arr[j]结尾的最长斐波那契数列的长度；
+​ 当前元素为arr[i]，此时arr[j]是从i开始向后任意找一个元素，然后arr[k]代表从0~i-1中任意找一个元素，符合arr[k]+arr[i]=arr[j]即可，相当于一个三层循环，每次针对不同的arr[i]和arr[j]组合都要重新寻找arr[k]，观察到题目中描述元素严格递增，说明没有重复元素，所以我们可以保存元素及其下标的对应关系
+​ 一旦有了arr[i]和arr[j]的组合，使用arr[j]-arr[j]就可以得到我们要找的arr[k]，再判断这个元素的下标是不是在0~i-1中即可
+执行流程
+初始化dp数组，所有的元素值都为2，因为一旦找到一个最小的斐波那契数列，这个长度为3 针对不同位置的arr[i]，arr[j]元素的下标从i+1开始 使用arr[j]-arr[j]得到要找的arr[k]，判断其下标是否符合要求 不停地向后更新dp 返回结果 代码
+根据以上分析，得出以下代码：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 …</content></entry><entry><title>372.超级次方</title><url>/post/372.%E8%B6%85%E7%BA%A7%E6%AC%A1%E6%96%B9/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍈 372.超级次方
 你的任务是计算 a^b 对 1337 取模，a 是一个正整数，b 是一个非常大的正整数且会以数组形式给出。
 思路
 基本思想
@@ -342,11 +355,9 @@ ioc的实现机制
 IOC和DI的区别
 IOC是控制反转，控制了对象的创建和使用，这是一种设计思想。DI是依赖注入，当我们需要一个bean对象时，必须要spring注入才能使用，或者说将一个对象所依赖的的其他对象自动注入到这个对象中，也就是DI是IOC的一种实现方式，二者并不能等同
 依赖注入的方式
-属性注入，也就是使用@AutoWired或者@Resource直接注入属性对象， 前者先byType后byName，一个类型存在多个bean就需要使用@quelifier或者@primary指定先注入谁，并且autowired还可以作用在构造方法上用来推断构造函数 后者先byName再byType，指定name之后只按照name注入 spring中如何推断构造函数
-有默认先用默认 没有默认就使用@Autowired指定的构造函数 两者都没有就按照构造函数的参数类型使用 都没有就报错 紧耦合和松耦合
-紧耦合：类之间高度依赖，当依赖关系过多时，一个类修改，那么所有类都要跟着修改
-松耦合：类之间的依赖关系较低，一个类修改时其余类可以不变，类的职责变得单一
-例如多个service层依赖mapper层，紧耦合就是直接 …</content></entry><entry><title>1887.使数组元素相等的减少操作次数</title><url>/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 1887.使数组元素相等的减少操作次数
+属性注入，也就是使用@AutoWired或者@Resource直接注入属性对象， 前者先byType后byName，一个类型存在多个bean就需要使用@quelifier或者@primary指定先注入谁，并且autowired还可以作用在构造方法上用来推断构造函数 后者先byName再byType，指定name之后只按照name注入 setter注入，给每个属性编写对应的setter方法，符合单一职责，但是在setter方法中可以随时修改，因为setter可能被调用多次 构造器注入，只可能被修改一次，可以注入final修饰的对象，在不支持ioc的框架中也可以使用 spring中如何推断构造函数
+只有一个就只能用这个，根据形参列表区IOC容器中找到对应的bean，有一个包含两种情况：
+只有一个默认的无参 有一个有参构造函 …</content></entry><entry><title>1887.使数组元素相等的减少操作次数</title><url>/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   😃 1887.使数组元素相等的减少操作次数
 给你一个整数数组 nums ，你的目标是令 nums 中的所有元素相等。完成一次减少操作需要遵照下面的几个步骤：
 找出 nums 中的 最大 值。记这个值为 largest 并取其下标 i （下标从 0 开始计数）。如果有多个元素都是最大值，则取最小的 i 。 找出 nums 中的 下一个最大 值，这个值 严格小于 largest ，记为 nextLargest 。 将 nums[i] 减少到 nextLargest 。 返回使 nums 中的所有元素相等的操作次数。
 思路基本思想读完题目之后，发现数组的变化过程是一个分阶梯一步一步累加得到的，对于数组整体而言，是从最大值变为倒数第二的最大值，然后从倒数第二变成倒数第三，当所有的数都变成最小的数时就可以得到最终的答案，在这个变化过程中，有的数经历了几个阶梯的变化，但是这是有规律的
