@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>873.最长的斐波那契子序列的长度</title><url>/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍉 873.最长的斐波那契子序列的长度
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>滑动窗口</title><url>/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</url><categories><category>学习笔记</category></categories><tags><tag>滑动窗口</tag></tags><content type="html"><![CDATA[   滑动窗口
+根据灵神的滑动窗口题单总结的滑动窗口模版
+定长滑动窗口定长滑动窗口的精髓是固定k
+所谓的定长，指的是窗口的长度不变，题目中一般会给出长度为K的限制，此时只需要一个单指针right就可以固定住窗口大小，窗口滑动时，左边窗口的位置可以用right-k来计算，不符合要求的元素扔掉即可，模版为：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 class Solution { //一般题目会给定数组或者字符串，以及窗口的固定大小 public void staticWindow(int[] arr, int k) { int right=0; while(right&amp;lt;arr.length){ //在这里累加或者统计窗口中符合条件元素的个数 if(arr[right++] 满足条件) //统计 //形成了k大小的窗口 if(right&amp;gt;=k){ //针对当前窗口做业务 //窗口滑动，删除左边的元素 sum-=arr[right-k]; } } //返回结果 } } 变长滑动窗口求最大最小求最大和最小在不同的地方更新，最小在内部，最大在外部
+变长滑动窗口的精髓是找到边界条件
+变长滑动窗口只有两个操作，并且需要两个指针，因为此时窗口大小是变化的：
+变长，只要没触发边界条件就一直变长 缩短：一旦触发边界条件，就开始缩短 根据这种分析，得到一个滑动窗口的模版：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 class Solution { public int dynamicWidow(int[] nums) { //变长窗口必须两个指针 int right = 0, left = 0; while (right &amp;lt; nums.length) { //不断滑动，有可能是累加窗口中的元素值，也有可能是统计元素出现次数 while(left&amp;lt;=right&amp;amp;&amp;amp;false){//这里的left&amp;lt;=right看情况添加 //求最小值在这里尝试更新结果 ++left; } //求最大值在这里尝试更新结果 //滑动 ++right; } // 最后一个窗口别漏掉 res = Math.max(res, right - left); …  ]]></content></entry><entry><title>Java面经</title><url>/post/java%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>面经</tag><tag>java</tag></tags><content type="html"> java面经
+什么是JVM
+是java虚拟机，有了它java才有了跨平台的特性，他屏蔽了底层具体平台的差异，使得java可以跨平台 java编译成统一的.class文件，然后交给不同平台的虚拟机，解释成不同平台的机器指令完成跨平台 任何可以通过java编译的语言都可以放到jvm上解释执行，例如Groovy，Kotlin JDK，JRE，JVM的关系
+JDK是java的开发包，内部包含JRE运行时环境 JRE是java的运行时环境，内部包含JVM JVM编译java语言的字节码文件，屏蔽平台的差异性，使得java语言可以跨平台 JVM的结构
+类加载器：主要负责将.class文件加载到内存中，主要有四种： 启动类加载器：用来加载java核心类库，无法被java程序直接引用 扩展类加载器：加载java的扩展库，主要是从jvm提供的扩展库中加载java类 系统类加载器：通过系统类路径加载本地化的文件，java应用的类都是由这个加载器加载的 用户自定义类加载器：继承一个类实现自定义的类加载器 运行时数据区：执行java代码时，需要在内存中处理各种类型的数据，这些内存区域主要分为： 方法区 堆 栈 程序计数器 本地方法栈 执行引擎：包含一个虚拟处理器，即时编译器（JIT），垃圾回收器（GC），用来执行字节码文件 类加载器ClassLoader的工作过程
+加载：通过类的全限定名获取类的class文件的二进制字节流，为其创建一个class对象 链接： 验证：确保被加载的类的正确性，比如语法，语义等 准备：给类中的静态变量分配内存并加上默认值 解析：将类的符号引用转换成直接引用</content></entry><entry><title>873.最长的斐波那契子序列的长度</title><url>/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"> 🍉 873.最长的斐波那契子序列的长度
 如果序列 X_1, X_2, ..., X_n 满足下列条件，就说它是 斐波那契式 的：
 n &amp;amp;gt;= 3 对于所有 i + 2 &amp;amp;lt;= n，都有 X_i + X_{i+1} = X_{i+2} 给定一个严格递增的正整数数组形成序列 arr ，找到 arr 中最长的斐波那契式的子序列的长度。如果一个不存在，返回 0 。
 （回想一下，子序列是从原序列 arr 中派生出来的，它从 arr 中删掉任意数量的元素（也可以不删），而不改变其余元素的顺序。例如， [3, 5, 8] 是 [3, 4, 5, 6, 7, 8] 的一个子序列）
@@ -331,17 +344,17 @@ sql语句执行的流程
 解析SQL：主要是词法分析和语法分析，分析成功就会得到一个SQL语法树
 执行SQL：
 预处理SQL：替换*，判断字段和表是否存在
-优化SQL：使得SQL执行的效率变高，例如存在主键索引（id）和普通索引（其余字段加索引）时，会判断使用哪个索引的效率更高
+优化SQL：使得SQL执行的效率变高，例如存在主键索引（id）和普通索引（其余字段加索引）时，会判断使用哪个索引的效率更高，需要的列就是id，此时利用二级索引更快，因为二级索引的叶子结点保存的就是id
 执行SQL：与存储引擎交互查询数据
 主键索引查询：直接利用主键索引查询
 全表扫描：全表扫描一遍
 索引下推：将索引的判断工作交给存储引擎端，减少回表操作，这里涉及到一个联合索引的操作，由于存在最左匹配原则，当出现范围查询时，联合索引的范围查询可以使用索引，但是剩下的字段无法使用索引（因为局部无序），所以剩下的字段需要进行回表，将存储引擎查询到的数据在服务端再进行筛选，索引下推可以使得这个筛选工作在存储引擎端完成，从而减小回表操作，提高效率，举例：
 select * from t_table where a &amp;amp;gt; 1 and b = 2，联合索引（a, b）
-此时联合索引会先按照a排序，然后存储引擎找到所有a&amp;amp;gt;1的数据的id，在这些数据里，b没有进行排序，所以联合索引失效，这些数据需要进行回表进一步筛选，索引下推可以将筛选的工作交给存储引擎端，减小数据传输的事件
+此时联合索引会先按照a排序，然后存储引擎找到所有a&amp;amp;gt;1的数据的id，在这些数据里，b没有进行排序，所以联合索引失效，这些数据需要进行回表进一步筛选，索引下推可以将筛选的工作交给存储引擎端，减小数据传输的时间
 mysql一行记录如何存储
 数据存储由行，页，区，段组成，每一行数据分为额外信息和真实数据，额外信息包含变长字段的长度以及NULL值列表（二者可能不存在），真实数据包含三个隐藏字段（隐藏自增id，事务id，上一个版本指针）以及真实值
 一旦建立数据库中的一张表，那么就会在/var/lib/mysql/ 中建立一个对应的数据库，内部新增三个文件：
-1 2 3 db.opt 表名.frm 表名.ibd db.opt：存储数据库的默认字符集和校验规则 表名.frm ：存储表结构信息 表名.ibd：存储表中的数据，默认存储在这个独占表空间文 …</content></entry><entry><title>Spring面经</title><url>/post/spring%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>spring</tag><tag>面经</tag></tags><content type="html"> 🌸 spring面经
+1 2 3 db.opt 表名.frm 表名.ibd db.opt：存储数据库的默认字符集和校验规则 表 …</content></entry><entry><title>Spring面经</title><url>/post/spring%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>spring</tag><tag>面经</tag></tags><content type="html"> 🌸 spring面经
 本文总结一些常见的spring面试题并自己做出总结，文章持续更新
 spring是什么
 spring通常指的是spring framework，是一个IOC和AOP的容器框架，从广义来说指的是一个生态，可以构建java应用所需要的基础框架
