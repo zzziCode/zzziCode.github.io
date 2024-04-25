@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>滑动窗口 on zzzi的小站</title><link>https://zzzicode.github.io/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><description>Recent content in 滑动窗口 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 12:55:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/rss.xml" rel="self" type="application/rss+xml"/><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
-&lt;p>滑动窗口&lt;/p>
+&lt;p>🚍 滑动窗口&lt;/p>
 &lt;/blockquote>
-&lt;p>根据灵神的滑动窗口题单总结的滑动窗口模版&lt;/p></description></item></channel></rss>
+&lt;p>根据灵神的滑动窗口
+&lt;a href="https://leetcode.cn/circle/discuss/0viNMK/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+题单
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度&lt;/p></description></item></channel></rss>

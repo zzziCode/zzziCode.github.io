@@ -1,7 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 12:55:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
-&lt;p>滑动窗口&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zzzi的小站</title><link>https://zzzicode.github.io/</link><description>Recent content on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Apr 2024 14:26:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>开始</title><link>https://zzzicode.github.io/post/external-link/</link><pubDate>Sun, 21 May 2023 15:59:41 +0800</pubDate><guid>https://zzzicode.github.io/post/external-link/</guid><description>🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</description></item><item><title>二分查找</title><link>https://zzzicode.github.io/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link><pubDate>Thu, 25 Apr 2024 14:26:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid><description>&lt;blockquote>
+&lt;p>🕧 二分查找&lt;/p>
 &lt;/blockquote>
-&lt;p>根据灵神的滑动窗口题单总结的滑动窗口模版&lt;/p></description></item><item><title>Java面经</title><link>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 17 Apr 2024 22:33:00 +0800</pubDate><guid>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;p>根据灵神的二分查找
+&lt;a href="https://leetcode.cn/circle/discuss/SqopEo/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+题单
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>以及
+&lt;a href="https://www.bilibili.com/video/BV1AP41137w7" title="视频教程" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+视频教程
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>&lt;/p></description></item><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
+&lt;p>🚍 滑动窗口&lt;/p>
+&lt;/blockquote>
+&lt;p>根据灵神的滑动窗口
+&lt;a href="https://leetcode.cn/circle/discuss/0viNMK/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+题单
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度&lt;/p></description></item><item><title>Java面经</title><link>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 17 Apr 2024 22:33:00 +0800</pubDate><guid>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
 &lt;p>java面经&lt;/p>
 &lt;/blockquote></description></item><item><title>873.最长的斐波那契子序列的长度</title><link>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</link><pubDate>Wed, 17 Apr 2024 16:04:38 +0800</pubDate><guid>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</guid><description>&lt;blockquote>
 &lt;p>🍉 873.最长的斐波那契子序列的长度&lt;/p>

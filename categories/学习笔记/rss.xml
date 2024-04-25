@@ -1,7 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习笔记 on zzzi的小站</title><link>https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><description>Recent content in 学习笔记 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 12:55:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
-&lt;p>滑动窗口&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习笔记 on zzzi的小站</title><link>https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><description>Recent content in 学习笔记 on zzzi的小站</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Apr 2024 14:26:49 +0800</lastBuildDate><atom:link href="https://zzzicode.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>二分查找</title><link>https://zzzicode.github.io/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link><pubDate>Thu, 25 Apr 2024 14:26:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid><description>&lt;blockquote>
+&lt;p>🕧 二分查找&lt;/p>
 &lt;/blockquote>
-&lt;p>根据灵神的滑动窗口题单总结的滑动窗口模版&lt;/p></description></item><item><title>埃氏筛和线性筛</title><link>https://zzzicode.github.io/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</link><pubDate>Mon, 08 Apr 2024 19:30:37 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</guid><description>&lt;blockquote>
+&lt;p>根据灵神的二分查找
+&lt;a href="https://leetcode.cn/circle/discuss/SqopEo/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+题单
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>以及
+&lt;a href="https://www.bilibili.com/video/BV1AP41137w7" title="视频教程" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+视频教程
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>&lt;/p></description></item><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
+&lt;p>🚍 滑动窗口&lt;/p>
+&lt;/blockquote>
+&lt;p>根据灵神的滑动窗口
+&lt;a href="https://leetcode.cn/circle/discuss/0viNMK/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+题单
+&lt;i class="fa fa-external-link-alt">&lt;/i>
+&lt;/a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度&lt;/p></description></item><item><title>埃氏筛和线性筛</title><link>https://zzzicode.github.io/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</link><pubDate>Mon, 08 Apr 2024 19:30:37 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</guid><description>&lt;blockquote>
 &lt;p>🍇埃氏筛和线性筛&lt;/p>
 &lt;/blockquote>
 &lt;p>本文中介绍两种快速求出给定范围内所有质数的快速办法，不用再逐个判断，大大缩短了质数的求解时间，可以用来解决很多算法问题&lt;/p></description></item><item><title>异步通信MQ</title><link>https://zzzicode.github.io/post/%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1mq/</link><pubDate>Sat, 16 Mar 2024 12:37:17 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1mq/</guid><description>&lt;blockquote>
