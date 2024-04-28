@@ -9,4 +9,4 @@
 &lt;a href="https://www.bilibili.com/video/BV1AP41137w7" title="视频教程" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 视频教程
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式去找大于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>，之后确定上下界就可以完美利用二分模版解决问题&lt;/p></description></item></channel></rss>

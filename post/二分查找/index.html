@@ -17,7 +17,7 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text title=分类于>分类于：</span>
 <span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0 itemprop=url rel=index><span itemprop=name>学习笔记</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i></span>
 <span class=post-meta-item-text>字数：</span>
-<span>1258</span></span>
+<span>1335</span></span>
 <span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i></span>
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🕧 二分查找</p></blockquote><p>根据灵神的二分查找
@@ -26,8 +26,8 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 </a>以及
 <a href=https://www.bilibili.com/video/BV1AP41137w7 title=视频教程 rel="noopener external nofollow noreferrer" target=_blank class=exturl>视频教程
 <i class="fa fa-external-link-alt"></i>
-</a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式于等于<code>target</code>的元素位置做了总结，并针对<code>>，>=，&lt;，&lt;=</code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到<code>target</code></p><h2 id=模版>模版
-<a class=header-anchor href=#%e6%a8%a1%e7%89%88></a></h2><p>二分查找的模板适合用在查找与某一个给定元素存在一定关系的元素位置，并且给定的元素是有序的，或者元素排序不影响结果，此时可以考虑用二分查找</p><h3 id=闭区间推荐>闭区间（推荐）
+</a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式去找大于等于<code>target</code>的元素位置做了总结，并针对<code>>，>=，&lt;，&lt;=</code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到<code>target</code>，之后确定上下界就可以完美利用二分模版解决问题</p><h2 id=模版>模版
+<a class=header-anchor href=#%e6%a8%a1%e7%89%88></a></h2><p>二分查找的模板适合用在查找与某一个给定元素存在一定关系的元素位置，并且给定的元素是有序的，或者元素排序不影响结果，此时可以考虑用二分查找，核心点需要确定循环不变量以及上下界，当某一个边界无法确定时，可以使用开区间，都可以确定时，使用闭区间</p><h3 id=闭区间推荐>闭区间（推荐）
 <a class=header-anchor href=#%e9%97%ad%e5%8c%ba%e9%97%b4%e6%8e%a8%e8%8d%90></a></h3><ol><li>初始化：<code>left</code>和<code>right</code>需要初始化为<code>0</code>和<code>len-1</code></li><li>循环条件：区间内没有元素的情况是<code>left>right</code>，所以循环条件为<code>left&lt;=right</code></li><li>结果位置：结束循环时，<code>left</code>和<code>right</code>的位置为：<code>[right,left]</code>，所以结果位置为<code>left</code>或者<code>right+1</code></li></ol><blockquote><p>模板如下：</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3

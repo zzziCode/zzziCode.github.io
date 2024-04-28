@@ -9,7 +9,7 @@
 &lt;a href="https://www.bilibili.com/video/BV1AP41137w7" title="视频教程" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 视频教程
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>&lt;/p></description></item><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
+&lt;/a>总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式去找大于等于&lt;code>target&lt;/code>的元素位置做了总结，并针对&lt;code>&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=&lt;/code>四种关系做了转换，核心点在于找到循环不变量，可以理解为找到&lt;code>target&lt;/code>，之后确定上下界就可以完美利用二分模版解决问题&lt;/p></description></item><item><title>滑动窗口</title><link>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link><pubDate>Sat, 20 Apr 2024 12:55:49 +0800</pubDate><guid>https://zzzicode.github.io/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid><description>&lt;blockquote>
 &lt;p>🚍 滑动窗口&lt;/p>
 &lt;/blockquote>
 &lt;p>根据灵神的滑动窗口
