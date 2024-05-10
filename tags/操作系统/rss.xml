@@ -5,4 +5,4 @@
 &lt;a href="https://xiaolincoding.com/" title="小林coding" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 小林coding
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，文章长期更新&lt;/p></description></item></channel></rss>
+&lt;/a>，文章长期更新，先介绍了CPU和内存的相关知识，在这个基础上引入了运行在cpu和内存中的进程的相关知识，之后针对页面，进程，磁盘的调度算法做了研究，最后就是一些文件系统，输入输出设备的相关知识，相当于围绕了一个计算机来介绍内部的相关知识&lt;/p></description></item></channel></rss>

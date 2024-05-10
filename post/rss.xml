@@ -54,7 +54,7 @@
 &lt;a href="https://xiaolincoding.com/" title="小林coding" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 小林coding
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，文章长期更新&lt;/p></description></item><item><title>生成特殊数字的最少操作</title><link>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 16 Mar 2024 12:40:16 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
+&lt;/a>，文章长期更新，先介绍了CPU和内存的相关知识，在这个基础上引入了运行在cpu和内存中的进程的相关知识，之后针对页面，进程，磁盘的调度算法做了研究，最后就是一些文件系统，输入输出设备的相关知识，相当于围绕了一个计算机来介绍内部的相关知识&lt;/p></description></item><item><title>生成特殊数字的最少操作</title><link>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 16 Mar 2024 12:40:16 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
 &lt;p>😃 2844.生成特殊数字的最少操作&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个下标从 &lt;strong>0&lt;/strong> 开始的字符串 &lt;code>num&lt;/code> ，表示一个非负整数。&lt;/p>
