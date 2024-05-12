@@ -5,4 +5,5 @@
 &lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 图解系列
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p></description></item></channel></rss>
+&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p>
+&lt;p>主要分为索引，锁，事务，三大日志四个核心部分&lt;/p></description></item></channel></rss>

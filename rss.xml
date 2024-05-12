@@ -108,7 +108,8 @@
 &lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 图解系列
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
+&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p>
+&lt;p>主要分为数据类型及实现原理，持久化，集群，缓存三大问题&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
 &lt;p>🔍 elasticsearch学习笔记2&lt;/p>
 &lt;/blockquote>
 &lt;p>本节中主要介绍elasticsearch中的文档搜索功能，这也是它最重要的一个知识点&lt;/p></description></item><item><title>875.爱吃香蕉的珂珂</title><link>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</link><pubDate>Fri, 01 Mar 2024 19:36:57 +0800</pubDate><guid>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</guid><description>&lt;blockquote>
@@ -127,7 +128,8 @@
 &lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 图解系列
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p>
+&lt;p>主要分为索引，锁，事务，三大日志四个核心部分&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
 &lt;p>🌸 spring面经&lt;/p>
 &lt;/blockquote>
 &lt;p>本文总结一些常见的spring面试题并自己做出总结，文章持续更新&lt;/p></description></item><item><title>1887.使数组元素相等的减少操作次数</title><link>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</link><pubDate>Mon, 15 Jan 2024 20:47:56 +0800</pubDate><guid>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</guid><description>&lt;blockquote>

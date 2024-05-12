@@ -275,6 +275,7 @@ Avg：求平均值 Max：求最大值 Min：求最小值 Stats：同时求max、
 本文主要介绍一些redis的常见面试题，文章长期更新，面试答案参考小林coding的
 图解系列
 ，第一章面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充
+主要分为数据类型及实现原理，持久化，集群，缓存三大问题
 redis定义
 redis是一种基于内存的数据库，数据读写都在内存中完成，因此读写速度很快，常用于缓存，消息队列，分布式锁等场景
 redis和Memcached的区别
@@ -284,7 +285,7 @@ redis具备高性能：数据经过redis缓存在内存中，访问速度会大�
 redis的数据类型
 这里指的主要是redis中key-value中value的数据类型，key的数据类型始终是string
 String：可存储字符串，整数，浮点数，常用来缓存对象（json，按字段分别缓存），计数（因为可存储整数），和一些共享信息（分布式锁） Hash：键值对形式的散列表，常用来缓存对象，一个哈希表就是一个对象的所有字段 List：链表，每个节点都是一个字符串，常用来做消息队列，要自己实现全局唯一消息id，判断消息是否被处理过，后期出现的stream专门用来做消息队列 Set：字符串的无序集合：常用来做集合之间的聚合计算（交并差） Zset：字符串的不允许重复的集合，每个元素带一个分数，常用来进行排序 随着版本更新，后面又新增了一些数据类型
-BitMap：二进制状态的场景，签到，判断是否登录，底层使用String，布隆过滤器 HyperLoglog：统计基数（不重复元素的个数），但是不太精确，因为是基于概率的 GEO：存储地理位置信息，滴滴叫车 Stream：为消息队列而生，相比于List实现的消息队列，Stream可以自动生成全局唯一消息id，并且有消费组（多个 …</content></entry><entry><title>Elasticsearch学习笔记2</title><url>/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>elasticsearch</tag></tags><content type="html"><![CDATA[   🔍 elasticsearch学习笔记2
+BitMap：二进制状态的场景，签到，判断是否登录，底层使用String，布隆过滤器 HyperLoglog：统计基数（不重复元素的个数），但是不太精确，因为是基于概率的 GEO：存储地理位置信息，滴滴叫车 Stream：为消息队列而生，相比于List实现的消息队 …</content></entry><entry><title>Elasticsearch学习笔记2</title><url>/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>elasticsearch</tag></tags><content type="html"><![CDATA[   🔍 elasticsearch学习笔记2
 本节中主要介绍elasticsearch中的文档搜索功能，这也是它最重要的一个知识点
 1.DSL查询文档elasticsearch的查询依然是基于JSON风格的DSL来实现的。
 1.1.DSL查询分类Elasticsearch提供了基于JSON的DSL（Domain Specific Language）来定义查询。常见的查询类型包括：
@@ -339,6 +340,7 @@ elasticsearch的发展历史：
 本文中主要介绍一些mysql的面试笔记，文章持续更新，面试答案参小林coding的
 图解系列
 ，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍
+主要分为索引，锁，事务，三大日志四个核心部分
 sql语句执行的流程
 连接器：建立连接（TCP），之后所有的查询操作都会先判断当前用户的权限，长时间（28800）不用的连接会被释放，并且连接数不能超过151
 查询缓存：select会查询缓存，看是否曾经执行过，对于更新频繁的表，缓存基本无用
@@ -355,7 +357,7 @@ select * from t_table where a &amp;amp;gt; 1 and b = 2，联合索引（a, b）
 mysql一行记录如何存储
 数据存储由行，页，区，段组成，每一行数据分为额外信息和真实数据，额外信息包含变长字段的长度以及NULL值列表（二者可能不存在），真实数据包含三个隐藏字段（隐藏自增id，事务id，上一个版本指针）以及真实值
 一旦建立数据库中的一张表，那么就会在/var/lib/mysql/ 中建立一个对应的数据库，内部新增三个文件：
-1 2 3 db.opt 表名.frm 表名.ibd db.opt：存储数据库的默认字符集和校验规则 表 …</content></entry><entry><title>Spring面经</title><url>/post/spring%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>spring</tag><tag>面经</tag></tags><content type="html"> 🌸 spring面经
+1 2 3 db.opt 表名.frm 表名.ibd …</content></entry><entry><title>Spring面经</title><url>/post/spring%E9%9D%A2%E7%BB%8F/</url><categories><category>面试</category></categories><tags><tag>spring</tag><tag>面经</tag></tags><content type="html"> 🌸 spring面经
 本文总结一些常见的spring面试题并自己做出总结，文章持续更新
 spring是什么
 spring通常指的是spring framework，是一个IOC和AOP的容器框架，从广义来说指的是一个生态，可以构建java应用所需要的基础框架

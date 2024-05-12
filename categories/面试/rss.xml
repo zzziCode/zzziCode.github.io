@@ -21,14 +21,16 @@
 &lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 图解系列
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p></description></item><item><title>Mysql面经</title><link>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:56:32 +0800</pubDate><guid>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p>
+&lt;p>主要分为数据类型及实现原理，持久化，集群，缓存三大问题&lt;/p></description></item><item><title>Mysql面经</title><link>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:56:32 +0800</pubDate><guid>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
 &lt;p>📈 mysql面经&lt;/p>
 &lt;/blockquote>
 &lt;p>本文中主要介绍一些mysql的面试笔记，文章持续更新，面试答案参小林coding的
 &lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 图解系列
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
+&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p>
+&lt;p>主要分为索引，锁，事务，三大日志四个核心部分&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
 &lt;p>🌸 spring面经&lt;/p>
 &lt;/blockquote>
 &lt;p>本文总结一些常见的spring面试题并自己做出总结，文章持续更新&lt;/p></description></item><item><title>Spring相关知识</title><link>https://zzzicode.github.io/post/spring%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</link><pubDate>Mon, 11 Dec 2023 15:23:51 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</guid><description>&lt;blockquote>
