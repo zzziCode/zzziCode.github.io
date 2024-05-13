@@ -157,6 +157,7 @@ fork采用的是copy-on-write技术：
 本文中介绍了一些计算机网络中常见的面试题，也可以当做平时的学习笔记来使用，知识点参考小林coding的
 图解系列
 ，文章长期更新
+核心就是HTTP，TCP，UDP，IP四大协议
 TCP/IP的层数
 这是对OSI七层网络协议的简化，现在变成了四层，常用的也是四层
 应用层：应用软件在这一层实现，不同应用需要通信时，就把数据交给下一层传输层
@@ -178,8 +179,7 @@ mac地址是用于两点传输的，在传输的过程中需要不断变化，�
 数据封装好之后，经由发送方的网卡发送出去
 发送方网卡发送的消息**先到达交换机**，判断该消息从交换机哪个端口转发出去，这根据交换机中缓存的mac地址与端口的映射表
 找不到端口的映射，就发送给所有的端口（除了来时的端口）
-从端口出来到达路由器，路由器判断这个包自己需不需要转发（MAC地址是否一样）
-需要转发就去掉数据的MAC头信息，根据 …</content></entry><entry><title>分布式事务Seata</title><url>/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>分布式事务</tag><tag>Seata</tag></tags><content type="html"> 😝 分布式事务Seata
+从端口出来到达路由器，路由器判断这个包自己需不需要转发（MAC地址是 …</content></entry><entry><title>分布式事务Seata</title><url>/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</url><categories><category>学习笔记</category></categories><tags><tag>微服务</tag><tag>分布式事务</tag><tag>Seata</tag></tags><content type="html"> 😝 分布式事务Seata
 本节中我们介绍分布式事务的相关知识，并且引入Seata框架简单介绍其使用方法
 1.分布式事务问题
 1.1.本地事务
