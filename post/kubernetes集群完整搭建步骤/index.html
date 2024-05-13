@@ -1,0 +1,971 @@
+<!doctype html><html lang=zh-cn data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.111.3"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon_next.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/favicon_next.png><meta itemprop=name content="Kubernetes集群完整搭建步骤"><meta itemprop=description content="kubernetes集群完整搭建步骤"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://zzzicode.github.io/imgs/avatar.png"><meta itemprop=keywords content="k8s"><meta property="og:type" content="article"><meta property="og:title" content="Kubernetes集群完整搭建步骤"><meta property="og:description" content="kubernetes集群完整搭建步骤"><meta property="og:image" content="/imgs/avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/"><meta property="og:site_name" content="zzzi的小站"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="zzzi"><meta property="article:published_time" content="2023-07-03 10:12:03 +0700 +0700"><meta property="article:modified_time" content="2023-07-09 10:17:52 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.4b7f3d9c4ef8db1505229a7dcd2c4e3ab17cd4960dd8a78b503c013770ad56a6.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"js":{"file":"es5/tex-mml-chtml.js","name":"mathjax","version":"3.2.0"},"render":"mathjax"},"path":"kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4","permalink":"https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/","title":"Kubernetes集群完整搭建步骤"}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Kubernetes集群完整搭建步骤 - zzzi的小站</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>zzzi的小站</h1><i class=logo-line></i></a></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about.html class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>231</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#前言>前言</a><ul><li><a href=#k8s介绍>k8s介绍</a></li><li><a href=#环境规划>环境规划</a><ul><li><a href=#集群类型>集群类型</a></li><li><a href=#安装方式>安装方式</a></li><li><a href=#主机规划>主机规划</a></li></ul></li></ul></li><li><a href=#安装步骤>安装步骤</a><ul><li><a href=#连接服务器>连接服务器</a></li><li><a href=#批量操作>批量操作</a></li><li><a href=#环境初始化>环境初始化</a></li><li><a href=#安装必备组件>安装必备组件</a><ul><li><a href=#安装docker>安装docker</a></li><li><a href=#安装k8s组件>安装k8s组件</a></li><li><a href=#集群初始化>集群初始化</a></li><li><a href=#环境测试>环境测试</a></li></ul></li></ul></li><li><a href=#错误解决方法>错误解决方法</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=zzzi src=/imgs/img-lazy-loading.gif data-src=/imgs/avatar.png><p class=site-author-name itemprop=name>zzzi</p><div class=site-description itemprop=description>make_tuple("工作","论文")</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>231</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>5</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>56</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/zzziCode title="Github → https://github.com/zzziCode" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘</a></li></ul></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script>
+<script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://zzzicode.github.io/post/kubernetes%E9%9B%86%E7%BE%A4%E5%AE%8C%E6%95%B4%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/avatar.png"><meta itemprop=name content="zzzi"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="zzzi"><meta itemprop=description content="make_tuple(&#34;工作&#34;,&#34;论文&#34;)"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Kubernetes集群完整搭建步骤"><meta itemprop=description content="kubernetes集群完整搭建步骤"></span><header class=post-header><h1 class=post-title itemprop="name headline">Kubernetes集群完整搭建步骤</h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i></span>
+<span class=post-meta-item-text title=发表于>发表于：</span>
+<time title="创建时间：2023-07-03 10:12:03 +0700 +0700" itemprop="dateCreated datePublished" datetime="2023-07-03 10:12:03 +0700 +0700">2023-07-03</time></span>
+<span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar-check"></i></span>
+<span class=post-meta-item-text title=更新于>更新于：</span>
+<time title=修改时间：2023-07-09T10:17:52+08:00 itemprop=dateModified datetime=2023-07-09T10:17:52+08:00>2023-07-09</time></span>
+<span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i></span>
+<span class=post-meta-item-text title=分类于>分类于：</span>
+<span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E6%95%99%E7%A8%8B itemprop=url rel=index><span itemprop=name>教程</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i></span>
+<span class=post-meta-item-text>字数：</span>
+<span>6675</span></span>
+<span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i></span>
+<span class=post-meta-item-text>阅读：&ap;</span>
+<span>14分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>kubernetes集群完整搭建步骤</p></blockquote><p>使用Ubuntu搭建k8s集群的完整步骤，包含常见错误解决办法</p><h2 id=前言>前言
+<a class=header-anchor href=#%e5%89%8d%e8%a8%80></a></h2><h3 id=k8s介绍>k8s介绍
+<a class=header-anchor href=#k8s%e4%bb%8b%e7%bb%8d></a></h3><blockquote><p>用于自动部署、扩展和管理“容器化应用程序”的开源系统</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307021520659.png alt=image-20200406232838722 style=zoom:50%><p>kubernetes，是一个全新的基于容器技术的分布式架构领先方案，是谷歌严格保密十几年的秘密武器&mdash;-Borg系统的一个开源版本，于2014年9月发布第一个版本，2015年7月发布第一个正式版本。</p><p>kubernetes的本质是<strong>一组服务器集群</strong>，它可以在集群的每个节点上运行特定的程序，来对节点中的容器进行管理。目的是实现资源管理的自动化，主要提供了如下的主要功能：</p><ul><li><strong>自我修复</strong>：一旦某一个容器崩溃，能够在1秒中左右迅速启动新的容器</li><li><strong>弹性伸缩</strong>：可以根据需要，自动对集群中正在运行的容器数量进行调整</li><li><strong>服务发现</strong>：服务可以通过自动发现的形式找到它所依赖的服务，想要什么服务就自动去寻找</li><li><strong>负载均衡</strong>：如果一个服务启动了多个容器，能够自动实现请求的负载均衡</li><li><strong>版本回退</strong>：如果发现新发布的程序版本有问题，可以立即回退到原来的版本</li><li><strong>存储编排</strong>：可以根据容器自身的需求自动创建存储卷</li></ul><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307072040000.png alt=img style=zoom:50%><p>从上图中可以看出k8s的整体结构，一个k8s集群主要分为两类节点，一类是master节点，一类是工作节点，也就是主节点和从节点，具体的区别如下：</p><ul><li>主节点主要用来管理集群，接受客户端的请求，安排容器的执行并且运行控制循环</li><li>从节点主要用来部署应用，听从主节点的调度</li></ul><h3 id=环境规划>环境规划
+<a class=header-anchor href=#%e7%8e%af%e5%a2%83%e8%a7%84%e5%88%92></a></h3><h4 id=集群类型>集群类型
+<a class=header-anchor href=#%e9%9b%86%e7%be%a4%e7%b1%bb%e5%9e%8b></a></h4><p>kubernetes集群大体上分为两类：一主多从和多主多从</p><ul><li>一主多从：一台master，多台node，搭建简单，但是master出现错误，整个集群不再可用</li><li>多主多从：多台master，多台node，搭建麻烦，但是容错率高</li></ul><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307021520661.png alt=image-20200404094800622 style=zoom:50%><blockquote><p>为了简单，本文中使用一主两从</p></blockquote><h4 id=安装方式>安装方式
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85%e6%96%b9%e5%bc%8f></a></h4><p>目前生产部署Kubernetes 集群主要有两种方式：</p><p><strong>1.kubeadm（本文中采用）</strong></p><p>Kubeadm 是一个K8s 部署工具，提供kubeadm init 和kubeadm join，用于快速部署Kubernetes 集群。</p><p>官方地址：https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/</p><p><strong>2.二进制包</strong></p><p>从github 下载发行版的二进制包，手动部署每个组件，组成Kubernetes 集群。</p><p>Kubeadm 降低部署门槛，但屏蔽了很多细节，遇到问题很难排查。如果想更容易可控，推荐使用二进制包部署Kubernetes 集群，虽然手动部署麻烦点，期间可以学习很多工作原理，利于后期维护。</p><h4 id=主机规划>主机规划
+<a class=header-anchor href=#%e4%b8%bb%e6%9c%ba%e8%a7%84%e5%88%92></a></h4><table><thead><tr><th style=text-align:center>服务器ip</th><th style=text-align:center>主机名</th><th style=text-align:center>备注</th></tr></thead><tbody><tr><td style=text-align:center>222.27.255.211</td><td style=text-align:center>master</td><td style=text-align:center>master node</td></tr><tr><td style=text-align:center>222.27.255.211</td><td style=text-align:center>node1</td><td style=text-align:center>work node</td></tr><tr><td style=text-align:center>222.27.255.211</td><td style=text-align:center>node2</td><td style=text-align:center>work node</td></tr></tbody></table><blockquote><p>上面三台主机对外暴露端口不一样</p></blockquote><h2 id=安装步骤>安装步骤
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4></a></h2><h3 id=连接服务器>连接服务器
+<a class=header-anchor href=#%e8%bf%9e%e6%8e%a5%e6%9c%8d%e5%8a%a1%e5%99%a8></a></h3><p>为了部署一个kubernetes集群，首先需要通过远程工具连接集群中的每一个主机，下面提供master节点的连接方式，工作节点的连接方式类似：</p><ol><li>新建连接</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307100943125.png alt=image-20230710094242869 style=zoom:50%><blockquote><p>按照服务器配置中的ip和端口号进行配置，之后点击用户身份验证</p></blockquote><ol start=2><li>配置用户名和密码</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307100943129.png alt=image-20230710094323276 style=zoom:50%><blockquote><p>按照自己主机的用户名和密码连接到master主机上</p></blockquote><ol start=3><li>配置xshell</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031046702.png alt=image-20230703104607658 style=zoom:50%>
+<img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031046769.png alt=image-20230703104649715 style=zoom:50%><blockquote><p>按照如图方式配置xshell之后，实现左键选中，右键自动粘贴，提升效率</p></blockquote><ol start=4><li>连接成功</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916865.png alt=image-20230703110826232 style=zoom:60%><p>提示未知主机秘钥，点击"接受并保存"</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916871.png alt=image-20230703105455606 style=zoom:33%><blockquote><p>出现如图效果，证明连接成功</p></blockquote><ol start=5><li>配置主机名，方便辨认</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916872.png alt=image-20230703110119090 style=zoom:50%><blockquote><p>至此master节点的基本配置完成，两个工作节点按照以上操作连接并修改自己的主机名</p></blockquote><h3 id=批量操作>批量操作
+<a class=header-anchor href=#%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c></a></h3><p>为了简化操作步骤，避免重复输入，xshell提供了批量操作功能，实现一处输入，多处运行</p><ol><li>连接所有想要批量操作的主机</li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916873.png alt=image-20230703112104300></p><ol start=2><li>批量操作</li></ol><p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916874.png alt=image-20230703112356694 style=zoom:50%>></p><blockquote><p>选择将发送键入到已连接的会话,此时可以批量管理k8s集群</p></blockquote><ol start=3><li>测试</li></ol><blockquote><p>将窗口<strong>垂直</strong>和<strong>水平</strong>分割之后，三个窗口可以显示在同一个屏幕中</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916876.png alt=image-20230703112623950 style=zoom:50%><blockquote><p>确保所有主机的状态都是<code>off</code>，之后输入<code>hostname</code>查看之前的主机名配置是否生效，出现如图状态说明配置成功</p></blockquote><ol start=4><li>查看三台主机ip，输入<code>ifconfig</code>即可</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916877.png alt=image-20230703124402502 style=zoom:50%><blockquote><p>可以看到三台主机处于同一个网段，子网掩码一致，后期节点通信时就是用下面的ip</p></blockquote><table><thead><tr><th style=text-align:center>主机名</th><th style=text-align:center>主机ip</th><th style=text-align:center>子网掩码</th></tr></thead><tbody><tr><td style=text-align:center>master</td><td style=text-align:center>192.168.1.24</td><td style=text-align:center>255.255.255.0</td></tr><tr><td style=text-align:center>node1</td><td style=text-align:center>192.168.1.25</td><td style=text-align:center>255.255.255.0</td></tr><tr><td style=text-align:center>node2</td><td style=text-align:center>192.168.1.27</td><td style=text-align:center>255.255.255.0</td></tr></tbody></table><h3 id=环境初始化>环境初始化
+<a class=header-anchor href=#%e7%8e%af%e5%a2%83%e5%88%9d%e5%a7%8b%e5%8c%96></a></h3><p>为了安装k8s集群，将三台主机配置好后，还需要进行环境初始化</p><blockquote><p>为了操作方便，以下操作全部都在root用户下进行，切换root用户的命令为：<code>su root</code> ，之后按照提示输入root用户的密码即可</p></blockquote><ol><li>查看ubuntu版本</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916878.png alt=image-20230703125722026 style=zoom:50%><blockquote><p>本次实验中采用<code>ubuntu 22.04.2 LTS</code>版本</p></blockquote><ol start=2><li><p>配置主机名解析，配置之后按照主机名即可访问对应主机</p><blockquote><p>主机的hosts文件路径在<code>/etc/hosts</code>中</p></blockquote></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#修改hosts文件</span>
+</span></span><span style=display:flex><span>vim /etc/hosts
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#在hosts文件中添加三项</span>
+</span></span><span style=display:flex><span>192.168.1.24 master
+</span></span><span style=display:flex><span>192.168.1.25 node1 
+</span></span><span style=display:flex><span>192.168.1.27 node2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#vim中保存并退出</span>
+</span></span><span style=display:flex><span>:wq
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>以上操作要确保hosts有写入权限</p><p>如果没有写入权限，执行<code>sudo chmod +w /etc/hosts</code>添加写入权限，或者直接切换到root用户，命令为<code>su root</code>，之后输入root用户的密码即可</p><p>在node1和node2中ping master出现下图中的效果说明配置成功</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916879.png alt=image-20230703140650238 style=zoom:50%><ol start=3><li>同步系统时间，k8s要求集群中的节点时间必须一致，所以这里使用<code>chronyd</code>服务从网络同步时间</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#启动chronyd服务</span>
+</span></span><span style=display:flex><span>systemctl start chronyd
+</span></span><span style=display:flex><span><span style=color:#75715e>#设置服务开机自启</span>
+</span></span><span style=display:flex><span>systemctl enable chronyd
+</span></span><span style=display:flex><span><span style=color:#75715e>#使用date验证节点的时间是否同步</span>
+</span></span><span style=display:flex><span>date
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916880.png alt=image-20230703134019481 style=zoom:50%><ol start=4><li><p>禁用<code>iptables</code>和<code>firewall</code>服务</p><p>禁用iptables服务的原因是因为k8s和docker在运行的过程中会产生大量的iptables规则实现转发，为了不让这些规则与系统规则混淆，直接关闭iptables服务</p><p>禁用firewall服务是为了节点之间通信时不会产生一些莫名其妙的错误</p></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-BASH data-lang=BASH><span style=display:flex><span><span style=color:#75715e>#关闭firewall服务</span>
+</span></span><span style=display:flex><span>systemctl stop firewall
+</span></span><span style=display:flex><span>systemctl disable firewall
+</span></span><span style=display:flex><span><span style=color:#75715e>#关闭iptables服务</span>
+</span></span><span style=display:flex><span>systemctl stop iptables
+</span></span><span style=display:flex><span>systemctl disable iptables
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>禁用selinux服务</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#查看selinux的状态</span>
+</span></span><span style=display:flex><span>getenforce
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果输出结果为 &#34;Enforcing&#34;，则表示 SELinux 已启用</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果为 &#34;Permissive&#34;，则表示 SELinux 处于宽容模式</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果为 &#34;Disabled&#34;，则表示 SELinux 未启用。</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#修改/etc/selinux/config</span>
+</span></span><span style=display:flex><span>vim /etc/selinux/config
+</span></span><span style=display:flex><span>SELINUX<span style=color:#f92672>=</span>disabled
+</span></span><span style=display:flex><span><span style=color:#75715e>#重启系统</span>
+</span></span></code></pre></td></tr></table></div></div><p>出现下图中的状态说明配置生效</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916881.png alt=image-20230703141739168 style=zoom:50%><ol start=6><li><p>禁用swap分区</p><p>启用swap分区会对系统的性能产生负面的影响，所以k8s要求禁用swap分区</p></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#编辑/etc/fstab文件，注释掉其中的一行</span>
+</span></span><span style=display:flex><span>vim /etc/fstab
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#注释一行</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#/swap.img      none    swap    sw      0       0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#vim中保存并退出</span>
+</span></span><span style=display:flex><span>:wq
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>出现下图效果说明配置生效</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916882.png alt=image-20230703142227517 style=zoom:50%><ol start=7><li>修改linux的内核参数</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#修改linux的内核参数，添加网桥和地址转发功能</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#新建/etc/sysctl.d/kubernetes.conf文件</span>
+</span></span><span style=display:flex><span>vim /etc/sysctl.d/kubernetes.conf
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加如下配置：</span>
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-ip6tables <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-iptables <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>net.ipv4.ip_forward <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#vim中保存并退出</span>
+</span></span><span style=display:flex><span>:wq
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#重新加载配置</span>
+</span></span><span style=display:flex><span>sysctl -p
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#加载网桥过滤模块</span>
+</span></span><span style=display:flex><span>modprobe br_netfilter
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看网桥过滤模块是否加载成功</span>
+</span></span><span style=display:flex><span>lsmod | grep br_netfilter
+</span></span></code></pre></td></tr></table></div></div><p>出现以下效果说明配置成功</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916883.png alt=image-20230703143437847 style=zoom:50%><ol start=8><li><p>配置ipvs功能</p><p>在k8s中有两种代理模型，这里选择性能更高的ipvs</p></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#安装ipset和ipvsadm</span>
+</span></span><span style=display:flex><span>apt install -y ipset ipvsadmin
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加需要加载的模块写入脚本文件</span>
+</span></span><span style=display:flex><span>cat &gt; /etc/sysconfig/modules/ipvs.modules <span style=color:#e6db74>&lt;&lt;EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>modprobe -- ip_vs
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>modprobe -- ip_vs_rr
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>modprobe -- ip_vs_wrr
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>modprobe -- ip_vs_sh
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>modprobe -- nf_conntrack
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果提示路径不存在，就需要先在此路径下创建ipvs.modules文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#为脚本调价执行权限</span>
+</span></span><span style=display:flex><span>chmod +x /etc/sysconfig/modules/ipvs.modules
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#执行脚本文件</span>
+</span></span><span style=display:flex><span>bash /etc/sysconfig/modules/ipvs.modules
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看对应的模块是否加载成功</span>
+</span></span><span style=display:flex><span>lsmod | grep -e ipvs -e nf_conntrack_ipv4
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果修改了nf_conntrack_ipv4为nf_conntrack，这里也要修改</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=9><li><p>重启服务器</p><blockquote><p>重启服务器查看selinux和swap配置是否生效</p></blockquote></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#立即重启</span>
+</span></span><span style=display:flex><span>shutdown -r now
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看selinux服务的状态</span>
+</span></span><span style=display:flex><span>getenforce
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看swap分区是否被禁用</span>
+</span></span><span style=display:flex><span>free -m
+</span></span></code></pre></td></tr></table></div></div><p>出现下面的效果说明配置生效：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916884.png alt=image-20230703153459146 style=zoom:50%><h3 id=安装必备组件>安装必备组件
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85%e5%bf%85%e5%a4%87%e7%bb%84%e4%bb%b6></a></h3><h4 id=安装docker>安装docker
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85docker></a></h4><ol><li>切换镜像源</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#指定国内镜像源</span>
+</span></span><span style=display:flex><span>curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加docker软件源</span>
+</span></span><span style=display:flex><span>echo <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  <span style=color:#e6db74>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  </span><span style=color:#66d9ef>$(</span>lsb_release -cs<span style=color:#66d9ef>)</span><span style=color:#e6db74> stable&#34;</span> | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li><p>安装docker</p><blockquote><p><a href=https://juejin.cn/s/ubuntu%20%E5%8D%B8%E8%BD%BDdocker title=彻底卸载docker旧版本 rel="noopener external nofollow noreferrer" target=_blank class=exturl>彻底卸载docker旧版本
+<i class="fa fa-external-link-alt"></i></a></p><p><a href=https://www.jianshu.com/p/688c677a281f title=https://www.jianshu.com/p/688c677a281f rel="noopener external nofollow noreferrer" target=_blank class=exturl>https://www.jianshu.com/p/688c677a281f
+<i class="fa fa-external-link-alt"></i></a></p></blockquote></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#卸载旧版本的docker，如果有的话</span>
+</span></span><span style=display:flex><span>apt-get remove docker docker-engine docker-ce docker.io
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#更新索引包</span>
+</span></span><span style=display:flex><span>apt-get update
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#安装以下包，以使 apt 可以通过 https 使用 repository</span>
+</span></span><span style=display:flex><span>apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加Docker官方的GPG密钥并更新索引包</span>
+</span></span><span style=display:flex><span>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</span></span><span style=display:flex><span>apt-get update
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看docker支持版本</span>
+</span></span><span style=display:flex><span>apt-cache madison docker-ce
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#安装docker,需要指定版本</span>
+</span></span><span style=display:flex><span>apt-get install -y docker-ce<span style=color:#f92672>=</span>5:20.10.13~3-0~ubuntu-jammy docker-ce-cli<span style=color:#f92672>=</span>5:20.10.13~3-0~ubuntu-jammy  containerd.io<span style=color:#f92672>=</span>1.5.11-1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>apt install 
+</span></span><span style=display:flex><span><span style=color:#75715e>#启动docker</span>
+</span></span><span style=display:flex><span>systemctl start docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#设置开机启动</span>
+</span></span><span style=display:flex><span>systemctl enable docker
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li><p>添加一个配置文件</p><p>docker默认使用cgroupfs作为Cgroup Drive，但是k8s推荐使用systemd，所以这里修改配置</p></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#创建文件，如果不存在的话</span>
+</span></span><span style=display:flex><span>mkdir /etc/docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加配置</span>
+</span></span><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt;EOF &gt; /etc/docker/daemon.json
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>{
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	&#34;exec-opts&#34;:[&#34;native.cgroupdrivers=systemd&#34;],
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	&#34;registry-mirrors&#34;:[&#34;https://kn0t2bca.mirror.aliyuncs.com&#34;]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用<code>docker info | grep -i "Cgroup Driver"</code>查看配置是否生效</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916885.png alt=image-20230703161654464></p><p>使用<code>docker -v</code>查看docker版本</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307101923045.png alt=image-20230710192304554 style=zoom:50%><p>测试docker</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916887.png alt=image-20230703185505255 style=zoom:50%><h4 id=安装k8s组件>安装k8s组件
+<a class=header-anchor href=#%e5%ae%89%e8%a3%85k8s%e7%bb%84%e4%bb%b6></a></h4><blockquote><p><a href=https://blog.csdn.net/weixin_39589455/article/details/129160682 title=卸载k8s rel="noopener external nofollow noreferrer" target=_blank class=exturl>卸载k8s
+<i class="fa fa-external-link-alt"></i></a></p></blockquote><ol><li>切换镜像源</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#支持https传送</span>
+</span></span><span style=display:flex><span>apt update <span style=color:#f92672>&amp;&amp;</span> apt install -y apt-transport-https
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加访问公钥</span>
+</span></span><span style=display:flex><span>curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加源</span>
+</span></span><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#更新缓存索引</span>
+</span></span><span style=display:flex><span>apt update
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>安装kubuadm、kubulet、kubuctl</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#执行安装命令，需要指定版本</span>
+</span></span><span style=display:flex><span>apt-get install -y kubelet<span style=color:#f92672>=</span>1.23.10-00 kubectl<span style=color:#f92672>=</span>1.23.10-00 kubeadm<span style=color:#f92672>=</span>1.23.10-00
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>配置kubulet的cgroup</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#编辑kubulet的cgroup，添加如下配置</span>
+</span></span><span style=display:flex><span>vim /etc/sysconfig/kubelet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 修改</span>
+</span></span><span style=display:flex><span>KUBELET_EXTRA_ARGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;--cgroup-driver=systemd&#34;</span>
+</span></span><span style=display:flex><span>KUBE_PROXY_MODE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ipvs&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#开机自启</span>
+</span></span><span style=display:flex><span>systemctl enable kubelet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看是否配置成功</span>
+</span></span><span style=display:flex><span>systemctl list-unit-files --type<span style=color:#f92672>=</span>service|grep kubelet
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916888.png alt=image-20230703164724593 style=zoom:50%><p><font color=red><strong>上面的步骤三台主机都需要操作</strong></font></p><p><font color=red><strong>上面的步骤三台主机都需要操作</strong></font></p><p><font color=red><strong>上面的步骤三台主机都需要操作</strong></font></p><h4 id=集群初始化>集群初始化
+<a class=header-anchor href=#%e9%9b%86%e7%be%a4%e5%88%9d%e5%a7%8b%e5%8c%96></a></h4><img src=https://raw.githubusercontent.com/BlackSunday001/mardown_blog_image/master/kubernetes/k8s-jiqun.png alt=img style=zoom:50%><p>使用<code>kubeadm init</code>对集群初始化，kubeadm会自动下载apiserver，controller-manager等镜像，但是由于网络原因可能下载失败，所以提供一个其他的方法：</p><ul><li>从阿里云下载对应镜像</li></ul><ol><li>集群初始化（master节点操作）</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#运行如下命令</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 由于默认拉取镜像地址k8s.gcr.io国内无法访问，这里需要指定阿里云镜像仓库地址</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#新版才可以直接指定镜像仓库，旧版需要手动下载镜像，这里直接使用新版即可</span>
+</span></span><span style=display:flex><span>kubeadm init <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --image-repository registry.cn-hangzhou.aliyuncs.com/google_containers <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --apiserver-advertise-address<span style=color:#f92672>=</span>192.168.1.24 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --kubernetes-version v1.23.10<span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --pod-network-cidr<span style=color:#f92672>=</span>10.244.0.0/16 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --service-cidr<span style=color:#f92672>=</span>10.96.0.0/12 
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span><span style=color:#75715e>#备注脚本，不用管</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#!/bin/bash</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>images<span style=color:#f92672>=(</span>
+</span></span><span style=display:flex><span>    kube-apiserver:v1.27.3
+</span></span><span style=display:flex><span>    kube-controller-manager:v1.27.3
+</span></span><span style=display:flex><span>    kube-scheduler:v1.27.3
+</span></span><span style=display:flex><span>    kube-proxy:v1.27.3
+</span></span><span style=display:flex><span>    pause:3.9
+</span></span><span style=display:flex><span>    etcd:3.5.7-0
+</span></span><span style=display:flex><span>    coredns:1.10.1
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> imageName in <span style=color:#e6db74>${</span>images[@]<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+</span></span><span style=display:flex><span>        docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
+</span></span><span style=display:flex><span>        docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span></code></pre></td></tr></table></div></div><p>出现如下效果证明集群初始化成功：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235723.png alt=image-20230706194515013></p><ol start=2><li><p>执行制定指令</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>mkdir -p $HOME/.kube
+</span></span><span style=display:flex><span>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style=display:flex><span>sudo chown <span style=color:#66d9ef>$(</span>id -u<span style=color:#66d9ef>)</span>:<span style=color:#66d9ef>$(</span>id -g<span style=color:#66d9ef>)</span> $HOME/.kube/config
+</span></span></code></pre></td></tr></table></div></div></li><li><p>查看集群状态</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235724.png alt=image-20230706194713757></p></li><li><p>配置主节点网络</p><ul><li><p>查看pod状态</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235725.png alt=image-20230706205120539></p></li><li><p>新增kube-flannel.yml文件，文件下载地址
+<a href=https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml title=点这里 rel="noopener external nofollow noreferrer" target=_blank class=exturl>点这里
+<i class="fa fa-external-link-alt"></i>
+</a>，这里的文件为k8s1.17+以上的版本使用的文件，具体安装方式
+<a href=https://kubernetes.io/docs/concepts/cluster-administration/addons/ title=点这里 rel="noopener external nofollow noreferrer" target=_blank class=exturl>点这里
+<i class="fa fa-external-link-alt"></i>
+</a>，选择<code>flannel</code></p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235726.png alt=image-20230706204922808></p></li></ul><blockquote><p>由于github需要外网访问，所以手动下载，之后上传到服务器中</p><p>将文件放在/目录下即可</p><p>提供修改之后的文件</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">206
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">207
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">208
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">209
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">210
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">211
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">212
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">213
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">214
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">215
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">216
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">217
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">218
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">219
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>kind: Namespace
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>    pod-security.kubernetes.io/enforce: privileged
+</span></span><span style=display:flex><span>  name: kube-flannel
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>kind: ServiceAccount
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>  name: flannel
+</span></span><span style=display:flex><span>  namespace: kube-flannel
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span style=display:flex><span>kind: ClusterRole
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>  name: flannel
+</span></span><span style=display:flex><span>rules:
+</span></span><span style=display:flex><span>- apiGroups:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>  resources:
+</span></span><span style=display:flex><span>  - pods
+</span></span><span style=display:flex><span>  verbs:
+</span></span><span style=display:flex><span>  - get
+</span></span><span style=display:flex><span>- apiGroups:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>  resources:
+</span></span><span style=display:flex><span>  - nodes
+</span></span><span style=display:flex><span>  verbs:
+</span></span><span style=display:flex><span>  - get
+</span></span><span style=display:flex><span>  - list
+</span></span><span style=display:flex><span>  - watch
+</span></span><span style=display:flex><span>- apiGroups:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>  resources:
+</span></span><span style=display:flex><span>  - nodes/status
+</span></span><span style=display:flex><span>  verbs:
+</span></span><span style=display:flex><span>  - patch
+</span></span><span style=display:flex><span>- apiGroups:
+</span></span><span style=display:flex><span>  - networking.k8s.io
+</span></span><span style=display:flex><span>  resources:
+</span></span><span style=display:flex><span>  - clustercidrs
+</span></span><span style=display:flex><span>  verbs:
+</span></span><span style=display:flex><span>  - list
+</span></span><span style=display:flex><span>  - watch
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span style=display:flex><span>kind: ClusterRoleBinding
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>  name: flannel
+</span></span><span style=display:flex><span>roleRef:
+</span></span><span style=display:flex><span>  apiGroup: rbac.authorization.k8s.io
+</span></span><span style=display:flex><span>  kind: ClusterRole
+</span></span><span style=display:flex><span>  name: flannel
+</span></span><span style=display:flex><span>subjects:
+</span></span><span style=display:flex><span>- kind: ServiceAccount
+</span></span><span style=display:flex><span>  name: flannel
+</span></span><span style=display:flex><span>  namespace: kube-flannel
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>data:
+</span></span><span style=display:flex><span>  cni-conf.json: |
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;cbr0&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;cniVersion&#34;</span>: <span style=color:#e6db74>&#34;0.3.1&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;plugins&#34;</span>: <span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;flannel&#34;</span>,
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;delegate&#34;</span>: <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;hairpinMode&#34;</span>: true,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;isDefaultGateway&#34;</span>: true
+</span></span><span style=display:flex><span>          <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;portmap&#34;</span>,
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;capabilities&#34;</span>: <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;portMappings&#34;</span>: true
+</span></span><span style=display:flex><span>          <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>  net-conf.json: |
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;Network&#34;</span>: <span style=color:#e6db74>&#34;10.244.0.0/16&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;Backend&#34;</span>: <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Type&#34;</span>: <span style=color:#e6db74>&#34;vxlan&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>kind: ConfigMap
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    app: flannel
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>    tier: node
+</span></span><span style=display:flex><span>  name: kube-flannel-cfg
+</span></span><span style=display:flex><span>  namespace: kube-flannel
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>apiVersion: apps/v1
+</span></span><span style=display:flex><span>kind: DaemonSet
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  labels:
+</span></span><span style=display:flex><span>    app: flannel
+</span></span><span style=display:flex><span>    k8s-app: flannel
+</span></span><span style=display:flex><span>    tier: node
+</span></span><span style=display:flex><span>  name: kube-flannel-ds
+</span></span><span style=display:flex><span>  namespace: kube-flannel
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    matchLabels:
+</span></span><span style=display:flex><span>      app: flannel
+</span></span><span style=display:flex><span>      k8s-app: flannel
+</span></span><span style=display:flex><span>  template:
+</span></span><span style=display:flex><span>    metadata:
+</span></span><span style=display:flex><span>      labels:
+</span></span><span style=display:flex><span>        app: flannel
+</span></span><span style=display:flex><span>        k8s-app: flannel
+</span></span><span style=display:flex><span>        tier: node
+</span></span><span style=display:flex><span>    spec:
+</span></span><span style=display:flex><span>      affinity:
+</span></span><span style=display:flex><span>        nodeAffinity:
+</span></span><span style=display:flex><span>          requiredDuringSchedulingIgnoredDuringExecution:
+</span></span><span style=display:flex><span>            nodeSelectorTerms:
+</span></span><span style=display:flex><span>            - matchExpressions:
+</span></span><span style=display:flex><span>              - key: kubernetes.io/os
+</span></span><span style=display:flex><span>                operator: In
+</span></span><span style=display:flex><span>                values:
+</span></span><span style=display:flex><span>                - linux
+</span></span><span style=display:flex><span>      containers:
+</span></span><span style=display:flex><span>      - args:
+</span></span><span style=display:flex><span>        - --ip-masq
+</span></span><span style=display:flex><span>        - --kube-subnet-mgr
+</span></span><span style=display:flex><span>        - --iface<span style=color:#f92672>=</span>eno2 <span style=color:#75715e># master的ip在哪就写哪个</span>
+</span></span><span style=display:flex><span>        command:
+</span></span><span style=display:flex><span>        - /opt/bin/flanneld
+</span></span><span style=display:flex><span>        env:
+</span></span><span style=display:flex><span>        - name: POD_NAME
+</span></span><span style=display:flex><span>          valueFrom:
+</span></span><span style=display:flex><span>            fieldRef:
+</span></span><span style=display:flex><span>              fieldPath: metadata.name
+</span></span><span style=display:flex><span>        - name: POD_NAMESPACE
+</span></span><span style=display:flex><span>          valueFrom:
+</span></span><span style=display:flex><span>            fieldRef:
+</span></span><span style=display:flex><span>              fieldPath: metadata.namespace
+</span></span><span style=display:flex><span>        - name: EVENT_QUEUE_DEPTH
+</span></span><span style=display:flex><span>          value: <span style=color:#e6db74>&#34;5000&#34;</span>
+</span></span><span style=display:flex><span>        image: docker.io/flannel/flannel:v0.22.0
+</span></span><span style=display:flex><span>        name: kube-flannel
+</span></span><span style=display:flex><span>        resources:
+</span></span><span style=display:flex><span>          requests:
+</span></span><span style=display:flex><span>            cpu: 100m
+</span></span><span style=display:flex><span>            memory: 50Mi
+</span></span><span style=display:flex><span>        securityContext:
+</span></span><span style=display:flex><span>          capabilities:
+</span></span><span style=display:flex><span>            add:
+</span></span><span style=display:flex><span>            - NET_ADMIN
+</span></span><span style=display:flex><span>            - NET_RAW
+</span></span><span style=display:flex><span>          privileged: false
+</span></span><span style=display:flex><span>        volumeMounts:
+</span></span><span style=display:flex><span>        - mountPath: /run/flannel
+</span></span><span style=display:flex><span>          name: run
+</span></span><span style=display:flex><span>        - mountPath: /etc/kube-flannel/
+</span></span><span style=display:flex><span>          name: flannel-cfg
+</span></span><span style=display:flex><span>        - mountPath: /run/xtables.lock
+</span></span><span style=display:flex><span>          name: xtables-lock
+</span></span><span style=display:flex><span>      hostNetwork: true
+</span></span><span style=display:flex><span>      initContainers:
+</span></span><span style=display:flex><span>      - args:
+</span></span><span style=display:flex><span>        - -f
+</span></span><span style=display:flex><span>        - /flannel
+</span></span><span style=display:flex><span>        - /opt/cni/bin/flannel
+</span></span><span style=display:flex><span>        command:
+</span></span><span style=display:flex><span>        - cp
+</span></span><span style=display:flex><span>        image: docker.io/flannel/flannel-cni-plugin:v1.1.2
+</span></span><span style=display:flex><span>        name: install-cni-plugin
+</span></span><span style=display:flex><span>        volumeMounts:
+</span></span><span style=display:flex><span>        - mountPath: /opt/cni/bin
+</span></span><span style=display:flex><span>          name: cni-plugin
+</span></span><span style=display:flex><span>      - args:
+</span></span><span style=display:flex><span>        - -f
+</span></span><span style=display:flex><span>        - /etc/kube-flannel/cni-conf.json
+</span></span><span style=display:flex><span>        - /etc/cni/net.d/10-flannel.conflist
+</span></span><span style=display:flex><span>        command:
+</span></span><span style=display:flex><span>        - cp
+</span></span><span style=display:flex><span>        image: docker.io/flannel/flannel:v0.22.0
+</span></span><span style=display:flex><span>        name: install-cni
+</span></span><span style=display:flex><span>        volumeMounts:
+</span></span><span style=display:flex><span>        - mountPath: /etc/cni/net.d
+</span></span><span style=display:flex><span>          name: cni
+</span></span><span style=display:flex><span>        - mountPath: /etc/kube-flannel/
+</span></span><span style=display:flex><span>          name: flannel-cfg
+</span></span><span style=display:flex><span>      priorityClassName: system-node-critical
+</span></span><span style=display:flex><span>      serviceAccountName: flannel
+</span></span><span style=display:flex><span>      tolerations:
+</span></span><span style=display:flex><span>      - effect: NoSchedule
+</span></span><span style=display:flex><span>        operator: Exists
+</span></span><span style=display:flex><span>      volumes:
+</span></span><span style=display:flex><span>      - hostPath:
+</span></span><span style=display:flex><span>          path: /run/flannel
+</span></span><span style=display:flex><span>        name: run
+</span></span><span style=display:flex><span>      - hostPath:
+</span></span><span style=display:flex><span>          path: /opt/cni/bin
+</span></span><span style=display:flex><span>        name: cni-plugin
+</span></span><span style=display:flex><span>      - hostPath:
+</span></span><span style=display:flex><span>          path: /etc/cni/net.d
+</span></span><span style=display:flex><span>        name: cni
+</span></span><span style=display:flex><span>      - configMap:
+</span></span><span style=display:flex><span>          name: kube-flannel-cfg
+</span></span><span style=display:flex><span>        name: flannel-cfg
+</span></span><span style=display:flex><span>      - hostPath:
+</span></span><span style=display:flex><span>          path: /run/xtables.lock
+</span></span><span style=display:flex><span>          type: FileOrCreate
+</span></span><span style=display:flex><span>        name: xtables-lock
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>运行下面的命令配置集群</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>kubectl apply -f kube-flannel.yml
+</span></span></code></pre></td></tr></table></div></div></li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235727.png alt=image-20230706205931706></p><blockquote><p>显示created和configured即可</p></blockquote><ul><li><p>监控应用的进度</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>watch kubectl get pods --all-namespaces
+</span></span></code></pre></td></tr></table></div></div></li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235728.png alt=image-20230706220233480></p></li><li><p>显示如下效果说明网络配置成功</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235729.png alt=image-20230706221722496></p></li><li><p>将工作节点加入集群</p></li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235730.png alt=image-20230706195107562></p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>kubeadm join 192.168.1.24:6443 --token zn83su.rnsgtjxplhpzb94c <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>	--discovery-token-ca-cert-hash sha256:c94a061c9716ed6f2ac65d0c8a4558efc7f0b25fd6684b13619e500d58dec16c
+</span></span></code></pre></td></tr></table></div></div><ol start=7><li><p>显示如下效果证明节点加入成功</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235731.png alt=image-20230707113652154></p></li></ol><p>看到节点的状态为NotReady，等待节点自动加载完毕，会显示Ready，约三分钟后，显示如下效果：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235732.png alt=image-20230707113848901></p><h4 id=环境测试>环境测试
+<a class=header-anchor href=#%e7%8e%af%e5%a2%83%e6%b5%8b%e8%af%95></a></h4><ol><li>部署nginx</li></ol><p>在集群中部署一个nginx，查看集群是否安装成功</p><blockquote><p>操作时，只需要通过master执行即可，k8s自动管理工作节点</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#部署nginx</span>
+</span></span><span style=display:flex><span>kubectl create deployment nginx --image<span style=color:#f92672>=</span>nginx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#nginx的端口向外暴露</span>
+</span></span><span style=display:flex><span>kubectl expose deployment nginx --port<span style=color:#f92672>=</span><span style=color:#ae81ff>80</span> --type<span style=color:#f92672>=</span>NodePort
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看nginx是否启动成功</span>
+</span></span><span style=display:flex><span>kubectl get pods
+</span></span><span style=display:flex><span>kubectl get service
+</span></span></code></pre></td></tr></table></div></div><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235733.png alt=image-20230707114756123></p><ol start=2><li>查看nginx部署情况</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#查看nginx被部署到了哪个节点上：kubectl get pod &lt;pod-name&gt; -o wide</span>
+</span></span><span style=display:flex><span>kubectl get pod -o wide
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#查看访问是否成功</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>查看nginx被部署到了<strong>node2</strong>节点上</p></blockquote><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235734.png alt=image-20230707121814038></p><p>可以看到集群的变化，对外暴露端口为32737，也就是说，使用<code>node2</code>的ip+32737就可以访问到节点内部80端口对应的nginx，测试如下：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235735.png alt=image-20230707122113771 style=zoom:50%><blockquote><p>至此k8s集群部署完毕</p></blockquote><h2 id=错误解决方法>错误解决方法
+<a class=header-anchor href=#%e9%94%99%e8%af%af%e8%a7%a3%e5%86%b3%e6%96%b9%e6%b3%95></a></h2><ol><li><p>同步节点时间时使用chronyd服务显示以下错误</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916889.png alt=image-20230703132932388 style=zoom:50%></li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#首先查看服务列表中有没有这个服务</span>
+</span></span><span style=display:flex><span>systemctl list-unit-files --type<span style=color:#f92672>=</span>service|grep chronyd
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果有的话，执行下面的命令</span>
+</span></span><span style=display:flex><span>systemctl daemon-reload
+</span></span><span style=display:flex><span><span style=color:#75715e>#如果没有的话，执行下面的命令,之后再次查看是否有这个服务</span>
+</span></span><span style=display:flex><span>sudo apt install -y chrony
+</span></span></code></pre></td></tr></table></div></div><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916890.png alt=image-20230703133459335 style=zoom:50%><ol start=2><li><p>查看selinux状态出现以下错误:</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916891.png alt=image-20230703140821276></p><p>直接按照提示安装<code>selinux-utils</code>即可</p></li><li><p>运行ipvs.modules脚本显示下面的错误</p></li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307031916892.png alt=image-20230703150206722></p><blockquote><p>版本出了问题，此时将脚本中的<code>nf_conntrack_ipv4</code>改成<code>nf_conntrack</code>即可</p></blockquote><ol start=4><li>集群初始化安装镜像时出现以下错误</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235736.png alt=image-20230704151656475 style=zoom:50%><blockquote><p>确保当前用户是root，如果还是出现错误，重启docker服务即可：<code>systemctl restart docker</code></p></blockquote><ol start=5><li><p>集群初始化使用kubeadm init出现以下错误</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235737.png alt=image-20230704153749023 style=zoom:50%><blockquote><p>更换<code>kubernetes-version</code>的版本</p></blockquote></li><li><p>如果kubeadm init提示如下信息</p></li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235738.png alt=image-20230704160510626></p><p>说明docker版本不兼容，需要安装指定版本docker</p><ol start=7><li>kubeadm初始化时显示如下错误</li></ol><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235739.png alt=image-20230704204530312 style=zoom:50%><blockquote><p>依次执行下面的命令</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#删除旧的containerd</span>
+</span></span><span style=display:flex><span>apt remove containerd
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#更新存储库</span>
+</span></span><span style=display:flex><span>apt update
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#安装新的containerd</span>
+</span></span><span style=display:flex><span>apt install containerd.io
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#删除默认配置文件</span>
+</span></span><span style=display:flex><span>rm /etc/containerd/config.toml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#重新启动containerd</span>
+</span></span><span style=display:flex><span>systemctl restart containerd
+</span></span></code></pre></td></tr></table></div></div><ol start=8><li>kubeadm init出现以下问题</li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235740.png alt=image-20230704224759111></p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#执行下面的命令</span>
+</span></span><span style=display:flex><span>kubeadm reset
+</span></span></code></pre></td></tr></table></div></div><ol start=9><li>kubeadm init出现以下问题</li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235741.png alt=image-20230705103616882></p><p>直接删除对应的文件即可</p><ol start=10><li><p>k8s的多网卡节点之间通信出现问题</p><p>存在多个网卡时，k8s不知道以哪个网卡进行通信，需要手动指定，在网卡配置时，需要在配置文件中更改参数，配置文件的下载地址
+<a href=https://github.com/flannel-io/flannel#deploying-flannel-manually title=点这里 rel="noopener external nofollow noreferrer" target=_blank class=exturl>点这里
+<i class="fa fa-external-link-alt"></i></a></p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307100943131.png alt=image-20230710092306335></p><blockquote><p>iface指定通信的网卡</p></blockquote></li><li><p>kubeadm init出现以下问题</p></li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235742.png alt=image-20230705123648049></p><p>运行以下命令之后重新运行kubeadm init</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-shell data-lang=shell><span style=display:flex><span>rm -rf /etc/containerd/config.toml
+</span></span><span style=display:flex><span>systemctl restart containerd
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>如果还是不行，尝试重装k8s，确保之前的版本完全卸载，卸载教程
+<a href=https://blog.csdn.net/weixin_39589455/article/details/129160682 title=点这里 rel="noopener external nofollow noreferrer" target=_blank class=exturl>点这里
+<i class="fa fa-external-link-alt"></i></a></p></blockquote><ol start=11><li>apt update一直连接的是google镜像源</li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235743.png alt=image-20230706193502767></p><blockquote><p>进入/etc/apt/sources.list.d目录下</p></blockquote><p>查看目录结构</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235745.png alt=image-20230706193552285></p><p>只保留上面<strong>两个</strong>文件即可</p><ol start=12><li>安装docker报错</li></ol><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235746.png alt=image-20230706193649928></p><blockquote><p>1.查看系统版本</p></blockquote><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235747.png alt=image-20230706193918087></p><blockquote><ol start=2><li>发现系统的codename为jammy，此时下载的docker版本也需要有jammy后缀</li></ol></blockquote><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235748.png alt=image-20230706194020883></p><blockquote><p>上述操作保证docker被完全卸载</p></blockquote><p>13.初始化k8s集群报错，首先检查docker与k8s的版本
+<a href=https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG title=对应关系 rel="noopener external nofollow noreferrer" target=_blank class=exturl>对应关系
+<i class="fa fa-external-link-alt"></i>
+</a>，例如，以k8s v1.21为例：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307061941226.png alt=img></p><p><img src=/imgs/img-lazy-loading.gif data-src=https://img2020.cnblogs.com/blog/553409/202106/553409-20210615114639262-763119090.png alt=img></p><blockquote><p>发现支持的最新docker版本为20.10，所以不要超过这个版本</p></blockquote><ol start=14><li><p>安装docker指定不了版本，提供一个笨办法</p><ul><li>先安装docker-ce并指定版本，此时docker-ce-cli为最新版本</li><li>之后使用aptitude降级</li></ul></li><li><p>kubeadm join时卡在</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235749.png alt=image-20230706195409905></p><blockquote><p>master的6443端口未开放，打开master的6443端口即可正常加入</p></blockquote></li><li><p>kubectl get cs显示unhealthy</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235750.png alt=image-20230706224949054></p><blockquote><p>需要修改配置文件，文件路径为：<code>/etc/kubernetes/manifests</code></p></blockquote></li></ol><p>分别将<code>kube-scheduler.yaml kube-controller-manager.yaml</code></p><p>文件中的<code>port=0</code>注释掉即可</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235751.png alt=image-20230706225055887></p><ol start=17><li><p>无法通过ip+端口的方式访问部署的应用</p><blockquote><p>先查看部署的应用在哪个节点上，之后通过节点ip+端口的方式访问</p><p>以nginx为例，</p><ol><li><p>查看nginx的名称（nginx-65c4bffcb6-zphwj）</p></li><li><p>找到nginx部署在哪个节点上（node2）</p></li><li><p>访问（192.168.1.27:32737），这个端口号为集群内部端口号</p><p>可以通过<code>kubectl get service</code>获得</p></li></ol></blockquote><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235752.png alt=image-20230707123038668></p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202307071235753.png alt=image-20230707123159437></p></li></ol><h2 id=总结>总结
+<a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>k8s部署过程中存在诸多问题，最常见的问题如下：</p><ol><li>docker无法指定版本，k8s与docker之间有版本对应关系</li><li>k8s节点之间通信对于多网卡设备来说需要指定网卡</li><li>k8s部署时卡在某一步不动</li></ol><blockquote><p>以上问题按照教程还不能完美解决，建议重装对应组件</p></blockquote></div><footer class=post-footer><div class=post-tags><a href=/tags/k8s>k8s</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/ rel=next title=739.每日温度><i class="fa fa-chevron-left"></i> 739.每日温度</a></div><div class="post-nav-prev post-nav-item"><a href=/post/3.%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/ rel=prev title=3.资源管理>3.资源管理
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2023 - 2024</span>
+<span class=with-love><i class="fa fa-heart"></i></span>
+<span class=author itemprop=copyrightHolder>zzzi提供技术支持</span></div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script>
+<script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script>
+<script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":false,"save":"manual"},"copybtn":true,"darkmode":false,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://zzzicode.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":null,"views":null},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"right","width":256},"statis":{"enable":true,"plugin":"busuanzi"},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"comment":true,"emoji":false,"imguploader":false,"pageview":true,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":"https://walinejs.comment.lithub.cc","sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0e26367f0461fb41ac6f947dc2af3620375dc44aa8945e6c2b1480d342c65d1.js defer></script>
+<script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>
