@@ -1100,6 +1100,7 @@ Kubernetes集群完整搭建步骤
 &lt;/blockquote>
 &lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
 &lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
+&lt;p>总结来看除了排列问题需要先遍历背包容量，其余都先遍历物品&lt;/p>
 &lt;blockquote>
 &lt;p>核心就是确定递推公式和初始化方案&lt;/p>
 &lt;/blockquote></description></item><item><title>2196.根据描述创建二叉树</title><link>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</link><pubDate>Sun, 18 Jun 2023 17:47:49 +0800</pubDate><guid>https://zzzicode.github.io/post/2196.%E6%A0%B9%E6%8D%AE%E6%8F%8F%E8%BF%B0%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/</guid><description>&lt;blockquote>

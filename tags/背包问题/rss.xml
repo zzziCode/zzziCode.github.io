@@ -3,6 +3,7 @@
 &lt;/blockquote>
 &lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
 &lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
+&lt;p>总结来看除了排列问题需要先遍历背包容量，其余都先遍历物品&lt;/p>
 &lt;blockquote>
 &lt;p>核心就是确定递推公式和初始化方案&lt;/p>
 &lt;/blockquote></description></item></channel></rss>
