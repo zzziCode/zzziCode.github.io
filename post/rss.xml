@@ -16,9 +16,7 @@
 &lt;a href="https://leetcode.cn/circle/discuss/0viNMK/" title="题单" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
 题单
 &lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度&lt;/p></description></item><item><title>Java面经</title><link>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 17 Apr 2024 22:33:00 +0800</pubDate><guid>https://zzzicode.github.io/post/java%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>java面经&lt;/p>
-&lt;/blockquote></description></item><item><title>873.最长的斐波那契子序列的长度</title><link>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</link><pubDate>Wed, 17 Apr 2024 16:04:38 +0800</pubDate><guid>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</guid><description>&lt;blockquote>
+&lt;/a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度&lt;/p></description></item><item><title>873.最长的斐波那契子序列的长度</title><link>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</link><pubDate>Wed, 17 Apr 2024 16:04:38 +0800</pubDate><guid>https://zzzicode.github.io/post/873.%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/</guid><description>&lt;blockquote>
 &lt;p>🍉 873.最长的斐波那契子序列的长度&lt;/p>
 &lt;/blockquote>
 &lt;p>如果序列 &lt;code>X_1, X_2, ..., X_n&lt;/code> 满足下列条件，就说它是 &lt;em>斐波那契式&lt;/em> 的：&lt;/p>
@@ -47,14 +45,7 @@
 &lt;/blockquote>
 &lt;p>给你一个数组 &lt;code>nums&lt;/code> 。&lt;/p>
 &lt;p>每次操作你可以选择 &lt;code>nums&lt;/code> 中的任意一个元素并将它改成 &lt;strong>任意值&lt;/strong> 。&lt;/p>
-&lt;p>在 &lt;strong>执行最多三次移动后&lt;/strong> ，返回 &lt;code>nums&lt;/code> 中最大值与最小值的最小差值。&lt;/p></description></item><item><title>系统面经</title><link>https://zzzicode.github.io/post/%E7%B3%BB%E7%BB%9F%E9%9D%A2%E7%BB%8F/</link><pubDate>Tue, 19 Mar 2024 08:47:11 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%B3%BB%E7%BB%9F%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>🥽 系统面经&lt;/p>
-&lt;/blockquote>
-&lt;p>本文中主要介绍一些操作系统相关的面试题，资料来源于
-&lt;a href="https://xiaolincoding.com/" title="小林coding" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
-小林coding
-&lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，文章长期更新，先介绍了CPU和内存的相关知识，在这个基础上引入了运行在cpu和内存中的进程的相关知识，之后针对页面，进程，磁盘的调度算法做了研究，最后就是一些文件系统，输入输出设备的相关知识，相当于围绕了一个计算机来介绍内部的相关知识&lt;/p></description></item><item><title>生成特殊数字的最少操作</title><link>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 16 Mar 2024 12:40:16 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
+&lt;p>在 &lt;strong>执行最多三次移动后&lt;/strong> ，返回 &lt;code>nums&lt;/code> 中最大值与最小值的最小差值。&lt;/p></description></item><item><title>生成特殊数字的最少操作</title><link>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</link><pubDate>Sat, 16 Mar 2024 12:40:16 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%94%9F%E6%88%90%E7%89%B9%E6%AE%8A%E6%95%B0%E5%AD%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C/</guid><description>&lt;blockquote>
 &lt;p>😃 2844.生成特殊数字的最少操作&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个下标从 &lt;strong>0&lt;/strong> 开始的字符串 &lt;code>num&lt;/code> ，表示一个非负整数。&lt;/p>
@@ -69,15 +60,7 @@
 &lt;p>本节中介绍一种亿级流量的缓存方案，也就是多级缓存，将请求分为多种类型，然后一步一步的进行缓存，经过多级缓存都没找到数据最终才会到达数据库中&lt;/p></description></item><item><title>分布式缓存Redis</title><link>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98redis/</link><pubDate>Thu, 14 Mar 2024 13:14:15 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98redis/</guid><description>&lt;blockquote>
 &lt;p>🤘 分布式缓存Redis&lt;/p>
 &lt;/blockquote>
-&lt;p>本节中主要介绍分布式缓存的相关知识，以Redis的相关知识为主进行介绍，主要包括redis持久化的两种方式，redis主从集群的数据同步，哨兵模式的作用以及分片集群的相关知识&lt;/p></description></item><item><title>网络面经</title><link>https://zzzicode.github.io/post/%E7%BD%91%E7%BB%9C%E9%9D%A2%E7%BB%8F/</link><pubDate>Mon, 11 Mar 2024 08:52:11 +0800</pubDate><guid>https://zzzicode.github.io/post/%E7%BD%91%E7%BB%9C%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>🕸 网络面经&lt;/p>
-&lt;/blockquote>
-&lt;p>本文中介绍了一些计算机网络中常见的面试题，也可以当做平时的学习笔记来使用，知识点参考小林coding的
-&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
-图解系列
-&lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，文章长期更新&lt;/p>
-&lt;p>核心就是HTTP，TCP，UDP，IP&lt;strong>四大协议&lt;/strong>&lt;/p></description></item><item><title>分布式事务Seata</title><link>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</link><pubDate>Sun, 10 Mar 2024 21:15:40 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</guid><description>&lt;blockquote>
+&lt;p>本节中主要介绍分布式缓存的相关知识，以Redis的相关知识为主进行介绍，主要包括redis持久化的两种方式，redis主从集群的数据同步，哨兵模式的作用以及分片集群的相关知识&lt;/p></description></item><item><title>分布式事务Seata</title><link>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</link><pubDate>Sun, 10 Mar 2024 21:15:40 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1seata/</guid><description>&lt;blockquote>
 &lt;p>😝 分布式事务Seata&lt;/p>
 &lt;/blockquote>
 &lt;p>本节中我们介绍分布式事务的相关知识，并且引入Seata框架简单介绍其使用方法&lt;/p></description></item><item><title>微服务保护之Sentinel</title><link>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</link><pubDate>Wed, 06 Mar 2024 12:40:17 +0800</pubDate><guid>https://zzzicode.github.io/post/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4sentinel/</guid><description>&lt;blockquote>
@@ -102,15 +85,7 @@
 &lt;p>给你两个下标从 &lt;strong>0&lt;/strong> 开始的字符串 &lt;code>source&lt;/code> 和 &lt;code>target&lt;/code> ，它们的长度均为 &lt;code>n&lt;/code> 并且由 &lt;strong>小写&lt;/strong> 英文字母组成。&lt;/p>
 &lt;p>另给你两个下标从 &lt;strong>0&lt;/strong> 开始的字符数组 &lt;code>original&lt;/code> 和 &lt;code>changed&lt;/code> ，以及一个整数数组 &lt;code>cost&lt;/code> ，其中 &lt;code>cost[i]&lt;/code> 代表将字符 &lt;code>original[i]&lt;/code> 更改为字符 &lt;code>changed[i]&lt;/code> 的成本。&lt;/p>
 &lt;p>你从字符串 &lt;code>source&lt;/code> 开始。在一次操作中，&lt;strong>如果&lt;/strong> 存在 &lt;strong>任意&lt;/strong> 下标 &lt;code>j&lt;/code> 满足 &lt;code>cost[j] == z&lt;/code> 、&lt;code>original[j] == x&lt;/code> 以及 &lt;code>changed[j] == y&lt;/code> 。你就可以选择字符串中的一个字符 &lt;code>x&lt;/code> 并以 &lt;code>z&lt;/code> 的成本将其更改为字符 &lt;code>y&lt;/code> 。&lt;/p>
-&lt;p>返回将字符串 &lt;code>source&lt;/code> 转换为字符串 &lt;code>target&lt;/code> 所需的 &lt;strong>最小&lt;/strong> 成本。如果不可能完成转换，则返回 &lt;code>-1&lt;/code>&lt;/p></description></item><item><title>Redis面经</title><link>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</link><pubDate>Mon, 04 Mar 2024 12:57:25 +0800</pubDate><guid>https://zzzicode.github.io/post/redis%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>🛅 redis面经&lt;/p>
-&lt;/blockquote>
-&lt;p>本文主要介绍一些redis的常见面试题，文章长期更新，面试答案参考小林coding的
-&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
-图解系列
-&lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，&lt;strong>第一章&lt;/strong>面试篇就是整体的面试题，后面几章是对面试篇中一些重点问题的补充&lt;/p>
-&lt;p>主要分为数据类型及实现原理，持久化，集群，缓存三大问题&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
+&lt;p>返回将字符串 &lt;code>source&lt;/code> 转换为字符串 &lt;code>target&lt;/code> 所需的 &lt;strong>最小&lt;/strong> 成本。如果不可能完成转换，则返回 &lt;code>-1&lt;/code>&lt;/p></description></item><item><title>Elasticsearch学习笔记2</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><pubDate>Fri, 01 Mar 2024 20:51:31 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><description>&lt;blockquote>
 &lt;p>🔍 elasticsearch学习笔记2&lt;/p>
 &lt;/blockquote>
 &lt;p>本节中主要介绍elasticsearch中的文档搜索功能，这也是它最重要的一个知识点&lt;/p></description></item><item><title>875.爱吃香蕉的珂珂</title><link>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</link><pubDate>Fri, 01 Mar 2024 19:36:57 +0800</pubDate><guid>https://zzzicode.github.io/post/875.%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/</guid><description>&lt;blockquote>
@@ -122,18 +97,7 @@
 &lt;p>返回她可以在 &lt;code>h&lt;/code> 小时内吃掉所有香蕉的最小速度 &lt;code>k&lt;/code>（&lt;code>k&lt;/code> 为整数）。&lt;/p></description></item><item><title>Elasticsearch学习笔记1</title><link>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><pubDate>Thu, 29 Feb 2024 20:30:00 +0800</pubDate><guid>https://zzzicode.github.io/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><description>&lt;blockquote>
 &lt;p>🔍 elasticsearch学习笔记1&lt;/p>
 &lt;/blockquote>
-&lt;p>本节中主要介绍了elasticsearch中的一些基本概念，并于mysql中的一些概念进行了对比，分析了elasticsearch与mysql适用的场景。并且介绍了elasticsearch中索引库和文档的DSL语句的操作语法，主要是索引库的增删改查以及文档的增删改，关于文档如何进行查询，在下一节中介绍。之后还使用了java封装的RestAPI来使用java代码操作索引库和文档&lt;/p></description></item><item><title>Mysql面经</title><link>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:56:32 +0800</pubDate><guid>https://zzzicode.github.io/post/mysql%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>📈 mysql面经&lt;/p>
-&lt;/blockquote>
-&lt;p>本文中主要介绍一些mysql的面试笔记，文章持续更新，面试答案参小林coding的
-&lt;a href="https://xiaolincoding.com/" title="图解系列" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
-图解系列
-&lt;i class="fa fa-external-link-alt">&lt;/i>
-&lt;/a>，主要围绕一条SQL的执行过程穿插了很多面试题，并且按照章节进行介绍&lt;/p>
-&lt;p>主要分为索引，锁，事务，三大日志四个核心部分&lt;/p></description></item><item><title>Spring面经</title><link>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</link><pubDate>Wed, 28 Feb 2024 09:26:12 +0800</pubDate><guid>https://zzzicode.github.io/post/spring%E9%9D%A2%E7%BB%8F/</guid><description>&lt;blockquote>
-&lt;p>🌸 spring面经&lt;/p>
-&lt;/blockquote>
-&lt;p>本文总结一些常见的spring面试题并自己做出总结，文章持续更新&lt;/p></description></item><item><title>1887.使数组元素相等的减少操作次数</title><link>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</link><pubDate>Mon, 15 Jan 2024 20:47:56 +0800</pubDate><guid>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</guid><description>&lt;blockquote>
+&lt;p>本节中主要介绍了elasticsearch中的一些基本概念，并于mysql中的一些概念进行了对比，分析了elasticsearch与mysql适用的场景。并且介绍了elasticsearch中索引库和文档的DSL语句的操作语法，主要是索引库的增删改查以及文档的增删改，关于文档如何进行查询，在下一节中介绍。之后还使用了java封装的RestAPI来使用java代码操作索引库和文档&lt;/p></description></item><item><title>1887.使数组元素相等的减少操作次数</title><link>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</link><pubDate>Mon, 15 Jan 2024 20:47:56 +0800</pubDate><guid>https://zzzicode.github.io/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/</guid><description>&lt;blockquote>
 &lt;p>😃 1887.使数组元素相等的减少操作次数&lt;/p>
 &lt;/blockquote>
 &lt;p>给你一个整数数组 &lt;code>nums&lt;/code> ，你的目标是令 &lt;code>nums&lt;/code> 中的所有元素相等。完成一次减少操作需要遵照下面的几个步骤：&lt;/p>
