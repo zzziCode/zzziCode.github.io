@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>二分查找</title><url>/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url><categories><category>学习笔记</category></categories><tags><tag>二分查找</tag></tags><content type="html"><![CDATA[   🕧 二分查找
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>开始</title><url>/post/external-link/</url><categories><category>开始</category></categories><tags><tag>开始</tag></tags><content type="html"> 🚀🚀🚀 盛年不重来，一日难再晨。及时当勉励，岁月不待人。</content></entry><entry><title>埃氏筛和线性筛</title><url>/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</url><categories><category>学习笔记</category></categories><tags><tag>质数</tag><tag>埃氏筛</tag><tag>线性筛</tag></tags><content type="html"><![CDATA[   🍇埃氏筛和线性筛
+本文中介绍两种快速求出给定范围内所有质数的快速办法，不用再逐个判断，大大缩短了质数的求解时间，可以用来解决很多算法问题
+埃氏筛埃氏筛的 核心就是从小开始，遇到一个质数就向后去掉所有当前质数的倍数，走到当前数字时，如果当前数字没有被去掉，说明比当前数字小的数中不存在当前数的因子，也就是当前数是质数
+为了判断某一个数是否被去掉，可以使用一个辅助数组flag来记录，当前数X是质数时需要划掉他的倍数，我们可以从x^2开始遍历，每次都X步，因为x到x^2之间的数如果其不是质数，那么一定会被小于x的质数划掉，这里优化一小部分，得到的代码为：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); //去掉当前质数的所有倍数 for (int j = i * i; j &lt;= right; j += i) { flag[j] = false; } } } } 从2开始，直到达到给定的范围，此时一定可以求出所有的质数
+如果给定的范围right过大，那么就将去除倍数的起点变成i+i，防止平方数过大越界
+线性筛（欧拉筛）​	线性筛的思想是为了改进埃氏筛中一个数被划掉多次的情况，为了划掉所有不是质数的数，我们在每个数的基础上乘以小于这个数，并且不是这个数的因子的质数，这样划掉的数可以保证是被它的最小质因子划掉
+​	例如当前数为4，比当前数小的质数由2和3，由于2是4的因子，所以只能划掉2*4=8，不能划掉3*4=12，因为这个12会被6划掉，不能划掉多次
+​	相当于我们在划掉所有不符合要求的数时，要保证当前数只能被自己的最小质因子划掉，也就是12不能被3划掉，只能被2划掉，为了找到这个最小质因子，就要保证当前数的因子出现后，就不能进行划分，最后得到的代码为：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); } //针对当前数来说，只划掉能划掉的数 for (int j = 0; j &lt; prime.size(); ++j) { if (i * prime.get(j) &gt; right) break; //划掉当前数的倍数 flag[i * prime.get(j)] = false; //出现了最小质因子 if (i % prime.get(j) == 0) break; } } } 如果无法理解线性筛，埃氏筛也能解决大部分问题，因为埃氏筛的思想就是一旦出现一个质数，就将当前范围内质数的所有倍数全部划掉，线性筛只是埃氏筛的优化版，基本原理还是划掉不是质数的数
+  ]]></content></entry><entry><title>Java的移位操作符</title><url>/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</url><categories><category>学习笔记</category></categories><tags><tag>Java</tag></tags><content type="html"> 🧢 Java的移位操作符
+介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍
+数据在底层的存储
+数据在计算机的底层统一采用补码的二进制形式存储,而Java的移位操作符只能作用于long,int,short,char四种基本整数类型上,所以这里用int进行介绍,其余的差别就是在所占的字节数上,这里总结Java中所有基本数据类型的占位情况
+数据类型 位数 字节数 默认值 boolean 1 - false byte 8 1 0 short 16 2 0 char 16 2 &amp;amp;lsquo;u0000&amp;amp;rsquo; int 32 4 0 float 32 4 0f long 64 8 0L double 64 8 0d 正数
+正数的补码就是其自身,例如整数5的二进制形式为00000000 00000000 00000000 00000101,补码也是00000000 00000000 00000000 00000101,对正数进行移位操作很简单
+负数
+负数的补码略微复杂一些,需要现将负数的原码表示出来,然后转换成反码,最后转换成补码,首先负数转换成原码需要注意,最高位是一个符号位
+例如-5的原码是10000000 00000000 00000000 00000101,最高位是一个符号位
+之后将原码转换成反码,除了符号位,剩下的每一位取反即可,-5的反码是11111111 11111111 11111111 11111010
+最后将反码转换成补码,就是在反码的基础上对反码加1即可,-5的补码是11111111 11111111 11111111 11111011
+移位操作符
+左移
+左移没有什么特殊的地方,高位直接覆盖,包括负数的符号位也直接覆盖,低位补零即可,例如-5的计算机存储形式为11111111 11111111 11111111 11111011,左移两位变成11111111 11111111 11111111 11101100,这是一个数的补码形式,将其转换成反码(补码-1)为11111111 11111111 11111111 11101011,进一步将其转换成原码(除了符号位都取反)为10000000 00000000 00000000 00010100,可以看出这是-20的原码,也就是说-5左移两位变成了-20
+代码测试为:
+1 2 3 4 5 …</content></entry><entry><title>JDK中的动态代理</title><url>/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url><categories><category>学习笔记</category></categories><tags><tag>动态代理</tag></tags><content type="html"><![CDATA[   🐇 JDK中的动态代理
+本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程
+静态代理所谓的代理，就是在原有方法的基础上进行增强，并且不侵入源代码，下面介绍一个静态代理的例子：
+UserService接口的代码
+1 2 3 4 5 public interface UserService { public void select(); public void update(); } UserServiceImpl类的代码，就是UserService接口的实现类
+1 2 3 4 5 6 7 8 9 public class UserServiceImpl implements UserService { public void select() { System.out.println(&amp;#34;查询 selectById&amp;#34;); } public void update() { System.out.println(&amp;#34;更新 update&amp;#34;); } } UserServiceProxy类的代码，就是代理类，用来增强UserServiceImpl类的功能
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 public class UserServiceProxy implements UserService{ //保存需要被代理的对象 private UserServiceImpl target; public UserServiceProxy(UserServiceImpl target) { this.target = target; } //调用被代理的方法，对原始方法进行增强，对外暴露代理对象Proxy的接口 //使得用户对增强无感 @Override public void select() { before(); //调用被代理对象的方法 target.select(); after(); } @Override public void …  ]]></content></entry><entry><title>快速排序和堆排序</title><url>/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</url><categories><category>学习笔记</category></categories><tags><tag>排序算法</tag></tags><content type="html"><![CDATA[   🍖 快速排序和堆排序
+本文主要介绍数组中的快速排序和堆排序的执行流程，介绍这两个算法的原理，针对快速排序来说，就是每一趟确定一个元素的位置，针对堆排序来说，就是每一次调整都找到一个最值元素
+快速排序原理快速排序的核心就是在于每一次的排序都要找到一个合适的位置，将当前元素插入这个位置之后，左边的元素不大于当前元素，右边的元素不小于当前元素，然后当前元素的位置固定了，左右两边的元素位置还需要继续划分，直到所有的元素都找到了自己的为止就完成了排序，由于每一次排序都是一半元素，所以时间复杂度为O(nlogn)
+每一趟快速排序都找到一个元素的最终位置，类似于不停地填坑，小的元素往前放，大的元素向后放，然后填完了最后一个坑就放置标志元素，然后两边的元素继续应用快速排序的算法，直到序列无法划分，针对升序还是降序的问题，主要是看大于标志位的元素往前放还是往后放，大于标志位的元素往前放就是降序，往后放就是升序
+核心就是每一趟找到一个标志元素的最终位置，大的往后放，小的往前放，并且序列长度大于1才能进行划分
+代码1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 public static void quickSort(int[] nums, int left, int right) { int temp = nums[right]; int i = left, j = right; //当序列长度大于1才能划分 if (left &amp;lt; right) { while (i &amp;lt; j) { //从前面找一个大于temp的数放到后面 while (i &amp;lt; j &amp;amp;&amp;amp; nums[i] &amp;lt;= temp) ++i; if (i &amp;lt; j) //将当前这个大于temp的元素向后放，并且j移动 nums[j--] = nums[i]; while (i &amp;lt; j &amp;amp;&amp;amp; nums[j] &amp;gt; temp) --j; if (i &amp;lt; j) //将当前这个小于temp的元素向前方，并且i移动 nums[i++] = nums[j]; } //找到了当前标志元素的最终位置 nums[i] = temp; quickSort(nums, left, i - 1); …  ]]></content></entry><entry><title>二分查找</title><url>/post/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url><categories><category>学习笔记</category></categories><tags><tag>二分查找</tag></tags><content type="html"><![CDATA[   🕧 二分查找
 根据灵神的二分查找题单以及视频教程总结的二分查找模版，主要针对闭区间，左闭右开区间，开区间三种形式去找大于等于target的元素位置做了总结，并针对&amp;gt;，&amp;gt;=，&amp;lt;，&amp;lt;=四种关系做了转换，核心点在于找到循环不变量，可以理解为找到target，之后确定上下界就可以完美利用二分模版解决问题
 模版二分查找的模板适合用在查找与某一个给定元素存在一定关系的元素位置，并且给定的元素是有序的，或者元素排序不影响结果，此时可以考虑用二分查找，核心点需要确定循环不变量以及上下界，当某一个边界无法确定时，可以使用开区间，都可以确定时，使用闭区间
 闭区间（推荐）初始化：left和right需要初始化为0和len-1 循环条件：区间内没有元素的情况是left&amp;gt;right，所以循环条件为left&amp;lt;=right 结果位置：结束循环时，left和right的位置为：[right,left]，所以结果位置为left或者right+1 模板如下：
@@ -35,17 +71,7 @@ n &amp;amp;gt;= 3 对于所有 i + 2 &amp;amp;lt;= n，都有 X_i + X_{i+1} = X_
 从尾部遍历b，每次取出一个最低位的指数计算快速幂 计算完快速幂之后，将底数变大，计算底数的10次幂，目的是为了将1560形式的指数分解为156 针对156这样的指数继续选择一个最低位的计算快速幂，不停地将快速幂的答案加到结果中 剩下的150继续拆分成15*10，将底数变大 计算每一个快速幂的过程中都要余上1337防止越界 代码
 根据以上分析，得出以下代码：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 class Solution { public int superPow(int a, int[] b) { // 针对每一个数位 int res = 1; int x = a % 1337; for (int i = b.length - 1; i &amp;gt;= 0; --i) { res = (res * myPow(x, b[i])) % 1337; //将指数1560变成156，然后继续取低位 x = myPow(x, 10) % 1337;//底数变大 } return res; } //快速幂的计算方式 public int myPow(int x, int pow) { int res = 1; while (pow != 0) { if (pow % 2 != 0) { res = (res * x) % 1337; } x *= x; x %= 1337; pow /= 2; } return res; } } 总结
-主要是要学会将很大的指数慢慢变小，一边变小的同时也不会超出数据范围，核心店就是将1569拆成1000+500+60+9，之后拆出9之后，剩下的1560将底数计算10次幂，指数变成156之后继续拆成100+50+6，以此类推，不直接利用很大的指数计算幂</content></entry><entry><title>埃氏筛和线性筛</title><url>/post/%E5%9F%83%E6%B0%8F%E7%AD%9B%E5%92%8C%E7%BA%BF%E6%80%A7%E7%AD%9B/</url><categories><category>学习笔记</category></categories><tags><tag>质数</tag><tag>埃氏筛</tag><tag>线性筛</tag></tags><content type="html"><![CDATA[   🍇埃氏筛和线性筛
-本文中介绍两种快速求出给定范围内所有质数的快速办法，不用再逐个判断，大大缩短了质数的求解时间，可以用来解决很多算法问题
-埃氏筛埃氏筛的 核心就是从小开始，遇到一个质数就向后去掉所有当前质数的倍数，走到当前数字时，如果当前数字没有被去掉，说明比当前数字小的数中不存在当前数的因子，也就是当前数是质数
-为了判断某一个数是否被去掉，可以使用一个辅助数组flag来记录，当前数X是质数时需要划掉他的倍数，我们可以从x^2开始遍历，每次都X步，因为x到x^2之间的数如果其不是质数，那么一定会被小于x的质数划掉，这里优化一小部分，得到的代码为：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); //去掉当前质数的所有倍数 for (int j = i * i; j &lt;= right; j += i) { flag[j] = false; } } } } 从2开始，直到达到给定的范围，此时一定可以求出所有的质数
-如果给定的范围right过大，那么就将去除倍数的起点变成i+i，防止平方数过大越界
-线性筛（欧拉筛）​	线性筛的思想是为了改进埃氏筛中一个数被划掉多次的情况，为了划掉所有不是质数的数，我们在每个数的基础上乘以小于这个数，并且不是这个数的因子的质数，这样划掉的数可以保证是被它的最小质因子划掉
-​	例如当前数为4，比当前数小的质数由2和3，由于2是4的因子，所以只能划掉2*4=8，不能划掉3*4=12，因为这个12会被6划掉，不能划掉多次
-​	相当于我们在划掉所有不符合要求的数时，要保证当前数只能被自己的最小质因子划掉，也就是12不能被3划掉，只能被2划掉，为了找到这个最小质因子，就要保证当前数的因子出现后，就不能进行划分，最后得到的代码为：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); } //针对当前数来说，只划掉能划掉的数 for (int j = 0; j &lt; prime.size(); ++j) { if (i * prime.get(j) &gt; right) break; //划掉当前数的倍数 flag[i * prime.get(j)] = false; //出现了最小质因子 if (i % prime.get(j) == 0) break; } } } 如果无法理解线性筛，埃氏筛也能解决大部分问题，因为埃氏筛的思想就是一旦出现一个质数，就将当前范围内质数的所有倍数全部划掉，线性筛只是埃氏筛的优化版，基本原理还是划掉不是质数的数
-  ]]></content></entry><entry><title>2385.感染二叉树需要的总时间</title><url>/post/2385.%E6%84%9F%E6%9F%93%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9C%80%E8%A6%81%E7%9A%84%E6%80%BB%E6%97%B6%E9%97%B4/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ☣ 2385.感染二叉树需要的总时间
+主要是要学会将很大的指数慢慢变小，一边变小的同时也不会超出数据范围，核心店就是将1569拆成1000+500+60+9，之后拆出9之后，剩下的1560将底数计算10次幂，指数变成156之后继续拆成100+50+6，以此类推，不直接利用很大的指数计算幂</content></entry><entry><title>2385.感染二叉树需要的总时间</title><url>/post/2385.%E6%84%9F%E6%9F%93%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9C%80%E8%A6%81%E7%9A%84%E6%80%BB%E6%97%B6%E9%97%B4/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ☣ 2385.感染二叉树需要的总时间
 给你一棵二叉树的根节点 root ，二叉树中节点的值 互不相同 。另给你一个整数 start 。在第 0 分钟，感染 将会从值为 start 的节点开始爆发。
 每分钟，如果节点满足以下全部条件，就会被感染：
 节点此前还没有感染。 节点与一个已感染节点相邻。 返回感染整棵树需要的分钟数*。*
@@ -461,12 +487,7 @@ AOP的相关知识，对于代理对象本身，其属性都为空，但是内�
 类似的题目还有
 786. 第 K 个最小的素数分数
 执行流程
-设计一个优先级队列，排序规则根据下标对应的数对和的大小升序排列 先将部分下标加入优先级队列中，目的是为了固定一个下标不变，防止两个下标同时变化导致出现重复元素 每次从优先级队列中 …</content></entry><entry><title>快速排序和堆排序</title><url>/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/</url><categories><category>学习笔记</category></categories><tags><tag>排序算法</tag></tags><content type="html"><![CDATA[   🍖 快速排序和堆排序
-本文主要介绍数组中的快速排序和堆排序的执行流程，介绍这两个算法的原理，针对快速排序来说，就是每一趟确定一个元素的位置，针对堆排序来说，就是每一次调整都找到一个最值元素
-快速排序原理快速排序的核心就是在于每一次的排序都要找到一个合适的位置，将当前元素插入这个位置之后，左边的元素不大于当前元素，右边的元素不小于当前元素，然后当前元素的位置固定了，左右两边的元素位置还需要继续划分，直到所有的元素都找到了自己的为止就完成了排序，由于每一次排序都是一半元素，所以时间复杂度为O(nlogn)
-每一趟快速排序都找到一个元素的最终位置，类似于不停地填坑，小的元素往前放，大的元素向后放，然后填完了最后一个坑就放置标志元素，然后两边的元素继续应用快速排序的算法，直到序列无法划分，针对升序还是降序的问题，主要是看大于标志位的元素往前放还是往后放，大于标志位的元素往前放就是降序，往后放就是升序
-核心就是每一趟找到一个标志元素的最终位置，大的往后放，小的往前放，并且序列长度大于1才能进行划分
-代码1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 public static void quickSort(int[] nums, int left, int right) { int temp = nums[right]; int i = left, j = right; //当序列长度大于1才能划分 if (left &amp;lt; right) { while (i &amp;lt; j) { //从前面找一个大于temp的数放到后面 while (i &amp;lt; j &amp;amp;&amp;amp; nums[i] &amp;lt;= temp) ++i; if (i &amp;lt; j) //将当前这个大于temp的元素向后放，并且j移动 nums[j--] = nums[i]; while (i &amp;lt; j &amp;amp;&amp;amp; nums[j] &amp;gt; temp) --j; if (i &amp;lt; j) //将当前这个小于temp的元素向前方，并且i移动 nums[i++] = nums[j]; } //找到了当前标志元素的最终位置 nums[i] = temp; quickSort(nums, left, i - 1); …  ]]></content></entry><entry><title>918.环形子数组的最大和</title><url>/post/918.%E7%8E%AF%E5%BD%A2%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ➰️ 918.环形子数组的最大和
+设计一个优先级队列，排序规则根据下标对应的数对和的大小升序排列 先将部分下标加入优先级队列中，目的是为了固定一个下标不变，防止两个下标同时变化导致出现重复元素 每次从优先级队列中 …</content></entry><entry><title>918.环形子数组的最大和</title><url>/post/918.%E7%8E%AF%E5%BD%A2%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/</url><categories><category>leetcode</category></categories><tags><tag>每日一题</tag></tags><content type="html"><![CDATA[   ➰️ 918.环形子数组的最大和
 给定一个长度为 n 的环形整数数组 nums ，返回 nums 的非空 子数组 的最大可能和 。
 环形数组 意味着数组的末端将会与开头相连呈环状。形式上， nums[i] 的下一个元素是 nums[(i + 1) % n] ， nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 子数组 最多只能包含固定缓冲区 nums 中的每个元素一次。形式上，对于子数组 nums[i], nums[i + 1], ..., nums[j] ，不存在 i &lt;= k1, k2 &lt;= j 其中 k1 % n == k2 % n 。
@@ -687,13 +708,7 @@ RandomizedSet() 初始化 RandomizedSet 对象 bool insert(int val) 当元素 va
 ​ 为了实现使用时才创建，需要改变思路，上一节中是将所有的参数准备好，然后直接创建bean对象，这一节中将bean对象依赖的所有关系都记录下来，普通类型的参数直接记录值，bean类型的参数只记录一个依赖关系，然后先创建一个空的bean对象，之后再进行属性填充，这种创建bean的方式才更加符合原始spring框架的流程，具体如下图所示：
 其实这种依赖关系可以进行配置，也就是这种依赖的属性列表可以配置到xml文件中，然后从xml配置文件中读取到对应的PropertyValues
 ​ 上一节中我们创建bean的时候，使用getBean函数需要传递bean需要的参数，这样才能创建带参的bean对象，这一节中我们不传递任何参数，只是将需要bean的参数的信息保存到一个类中，先创建空的bean对象，然后再进行属性填充，新的项目结构为：
-不再是创建bean时就填充属性，而是创建好了之后再填充属性，这样就不用在getBean时就传递已经实例化的bean属性了，也就 …</content></entry><entry><title>JDK中的动态代理</title><url>/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url><categories><category>学习笔记</category></categories><tags><tag>动态代理</tag></tags><content type="html"><![CDATA[   🐇 JDK中的动态代理
-本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程
-静态代理所谓的代理，就是在原有方法的基础上进行增强，并且不侵入源代码，下面介绍一个静态代理的例子：
-UserService接口的代码
-1 2 3 4 5 public interface UserService { public void select(); public void update(); } UserServiceImpl类的代码，就是UserService接口的实现类
-1 2 3 4 5 6 7 8 9 public class UserServiceImpl implements UserService { public void select() { System.out.println(&amp;#34;查询 selectById&amp;#34;); } public void update() { System.out.println(&amp;#34;更新 update&amp;#34;); } } UserServiceProxy类的代码，就是代理类，用来增强UserServiceImpl类的功能
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 public class UserServiceProxy implements UserService{ //保存需要被代理的对象 private UserServiceImpl target; public UserServiceProxy(UserServiceImpl target) { this.target = target; } //调用被代理的方法，对原始方法进行增强，对外暴露代理对象Proxy的接口 //使得用户对增强无感 @Override public void select() { before(); //调用被代理对象的方法 target.select(); after(); } @Override public void …  ]]></content></entry><entry><title>3.创建带参bean对象</title><url>/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍈 3.创建带参bean对象
+不再是创建bean时就填充属性，而是创建好了之后再填充属性，这样就不用在getBean时就传递已经实例化的bean属性了，也就 …</content></entry><entry><title>3.创建带参bean对象</title><url>/post/3.%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%8F%82bean%E5%AF%B9%E8%B1%A1/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag><tag>源码</tag></tags><content type="html"> 🍈 3.创建带参bean对象
 本文主要是在上一章的基础上对上一章中代码存在的问题进行改造，上一章中将bean对象的创建交给了IOC容器，利用反射创建bean对象并保存到IOC容器中，但是忽略了一点，上章中代码只能创建不携带参数的bean对象，所以这一章主要解决的问题就是创建有参数的bean对象，正常的spring创建带参的bean对象时，参数应该注册到了BeanDefinition中，然后先创建然后属性填充，但是本节中我们直接一步到位，简化bean的创建过程。具体的代码在
 仓库
 中
@@ -892,22 +907,7 @@ springmvc将传统的mvc架构设计成了异步交互 …</content></entry><ent
 执行流程
 依次从board中的每一个元素出发进行搜索,形成一个图的搜索形式 当前元素与word的位置不匹配,直接返回false 当前元素与word的位置匹配,且匹配到了最后一个元素,直接返回true,递归从这里开始向上逐层返回true 当前元素与word的位置匹配,但是没到最后一个元素,此时需从当前元素出发,向上下左右遍历那些没访问过的元素,四个方向只要有一个方向匹配成功,就会继续向下匹配,如果没有一个位置匹配成功,此时就会逐层返回false,最终整个方法返回false,程序会继续选择board的下一个元素进行搜索,重复1的步骤 代码
 根据以上分析,得出以下代码:
-1 2 3 4 5 6 7 8 9 10 …</content></entry><entry><title>Java的移位操作符</title><url>/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</url><categories><category>学习笔记</category></categories><tags><tag>Java</tag></tags><content type="html"> 🧢 Java的移位操作符
-介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍
-数据在底层的存储
-数据在计算机的底层统一采用补码的二进制形式存储,而Java的移位操作符只能作用于long,int,short,char四种基本整数类型上,所以这里用int进行介绍,其余的差别就是在所占的字节数上,这里总结Java中所有基本数据类型的占位情况
-数据类型 位数 字节数 默认值 boolean 1 - false byte 8 1 0 short 16 2 0 char 16 2 &amp;amp;lsquo;u0000&amp;amp;rsquo; int 32 4 0 float 32 4 0f long 64 8 0L double 64 8 0d 正数
-正数的补码就是其自身,例如整数5的二进制形式为00000000 00000000 00000000 00000101,补码也是00000000 00000000 00000000 00000101,对正数进行移位操作很简单
-负数
-负数的补码略微复杂一些,需要现将负数的原码表示出来,然后转换成反码,最后转换成补码,首先负数转换成原码需要注意,最高位是一个符号位
-例如-5的原码是10000000 00000000 00000000 00000101,最高位是一个符号位
-之后将原码转换成反码,除了符号位,剩下的每一位取反即可,-5的反码是11111111 11111111 11111111 11111010
-最后将反码转换成补码,就是在反码的基础上对反码加1即可,-5的补码是11111111 11111111 11111111 11111011
-移位操作符
-左移
-左移没有什么特殊的地方,高位直接覆盖,包括负数的符号位也直接覆盖,低位补零即可,例如-5的计算机存储形式为11111111 11111111 11111111 11111011,左移两位变成11111111 11111111 11111111 11101100,这是一个数的补码形式,将其转换成反码(补码-1)为11111111 11111111 11111111 11101011,进一步将其转换成原码(除了符号位都取反)为10000000 00000000 00000000 00010100,可以看出这是-20的原码,也就是说-5左移两位变成了-20
-代码测试为:
-1 2 3 4 5 …</content></entry><entry><title>Spring03</title><url>/post/spring03/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag></tags><content type="html"> 🧒 spring03
+1 2 3 4 5 6 7 8 9 10 …</content></entry><entry><title>Spring03</title><url>/post/spring03/</url><categories><category>学习笔记</category></categories><tags><tag>spring</tag></tags><content type="html"> 🧒 spring03
 本文主要介绍spring中的面向切面编程AOP，实现不侵入源代码的情况下对代码进行增强处理，从入门到最后的配置以及案例进行讲解
 AOP简介
 前面我们在介绍Spring的时候说过，Spring有两个核心的概念，一个是IOC/DI，一个是AOP。
