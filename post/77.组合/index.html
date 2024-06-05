@@ -22,18 +22,18 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🤏 77.组合</p></blockquote><p>给定两个整数 <code>n</code> 和 <code>k</code>，返回范围 <code>[1, n]</code> 中所有可能的 <code>k</code> 个数的组合。</p><p>你可以按 <strong>任何顺序</strong> 返回答案。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了求出所有数的组合，最直接的办法就是for循环，当求两个数的组合时，只需要两层循环，求三个数的组合时需要三层循环，但是一旦组合个数过多，就会导致时间复杂度太高，并且由于组合个数是动态指定的，所以无法固定for循环的层数：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#66d9ef>int</span> n <span style=color:#f92672>=</span> <span style=color:#ae81ff>4</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;=</span> n; j<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>        cout <span style=color:#f92672>&lt;&lt;</span> i <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34; &#34;</span> <span style=color:#f92672>&lt;&lt;</span> j <span style=color:#f92672>&lt;&lt;</span> endl;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了求出所有数的组合，最直接的办法就是for循环，当求两个数的组合时，只需要两层循环，求三个数的组合时需要三层循环，但是一旦组合个数过多，就会导致时间复杂度太高，并且由于组合个数是动态指定的，所以无法固定for循环的层数：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span> <span style=color:#99d1db>=</span> 4<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>=</span> 1<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>&lt;=</span> <span style=color:#babbf1>n</span><span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>+</span> 1<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>j</span> <span style=color:#99d1db>&lt;=</span> <span style=color:#babbf1>n</span><span style=color:#c6d0f5>;</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>cout</span> <span style=color:#99d1db>&lt;&lt;</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>&lt;&lt;</span> <span style=color:#a6d189>&#34; &#34;</span> <span style=color:#99d1db>&lt;&lt;</span> <span style=color:#babbf1>j</span> <span style=color:#99d1db>&lt;&lt;</span> <span style=color:#babbf1>endl</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>为了遍历所有的结果，可以采用回溯的办法，每一层都相当与一层for循环，但是采用递归的方式向下遍历，而不是强行for循环嵌套</p><p>当前一层遍历[1,n]的数，下一层遍历[2,n]的数，再下一层遍历[3,n]的数，以此类推，每层中选一个数，直接进行下一层的遍历，最后会形成一个搜索树</p><p>上一层选取一个数，可以跟下一层的所有元素配对，例如第一层先在[1,n]中选择一个1，这个1就可以和下一层[2,n]中的所有数依次配对，当形成一个个数为k的集合时，说明找到一个结果，此时将当前集合加入结果容器中，删除集合末尾的元素，重新建立新的集合，就这样一直搜索，最终可以搜索出所有的结果</p><img src=https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195223940.png alt=77.组合 style=zoom:50%><p>选择范围时可以进行优化，例如集合中共有5个元素，当前已选择3个元素，需要组成3个元素的集合，那么剩下的两个元素无法形成新的3的元素的组合，可以直接不遍历，新的搜索树为：</p><img src=https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207.png alt=77.组合4 style=zoom:50%><p>此时在代码中需要推导出i的变化范围，当集合中剩余元素大于等于所需要元素时，可以正常遍历，集合中的剩余元素可以用<code>n-i</code>表示，所需要的元素可以用<code>k-path.size()</code>来表示，所以只需要符合：
 $$
 n-i>=k-path.size()
@@ -55,60 +55,60 @@ $$
 <i class="fa fa-external-link-alt"></i>
 </a>，元素重复需要使用一个容器标记当前元素是否被使用，并且需要区分是同一层不能使用还是同一列不能使用，并且去重时为了让相同的元素相邻，需要对给定的元素进行排序</li></ol><p>当给定集合中元素重复时，需要在当前层中去重，当元素可以重复使用时，下一层开始的下标可以与上一层相同，但是不能从0开始</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>判断当前遍历路径是否形成一个大小为k的集合，如果形成了，说明出现一个结果，将当前结果保留</li><li>如果没有形成大小为k的集合，需要在下面的元素中搜索一个新的元素加入集合中</li><li>当前元素x加入集合中，需要进行递归，在下一层中的[x+1,n]中找一个元素加入集合</li><li>如果程序返回，说明形成一个符合要求的结合，此时删除集合最后的元素，加入一个新的元素，继续递归</li><li>程序结果，结果容器中保存了正确的结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> res;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> path;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> combine(<span style=color:#66d9ef>int</span> n, <span style=color:#66d9ef>int</span> k) {
-</span></span><span style=display:flex><span>        backtrack(n,<span style=color:#ae81ff>1</span>,k);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span>(<span style=color:#66d9ef>int</span> n,<span style=color:#66d9ef>int</span> start,<span style=color:#66d9ef>int</span> k){
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//形成了一个k大小的集合
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(path.size()<span style=color:#f92672>==</span>k){
-</span></span><span style=display:flex><span>            res.push_back(path);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//每次从一个元素出发，形成一个k大小的集合
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//for循环可以优化为
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>start;i<span style=color:#f92672>&lt;</span>n<span style=color:#f92672>-</span>(k<span style=color:#f92672>-</span>path.size())<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//for(int i=start;i&lt;=n;++i){
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//加入一个元素
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            path.push_back(i);
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//递归
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            backtrack(n,i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,k);
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//进行回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            path.pop_back();
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>path</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>combine</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>k</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>n</span><span style=color:#c6d0f5>,</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>k</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>start</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>k</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//形成了一个k大小的集合
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>==</span><span style=color:#babbf1>k</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>path</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//每次从一个元素出发，形成一个k大小的集合
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//for循环可以优化为
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span><span style=color:#babbf1>start</span><span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>n</span><span style=color:#99d1db>-</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>k</span><span style=color:#99d1db>-</span><span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>())</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>;</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//for(int i=start;i&lt;=n;++i){
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//加入一个元素
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//递归
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>n</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>k</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//进行回溯
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop_back</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是明白搜索的过程中会形成一个搜索树，搜索树分层，每一层的元素都会遍历与下一层的元素进行组合，从而形成不同的结果</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/ rel=next title=17.电话号码的字母组合><i class="fa fa-chevron-left"></i> 17.电话号码的字母组合</a></div><div class="post-nav-prev post-nav-item"><a href=/post/236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/ rel=prev title=236.二叉树的公共祖先>236.二叉树的公共祖先
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

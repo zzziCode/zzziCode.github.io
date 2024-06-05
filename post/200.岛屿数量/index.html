@@ -24,78 +24,78 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>核心思想就是每次找到一个岛，需要将岛中的所有陆地找出来，标记为遍历过，所以需要使用遍历的方法，遍历的方法与二叉树遍历的方法类似</p><p>二叉树遍历时，遇到叶节点需要返回，之后遍历当前节点的两个叶子结点，也可以理解为相邻的两个节点，转换到图的遍历中，超出图的边界需要返回，之后遍历当前节点的四个相邻节点，也就是上下左右的四个节点</p><p>在本题中，为了将所有的相邻陆地找出来，所以需要在遇到一个陆地时，需要一直向下遍历，将所有相邻陆地全部遍历一遍，这样才算是将一个岛屿找出来</p><p>返回的条件就是遇到了图的边界或者遇到了海洋，此时需要返回</p><blockquote><p>一个陆地的所有相邻陆地全部遍历一遍，才能形成一个完整的岛屿</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202309022112809.jpeg alt=岛屿问题示例 style=zoom:50%><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>遍历一个图</li><li>一旦遇到陆地节点，就需要将相邻的陆地全部找出来</li><li>遍历时出现已访问过的节点或者越界亦或是海洋节点时返回</li><li>当当前节点是陆地节点并且没有被访问过时，需要将当前节点标记为访问过，防止出现重复访问的情况</li><li>递归遍历当前节点的相邻节点（上下左右）</li><li>一个陆地的所有相邻陆地被访问过，一个岛屿才会形成</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//什么时候才算是一个完整的岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//将·所有陆地连接在一起，形成一个完整的岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//也就是说，一旦遇到一个陆地，将与其相连的所有陆地统计出来，就可以形成一个岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//统计完所有相邻的陆地，会形成一个岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//再次遇到不相邻的陆地，就会形成新的岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>numIslands</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>char</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//遇到没有遍历过的陆地，将相邻的所有陆地找出来形成一个岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span>(grid[i][j]<span style=color:#f92672>==</span><span style=color:#e6db74>&#39;1&#39;</span>){
-</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>dfs</span>(grid,i,j);
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//岛屿数量+1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#f92672>++</span>res;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//返回最终的结果
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>char</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid,<span style=color:#66d9ef>int</span> x,<span style=color:#66d9ef>int</span> y){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(x<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>y<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>x<span style=color:#f92672>&gt;=</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>y<span style=color:#f92672>&gt;=</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>  <span style=color:#75715e>//超过图的边界
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>==</span><span style=color:#e6db74>&#39;0&#39;</span><span style=color:#f92672>||</span>                                 <span style=color:#75715e>//遇到了海洋
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>==</span><span style=color:#e6db74>&#39;2&#39;</span>)                                  <span style=color:#75715e>//遇到了遍历过的节点 
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里说明当前位置没有超过边界，也不是海洋，也没有遍历过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;2&#39;</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遍历四周相邻节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,y);    <span style=color:#75715e>//上
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,y);    <span style=color:#75715e>//下
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,x,y<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);    <span style=color:#75715e>//左
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,x,y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);    <span style=color:#75715e>//右
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//什么时候才算是一个完整的岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//将·所有陆地连接在一起，形成一个完整的岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//也就是说，一旦遇到一个陆地，将与其相连的所有陆地统计出来，就可以形成一个岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//统计完所有相邻的陆地，会形成一个岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//再次遇到不相邻的陆地，就会形成新的岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>numIslands</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>char</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//遇到没有遍历过的陆地，将相邻的所有陆地找出来形成一个岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#a6d189>&#39;1&#39;</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//岛屿数量+1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//返回最终的结果
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>char</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>y</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span>  <span style=color:#626880;font-style:italic>//超过图的边界
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#a6d189>&#39;0&#39;</span><span style=color:#99d1db>||</span>                                 <span style=color:#626880;font-style:italic>//遇到了海洋
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#a6d189>&#39;2&#39;</span><span style=color:#c6d0f5>)</span>                                  <span style=color:#626880;font-style:italic>//遇到了遍历过的节点 
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到这里说明当前位置没有超过边界，也不是海洋，也没有遍历过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#a6d189>&#39;2&#39;</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遍历四周相邻节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>    <span style=color:#626880;font-style:italic>//上
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>    <span style=color:#626880;font-style:italic>//下
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>    <span style=color:#626880;font-style:italic>//左
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>);</span>    <span style=color:#626880;font-style:italic>//右
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>核心就是如何遍历图，参考二叉树的遍历逻辑，并且岛屿形成的标志是所有相邻的陆地全部被访问过后，才能形成完整的岛屿</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%be%e8%ae%ba>图论</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/ rel=next title=463.岛屿的周长><i class="fa fa-chevron-left"></i> 463.岛屿的周长</a></div><div class="post-nav-prev post-nav-item"><a href=/post/797.%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/ rel=prev title=797.所有可能的路径>797.所有可能的路径
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

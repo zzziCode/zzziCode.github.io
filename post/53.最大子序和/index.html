@@ -24,50 +24,50 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本想法>基本想法
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%83%b3%e6%b3%95></a></h3><p>遍历容器，如果当前的元素大于零，就加到后面的元素中，然后记录相加之后的结果</p><p>如果相加小于零，说明会拉低连续子序列的大小，就不加到当前位置，但是需要尝试当前位置加到后面的序列中是不是正数</p><p>进行一遍遍历之后，最大的子序列一定会出现在容器的某个位置中，找出最大值即可</p><p>找最大值还需要排序之后找出容器开头或末尾的元素，消耗时间。</p><p>可以找一个标志记录每次都最大值，有最大值就更新，这样运行结束之后标志中就存放着最大值</p><p>一定要从大于零的位置开始累加，因为<code>[-1,2,4,3,-1,7]</code>和<code>[2,4,3,-1,7]</code>相比，肯定是从正数元素开始累加才会更大</p><blockquote><p>总结：一旦出现负值，就需要放弃之前的累加，重新从当前的正值元素开始累加</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><p>遍历容器，从前向后累加元素，一旦出现小于零的累加，就放弃这段序列，重新从大于零的位置开始累加，原因参考<code>[-1,2,4,3,-1,7]</code>和<code>[2,4,3,-1,7]</code>，在累加的过程中，每走一步统计一下最大值，判断是否更新</p><p>而只要累加之后是正数，就可以对序列和起到<strong>增益</strong>效果</p><p>每一步累加之后都需要<strong>先统计</strong>是否更新最大值，之后再将负数截断，因为最大子序和可能是一个<strong>负数</strong></p><p>这样即使出现最大值，然后后面出现一个负数将最大值拉低，那么也会记录这个最大值，代码搜索的过程如下：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://code-thinking.cdn.bcebos.com/gifs/53.%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C.gif alt=53.最大子序和></p><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> maxSubArray(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//记录最大值的标志
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span>INT32_MIN;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//记录序列的累加和
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> sum<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遍历容器
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>nums.size();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            sum<span style=color:#f92672>+=</span>nums[i];
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//每走一步就统计一下最大值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//并且必须放在累加之后，因为有可能最大序列和是负数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//此时就会
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(sum<span style=color:#f92672>&gt;</span>res)
-</span></span><span style=display:flex><span>                res<span style=color:#f92672>=</span>sum;
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//小于零的序列和舍弃
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(sum<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>                sum<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>maxSubArray</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//记录最大值的标志
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#babbf1>INT32_MIN</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//记录序列的累加和
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>sum</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遍历容器
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>sum</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//每走一步就统计一下最大值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//并且必须放在累加之后，因为有可能最大序列和是负数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//此时就会
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>sum</span><span style=color:#99d1db>&gt;</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#babbf1>sum</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//小于零的序列和舍弃
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>sum</span><span style=color:#99d1db>&lt;</span>0<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>sum</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>遍历容器，然后一步一步的累加，判断是否比最大值大，大的话就更新，之后判断如果子序和如果是负数的话就截断，因为只有正数才会对子序和产生增益效果</p><p>由于最大子序和有可能是负数，所以截断的操作必须放在统计最大值之后</p><p>并且每一步都会统计，所以即使最大值被负数拉低，程序中也有记录</p><p>尽可能的往后加，相加得出负数才会放弃当前子序列，因为负数对累加无法起到<strong>增益</strong>效果</p><p>程序运行结束，得到最大子序和</p><blockquote><p><strong>不能让“连续和”为负数的时候加上下一个元素，而不是 不让“连续和”加上一个负数</strong></p></blockquote></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/stl%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/ rel=next title=STL标准库和泛型编程><i class="fa fa-chevron-left"></i> STL标准库和泛型编程</a></div><div class="post-nav-prev post-nav-item"><a href=/post/455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/ rel=prev title=455.分发饼干>455.分发饼干
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

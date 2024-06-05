@@ -24,66 +24,66 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>只能从0号房间开始，相当于从0开始向后扩散，越来越大，这个扩散的过程形成了一个有向图，每走到一个节点，能进入的房间都会非递减的增长，所以只需要统计哪些房间可以进入，进入之后拿到钥匙，范围扩大到了哪</p><p>关键点就是记录这个<strong>范围</strong>，初始记录所有的房间都无法访问，然后从0号房间开始出发，进行深度搜索，每到一个房间都拿出房间中的钥匙，然后用这些钥匙去指定的房间，遇到访问过的房间就去下一间</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>从0号房间出发，拿到0号房间中放置的钥匙</li><li>去对应的房间开锁，拿到对应房间的钥匙</li><li>重复2，直到遇到已经进入过的房间</li><li>一层一层向下，偶尔回溯</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>bool</span> canVisitAllRooms(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> rooms) {
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>bool</span><span style=color:#f92672>&gt;</span> visited (rooms.size(),false);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//需要以0号房间为起点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        dfs(visited,<span style=color:#ae81ff>0</span>,rooms);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//查看是否有房间没被访问
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>visited.size();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>visited[i]){<span style=color:#75715e>//有房间没被访问
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>return</span> false;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//所有的房间都被访问
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//注意要传递引用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>bool</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>&amp;</span>visited,<span style=color:#66d9ef>int</span> key,vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> rooms){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(visited[key]){<span style=color:#75715e>//当前房间有钥匙，但是被访问过了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//当前房间有钥匙没被访问
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        visited[key]<span style=color:#f92672>=</span>true;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//进入当前房间，拿到当前房间的钥匙
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> keys <span style=color:#f92672>=</span>rooms[key];
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//拿到钥匙之后，递归向下，目的是使用所有的钥匙
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> key:keys){
-</span></span><span style=display:flex><span>            dfs(visited,key,rooms);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>bool</span> <span style=color:#babbf1>canVisitAllRooms</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>bool</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>visited</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>(),</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//需要以0号房间为起点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>,</span>0<span style=color:#c6d0f5>,</span><span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//查看是否有房间没被访问
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]){</span><span style=color:#626880;font-style:italic>//有房间没被访问
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//所有的房间都被访问
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//注意要传递引用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>bool</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>&amp;</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>key</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>key</span><span style=color:#c6d0f5>]){</span><span style=color:#626880;font-style:italic>//当前房间有钥匙，但是被访问过了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//当前房间有钥匙没被访问
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>visited</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>key</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//进入当前房间，拿到当前房间的钥匙
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>keys</span> <span style=color:#99d1db>=</span><span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>key</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//拿到钥匙之后，递归向下，目的是使用所有的钥匙
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#e5c890>key</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>keys</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>visited</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>key</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>rooms</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是进入一个房间之后，拿到这些钥匙，就依次进入对应的房间，然后再从这个房间拿到对应的钥匙，没进入一个房间拿到对应的钥匙，都设置一个for循环，目的是使用拿到的钥匙去打开所有的房间，这样所有的钥匙都会被使用</p><p>最后查看是否有房间没被打开，有的话说明即使全部钥匙都使用了，但还是无法进入所有房间</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/27.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/ rel=next title=27.移除元素><i class="fa fa-chevron-left"></i> 27.移除元素</a></div><div class="post-nav-prev post-nav-item"><a href=/post/673.%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0/ rel=prev title=673.最长递增子序列的个数>673.最长递增子序列的个数
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

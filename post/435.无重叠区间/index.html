@@ -28,60 +28,60 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <i class="fa fa-external-link-alt"></i>
 </a>思路类似，452题是需要找到所有的重叠区间，这里是需要去除所有的重叠区间，让所有的区间都没有重复，所以判断条件与452题类似，先排序，这样才能在遍历容器的时候方便的知道前后两个区间是否重叠</p><p>不排序的话就需要依次从每个区间出发，判断他与其他的区间是否重叠从而删除</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li><p>对容器排序，初始<code>flag</code>为第一个区间</p></li><li><p>遍历容器，没有遇到交集<code>flag</code>就更新为当前区间，遇到交集就删除，在程序中不删除只计数</p></li><li><p>遇到有交集的两个区间，尽可能保留范围小（<strong>靠右</strong>）的区间，这样尽可能地保证区间之间的间隔增大</p><p>拿[10,16],[12,14],[15,18]举例，[10,16],[12,14]有交集，留下[12,14]之后就不会与[15,18]有交集，只需要删除<strong>一次</strong></p><p>若留下[10,16]，那么与[15,18]还有交集，需要删除两次，所以尽可能留下范围小（<strong>贪心</strong>）的区间</p></li><li><p>没遇到交集就将当前<code>flag</code>更新为当前区间</p></li></ol><blockquote><p>两种更新，有交集更新为范围小的区间，没交集更新为当前区间</p></blockquote><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> eraseOverlapIntervals(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> intervals) {
-</span></span><span style=display:flex><span>        sort(intervals.begin(),intervals.end(),
-</span></span><span style=display:flex><span>        [](vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> v1,vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> v2)<span style=color:#f92672>-&gt;</span><span style=color:#66d9ef>bool</span>{
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//第一元素相等按第二元素升序排列
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(v1[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>==</span>v2[<span style=color:#ae81ff>0</span>])
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> v1[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>&lt;</span>v2[<span style=color:#ae81ff>1</span>];
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> v1[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>&lt;</span>v2[<span style=color:#ae81ff>0</span>];
-</span></span><span style=display:flex><span>        });
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> flag<span style=color:#f92672>=</span>intervals[<span style=color:#ae81ff>0</span>];
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;i<span style=color:#f92672>&lt;</span>intervals.size();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//与flag作比较,有交集
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(intervals[i][<span style=color:#ae81ff>0</span>]<span style=color:#f92672>&lt;</span>flag[<span style=color:#ae81ff>1</span>]){
-</span></span><span style=display:flex><span>                <span style=color:#f92672>++</span>res;
-</span></span><span style=display:flex><span>                flag<span style=color:#f92672>=</span>intervals[i][<span style=color:#ae81ff>1</span>]<span style=color:#f92672>&lt;</span>flag[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>?</span>intervals[i]<span style=color:#f92672>:</span>flag;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//没有交集
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>                flag<span style=color:#f92672>=</span>intervals[i];
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//返回结果
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>eraseOverlapIntervals</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>sort</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>begin</span><span style=color:#c6d0f5>(),</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>(),</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>[](</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>v1</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>v2</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>-&gt;</span><span style=color:#e5c890>bool</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//第一元素相等按第二元素升序排列
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>v1</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#babbf1>v2</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>])</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>v1</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>v2</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>v1</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>v2</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>});</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>flag</span><span style=color:#99d1db>=</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>1<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//与flag作比较,有交集
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span>0<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>]){</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>flag</span><span style=color:#99d1db>=</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>?</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>:</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//没有交集
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>flag</span><span style=color:#99d1db>=</span><span style=color:#babbf1>intervals</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//返回结果
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>与452题一样的思路，一个时统计有多少交集，本题是去除所有交集，由于需要尽可能少的去除交集，所以在两个区间有交集时尽可能的保留范围<strong>靠右</strong>的小区间（<strong>贪心</strong>），这样与下一个区间相比时就尽可能的拉开他们之间的举例</p><p>当两个区间没有交集时，直接更新<code>flag</code>，判断当前区间与下一个区间是否有交集</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e8%b4%aa%e5%bf%83%e7%ae%97%e6%b3%95>贪心算法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/ rel=next title=763.划分字母区间><i class="fa fa-chevron-left"></i> 763.划分字母区间</a></div><div class="post-nav-prev post-nav-item"><a href=/post/452.%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83/ rel=prev title=452.用最少数量的箭引爆气球>452.用最少数量的箭引爆气球
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

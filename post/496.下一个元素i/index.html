@@ -28,92 +28,92 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 </a>的思想先求第i个元素的右边第一个大于自己的元素，找到之后看第i个元素是不是nums1中的元素，如果是的话，那么当前统计的结果就有用，如果不是的话，当前栈顶元素就不用统计</p><p>本题与
 <a href=https://www.programmercarl.com/0739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6.html#%E6%80%9D%E8%B7%AF title=739题 rel="noopener external nofollow noreferrer" target=_blank class=exturl>739题
 <i class="fa fa-external-link-alt"></i>
-</a>的不同是，739题求的是元素的距离，本题求的是第一个比自己大的元素的值，不再是求距离，所以可以直接将当前元素作为结果存储到ans中</p><p>对应的查询逻辑为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>if</span> (nums2[i] <span style=color:#f92672>&lt;=</span> nums2[st.top()]) {          
-</span></span><span style=display:flex><span>    st.push(i);
-</span></span><span style=display:flex><span>} <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>st.empty() <span style=color:#f92672>&amp;&amp;</span> nums2[i] <span style=color:#f92672>&gt;</span> nums2[st.top()]) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//看栈顶元素是否在nums1中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> (umap.find(nums2[st.top()]) <span style=color:#f92672>!=</span>umap.end()) { 
-</span></span><span style=display:flex><span>            result[umap[nums2[s.top()]]]<span style=color:#f92672>=</span>nums2[i];
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        st.pop();
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    st.push(i);
-</span></span><span style=display:flex><span>}
+</a>的不同是，739题求的是元素的距离，本题求的是第一个比自己大的元素的值，不再是求距离，所以可以直接将当前元素作为结果存储到ans中</p><p>对应的查询逻辑为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span> <span style=color:#99d1db>&lt;=</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#c6d0f5>{</span>          
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span> <span style=color:#ca9ee6>else</span> <span style=color:#c6d0f5>{</span> 
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>while</span> <span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>empty</span><span style=color:#c6d0f5>()</span> <span style=color:#99d1db>&amp;&amp;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span> <span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//看栈顶元素是否在nums1中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#99d1db>!=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>())</span> <span style=color:#c6d0f5>{</span> 
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>result</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>s</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()]]]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span>
 </span></span></code></pre></td></tr></table></div></div><ol><li>如果当前元素小于等于栈顶元素，对于栈顶元素来说没找到比自己大的元素，可以直接统计结果</li><li>如果当前元素大于栈顶元素，那么栈顶元素就找到了第一个比自己大的元素<ol><li>如果当前栈顶元素在nums1中，那么就可以统计，因为题目最终求的就是nums1中的元素在nums2中的第一个比自己大的元素</li><li>如果当前栈顶元素不在nums1中，可以不统计</li></ol></li></ol><p>下面说明部分代码的含义：</p><ul><li><p><code>st.top()</code>代表栈顶元素的下标</p></li><li><p><code>nums2[st.top()]</code>代表栈顶元素的值</p></li><li><p><code>umap.find(nums2[st.top()])</code>代表查询当前栈顶元素是否在nums1中</p></li><li><p><code>umap[nums2[st.top()]]</code>代表当前栈顶元素在nums1中的下标</p></li></ul><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>初始化结果数组都为-1，因为题目要求没找到比自己大的元素当前位置的结果就为-1</li><li>定义一个map用来判断当前栈顶元素在不在nums1中，在的话查询到当前元素在nums1中的下标</li><li>定义一个栈存储元素的下标，按照单调栈的执行流程统计比第i个元素大的第一个元素是多少</li><li>按照判断逻辑得到nums1的结果并返回</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> nextGreaterElement(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums1, vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums2) {
-</span></span><span style=display:flex><span>        stack<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> st;
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> result(nums1.size(), <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (nums1.size() <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) <span style=color:#66d9ef>return</span> result;
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>nextGreaterElement</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums1</span><span style=color:#c6d0f5>,</span> <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>stack</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>st</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums1</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>(),</span> <span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums1</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span> <span style=color:#99d1db>==</span> 0<span style=color:#c6d0f5>)</span> <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> umap; <span style=color:#75715e>// key:下标元素，value：下标
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//用来查询元素是否在nums1中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> nums1.size(); i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>            umap[nums1[i]] <span style=color:#f92672>=</span> i;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        st.push(<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;</span> nums2.size(); i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (nums2[i] <span style=color:#f92672>&lt;=</span> nums2[st.top()]) {          
-</span></span><span style=display:flex><span>                st.push(i);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>st.empty() <span style=color:#f92672>&amp;&amp;</span> nums2[i] <span style=color:#f92672>&gt;</span> nums2[st.top()]) {
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//看栈顶元素是否在nums1中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#66d9ef>if</span> (umap.find(nums2[st.top()]) <span style=color:#f92672>!=</span>umap.end()) { 
-</span></span><span style=display:flex><span>                        result[umap[nums2[st.top()]]]<span style=color:#f92672>=</span>nums2[i];
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    st.pop();
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                st.push(i);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> result;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>;</span> <span style=color:#626880;font-style:italic>// key:下标元素，value：下标
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//用来查询元素是否在nums1中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>=</span> 0<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>&lt;</span> <span style=color:#babbf1>nums1</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>nums1</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]]</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>i</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>=</span> 1<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>&lt;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span> <span style=color:#99d1db>&lt;=</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#c6d0f5>{</span>          
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span> <span style=color:#ca9ee6>else</span> <span style=color:#c6d0f5>{</span> 
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>while</span> <span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>empty</span><span style=color:#c6d0f5>()</span> <span style=color:#99d1db>&amp;&amp;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span> <span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//看栈顶元素是否在nums1中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()])</span> <span style=color:#99d1db>!=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>())</span> <span style=color:#c6d0f5>{</span> 
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>result</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>()]]]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>nums2</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>st</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>相比于
 <a href=https://www.programmercarl.com/0739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6.html#%E6%80%9D%E8%B7%AF title=739题 rel="noopener external nofollow noreferrer" target=_blank class=exturl>739题

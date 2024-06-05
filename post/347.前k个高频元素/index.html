@@ -24,86 +24,86 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h2 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h2><p>为了找出出现频率前k个的元素，首先肯定是先统计出元素出现的频率，一个元素对应一个频率，所以是成对出现的，所以考虑使用map来存储元素出现的频率</p><p>统计完元素出现的频率，需要对频率进行排序，但是正常的map排序都是对键进行排序，而我们统计时，元素出现的频率保存在了值上，所以不能使用map进行排序</p><p>此时借助到了优先级队列，优先级队列中默认使用元素的<code>&lt;</code>来排序、但是这里我们使用map存储元素，元素是以pair的形式存在，需要针对pair的second进行排序，所以需要自定义排序规则，一旦需要指定自定义的排序规则，就需要手动指定底层的存储容器</p><p>当排序规则制定好之后，需要确保优先级队列中存储的是前k个高频元素，所以需要建立小根堆，不建立大根堆的原因是因为大根堆删除元素时删除的是最大的元素，无法将这些元素保留</p><p>当将统计过频率的元素形成的pair都插入优先级队列中，最后剩下来的k个元素就是所要的元素，此时直接将pair中的first元素拿出来就是所求的结果</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>统计元素出现的频率</li><li>对频率排序</li><li>将剩下的pair中的元素取出来形成vector作为最后的结果</li><li>返回结果</li></ol><h1 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h1><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 小顶堆
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>mycomparison</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span>()(<span style=color:#66d9ef>const</span> pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> lhs, <span style=color:#66d9ef>const</span> pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> rhs) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> lhs.second <span style=color:#f92672>&gt;</span> rhs.second;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    };
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> topKFrequent(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums, <span style=color:#66d9ef>int</span> k) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 要统计元素出现频率
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> map; <span style=color:#75715e>// map&lt;nums[i],对应出现的次数&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>auto</span> num:nums) {
-</span></span><span style=display:flex><span>            map[num]<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>        }
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h1><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>// 小顶堆
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>class</span> <span style=color:#e5c890>mycomparison</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>bool</span> <span style=color:#ca9ee6>operator</span><span style=color:#c6d0f5>()(</span><span style=color:#ca9ee6>const</span> <span style=color:#babbf1>pair</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>lhs</span><span style=color:#c6d0f5>,</span> <span style=color:#ca9ee6>const</span> <span style=color:#babbf1>pair</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>rhs</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>lhs</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span> <span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>rhs</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>};</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>topKFrequent</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>k</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>// 要统计元素出现频率
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>map</span><span style=color:#c6d0f5>;</span> <span style=color:#626880;font-style:italic>// map&lt;nums[i],对应出现的次数&gt;
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>num</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>map</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 对频率排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// 定义一个小顶堆，大小为k
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//优先级队列的底层存储容器为vector
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//要想自定义排序规则，就需要手动指定底层存储容器
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        priority_queue<span style=color:#f92672>&lt;</span>pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span>, vector<span style=color:#f92672>&lt;</span>pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span>, mycomparison<span style=color:#f92672>&gt;</span> pri_que;
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>// 对频率排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>// 定义一个小顶堆，大小为k
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//优先级队列的底层存储容器为vector
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//要想自定义排序规则，就需要手动指定底层存储容器
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>priority_queue</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>pair</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span><span style=color:#c6d0f5>,</span> <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>pair</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span><span style=color:#c6d0f5>,</span> <span style=color:#babbf1>mycomparison</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 用固定大小为k的小顶堆，扫面所有频率的数值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span> (unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;::</span>iterator it <span style=color:#f92672>=</span> map.begin(); it <span style=color:#f92672>!=</span> map.end(); it<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>            pri_que.push(<span style=color:#f92672>*</span>it);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (pri_que.size() <span style=color:#f92672>&gt;</span> k) { <span style=color:#75715e>// 如果堆的大小大于了K，则队列弹出，保证堆的大小一直为k
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                pri_que.pop();
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>// 用固定大小为k的小顶堆，扫面所有频率的数值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;::</span><span style=color:#babbf1>iterator</span> <span style=color:#babbf1>it</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>map</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>begin</span><span style=color:#c6d0f5>();</span> <span style=color:#babbf1>it</span> <span style=color:#99d1db>!=</span> <span style=color:#babbf1>map</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>();</span> <span style=color:#babbf1>it</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>*</span><span style=color:#babbf1>it</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span> <span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>k</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span> <span style=color:#626880;font-style:italic>// 如果堆的大小大于了K，则队列弹出，保证堆的大小一直为k
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 找出前K个高频元素，因为小顶堆先弹出的是最小的，所以倒序来输出到数组
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> result(k);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> k <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>) {
-</span></span><span style=display:flex><span>            result[i] <span style=color:#f92672>=</span> pri_que.top().first;
-</span></span><span style=display:flex><span>            pri_que.pop();
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> result;
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>// 找出前K个高频元素，因为小顶堆先弹出的是最小的，所以倒序来输出到数组
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>k</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>k</span> <span style=color:#99d1db>-</span> 1<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span> <span style=color:#99d1db>&gt;=</span> 0<span style=color:#c6d0f5>;</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>--</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>result</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>top</span><span style=color:#c6d0f5>().</span><span style=color:#babbf1>first</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>pri_que</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是对频率的排序，无法使用正常的排序规则，所以借助了优先级队列进行排序</p><p>优先级队列使用自定义排序规则时需要手动指定底层存储的容器，因为在创建优先级队列时，需要确保底层容器中的元素能够根据你的自定义排序规则正确地构建堆结构。</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/501.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/ rel=next title=501.二叉搜索树中的众数><i class="fa fa-chevron-left"></i> 501.二叉搜索树中的众数</a></div><div class="post-nav-prev post-nav-item"><a href=/post/151.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/ rel=prev title=151.反转字符串中的单词>151.反转字符串中的单词
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

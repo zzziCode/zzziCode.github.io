@@ -22,174 +22,174 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🏐 526.优美的排列</p></blockquote><p>假设有从 1 到 n 的 n 个整数。用这些整数构造一个数组 <code>perm</code>（<strong>下标从 1 开始</strong>），只要满足下述条件 <strong>之一</strong> ，该数组就是一个 <strong>优美的排列</strong> ：</p><ul><li><code>perm[i]</code> 能够被 <code>i</code> 整除</li><li><code>i</code> 能够被 <code>perm[i]</code> 整除</li></ul><p>给你一个整数 <code>n</code> ，返回可以构造的 <strong>优美排列</strong> 的 <strong>数量</strong> 。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>看到题目之后，第一想法就是按照回溯法求出所有的全排列，然后再判断每个全排列是否符合要求，也就是对于当前全排列来说，每个位置是否符合（下标从1开始）：</p><ul><li><code>perm[i]</code> 能够被 <code>i</code> 整除</li><li><code>i</code> 能够被 <code>perm[i]</code> 整除</li></ul><p>按照这种思路编写代码之后，会超时，超时的代码为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//使用回溯法找到所有的排列，然后再判断是否合法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//针对一个排列的所有数，依次判断是否符合任意一个条件即可
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//解法可行，但是超时
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> path<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[]</span> visited<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>countArrangement</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        visited<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[</span>n<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        help<span style=color:#f92672>(</span>n<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//回溯法求排列
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>help</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//形成了一个全排列，并且每个元素都符合条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()==</span>n<span style=color:#f92672>&amp;&amp;</span>isValid<span style=color:#f92672>(</span>path<span style=color:#f92672>)){</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//对于当前全排列来说，1-n的所有元素都会尝试一遍，这是超时的主要问题
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//对于当前位置来说，只有部分元素符合条件，我们可以在回溯之前进行处理
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;=</span>n<span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前元素没访问，加入全排列中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(!</span>visited<span style=color:#f92672>[</span>i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]){</span>
-</span></span><span style=display:flex><span>                visited<span style=color:#f92672>[</span>i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                path<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                help<span style=color:#f92672>(</span>n<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                visited<span style=color:#f92672>[</span>i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]=</span><span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                path<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isValid</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> path<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//两个条件都不满足，说明当前排列不满足条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(!((</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>))%(</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||(</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)%(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>))==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>))</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>看到题目之后，第一想法就是按照回溯法求出所有的全排列，然后再判断每个全排列是否符合要求，也就是对于当前全排列来说，每个位置是否符合（下标从1开始）：</p><ul><li><code>perm[i]</code> 能够被 <code>i</code> 整除</li><li><code>i</code> 能够被 <code>perm[i]</code> 整除</li></ul><p>按照这种思路编写代码之后，会超时，超时的代码为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//使用回溯法找到所有的排列，然后再判断是否合法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//针对一个排列的所有数，依次判断是否符合任意一个条件即可
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//解法可行，但是超时
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>visited</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>countArrangement</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>visited</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[</span><span style=color:#babbf1>n</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>n</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//回溯法求排列
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>help</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//形成了一个全排列，并且每个元素都符合条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()==</span><span style=color:#babbf1>n</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>isValid</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>)){</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//对于当前全排列来说，1-n的所有元素都会尝试一遍，这是超时的主要问题
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//对于当前位置来说，只有部分元素符合条件，我们可以在回溯之前进行处理
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>n</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前元素没访问，加入全排列中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(!</span><span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>n</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//回溯
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>remove</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()-</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>isValid</span><span style=color:#99d1db>(</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//两个条件都不满足，说明当前排列不满足条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(!((</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>))%(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>)==</span>0<span style=color:#99d1db>||(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>)%(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>))==</span>0<span style=color:#99d1db>))</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>上述代码超时的主要原因在于构造全排列的过程中，每一个位置都尝试了1-n的所有数，其实大部分数都是无意义的尝试，如果我们提前告知回溯法对于当前位置来说，哪些元素符合上面的两个条件之一，这样就可以减少两个操作：</p><ol><li>全排列中的每一个位置不再有无意义的尝试</li><li>构造完全排列之后不用在判断全排列的有效性，因为每个位置的元素都是从合法集中选取的</li></ol><blockquote><p>相当于提前构造一个map,每个位置有哪些元素合法提前构造</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>初始化一个二维List，里面存储每个位置合法的元素</li><li>进行回溯，构造全排列时每个位置的元素选取从合法元素集中选取</li><li>构造完一个全排列结果数就+1</li><li>返回需要的结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//使用回溯法找到所有的排列，然后再判断是否合法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//针对一个排列的所有数，依次判断是否符合任意一个条件即可
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//解法可行，但是超时
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[]</span> visited<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;&gt;</span> map<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>countArrangement</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        visited<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[</span>n<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;=</span>n<span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            map<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;());</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//统计每个位置有哪些元素合法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;=</span>n<span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>j<span style=color:#f92672>&lt;=</span>n<span style=color:#f92672>;++</span>j<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>j<span style=color:#f92672>%</span>i<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>i<span style=color:#f92672>%</span>j<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//第i个位置上添加元素j
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>).</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>j<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        help<span style=color:#f92672>(</span>n<span style=color:#f92672>,</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//回溯法求排列
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>help</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> index<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//形成了一个全排列，并且每个元素都符合条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>index<span style=color:#f92672>==</span>n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//对于当前全排列来说，1-n的所有元素都会尝试一遍，这是超时的主要问题
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//对于当前位置来说，只有部分元素符合条件，我们可以在回溯之前进行处理
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> num<span style=color:#f92672>:</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>index<span style=color:#f92672>)){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(!</span>visited<span style=color:#f92672>[</span>num<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]){</span>
-</span></span><span style=display:flex><span>                visited<span style=color:#f92672>[</span>num<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                help<span style=color:#f92672>(</span>n<span style=color:#f92672>,</span>index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                visited<span style=color:#f92672>[</span>num<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]=</span><span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//使用回溯法找到所有的排列，然后再判断是否合法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//针对一个排列的所有数，依次判断是否符合任意一个条件即可
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//解法可行，但是超时
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>visited</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>map</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>countArrangement</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>visited</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[</span><span style=color:#babbf1>n</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>n</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;());</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//统计每个位置有哪些元素合法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>n</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>n</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>j</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>j</span><span style=color:#99d1db>%</span><span style=color:#babbf1>i</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>i</span><span style=color:#99d1db>%</span><span style=color:#babbf1>j</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//第i个位置上添加元素j
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>).</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>j</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>n</span><span style=color:#99d1db>,</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//回溯法求排列
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>help</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//形成了一个全排列，并且每个元素都符合条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>index</span><span style=color:#99d1db>==</span><span style=color:#babbf1>n</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//对于当前全排列来说，1-n的所有元素都会尝试一遍，这是超时的主要问题
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//对于当前位置来说，只有部分元素符合条件，我们可以在回溯之前进行处理
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>num</span><span style=color:#99d1db>:</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>index</span><span style=color:#99d1db>)){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(!</span><span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>n</span><span style=color:#99d1db>,</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>visited</span><span style=color:#99d1db>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>解决问题的核心还是使用回溯法求出所有的排列，只不过第一份代码是求出所有的代码，然后进行筛选，相当于每个位置上填充的元素是从1-n中选取的，而这些无意义的尝试会使得算法超时。第二份代码提前进行构造，每个位置上填充的元素是从一个候选List中选取的，这个候选List中的所有元素都是合法的，这既不会有无意义的尝试，在形成全排列的时候又不用担心当前全排列是否合法，相当于一举两得</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/rabbitmq%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ rel=next title=RabbitMQ学习笔记><i class="fa fa-chevron-left"></i> RabbitMQ学习笔记</a></div><div class="post-nav-prev post-nav-item"><a href=/post/1771.%E7%94%B1%E5%AD%90%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E7%9A%84%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6/ rel=prev title=1771.由子序列构造的最长回文串的长度>1771.由子序列构造的最长回文串的长度
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

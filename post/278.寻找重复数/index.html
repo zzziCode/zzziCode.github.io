@@ -25,88 +25,88 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>题目中说，一共有<code>n+1</code>个数，但是数字的范围为<code>[1,n]</code>。这是典型的<strong>鸽巢原理</strong>的题目，即使每个数字只出现一次，那么最后一定会多一个元素，这个元素就是重复的。这是最极端的情况，真实情况下，重复的元素可能不止重复一次，但是题目中又描述，只有一个重复的元素，说明就是这种最极端的情况</p><p>为了找到这个重复的元素，可以借鉴
 <a href="https://zzzicode.github.io/post/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8ii/?highlight=%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8" title=环形链表II rel="noopener external nofollow noreferrer" target=_blank class=exturl>环形链表II
 <i class="fa fa-external-link-alt"></i>
-</a>的思想，先找到环，之后找到环的入口，这个入口就是重复的元素，为了找到环，需要使用<strong>快慢指针</strong>的思想。为了找到入口，需要从链表的起点和当前相遇的点开始向后走，二者再次相遇的地方就是环的入口，这是经过环形链表II中推导得到的。</p><p>但是上面的思想是链表中，本题中提供的是数组，所以需要将数组转换成链表，于是可以利用下标<code>index</code>和数值<code>nums[index]</code>之间的映射关系来构造一个<strong>链表</strong></p><p>由于一共有<code>n+1</code>个数，所以数组元素下标的范围为<code>[0~n]</code>，而数组中的每一个元素的范围为<code>[1~n]</code>，这可以说明，可以直接建立映射，不用担心建立应设置后数组下标越界的情况</p><p>所以第一阶段就是判断环在哪</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>int</span> slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>	<span style=color:#75715e>//快慢指针先各走一步
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>slow<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>    fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>nums<span style=color:#f92672>[</span>fast<span style=color:#f92672>]];</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> <span style=color:#f92672>(</span>slow <span style=color:#f92672>!=</span> fast<span style=color:#f92672>){</span><span style=color:#75715e>//不用担心下标越界的情况
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>slow<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>nums<span style=color:#f92672>[</span>fast<span style=color:#f92672>]];</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>因为必须要先走一步，所以可以将while循环改成do while循环</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>int</span> slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>//找到快慢指针的相遇点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>do</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>slow<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>    fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>nums<span style=color:#f92672>[</span>fast<span style=color:#f92672>]];</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span><span style=color:#66d9ef>while</span> <span style=color:#f92672>(</span>slow <span style=color:#f92672>!=</span> fast<span style=color:#f92672>);</span>
+</a>的思想，先找到环，之后找到环的入口，这个入口就是重复的元素，为了找到环，需要使用<strong>快慢指针</strong>的思想。为了找到入口，需要从链表的起点和当前相遇的点开始向后走，二者再次相遇的地方就是环的入口，这是经过环形链表II中推导得到的。</p><p>但是上面的思想是链表中，本题中提供的是数组，所以需要将数组转换成链表，于是可以利用下标<code>index</code>和数值<code>nums[index]</code>之间的映射关系来构造一个<strong>链表</strong></p><p>由于一共有<code>n+1</code>个数，所以数组元素下标的范围为<code>[0~n]</code>，而数组中的每一个元素的范围为<code>[1~n]</code>，这可以说明，可以直接建立映射，不用担心建立应设置后数组下标越界的情况</p><p>所以第一阶段就是判断环在哪</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#e5c890>int</span> <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>	<span style=color:#626880;font-style:italic>//快慢指针先各走一步
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>]];</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>while</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>slow</span> <span style=color:#99d1db>!=</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>){</span><span style=color:#626880;font-style:italic>//不用担心下标越界的情况
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>]];</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>因为必须要先走一步，所以可以将while循环改成do while循环</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#e5c890>int</span> <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>int</span> <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>//找到快慢指针的相遇点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#ca9ee6>do</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>]];</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span><span style=color:#ca9ee6>while</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>slow</span> <span style=color:#99d1db>!=</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>);</span>
 </span></span></code></pre></td></tr></table></div></div><p>上面代码中的快慢指针移动的方式需要注意，<code>slow = nums[slow]</code>代表慢指针走了一步。<code>fast = nums[nums[fast]]</code>代表快指针走了两步。当退出循环的时候，就是找到环的时候，此时需要将环的入口找到</p><p>找入口的代码就是一个指针从起点出发，一个指针从相遇点出发，按照相同的步伐向后走。再次相遇就找到了环的入口，这个地方就是重复元素出现的位置</p><blockquote><p>核心就是将数组转换成链表，利用了<code>index</code>和<code>nums[index]</code>之间的映射关系</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>利用下标和元素之间的映射关系将数组转换成链表，然后利用快慢指针找到环</li><li>一个指针从起点出发，一个指针从相遇点出发，按照相同的步伐找到环的入口</li><li>返回入口元素就是重复的元素</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//不能修改数组代表不能对数组排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//空间复杂度为O(1)代表不能使用容器或者辅助数组
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//第一种想法就是拿每一个元素去与剩下的元素匹配，但是超时了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//借鉴环形链表的思想
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>findDuplicate</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> nums<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>int</span> slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>int</span> fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>       <span style=color:#75715e>//找到快慢指针的相遇点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>do</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>           slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>slow<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>           fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>nums<span style=color:#f92672>[</span>fast<span style=color:#f92672>]];</span>
-</span></span><span style=display:flex><span>       <span style=color:#f92672>}</span><span style=color:#66d9ef>while</span> <span style=color:#f92672>(</span>slow <span style=color:#f92672>!=</span> fast<span style=color:#f92672>);</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//不能修改数组代表不能对数组排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//空间复杂度为O(1)代表不能使用容器或者辅助数组
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//第一种想法就是拿每一个元素去与剩下的元素匹配，但是超时了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//借鉴环形链表的思想
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>findDuplicate</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>       <span style=color:#e5c890>int</span> <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>       <span style=color:#e5c890>int</span> <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>       <span style=color:#626880;font-style:italic>//找到快慢指针的相遇点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>       <span style=color:#ca9ee6>do</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>           <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>           <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>]];</span>
+</span></span><span style=display:flex><span>       <span style=color:#99d1db>}</span><span style=color:#ca9ee6>while</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>slow</span> <span style=color:#99d1db>!=</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>);</span>
 </span></span><span style=display:flex><span>       
-</span></span><span style=display:flex><span>       <span style=color:#75715e>//找到环的入口
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>while</span> <span style=color:#f92672>(</span>slow <span style=color:#f92672>!=</span> fast<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>           slow <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>slow<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>           fast <span style=color:#f92672>=</span> nums<span style=color:#f92672>[</span>fast<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>       <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>       <span style=color:#75715e>//返回入口处的元素
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>return</span> slow<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>       <span style=color:#626880;font-style:italic>//找到环的入口
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>       <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>       <span style=color:#ca9ee6>while</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>slow</span> <span style=color:#99d1db>!=</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>           <span style=color:#babbf1>slow</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>           <span style=color:#babbf1>fast</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>       <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>       <span style=color:#626880;font-style:italic>//返回入口处的元素
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>       <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>slow</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>重点或者说巧妙地地方就是将数组转换成链表，利用了下标和元素之间的对应关系，由于存在鸽巢原理的情况，所以一定有一个重复元素，并且按照题意只有唯一一个重复元素，利用环形链表II的思想，找到环之后，环的入口处就是重复元素，也就是最终的答案</p><ol><li>数组转换成链表</li><li>找到环的入口</li><li>返回结果</li></ol></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/80.%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/ rel=next title=80.删除有序数组中的重复项II><i class="fa fa-chevron-left"></i> 80.删除有序数组中的重复项II</a></div><div class="post-nav-prev post-nav-item"><a href=/post/31.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/ rel=prev title=31.下一个排列>31.下一个排列
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

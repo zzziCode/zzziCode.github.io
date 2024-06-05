@@ -24,52 +24,52 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了删除倒数第n个节点，最简单的办法就是求出链表的长度，然后再找到倒数第n个节点的前一个节点进行删除，此时就需要两次遍历，第一次求出链表长度，第二次找到倒数第n个节点的前一个节点，为了简化流程，想到一个更简单的办法</p><p>定义两个变量，使用双指针，快指针先走n步，然后快慢指针一起走，当快指针移动到末尾时，慢指针就移动到了倒数第n个节点，为了找到倒数第n个节点的前一个节点，并且当链表中只有一个节点时也能完美删除，申请一个<strong>虚拟头结点</strong>，让链表的操作变得统一</p><p>核心就是双指针+虚拟头结点</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>申请虚拟头结点，虚拟头结点的<code>next</code>指针指向链表的首元结点</li><li>快慢指针都从虚拟头结点出发</li><li>快指针走n步</li><li>快慢指针一起走，当快指针到了末尾，慢指针就到了倒数第n个节点的前一个节点</li><li>删除节点，返回虚拟头结点的<code>next</code>指针</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    ListNode<span style=color:#f92672>*</span> removeNthFromEnd(ListNode<span style=color:#f92672>*</span> head, <span style=color:#66d9ef>int</span> n) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(head<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> head;
-</span></span><span style=display:flex><span>        ListNode<span style=color:#f92672>*</span> dummyHead<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ListNode(<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        dummyHead<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>head;
-</span></span><span style=display:flex><span>        ListNode<span style=color:#f92672>*</span> fast<span style=color:#f92672>=</span>dummyHead;
-</span></span><span style=display:flex><span>        ListNode<span style=color:#f92672>*</span> slow<span style=color:#f92672>=</span>dummyHead;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> num<span style=color:#f92672>=</span>n;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(fast<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>!=</span><span style=color:#66d9ef>nullptr</span>){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(num<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span>){
-</span></span><span style=display:flex><span>                fast<span style=color:#f92672>=</span>fast<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>                num<span style=color:#f92672>--</span>;
-</span></span><span style=display:flex><span>            }<span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>                fast<span style=color:#f92672>=</span>fast<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>                slow<span style=color:#f92672>=</span>slow<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        slow<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>slow<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> dummyHead<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>removeNthFromEnd</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>head</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>head</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>head</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>dummyHead</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ListNode</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>dummyHead</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>head</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>dummyHead</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>slow</span><span style=color:#99d1db>=</span><span style=color:#babbf1>dummyHead</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>num</span><span style=color:#99d1db>=</span><span style=color:#babbf1>n</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#99d1db>&gt;</span>0<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>num</span><span style=color:#99d1db>--</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span><span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>slow</span><span style=color:#99d1db>=</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>slow</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>dummyHead</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>核心就是快慢指针+虚拟头结点</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8ii/ rel=next title=142.环形链表II><i class="fa fa-chevron-left"></i> 142.环形链表II</a></div><div class="post-nav-prev post-nav-item"><a href=/post/59.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5ii/ rel=prev title=59.螺旋矩阵II>59.螺旋矩阵II
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

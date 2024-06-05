@@ -21,401 +21,401 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i></span>
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>7分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🐇 JDK中的动态代理</p></blockquote><p>本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202406051704957.png alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" style=zoom:67%><h2 id=静态代理>静态代理
-<a class=header-anchor href=#%e9%9d%99%e6%80%81%e4%bb%a3%e7%90%86></a></h2><p>所谓的代理，就是在原有方法的基础上进行增强，并且不侵入源代码，下面介绍一个静态代理的例子：</p><blockquote><p>UserService接口的代码</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>UserService</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>select</span><span style=color:#f92672>();</span>
+<a class=header-anchor href=#%e9%9d%99%e6%80%81%e4%bb%a3%e7%90%86></a></h2><p>所谓的代理，就是在原有方法的基础上进行增强，并且不侵入源代码，下面介绍一个静态代理的例子：</p><blockquote><p>UserService接口的代码</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>interface</span> <span style=color:#e5c890>UserService</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>select</span><span style=color:#99d1db>();</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>UserServiceImpl类的代码，就是UserService接口的实现类</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserServiceImpl</span> <span style=color:#66d9ef>implements</span> UserService <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>select</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;查询 selectById&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>update</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>UserServiceImpl类的代码，就是UserService接口的实现类</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>class</span> <span style=color:#e5c890>UserServiceImpl</span> <span style=color:#ca9ee6>implements</span> <span style=color:#babbf1>UserService</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>select</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;查询 selectById&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;更新 update&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>UserServiceProxy类的代码，就是代理类，用来增强UserServiceImpl类的功能</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserServiceProxy</span> <span style=color:#66d9ef>implements</span> UserService<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>update</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;更新 update&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>UserServiceProxy类的代码，就是代理类，用来增强UserServiceImpl类的功能</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>class</span> <span style=color:#e5c890>UserServiceProxy</span> <span style=color:#ca9ee6>implements</span> <span style=color:#babbf1>UserService</span><span style=color:#99d1db>{</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//保存需要被代理的对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> UserServiceImpl target<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//保存需要被代理的对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#babbf1>UserServiceImpl</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>UserServiceProxy</span><span style=color:#f92672>(</span>UserServiceImpl target<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>target</span> <span style=color:#f92672>=</span> target<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#99d1db>UserServiceProxy</span><span style=color:#99d1db>(</span><span style=color:#babbf1>UserServiceImpl</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>this</span><span style=color:#99d1db>.</span><span style=color:#e5c890>target</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//调用被代理的方法，对原始方法进行增强，对外暴露代理对象Proxy的接口
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//使得用户对增强无感
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>select</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        before<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//调用被代理对象的方法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        target<span style=color:#f92672>.</span><span style=color:#a6e22e>select</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        after<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//调用被代理的方法，对原始方法进行增强，对外暴露代理对象Proxy的接口
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//使得用户对增强无感
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#f4b8e4>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>select</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>before</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//调用被代理对象的方法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>target</span><span style=color:#99d1db>.</span><span style=color:#e5c890>select</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>after</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        before<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//调用被代理对象的方法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        target<span style=color:#f92672>.</span><span style=color:#a6e22e>update</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        after<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f4b8e4>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>update</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>before</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//调用被代理对象的方法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>target</span><span style=color:#99d1db>.</span><span style=color:#e5c890>update</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>after</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>before</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>     <span style=color:#75715e>// 在执行方法之前执行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>format</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;开始时间[%s] &#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> Date<span style=color:#f92672>()));</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>after</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>      <span style=color:#75715e>// 在执行方法之后执行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>format</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;结束时间 [%s] &#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> Date<span style=color:#f92672>()));</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>before</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>     <span style=color:#626880;font-style:italic>// 在执行方法之前执行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span><span style=color:#99d1db>.</span><span style=color:#e5c890>format</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;开始时间[%s] &#34;</span><span style=color:#99d1db>,</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Date</span><span style=color:#99d1db>()));</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>after</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>      <span style=color:#626880;font-style:italic>// 在执行方法之后执行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span><span style=color:#99d1db>.</span><span style=color:#e5c890>format</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;结束时间 [%s] &#34;</span><span style=color:#99d1db>,</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Date</span><span style=color:#99d1db>()));</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>main函数的代码</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    UserService userServiceImpl <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UserServiceImpl<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    UserService proxy <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UserServiceProxy<span style=color:#f92672>(</span>userServiceImpl<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>main函数的代码</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>static</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>main</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>args</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>UserService</span> <span style=color:#babbf1>userServiceImpl</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UserServiceImpl</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>UserService</span> <span style=color:#babbf1>proxy</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UserServiceProxy</span><span style=color:#99d1db>(</span><span style=color:#babbf1>userServiceImpl</span><span style=color:#99d1db>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    proxy<span style=color:#f92672>.</span><span style=color:#a6e22e>select</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    proxy<span style=color:#f92672>.</span><span style=color:#a6e22e>update</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>proxy</span><span style=color:#99d1db>.</span><span style=color:#e5c890>select</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>proxy</span><span style=color:#99d1db>.</span><span style=color:#e5c890>update</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>可以看出，静态代理就是将代理对象封装到了一个代理类中，对外直接使用代理类提供的接口访问，功能增强对用户无感，因为代理类的接口名与被代理对象的接口名一样，在代理类的内部调用被代理对象的方法，相当于<strong>套了一个壳子</strong>，套壳子的方法就是实现被代理对象实现的接口，通过实现接口，代理类和被代理对象的结构变得一样</p><p>这种方法很简便，但是不利于后期扩展，当被代理对象变多之后，有两种解决方法：</p><ol><li>代理类实现多个接口，会使得代理类很庞大</li><li>实现多个代理类，会让代理类变得很多</li></ol><blockquote><p>以上这些工作都是手工实现的，而动态代理的技术是将代理类的创建交给系统，利用反射创建适合自己的代理类，虽然是一个被代理对象一个代理类，但是代理类不用手写了，取而代之的是手写一个Handler类，用来描述如何增强被代理类对象，当要增强的方法足够多时，这种方法就有了优势</p></blockquote><h2 id=动态代理>动态代理
 <a class=header-anchor href=#%e5%8a%a8%e6%80%81%e4%bb%a3%e7%90%86></a></h2><h3 id=invocationhandler>InvocationHandler
-<a class=header-anchor href=#invocationhandler></a></h3><p>在这个类中描述被代理对象的增强方式，比如在方法执行的前后打印方法执行的耗时，核心就是<code>invoke</code>方法，在这个方法中会对被代理对象中的方法进行增强。类的实现如下：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogHandler</span> <span style=color:#66d9ef>implements</span> InvocationHandler <span style=color:#f92672>{</span>
+<a class=header-anchor href=#invocationhandler></a></h3><p>在这个类中描述被代理对象的增强方式，比如在方法执行的前后打印方法执行的耗时，核心就是<code>invoke</code>方法，在这个方法中会对被代理对象中的方法进行增强。类的实现如下：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>class</span> <span style=color:#e5c890>LogHandler</span> <span style=color:#ca9ee6>implements</span> <span style=color:#babbf1>InvocationHandler</span> <span style=color:#99d1db>{</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//保存被代理的对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Object target<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>LogHandler</span><span style=color:#f92672>(</span>Object target<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>target</span> <span style=color:#f92672>=</span> target<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**@author zzzi
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @date 2023/10/31 10:33
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 主要是利用反射，对传递来的方法调用其invoke方法，在调用前后进行增强
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>Object proxy<span style=color:#f92672>,</span> Method method<span style=color:#f92672>,</span> Object<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Throwable <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        before<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//利用反射的知识触发method的执行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Object res <span style=color:#f92672>=</span> method<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>target<span style=color:#f92672>,</span> args<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        after<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//对原始方法如何增强
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>before</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>format</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;动态增强日志开始执行 [%s] &#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> Date<span style=color:#f92672>()));</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 调用invoke方法之后执行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>after</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>format</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;动态增强日志结束执行 [%s] &#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> Date<span style=color:#f92672>()));</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//保存被代理的对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>Object</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#99d1db>LogHandler</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Object</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>this</span><span style=color:#99d1db>.</span><span style=color:#e5c890>target</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>target</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>/**@author zzzi
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     * @date 2023/10/31 10:33
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     * 主要是利用反射，对传递来的方法调用其invoke方法，在调用前后进行增强
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#f4b8e4>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>Object</span> <span style=color:#99d1db>invoke</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Object</span> <span style=color:#babbf1>proxy</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>Method</span> <span style=color:#babbf1>method</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>Object</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>args</span><span style=color:#99d1db>)</span> <span style=color:#ca9ee6>throws</span> <span style=color:#babbf1>Throwable</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>before</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//利用反射的知识触发method的执行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>Object</span> <span style=color:#babbf1>res</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>method</span><span style=color:#99d1db>.</span><span style=color:#e5c890>invoke</span><span style=color:#99d1db>(</span><span style=color:#babbf1>target</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>args</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>after</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//对原始方法如何增强
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>before</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span><span style=color:#99d1db>.</span><span style=color:#e5c890>format</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;动态增强日志开始执行 [%s] &#34;</span><span style=color:#99d1db>,</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Date</span><span style=color:#99d1db>()));</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>// 调用invoke方法之后执行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>after</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>out</span><span style=color:#99d1db>.</span><span style=color:#e5c890>println</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span><span style=color:#99d1db>.</span><span style=color:#e5c890>format</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;动态增强日志结束执行 [%s] &#34;</span><span style=color:#99d1db>,</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Date</span><span style=color:#99d1db>()));</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>这个类中只是定义了如何对被代理对象增强，并不是真正的代理类，当调用代理类中的方法时，内部会调用这里的<code>invoke</code>方法，最终实现增强，所以说最核心的就是<code>invoke</code>方法，这个类最后会配合代理类实现对被代理对象的增强</p><h3 id=创建代理类>创建代理类
-<a class=header-anchor href=#%e5%88%9b%e5%bb%ba%e4%bb%a3%e7%90%86%e7%b1%bb></a></h3><p>刚才描述，代理类的创建不再交给用户，而是让系统利用反射来创建，那么是如何创建的呢，只需要几行代码，用户就可以得到一个代理类：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//创建被代理的对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>UserServiceImpl userService <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UserServiceImpl<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>ClassLoader classLoader <span style=color:#f92672>=</span> userService<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getClassLoader</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>Class<span style=color:#f92672>&lt;?&gt;[]</span> interfaces <span style=color:#f92672>=</span> userService<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getInterfaces</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>InvocationHandler handler <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> LogHandler<span style=color:#f92672>(</span>userService<span style=color:#f92672>);</span>
+<a class=header-anchor href=#%e5%88%9b%e5%bb%ba%e4%bb%a3%e7%90%86%e7%b1%bb></a></h3><p>刚才描述，代理类的创建不再交给用户，而是让系统利用反射来创建，那么是如何创建的呢，只需要几行代码，用户就可以得到一个代理类：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#626880;font-style:italic>//创建被代理的对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#babbf1>UserServiceImpl</span> <span style=color:#babbf1>userService</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UserServiceImpl</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#babbf1>ClassLoader</span> <span style=color:#babbf1>classLoader</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>userService</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getClass</span><span style=color:#99d1db>().</span><span style=color:#e5c890>getClassLoader</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#babbf1>Class</span><span style=color:#99d1db>&lt;?&gt;[]</span> <span style=color:#babbf1>interfaces</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>userService</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getClass</span><span style=color:#99d1db>().</span><span style=color:#e5c890>getInterfaces</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#babbf1>InvocationHandler</span> <span style=color:#babbf1>handler</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>LogHandler</span><span style=color:#99d1db>(</span><span style=color:#babbf1>userService</span><span style=color:#99d1db>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>/**@author zzzi
-</span></span></span><span style=display:flex><span><span style=color:#75715e>* @date 2023/10/30 22:14
-</span></span></span><span style=display:flex><span><span style=color:#75715e>* 重点就是在这个代理对象的创建上，传入了代理对象的各种信息，以及如何代理
-</span></span></span><span style=display:flex><span><span style=color:#75715e>* 系统就会创建对应的代理类
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
-</span></span><span style=display:flex><span>UserService proxy <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>UserService<span style=color:#f92672>)</span> Proxy<span style=color:#f92672>.</span><span style=color:#a6e22e>newProxyInstance</span><span style=color:#f92672>(</span>classLoader<span style=color:#f92672>,</span> interfaces<span style=color:#f92672>,</span> handler<span style=color:#f92672>);</span>
-</span></span></code></pre></td></tr></table></div></div><p>甚至上面的代码可以简化为一行：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span>UserService proxy <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>UserService<span style=color:#f92672>)</span>Proxy<span style=color:#f92672>.</span><span style=color:#a6e22e>newProxyInstance</span><span style=color:#f92672>(</span>UserService<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getClassLoader</span><span style=color:#f92672>(),</span><span style=color:#66d9ef>new</span> Class<span style=color:#f92672>&lt;?&gt;[]{</span>UserService<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>},</span>handler<span style=color:#f92672>);</span>
-</span></span></code></pre></td></tr></table></div></div><p>那么底层是如何根据传递来的这些参数来创建一个代理类的呢，既然外部使用了<code>newProxyInstance</code>这个方法创建代理类，那么显然核心代码就在这个方法中，我们需要查看<code>newProxyInstance</code>这个方法的源码：</p><blockquote><p>newProxyInstance方法的源码：</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//创建代理对象的方法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Object <span style=color:#a6e22e>newProxyInstance</span><span style=color:#f92672>(</span>ClassLoader loader<span style=color:#f92672>,</span>
-</span></span><span style=display:flex><span>                                      Class<span style=color:#f92672>&lt;?&gt;[]</span> interfaces<span style=color:#f92672>,</span>
-</span></span><span style=display:flex><span>                                      InvocationHandler h<span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throws</span> IllegalArgumentException <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//定义如何增强的InvocationHandler不能为空
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>h<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>/**@author zzzi
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>* @date 2023/10/30 22:14
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>* 重点就是在这个代理对象的创建上，传入了代理对象的各种信息，以及如何代理
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>* 系统就会创建对应的代理类
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>*/</span>
+</span></span><span style=display:flex><span><span style=color:#babbf1>UserService</span> <span style=color:#babbf1>proxy</span> <span style=color:#99d1db>=</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>UserService</span><span style=color:#99d1db>)</span> <span style=color:#babbf1>Proxy</span><span style=color:#99d1db>.</span><span style=color:#e5c890>newProxyInstance</span><span style=color:#99d1db>(</span><span style=color:#babbf1>classLoader</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>interfaces</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>handler</span><span style=color:#99d1db>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>甚至上面的代码可以简化为一行：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#babbf1>UserService</span> <span style=color:#babbf1>proxy</span> <span style=color:#99d1db>=</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>UserService</span><span style=color:#99d1db>)</span><span style=color:#babbf1>Proxy</span><span style=color:#99d1db>.</span><span style=color:#e5c890>newProxyInstance</span><span style=color:#99d1db>(</span><span style=color:#babbf1>UserService</span><span style=color:#99d1db>.</span><span style=color:#e5c890>class</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getClassLoader</span><span style=color:#99d1db>(),</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Class</span><span style=color:#99d1db>&lt;?&gt;[]{</span><span style=color:#babbf1>UserService</span><span style=color:#99d1db>.</span><span style=color:#e5c890>class</span><span style=color:#99d1db>},</span><span style=color:#babbf1>handler</span><span style=color:#99d1db>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么底层是如何根据传递来的这些参数来创建一个代理类的呢，既然外部使用了<code>newProxyInstance</code>这个方法创建代理类，那么显然核心代码就在这个方法中，我们需要查看<code>newProxyInstance</code>这个方法的源码：</p><blockquote><p>newProxyInstance方法的源码：</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#626880;font-style:italic>//创建代理对象的方法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>static</span> <span style=color:#babbf1>Object</span> <span style=color:#99d1db>newProxyInstance</span><span style=color:#99d1db>(</span><span style=color:#babbf1>ClassLoader</span> <span style=color:#babbf1>loader</span><span style=color:#99d1db>,</span>
+</span></span><span style=display:flex><span>                                      <span style=color:#babbf1>Class</span><span style=color:#99d1db>&lt;?&gt;[]</span> <span style=color:#babbf1>interfaces</span><span style=color:#99d1db>,</span>
+</span></span><span style=display:flex><span>                                      <span style=color:#babbf1>InvocationHandler</span> <span style=color:#babbf1>h</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>throws</span> <span style=color:#babbf1>IllegalArgumentException</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//定义如何增强的InvocationHandler不能为空
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>Objects</span><span style=color:#99d1db>.</span><span style=color:#e5c890>requireNonNull</span><span style=color:#99d1db>(</span><span style=color:#babbf1>h</span><span style=color:#99d1db>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> Class<span style=color:#f92672>&lt;?&gt;[]</span> intfs <span style=color:#f92672>=</span> interfaces<span style=color:#f92672>.</span><span style=color:#a6e22e>clone</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> SecurityManager sm <span style=color:#f92672>=</span> System<span style=color:#f92672>.</span><span style=color:#a6e22e>getSecurityManager</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>sm <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        checkProxyAccess<span style=color:#f92672>(</span>Reflection<span style=color:#f92672>.</span><span style=color:#a6e22e>getCallerClass</span><span style=color:#f92672>(),</span> loader<span style=color:#f92672>,</span> intfs<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//动态生成代理类的类文件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//根据传递的接口得到代理类的结构，根据传递的增强方式得到代理类如何增强
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Class<span style=color:#f92672>&lt;?&gt;</span> cl <span style=color:#f92672>=</span> getProxyClass0<span style=color:#f92672>(</span>loader<span style=color:#f92672>,</span> intfs<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>sm <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            checkNewProxyPermission<span style=color:#f92672>(</span>Reflection<span style=color:#f92672>.</span><span style=color:#a6e22e>getCallerClass</span><span style=color:#f92672>(),</span> cl<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//得到构造函数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> Constructor<span style=color:#f92672>&lt;?&gt;</span> cons <span style=color:#f92672>=</span> cl<span style=color:#f92672>.</span><span style=color:#a6e22e>getConstructor</span><span style=color:#f92672>(</span>constructorParams<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> InvocationHandler ih <span style=color:#f92672>=</span> h<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span>Modifier<span style=color:#f92672>.</span><span style=color:#a6e22e>isPublic</span><span style=color:#f92672>(</span>cl<span style=color:#f92672>.</span><span style=color:#a6e22e>getModifiers</span><span style=color:#f92672>()))</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            AccessController<span style=color:#f92672>.</span><span style=color:#a6e22e>doPrivileged</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> PrivilegedAction<span style=color:#f92672>&lt;</span>Void<span style=color:#f92672>&gt;()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>public</span> Void <span style=color:#a6e22e>run</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>                    cons<span style=color:#f92672>.</span><span style=color:#a6e22e>setAccessible</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>});</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//创建一个代理类对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> cons<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Object<span style=color:#f92672>[]{</span>h<span style=color:#f92672>});</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>IllegalAccessException <span style=color:#f92672>|</span> InstantiationException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InternalError<span style=color:#f92672>(</span>e<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(),</span> e<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InvocationTargetException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        Throwable t <span style=color:#f92672>=</span> e<span style=color:#f92672>.</span><span style=color:#a6e22e>getCause</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>t <span style=color:#66d9ef>instanceof</span> RuntimeException<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#f92672>(</span>RuntimeException<span style=color:#f92672>)</span> t<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InternalError<span style=color:#f92672>(</span>t<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(),</span> t<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>NoSuchMethodException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InternalError<span style=color:#f92672>(</span>e<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(),</span> e<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>重点就是代码中增加注释的几句，根据传递来的接口和增强方式handler来动态创建代理类的类文件，之后调用构造函数创建一个代理类的对象返回，这些操作都借助了java中的反射</p><p>接下来我们查看一下生成的代理类到底长什么样子，为了简化代码量，这里只展示与本文有关的部分：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserServiceProxy</span> <span style=color:#66d9ef>extends</span> Proxy <span style=color:#66d9ef>implements</span> UserService <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Method m4<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Method m3<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>final</span> <span style=color:#babbf1>Class</span><span style=color:#99d1db>&lt;?&gt;[]</span> <span style=color:#babbf1>intfs</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>interfaces</span><span style=color:#99d1db>.</span><span style=color:#e5c890>clone</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>final</span> <span style=color:#babbf1>SecurityManager</span> <span style=color:#babbf1>sm</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>System</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getSecurityManager</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>sm</span> <span style=color:#99d1db>!=</span> <span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>checkProxyAccess</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Reflection</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getCallerClass</span><span style=color:#99d1db>(),</span> <span style=color:#babbf1>loader</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>intfs</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//动态生成代理类的类文件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//根据传递的接口得到代理类的结构，根据传递的增强方式得到代理类如何增强
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>Class</span><span style=color:#99d1db>&lt;?&gt;</span> <span style=color:#babbf1>cl</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>getProxyClass0</span><span style=color:#99d1db>(</span><span style=color:#babbf1>loader</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>intfs</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>try</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>sm</span> <span style=color:#99d1db>!=</span> <span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>checkNewProxyPermission</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Reflection</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getCallerClass</span><span style=color:#99d1db>(),</span> <span style=color:#babbf1>cl</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//得到构造函数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>final</span> <span style=color:#babbf1>Constructor</span><span style=color:#99d1db>&lt;?&gt;</span> <span style=color:#babbf1>cons</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>cl</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getConstructor</span><span style=color:#99d1db>(</span><span style=color:#babbf1>constructorParams</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>final</span> <span style=color:#babbf1>InvocationHandler</span> <span style=color:#babbf1>ih</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>h</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(!</span><span style=color:#babbf1>Modifier</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isPublic</span><span style=color:#99d1db>(</span><span style=color:#babbf1>cl</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getModifiers</span><span style=color:#99d1db>()))</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>AccessController</span><span style=color:#99d1db>.</span><span style=color:#e5c890>doPrivileged</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>PrivilegedAction</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Void</span><span style=color:#99d1db>&gt;()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>Void</span> <span style=color:#99d1db>run</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>cons</span><span style=color:#99d1db>.</span><span style=color:#e5c890>setAccessible</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>});</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//创建一个代理类对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>cons</span><span style=color:#99d1db>.</span><span style=color:#e5c890>newInstance</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>Object</span><span style=color:#99d1db>[]{</span><span style=color:#babbf1>h</span><span style=color:#99d1db>});</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>IllegalAccessException</span> <span style=color:#99d1db>|</span> <span style=color:#babbf1>InstantiationException</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>InternalError</span><span style=color:#99d1db>(</span><span style=color:#babbf1>e</span><span style=color:#99d1db>.</span><span style=color:#e5c890>toString</span><span style=color:#99d1db>(),</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>InvocationTargetException</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>Throwable</span> <span style=color:#babbf1>t</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getCause</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>t</span> <span style=color:#ca9ee6>instanceof</span> <span style=color:#babbf1>RuntimeException</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>RuntimeException</span><span style=color:#99d1db>)</span> <span style=color:#babbf1>t</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>else</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>InternalError</span><span style=color:#99d1db>(</span><span style=color:#babbf1>t</span><span style=color:#99d1db>.</span><span style=color:#e5c890>toString</span><span style=color:#99d1db>(),</span> <span style=color:#babbf1>t</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>NoSuchMethodException</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>InternalError</span><span style=color:#99d1db>(</span><span style=color:#babbf1>e</span><span style=color:#99d1db>.</span><span style=color:#e5c890>toString</span><span style=color:#99d1db>(),</span> <span style=color:#babbf1>e</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>重点就是代码中增加注释的几句，根据传递来的接口和增强方式handler来动态创建代理类的类文件，之后调用构造函数创建一个代理类的对象返回，这些操作都借助了java中的反射</p><p>接下来我们查看一下生成的代理类到底长什么样子，为了简化代码量，这里只展示与本文有关的部分：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>final</span> <span style=color:#ca9ee6>class</span> <span style=color:#e5c890>UserServiceProxy</span> <span style=color:#ca9ee6>extends</span> <span style=color:#babbf1>Proxy</span> <span style=color:#ca9ee6>implements</span> <span style=color:#babbf1>UserService</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#ca9ee6>static</span> <span style=color:#babbf1>Method</span> <span style=color:#babbf1>m4</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#ca9ee6>static</span> <span style=color:#babbf1>Method</span> <span style=color:#babbf1>m3</span><span style=color:#99d1db>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//把传递来的loader传递给父类Proxy
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>UserServiceProxy</span><span style=color:#f92672>(</span>InvocationHandler var1<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span>  <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span><span style=color:#f92672>(</span>var1<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//把传递来的loader传递给父类Proxy
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#99d1db>UserServiceProxy</span><span style=color:#99d1db>(</span><span style=color:#babbf1>InvocationHandler</span> <span style=color:#babbf1>var1</span><span style=color:#99d1db>)</span> <span style=color:#ca9ee6>throws</span>  <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>super</span><span style=color:#99d1db>(</span><span style=color:#babbf1>var1</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            m4 <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;proxy.UserService&#34;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;select&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            m3 <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;proxy.UserService&#34;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;update&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>NoSuchMethodException var2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoSuchMethodError<span style=color:#f92672>(</span>var2<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessage</span><span style=color:#f92672>());</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>ClassNotFoundException var3<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NoClassDefFoundError<span style=color:#f92672>(</span>var3<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessage</span><span style=color:#f92672>());</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**@author zzzi
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @date 2023/10/31 10:47
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 在代理类中调用上面定义的Handler中的invoke方法实现对被代理对象的增强
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>select</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span>  <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>super</span><span style=color:#f92672>.</span><span style=color:#a6e22e>h</span><span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>,</span> m4<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>Object<span style=color:#f92672>[])</span><span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>RuntimeException <span style=color:#f92672>|</span> Error var2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> var2<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>Throwable var3<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> UndeclaredThrowableException<span style=color:#f92672>(</span>var3<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>static</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>try</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>m4</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>Class</span><span style=color:#99d1db>.</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>forName</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;proxy.UserService&#34;</span><span style=color:#99d1db>).</span><span style=color:#e5c890>getMethod</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;select&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>m3</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>Class</span><span style=color:#99d1db>.</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>forName</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;proxy.UserService&#34;</span><span style=color:#99d1db>).</span><span style=color:#e5c890>getMethod</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;update&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>NoSuchMethodException</span> <span style=color:#babbf1>var2</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>NoSuchMethodError</span><span style=color:#99d1db>(</span><span style=color:#babbf1>var2</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getMessage</span><span style=color:#99d1db>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>ClassNotFoundException</span> <span style=color:#babbf1>var3</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>NoClassDefFoundError</span><span style=color:#99d1db>(</span><span style=color:#babbf1>var3</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getMessage</span><span style=color:#99d1db>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>/**@author zzzi
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     * @date 2023/10/31 10:47
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     * 在代理类中调用上面定义的Handler中的invoke方法实现对被代理对象的增强
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>final</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>select</span><span style=color:#99d1db>()</span> <span style=color:#ca9ee6>throws</span>  <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>try</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>super</span><span style=color:#99d1db>.</span><span style=color:#e5c890>h</span><span style=color:#99d1db>.</span><span style=color:#e5c890>invoke</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>this</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>m4</span><span style=color:#99d1db>,</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>Object</span><span style=color:#99d1db>[])</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>RuntimeException</span> <span style=color:#99d1db>|</span> <span style=color:#babbf1>Error</span> <span style=color:#babbf1>var2</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#babbf1>var2</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>Throwable</span> <span style=color:#babbf1>var3</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UndeclaredThrowableException</span><span style=color:#99d1db>(</span><span style=color:#babbf1>var3</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span>  <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//拿到loader，调用他的invoke方法，传递此时调用哪个方法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>super</span><span style=color:#f92672>.</span><span style=color:#a6e22e>h</span><span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>,</span> m3<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>Object<span style=color:#f92672>[])</span><span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>RuntimeException <span style=color:#f92672>|</span> Error var2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> var2<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>Throwable var3<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> UndeclaredThrowableException<span style=color:#f92672>(</span>var3<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>可以看出代码的结构主要分为几个部分：</p><ol><li><p>将创建代理类中传递的handler传递给了父类Proxy，也就是在这里得到了如何对被代理对象增强，代码在<strong>第6行</strong></p></li><li><p>根据接口的结构得到被代理对象中的所有方法，用<strong>m+数字</strong>的方式标记这些方法</p></li><li><p>在代理类中尝试调用被代理对象的方法，实际上调用的是handler中的invoke方法，这是<strong>最关键的一步</strong>，这一步的调用传递的参数包括<strong>代理类对象</strong>，<strong>当前执行的方法</strong>，<strong>方法的参数</strong>，这些东西会被传递到handler中，我们再次查看invoke方法的结构：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> Object <span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>Object proxy<span style=color:#f92672>,</span> Method method<span style=color:#f92672>,</span> Object<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Throwable <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    before<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    Object res <span style=color:#f92672>=</span> method<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>target<span style=color:#f92672>,</span> args<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    after<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#ca9ee6>final</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>update</span><span style=color:#99d1db>()</span> <span style=color:#ca9ee6>throws</span>  <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>try</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//拿到loader，调用他的invoke方法，传递此时调用哪个方法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>super</span><span style=color:#99d1db>.</span><span style=color:#e5c890>h</span><span style=color:#99d1db>.</span><span style=color:#e5c890>invoke</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>this</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>m3</span><span style=color:#99d1db>,</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>Object</span><span style=color:#99d1db>[])</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>RuntimeException</span> <span style=color:#99d1db>|</span> <span style=color:#babbf1>Error</span> <span style=color:#babbf1>var2</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#babbf1>var2</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>catch</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>Throwable</span> <span style=color:#babbf1>var3</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>throw</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UndeclaredThrowableException</span><span style=color:#99d1db>(</span><span style=color:#babbf1>var3</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看出代码的结构主要分为几个部分：</p><ol><li><p>将创建代理类中传递的handler传递给了父类Proxy，也就是在这里得到了如何对被代理对象增强，代码在<strong>第6行</strong></p></li><li><p>根据接口的结构得到被代理对象中的所有方法，用<strong>m+数字</strong>的方式标记这些方法</p></li><li><p>在代理类中尝试调用被代理对象的方法，实际上调用的是handler中的invoke方法，这是<strong>最关键的一步</strong>，这一步的调用传递的参数包括<strong>代理类对象</strong>，<strong>当前执行的方法</strong>，<strong>方法的参数</strong>，这些东西会被传递到handler中，我们再次查看invoke方法的结构：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f4b8e4>@Override</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#babbf1>Object</span> <span style=color:#99d1db>invoke</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Object</span> <span style=color:#babbf1>proxy</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>Method</span> <span style=color:#babbf1>method</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>Object</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>args</span><span style=color:#99d1db>)</span> <span style=color:#ca9ee6>throws</span> <span style=color:#babbf1>Throwable</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>before</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>Object</span> <span style=color:#babbf1>res</span> <span style=color:#99d1db>=</span> <span style=color:#babbf1>method</span><span style=color:#99d1db>.</span><span style=color:#e5c890>invoke</span><span style=color:#99d1db>(</span><span style=color:#babbf1>target</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>args</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>after</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>可以看出，当代理类中调用这个invoke方法时，内部使用反射触发原始的被代理方法的执行，但是在执行前后对被代理对象的方法进行了增强</p></li></ol><p>所以整体经历了以下几步：</p><ol><li>创建handler，核心是里面的invoke方法，决定了被代理对象如何被增强</li><li>创建代理类，只需要传递几个参数就可以得到一个代理类对象</li><li>调用代理类对象的方法select或者update，内部会调用handler的invoke方法，而invoke方法在触发被代理对象的方法select或者update时，会在执行前后执行增强的逻辑</li><li>经历以上几步之后就完成了对被代理对象的增强，对外暴露的是代理类的接口，对用户无感，整体的流程可以总结为一个图：
 <img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202310311058251.webp alt=JDK动态代理执行方法调用过程></li></ol><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>本文中总结了静态代理和动态代理的实现步骤，对于静态代理来说，代理类需要自己书写，被代理对象中的每一个方法都需要手动增强，对于动态代理来说，代理类不需要自己书写，取而代之的是一个<code>Handler</code>类，这个类中描述了被代理对象中的方法如何增强，统一定义在<code>invoke</code>方法中</p><p>对于动态代理来说，根据传递的三个参数<code>classLoader</code>, <code>interfaces</code>, <code>handler</code>来创建一个代理类对象，代理类对象内部会调用handler中的invoke方法，invoke最终才调用被代理对象的方法，相比于静态代理的套<strong>一层壳子</strong>，动态代理套了<strong>两层壳子</strong></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%8a%a8%e6%80%81%e4%bb%a3%e7%90%86>动态代理</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/ rel=next title=Java的移位操作符><i class="fa fa-chevron-left"></i> Java的移位操作符</a></div><div class="post-nav-prev post-nav-item"><a href=/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/ rel=prev title=快速排序和堆排序>快速排序和堆排序

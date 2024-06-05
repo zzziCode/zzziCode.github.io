@@ -27,64 +27,64 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <i class="fa fa-external-link-alt"></i>
 </a>，需要计算二叉树中节点的位置，使用类似于二叉搜索的思想，每次丢弃一半的元素，找到目标的元素，直接申请新节点，在创建平衡二叉树的过程中有几点需要注意：</p><ol><li>得到中序遍历序列时，必须传递<strong>引用</strong>，否则中序遍历的结果无法存储到vector容器中</li><li>由容器中的元素构建平衡二叉树时，传递的范围必须是有效元素的范围，也就是<code>(0,res.size()-1)</code>，而不是<code>(0,res.size())</code>，后者会造成空指针访问的情况，因为当<code>pos=res.size()</code>时，也会尝试访问容器中的元素</li></ol><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>得到中序遍历序列</li><li>根据中序遍历序列得到平衡二叉树</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    TreeNode<span style=color:#f92672>*</span> balanceBST(TreeNode<span style=color:#f92672>*</span> root) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//分为两步，第一步将二叉搜索树存放在有序数组中：使用中序遍历
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//第二步将有序数组转化成二叉搜索树
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> res;
-</span></span><span style=display:flex><span>        trans(root,res);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//传递的元素范围必须是有效范围
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>create</span>(res,<span style=color:#ae81ff>0</span>,res.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将二叉树转化成有序数组,传递的必须是引用，才能将结果保存到res中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>trans</span>(TreeNode <span style=color:#f92672>*</span>root,vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>&amp;</span>res){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        trans(root<span style=color:#f92672>-&gt;</span>left,res);
-</span></span><span style=display:flex><span>        res.push_back(root<span style=color:#f92672>-&gt;</span>val);
-</span></span><span style=display:flex><span>        trans(root<span style=color:#f92672>-&gt;</span>right,res);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将有序数组转化为平衡二叉树
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    TreeNode<span style=color:#f92672>*</span> <span style=color:#a6e22e>create</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> res,<span style=color:#66d9ef>int</span> begin,<span style=color:#66d9ef>int</span> end){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(begin<span style=color:#f92672>&gt;</span>end)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nullptr</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> pos<span style=color:#f92672>=</span>(begin<span style=color:#f92672>+</span>end)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>;
-</span></span><span style=display:flex><span>        TreeNode <span style=color:#f92672>*</span>node<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TreeNode(res[pos]);
-</span></span><span style=display:flex><span>        node<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>=</span>create(res,begin,pos<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>        node<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>=</span>create(res,pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,end);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> node;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>balanceBST</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>root</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//分为两步，第一步将二叉搜索树存放在有序数组中：使用中序遍历
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//第二步将有序数组转化成二叉搜索树
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>trans</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//传递的元素范围必须是有效范围
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#99d1db>create</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span>0<span style=color:#c6d0f5>,</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将二叉树转化成有序数组,传递的必须是引用，才能将结果保存到res中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>trans</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>TreeNode</span> <span style=color:#99d1db>*</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>&amp;</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>trans</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>trans</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将有序数组转化为平衡二叉树
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#99d1db>create</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>begin</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>end</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>begin</span><span style=color:#99d1db>&gt;</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>pos</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>begin</span><span style=color:#99d1db>+</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>/</span>2<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>TreeNode</span> <span style=color:#99d1db>*</span><span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TreeNode</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>pos</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>node</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>=</span><span style=color:#babbf1>create</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>begin</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>node</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>=</span><span style=color:#babbf1>create</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>node</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>将问题分解，变成两个简单的问题，需要注意参数传递时传递<strong>引用</strong>，传递元素范围时需要传递<strong>有效</strong>元素的范围</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/100.%E7%9B%B8%E5%90%8C%E7%9A%84%E6%A0%91/ rel=next title=100.相同的树><i class="fa fa-chevron-left"></i> 100.相同的树</a></div><div class="post-nav-prev post-nav-item"><a href=/post/129.%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/ rel=prev title=129.求根节点到叶节点数字之和>129.求根节点到叶节点数字之和
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

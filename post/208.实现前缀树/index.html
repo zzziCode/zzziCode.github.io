@@ -24,142 +24,142 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <i class="fa fa-external-link-alt"></i>
 </a></strong>（发音类似 &ldquo;try&rdquo;）或者说 <strong>前缀树</strong> 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。</p><p>请你实现 Trie 类：</p><ul><li><code>Trie()</code> 初始化前缀树对象。</li><li><code>void insert(String word)</code> 向前缀树中插入字符串 <code>word</code> 。</li><li><code>boolean search(String word)</code> 如果字符串 <code>word</code> 在前缀树中，返回 <code>true</code>（即，在检索之前已经插入）；否则，返回 <code>false</code> 。</li><li><code>boolean startsWith(String prefix)</code> 如果之前已经插入的字符串 <code>word</code> 的前缀之一为 <code>prefix</code> ，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li></ul><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>前缀树也是一种树,只是树中的节点代表单词的一个字符,所以也称为字典树,每一个节点都有26个孩子节点,只是部分孩子节点才有值,由此形成了一个前缀树,也就是说,节点之间的连接完全可以使用一个数组来记录,26个元素的数组就可以记录节点之间的连接关系,对于单词cat来说,形成的前缀树如下:</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202310042055546.jpeg alt=在这里插入图片描述></p><p>其中c的下一个字符是a,所以c对应的26个分支中,只有a这一个分支不为空,由于节点的下一个位置还是节点,所以存储下一位置的数组的类型就是节点的类型,这里可以类比链表的next指针的类型就是节点自身的类型</p><p>知道了前缀树的基本原理之后,就是形成前缀树了,每一个前缀树都有一个root根节点,根节点也有26个分支,所以在空的前缀树中插入一个单词可以从根节点出发,每次遍历单词中的一个字符,形成一个新节点,后续再插入单词时,部分字符有可能就不用插入了,因为部分单词的前缀相同,所以在前缀树中共用一部分树的节点,例如apple和app</p><p>所以插入时需要判断,例如插入a时需要判断,长度为26的数组的a字符所对应的位置是不是空,不是空就直接使用,是空需要创建新的节点,插入到这个位置,当单词插入完成之后,需要将单词的尾部做一个标记,说明这个单词已经到头了</p><blockquote><p>核心就是节点之间的连接使用一个数组,数组的元素类型就是节点的类型</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TrieNode</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TrieNode<span style=color:#f92672>[]</span> children<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TrieNode<span style=color:#f92672>[</span><span style=color:#ae81ff>26</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> isEnd<span style=color:#f92672>=</span><span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>前缀树也是一种树,只是树中的节点代表单词的一个字符,所以也称为字典树,每一个节点都有26个孩子节点,只是部分孩子节点才有值,由此形成了一个前缀树,也就是说,节点之间的连接完全可以使用一个数组来记录,26个元素的数组就可以记录节点之间的连接关系,对于单词cat来说,形成的前缀树如下:</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202310042055546.jpeg alt=在这里插入图片描述></p><p>其中c的下一个字符是a,所以c对应的26个分支中,只有a这一个分支不为空,由于节点的下一个位置还是节点,所以存储下一位置的数组的类型就是节点的类型,这里可以类比链表的next指针的类型就是节点自身的类型</p><p>知道了前缀树的基本原理之后,就是形成前缀树了,每一个前缀树都有一个root根节点,根节点也有26个分支,所以在空的前缀树中插入一个单词可以从根节点出发,每次遍历单词中的一个字符,形成一个新节点,后续再插入单词时,部分字符有可能就不用插入了,因为部分单词的前缀相同,所以在前缀树中共用一部分树的节点,例如apple和app</p><p>所以插入时需要判断,例如插入a时需要判断,长度为26的数组的a字符所对应的位置是不是空,不是空就直接使用,是空需要创建新的节点,插入到这个位置,当单词插入完成之后,需要将单词的尾部做一个标记,说明这个单词已经到头了</p><blockquote><p>核心就是节点之间的连接使用一个数组,数组的元素类型就是节点的类型</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>TrieNode</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>children</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>[</span>26<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#babbf1>isEnd</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=执行流程>执行流程
-<a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>对于插入单词来说,从根节点出发,每次截取单词中的一个字符,找到其在数组中的位置,在这个位置插入一个节点</li><li>插入节点之后,为了衔接下一个字符,需要有一个node节点一直指向当前<strong>已遍历</strong>的<strong>最后</strong>一个字符对应的位置上,以便新来的字符可以直接加入他的<strong>children</strong>数组中的某一个位置</li><li>单词遍历完成之后,node指向的是单词的最后一个字符,此时将这个字符标记为单词的末尾,代表单词结束</li></ol><hr><ol><li><p>对于查找单词来说,从根节点开始,每次截取一个单词中的字符,判断这个字符对应的位置是不是有节点,有的话继续查询,没有的话直接返回</p></li><li><p>当前字符有节点,说明前缀树中存储了当前字符,此时查询单词中的下一个字符是不是存在于前缀树中,此时在前缀树中的匹配位置也需要移动,对应在代码中为:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>]==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>//在这里就是没有遇到,此时需要向后移动
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>node<span style=color:#f92672>=</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>];</span>
+<a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>对于插入单词来说,从根节点出发,每次截取单词中的一个字符,找到其在数组中的位置,在这个位置插入一个节点</li><li>插入节点之后,为了衔接下一个字符,需要有一个node节点一直指向当前<strong>已遍历</strong>的<strong>最后</strong>一个字符对应的位置上,以便新来的字符可以直接加入他的<strong>children</strong>数组中的某一个位置</li><li>单词遍历完成之后,node指向的是单词的最后一个字符,此时将这个字符标记为单词的末尾,代表单词结束</li></ol><hr><ol><li><p>对于查找单词来说,从根节点开始,每次截取一个单词中的字符,判断这个字符对应的位置是不是有节点,有的话继续查询,没有的话直接返回</p></li><li><p>当前字符有节点,说明前缀树中存储了当前字符,此时查询单词中的下一个字符是不是存在于前缀树中,此时在前缀树中的匹配位置也需要移动,对应在代码中为:</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>]==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>	<span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>//在这里就是没有遇到,此时需要向后移动
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>];</span>
 </span></span></code></pre></td></tr></table></div></div><p>也就是节点需要移动到下一个位置,跟随字符一起移动</p></li><li><p>判断到了单词的末尾,需要判断当前字符是不是结尾,不是的话也需要返回false,例如查找app,但是前缀树中只存储了apple,此时需要返回false,代表没有查到</p></li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Trie</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TrieNode root<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//前缀树中的每一个节点都是一个前缀节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//包含一个26长度的节点数组和一个标记
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Trie</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        root<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TrieNode<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">59
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Trie</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#babbf1>TrieNode</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//前缀树中的每一个节点都是一个前缀节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//包含一个26长度的节点数组和一个标记
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#99d1db>Trie</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>root</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//插入时使用下标链接每个节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>insert</span><span style=color:#f92672>(</span>String word<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//从头开始插入
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        TrieNode node<span style=color:#f92672>=</span>root<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>word<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=</span>word<span style=color:#f92672>.</span><span style=color:#a6e22e>charAt</span><span style=color:#f92672>(</span>i<span style=color:#f92672>)-</span><span style=color:#e6db74>&#39;a&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前前缀节点为空,说明没有创建,此时创建
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>]==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//当前节点有了字符
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>]=</span><span style=color:#66d9ef>new</span> TrieNode<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//从这个字符继续添加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            node<span style=color:#f92672>=</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//单词添加完毕之后,最后一个字符的结尾标志需要点亮
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        node<span style=color:#f92672>.</span><span style=color:#a6e22e>isEnd</span><span style=color:#f92672>=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//插入时使用下标链接每个节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>insert</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span> <span style=color:#babbf1>word</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//从头开始插入
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>TrieNode</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>root</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>word</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span><span style=color:#babbf1>word</span><span style=color:#99d1db>.</span><span style=color:#e5c890>charAt</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>)-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前前缀节点为空,说明没有创建,此时创建
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>]==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//当前节点有了字符
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>]=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//从这个字符继续添加
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//单词添加完毕之后,最后一个字符的结尾标志需要点亮
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEnd</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>search</span><span style=color:#f92672>(</span>String word<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        TrieNode node<span style=color:#f92672>=</span>root<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>word<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=</span>word<span style=color:#f92672>.</span><span style=color:#a6e22e>charAt</span><span style=color:#f92672>(</span>i<span style=color:#f92672>)-</span><span style=color:#e6db74>&#39;a&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//查找过程中遇到了未添加的字符,直接返回false
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>]==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//在这里就是没有遇到,此时需要向后移动
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            node<span style=color:#f92672>=</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//单词查找完了,看看是不是到了前缀树的末尾
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//防止出现apple和app的情况
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span><span style=color:#a6e22e>isEnd</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>search</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span> <span style=color:#babbf1>word</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>TrieNode</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>root</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>word</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span><span style=color:#babbf1>word</span><span style=color:#99d1db>.</span><span style=color:#e5c890>charAt</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>)-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//查找过程中遇到了未添加的字符,直接返回false
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>]==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//在这里就是没有遇到,此时需要向后移动
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//单词查找完了,看看是不是到了前缀树的末尾
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//防止出现apple和app的情况
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEnd</span><span style=color:#99d1db>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>startsWith</span><span style=color:#f92672>(</span>String prefix<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        TrieNode node<span style=color:#f92672>=</span>root<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>prefix<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=</span>prefix<span style=color:#f92672>.</span><span style=color:#a6e22e>charAt</span><span style=color:#f92672>(</span>i<span style=color:#f92672>)-</span><span style=color:#e6db74>&#39;a&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//查找过程中遇到了未添加的字符,直接返回false
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>]==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            node<span style=color:#f92672>=</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>children</span><span style=color:#f92672>[</span>index<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//前一种是apple和app,后一种是app和app
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>!</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>isEnd</span><span style=color:#f92672>||</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>isEnd</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TrieNode</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TrieNode<span style=color:#f92672>[]</span> children<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TrieNode<span style=color:#f92672>[</span><span style=color:#ae81ff>26</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> isEnd<span style=color:#f92672>=</span><span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>startsWith</span><span style=color:#99d1db>(</span><span style=color:#babbf1>String</span> <span style=color:#babbf1>prefix</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>TrieNode</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>root</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>prefix</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span><span style=color:#babbf1>prefix</span><span style=color:#99d1db>.</span><span style=color:#e5c890>charAt</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>)-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//查找过程中遇到了未添加的字符,直接返回false
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>]==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>children</span><span style=color:#99d1db>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//前一种是apple和app,后一种是app和app
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#99d1db>!</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEnd</span><span style=color:#99d1db>||</span><span style=color:#babbf1>node</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEnd</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>TrieNode</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>children</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TrieNode</span><span style=color:#99d1db>[</span>26<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#babbf1>isEnd</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是捋清楚前缀树相对于二叉树的不同,二叉树只有两个孩子节点,前缀树有26个孩子节点,而相同之处就是在于节点的连接上,next指针和children指针的类型都是节点本身的类型,这样才可以存储下一个节点是什么,从而链接成为一个树</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/spring02/ rel=next title=Spring02><i class="fa fa-chevron-left"></i> Spring02</a></div><div class="post-nav-prev post-nav-item"><a href=/post/207.%E8%AF%BE%E7%A8%8B%E8%A1%A8/ rel=prev title=207.课程表>207.课程表
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

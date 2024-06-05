@@ -24,92 +24,92 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e7%a4%ba%e4%be%8b></a></h2><p>示例 1：</p><ul><li>输入：nums = [1,1,2]</li><li>输出： [[1,1,2], [1,2,1], [2,1,1]]</li></ul><p>示例 2：</p><ul><li>输入：nums = [1,2,3]</li><li>输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</li></ul><p>提示：</p><ul><li>1 &lt;= nums.length &lt;= 8</li><li>-10 &lt;= nums[i] &lt;= 10</li></ul><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本想法>基本想法
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%83%b3%e6%b3%95></a></h3><p>基本思想与无重复元素的全排列一样，都需要每次取出集合中的一个未使用元素，将其标记为已使用，并进行递归，但是本题中是可重复元素，所以需要考虑去重</p><p>去重并不是直接将集合中的重复元素去除掉在进行全排列，而是在搜索时，每一层中同样的元素只可以使用一次，但是不同层可以使用值相同的元素</p><p>如何理解：例如[1,1,2,2]，第一层取一个1，剩下的集合为[1,2,2]，第二层还是可以取一个1，剩下[2,2]，第三层取<font color=red><strong>2</strong></font>，剩下[2]，第四层取一个2，剩下[]，此时形成一个全排列，达到递归返回的条件，并且for循环也结束，直接退回到第三层，此时剩下元素[2]，但是这个2不能使用，与红色的2值相同，并且处于同一层，这样一直搜索下去，形成一个搜索树：</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305252017821.png alt=image-20230525201725618 style=zoom:80%><p>总结来说，由于元素经过排序，所以在同一层中，出现当前元素与前一个元素重复，<strong>并且</strong>前一个元素被使用，那么当前元素就不能被使用了</p><h3 id=执行流程>执行流程
-<a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><p>主要需要考虑的就是如何去重，与之前子集的去重思路一样，但是增加了一个判断条件，由于之前的子集问题使用startIndex直接缩小集合的大小，进入下一层之前就可以将上一层使用的元素剔除掉，而排列问题不行，所以增加一个判断条件，很巧妙。</p><p>增加的条件：<code>flag[i-1]==false</code>，当<code>flag</code>为<code>true</code>时说明纵向遍历中元素被使用过，当<code>flag</code>为<code>false</code>说明横向遍历中元素被使用，为什么。因为同一层元素横向便利时，必然是遇到了回溯，也就是说<code>flag[i]=false</code>,在进行下一个元素的判断，所以此处是<code>flag[i-1]==false</code></p><p>所以去重条件为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>&amp;&amp;</span>nums[i]<span style=color:#f92672>==</span>nums[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>&amp;&amp;</span>flag[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>==</span>false)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>continue</span>;
+<a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><p>主要需要考虑的就是如何去重，与之前子集的去重思路一样，但是增加了一个判断条件，由于之前的子集问题使用startIndex直接缩小集合的大小，进入下一层之前就可以将上一层使用的元素剔除掉，而排列问题不行，所以增加一个判断条件，很巧妙。</p><p>增加的条件：<code>flag[i-1]==false</code>，当<code>flag</code>为<code>true</code>时说明纵向遍历中元素被使用过，当<code>flag</code>为<code>false</code>说明横向遍历中元素被使用，为什么。因为同一层元素横向便利时，必然是遇到了回溯，也就是说<code>flag[i]=false</code>,在进行下一个元素的判断，所以此处是<code>flag[i-1]==false</code></p><p>所以去重条件为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&gt;</span>0<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>continue</span><span style=color:#c6d0f5>;</span>
 </span></span></code></pre></td></tr></table></div></div><p>当前元素与上一个元素重复，并且上一个元素被使用过（经过回溯之后标志数组变成<code>false</code>）,那么当前元素不能被使用。</p><blockquote><p>其实<code>flag[i-1]==true</code>也可以作为判断条件，只是不太好理解，这里选择放弃</p></blockquote><p><a href=https://www.programmercarl.com/%E5%91%A8%E6%80%BB%E7%BB%93/20201112%E5%9B%9E%E6%BA%AF%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93.html#%E5%91%A8%E5%9B%9B title="flag[i-1]==true形成的判断树点这里" rel="noopener external nofollow noreferrer" target=_blank class=exturl>flag[i-1]==true形成的判断树点这里
 <i class="fa fa-external-link-alt"></i></a></p><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//定义全局变量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> res;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> path;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> permuteUnique(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(nums.size()<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>bool</span><span style=color:#f92672>&gt;</span> flag(nums.size(),false);
-</span></span><span style=display:flex><span>        sort(nums.begin(),nums.end());
-</span></span><span style=display:flex><span>        backtrack(nums,flag);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums,vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>bool</span><span style=color:#f92672>&gt;&amp;</span> flag){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(path.size()<span style=color:#f92672>==</span>nums.size()){
-</span></span><span style=display:flex><span>            res.push_back(path);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//横向遍历
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>nums.size();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//判断元素是否被使用或者同一层中已经有相等的元素被使用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>// used[i - 1] == true，说明同一树枝nums[i - 1]使用过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>// used[i - 1] == false，说明同一树层nums[i - 1]使用过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>// 如果同一树层nums[i - 1]使用过则直接跳过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>&amp;&amp;</span>nums[i]<span style=color:#f92672>==</span>nums[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>&amp;&amp;</span>flag[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>==</span>false)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>;
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//到这里就是当前元素可以被使用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(flag[i]<span style=color:#f92672>==</span>false){
-</span></span><span style=display:flex><span>                path.push_back(nums[i]);
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//当前元素被使用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                flag[i]<span style=color:#f92672>=</span>true;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//进行纵向遍历
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                backtrack(nums,flag);
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                path.pop_back();
-</span></span><span style=display:flex><span>                flag[i]<span style=color:#f92672>=</span>false;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//定义全局变量
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>path</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>permuteUnique</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>==</span>0<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>bool</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>flag</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>(),</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>sort</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>begin</span><span style=color:#c6d0f5>(),</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>bool</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>flag</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>==</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>path</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//横向遍历
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//判断元素是否被使用或者同一层中已经有相等的元素被使用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>// used[i - 1] == true，说明同一树枝nums[i - 1]使用过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>// used[i - 1] == false，说明同一树层nums[i - 1]使用过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>// 如果同一树层nums[i - 1]使用过则直接跳过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&gt;</span>0<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>continue</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//到这里就是当前元素可以被使用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//当前元素被使用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//进行纵向遍历
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//回溯
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>path</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop_back</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>flag</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>相比于没有重复元素的全排列，此题只是多了一个去重的逻辑，但是不要小看！！！！</p><p>去重的逻辑是<code>lag[i-1]==false</code>，为什么使用<code>false</code>一定要搞清楚</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%9e%e6%ba%af%e6%b3%95>回溯法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ rel=next title=Git学习笔记><i class="fa fa-chevron-left"></i> Git学习笔记</a></div><div class="post-nav-prev post-nav-item"><a href=/post/46.%E5%85%A8%E6%8E%92%E5%88%97/ rel=prev title=46.全排列>46.全排列
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

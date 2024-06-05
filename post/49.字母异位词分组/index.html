@@ -22,170 +22,170 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🐹 49.字母异位词分组</p></blockquote><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了将所有的字母异位词分组，首先需要能判断两个单词是不是字母异位词，所以需要单独定义一个函数，如果两个单词是字母异位词，才能属于同一组</p><p>对于每一个单词，判断已有的结果容器中是不是有字母异位词，只需要将结果容器中每一组的第一个单词拿出来判断即可，因为这一组中全都是字母异位词，如果与第一个单词成为了字母异位词，那么这个单词就可以加入这一组</p><p>所以整体的流程就是，针对每一个单词，依次取出结果容器中每一组的第一个进行判断，找到了字母异位词就加入那一组，但是这样会超时，但是代码没错：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将所有的字母异位词保存在一起
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;</span> <span style=color:#a6e22e>groupAnagrams</span>(vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&amp;</span> strs) {
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;</span> res;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遍历给定的每一个单词，查看是否有已知的字母异位词
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>strs.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//从已有的结果列表中查看属于哪个字母异位词容器
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(;j<span style=color:#f92672>&lt;</span>res.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//找到了属于哪一个字母异位词容器，直接break准备插入
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isSame</span>(strs[i],res[j][<span style=color:#ae81ff>0</span>]))
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>break</span>;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//区分是加入新的容器还是旧的容器
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(j<span style=color:#f92672>==</span>res.<span style=color:#a6e22e>size</span>()){
-</span></span><span style=display:flex><span>                vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> temp;
-</span></span><span style=display:flex><span>                temp.<span style=color:#a6e22e>push_back</span>(strs[i]);
-</span></span><span style=display:flex><span>                res.<span style=color:#a6e22e>push_back</span>(temp);
-</span></span><span style=display:flex><span>            }<span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>                res[j].<span style=color:#a6e22e>push_back</span>(strs[i]);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }   
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>isSame</span>(string str1,string str2){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(str1.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>!=</span>str2.<span style=color:#a6e22e>size</span>())
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> false;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//将第一个字符串转换成一个字典用来查询
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//不知道这样是不是可以
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>num</span>(<span style=color:#ae81ff>26</span>,<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> c:str1){
-</span></span><span style=display:flex><span>            num[c<span style=color:#f92672>-</span><span style=color:#e6db74>&#39;a&#39;</span>]<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> c:str2){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//还有对应的字符
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(num[c<span style=color:#f92672>-</span><span style=color:#e6db74>&#39;a&#39;</span>]<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>                num[c<span style=color:#f92672>-</span><span style=color:#e6db74>&#39;a&#39;</span>]<span style=color:#f92672>-=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> false;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了将所有的字母异位词分组，首先需要能判断两个单词是不是字母异位词，所以需要单独定义一个函数，如果两个单词是字母异位词，才能属于同一组</p><p>对于每一个单词，判断已有的结果容器中是不是有字母异位词，只需要将结果容器中每一组的第一个单词拿出来判断即可，因为这一组中全都是字母异位词，如果与第一个单词成为了字母异位词，那么这个单词就可以加入这一组</p><p>所以整体的流程就是，针对每一个单词，依次取出结果容器中每一组的第一个进行判断，找到了字母异位词就加入那一组，但是这样会超时，但是代码没错：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将所有的字母异位词保存在一起
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#99d1db>groupAnagrams</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>strs</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遍历给定的每一个单词，查看是否有已知的字母异位词
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//从已有的结果列表中查看属于哪个字母异位词容器
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//找到了属于哪一个字母异位词容器，直接break准备插入
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>isSame</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>],</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>][</span>0<span style=color:#c6d0f5>]))</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>break</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//区分是加入新的容器还是旧的容器
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>j</span><span style=color:#99d1db>==</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>temp</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>temp</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span><span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>].</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>   
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>bool</span> <span style=color:#99d1db>isSame</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>string</span> <span style=color:#babbf1>str1</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>string</span> <span style=color:#babbf1>str2</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>str1</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>str2</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>())</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//将第一个字符串转换成一个字典用来查询
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//不知道这样是不是可以
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>num</span><span style=color:#c6d0f5>(</span>26<span style=color:#c6d0f5>,</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>c</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>str1</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>num</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>c</span><span style=color:#99d1db>-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>+=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>c</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>str2</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//还有对应的字符
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>c</span><span style=color:#99d1db>-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>&gt;</span>0<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>num</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>c</span><span style=color:#99d1db>-</span><span style=color:#a6d189>&#39;a&#39;</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>-=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>else</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><hr><p>于是从上面的思路中，想办法简化时间复杂度，因为上面的内存循环主要是找到合适的字母异位词的小组，所以将内层循环进行改造</p><p>所有的字母异位词的小组都有一个标志，标志的得来是基于所有的字母异位词按照相同的排序规则排序之后变成同样的元素，例如ate和eta排序之后都变成了aet，所以定义了一个unordered_map用来存储小组和对应的标志之间的映射关系</p><p>此时对于每一个词来说，找到自己的字母异位词小组之前，需要先对自己进行排序，所以需要先转化成字符数组排序，再转换成字符串，一旦找到了自己对应的字母异位词小组，需要将其没有排序之前的值加入对应的小组，如果没有找到自己的字母异位词小组，说明这个单词需要自成一组</p><p>这样通过字典的方式查询到自己的字母异位词，而不是内层使用一个for循环从前到后的找到自己的字母异位词小组，从而达到减少时间复杂度的目的</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>从前到后遍历每一个单词</li><li>对每一个单词先转化成字符数组排序，之后在转化成字符串试图找到自己的字母异位词小组</li><li>如果找到了，那么就将<strong>原值</strong>加入小组</li><li>如果没找到，那么<strong>原值</strong>自成一组</li><li>最后将字典中的所有字母异位词集中在一起返回</li></ol><blockquote><p>原值指的是没有经过排序之前的单词</p></blockquote><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将所有的字母异位词保存在一起
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;</span> <span style=color:#a6e22e>groupAnagrams</span>(vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&amp;</span> strs) {
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;</span> res;
-</span></span><span style=display:flex><span>        unordered_map<span style=color:#f92672>&lt;</span>string,vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;</span> umap;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>strs.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//将当前单词转化成字符数组再进行排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>char</span><span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>temp</span>(strs[i].<span style=color:#a6e22e>begin</span>(),strs[i].<span style=color:#a6e22e>end</span>());
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>sort</span>(temp.<span style=color:#a6e22e>begin</span>(),temp.<span style=color:#a6e22e>end</span>());
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//排序之后重新进行查找，字母异位词排序之后变成了同一个单词
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            string str<span style=color:#f92672>=</span><span style=color:#a6e22e>string</span>(temp.<span style=color:#a6e22e>begin</span>(),temp.<span style=color:#a6e22e>end</span>());
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//找到了字母异位词的小组
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(umap.<span style=color:#a6e22e>find</span>(str)<span style=color:#f92672>!=</span>umap.<span style=color:#a6e22e>end</span>()){
-</span></span><span style=display:flex><span>                vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> group<span style=color:#f92672>=</span>umap[str];
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//新的字母异位词加入小组,加入时加入的是本身
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                group.<span style=color:#a6e22e>push_back</span>(strs[i]);
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//小组更新
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                umap[str]<span style=color:#f92672>=</span>group;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//没找到字母异位词的小组，他就是新的小组
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>                vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> group;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//新的字母异位词加入小组
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                group.<span style=color:#a6e22e>push_back</span>(strs[i]);
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//小组更新
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                umap[str]<span style=color:#f92672>=</span>group;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遍历完成之后，将所有的字母异位词小组加入结果容器
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> it<span style=color:#f92672>=</span>umap.<span style=color:#a6e22e>begin</span>();it<span style=color:#f92672>!=</span>umap.<span style=color:#a6e22e>end</span>();<span style=color:#f92672>++</span>it){
-</span></span><span style=display:flex><span>            res.<span style=color:#a6e22e>push_back</span>(it<span style=color:#f92672>-&gt;</span>second);
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }   
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将所有的字母异位词保存在一起
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#99d1db>groupAnagrams</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>strs</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//将当前单词转化成字符数组再进行排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>char</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>temp</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>].</span><span style=color:#99d1db>begin</span><span style=color:#c6d0f5>(),</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>].</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>sort</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>begin</span><span style=color:#c6d0f5>(),</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//排序之后重新进行查找，字母异位词排序之后变成了同一个单词
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>string</span> <span style=color:#babbf1>str</span><span style=color:#99d1db>=</span><span style=color:#99d1db>string</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>begin</span><span style=color:#c6d0f5>(),</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>());</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//找到了字母异位词的小组
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>str</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>group</span><span style=color:#99d1db>=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>str</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//新的字母异位词加入小组,加入时加入的是本身
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>group</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//小组更新
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>str</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>group</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//没找到字母异位词的小组，他就是新的小组
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>group</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//新的字母异位词加入小组
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>group</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>strs</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//小组更新
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>str</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>group</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遍历完成之后，将所有的字母异位词小组加入结果容器
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#babbf1>it</span><span style=color:#99d1db>=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>begin</span><span style=color:#c6d0f5>();</span><span style=color:#babbf1>it</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>it</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>it</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>second</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>   
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是如何找到自己的字母异位词小组，字母异位词排序之后变成相同的词，这个思想很重要</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/128.%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/ rel=next title=128.最长连续序列><i class="fa fa-chevron-left"></i> 128.最长连续序列</a></div><div class="post-nav-prev post-nav-item"><a href=/post/127.%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/ rel=prev title=127.单词接龙>127.单词接龙
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

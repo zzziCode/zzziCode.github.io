@@ -23,82 +23,82 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span>2分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>⛓︎ 143.重排链表</p></blockquote><p>给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p><code>L0 → L1 → … → Ln - 1 → Ln</code>
 请将其重新排列后变为：</p><p><code>L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …</code>
 不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><h2 id=示例>示例
-<a class=header-anchor href=#%e7%a4%ba%e4%be%8b></a></h2><p>示例 1：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://pic.leetcode-cn.com/1626420311-PkUiGI-image.png alt=img></p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>输入：</span>head <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>]
-</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>输出：</span>[<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>]
-</span></span></code></pre></td></tr></table></div></div><p>示例 2：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://pic.leetcode-cn.com/1626420320-YUiulT-image.png alt=img></p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C data-lang=C><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>输入：</span>head <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>5</span>]
-</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>输出：</span>[<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>5</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>3</span>]
+<a class=header-anchor href=#%e7%a4%ba%e4%be%8b></a></h2><p>示例 1：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://pic.leetcode-cn.com/1626420311-PkUiGI-image.png alt=img></p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#e78284>输入：</span><span style=color:#babbf1>head</span> <span style=color:#99d1db>=</span> <span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>,</span>2<span style=color:#c6d0f5>,</span>3<span style=color:#c6d0f5>,</span>4<span style=color:#c6d0f5>]</span>
+</span></span><span style=display:flex><span><span style=color:#e78284>输出：</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>,</span>4<span style=color:#c6d0f5>,</span>2<span style=color:#c6d0f5>,</span>3<span style=color:#c6d0f5>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>示例 2：</p><p><img src=/imgs/img-lazy-loading.gif data-src=https://pic.leetcode-cn.com/1626420320-YUiulT-image.png alt=img></p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C data-lang=C><span style=display:flex><span><span style=color:#e78284>输入：</span><span style=color:#babbf1>head</span> <span style=color:#99d1db>=</span> <span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>,</span>2<span style=color:#c6d0f5>,</span>3<span style=color:#c6d0f5>,</span>4<span style=color:#c6d0f5>,</span>5<span style=color:#c6d0f5>]</span>
+</span></span><span style=display:flex><span><span style=color:#e78284>输出：</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>,</span>5<span style=color:#c6d0f5>,</span>2<span style=color:#c6d0f5>,</span>4<span style=color:#c6d0f5>,</span>3<span style=color:#c6d0f5>]</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>根据题目的描述，需要将链表的节点取下来组成一个新的链表，并且取节点的顺序有限制，必须头先取一个插入新链表，之后尾部取一个插入新链表，插入的顺序为尾插法，知道这个流程之后就是使用代码模拟</p><p>为了不出现空指针，先给新链表中擦干入一个节点，并且为了可以首尾取节点，也就是随机访问，需要先遍历一遍链表，将链表转化为数组，从而实现随机访问</p><p>为了首尾取节点，使用双指针法遍历数组，当数组中只剩下一个元素时，需要单独处理，防止重复加入，并且最后需要将链表尾置空，这样才能成为一个真正的新链表</p><blockquote><p>知道上述这些细节之后，接下来的工作就是模拟插入的过程</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>判断链表是否为空，为空不用处理</li><li>将链表转化为数组</li><li>新链表中插入一个节点，方便后续操作</li><li>剩下的节点依次从头尾各取一个插入新链表中</li><li>判断是不是有一个单独的节点需要处理，防止重复加入</li><li>链表尾部置空</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> reorderList(ListNode<span style=color:#f92672>*</span> head) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(head<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里链表中至少有一个节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        vector<span style=color:#f92672>&lt;</span>ListNode<span style=color:#f92672>*&gt;</span> node;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//将链表转化为vector，这样就可以随机访问
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>while</span>(head<span style=color:#f92672>!=</span><span style=color:#66d9ef>nullptr</span>){
-</span></span><span style=display:flex><span>            node.push_back(head);
-</span></span><span style=display:flex><span>            head<span style=color:#f92672>=</span>head<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,j<span style=color:#f92672>=</span>node.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        ListNode <span style=color:#f92672>*</span>temp<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ListNode(<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        head<span style=color:#f92672>=</span>node[<span style=color:#ae81ff>0</span>];<span style=color:#75715e>//先加入一个节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        temp<span style=color:#f92672>=</span>head;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(i<span style=color:#f92672>&lt;</span>j){
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>node[j];
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>=</span>temp<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>node[i];
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>=</span>temp<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>            i<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>            j<span style=color:#f92672>--</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>==</span>j){
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>node[i];
-</span></span><span style=display:flex><span>            temp<span style=color:#f92672>=</span>temp<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//不要忘记链表的尾部置空
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        temp<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span><span style=color:#66d9ef>nullptr</span>;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>void</span> <span style=color:#babbf1>reorderList</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>head</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>head</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到这里链表中至少有一个节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*&gt;</span> <span style=color:#babbf1>node</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//将链表转化为vector，这样就可以随机访问
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>head</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>node</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>head</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>head</span><span style=color:#99d1db>=</span><span style=color:#babbf1>head</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>j</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>ListNode</span> <span style=color:#99d1db>*</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ListNode</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>head</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>];</span><span style=color:#626880;font-style:italic>//先加入一个节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>head</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>i</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>j</span><span style=color:#99d1db>--</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>==</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//不要忘记链表的尾部置空
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>temp</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>重点是模拟插入的过程，不能出现空指针，并且head的位置不能变，所以需要加入一个新指针辅助节点的插入，并且需要先加入一个节点，方便统一后面节点的插入过程，以新增一个虚拟头结点是一样的道理</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/141.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/ rel=next title=141.环形链表><i class="fa fa-chevron-left"></i> 141.环形链表</a></div><div class="post-nav-prev post-nav-item"><a href=/post/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/ rel=prev title=24.两两交换链表中的节点>24.两两交换链表中的节点
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

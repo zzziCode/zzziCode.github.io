@@ -33,76 +33,76 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>每一个描述都会创建一个新子树，包含一个根节点和一个孩子节点，重点就是如何讲子树<strong>连接</strong>起来</p><p>建立一个哈希表，建立子树时如果哈希表中已经有了节点，那么这个节点肯定要被连接到子树中，如果还没有此节点，就创建此节点，这样就可以将所有的子树一一连接在一起</p><p>并且一旦某个节点被连接到其他的子树中，入度就需要加一，最终统计入度为零的节点就是根节点</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><p>遍历描述数组，创建子树，在创建子树时如果父节点和孩子节点不存在就创建</p><p>如果存在的话就直接判断孩子节点是否已经被创建，如果已经被创建，那就意味着两个子树之间需要进行链接，并且被连接的节点入度需要增加</p><p>遍历完描述数组之后，所有的子树被链接成了一颗完整的子树，最后的工作就是找到根节点并返回，此时入度数组就排上用场了，只需要找到入度为0的节点就是根节点</p><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    TreeNode<span style=color:#f92672>*</span> createBinaryTree(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> descriptions) {
-</span></span><span style=display:flex><span>        map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>,TreeNode<span style=color:#f92672>*&gt;</span> tree;
-</span></span><span style=display:flex><span>        map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span>degreeIn;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> d:descriptions){<span style=color:#75715e>//遍历描述数组创建子树
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>int</span> root<span style=color:#f92672>=</span>d[<span style=color:#ae81ff>0</span>];<span style=color:#75715e>//父节点的值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>int</span> child<span style=color:#f92672>=</span>d[<span style=color:#ae81ff>1</span>];<span style=color:#75715e>//孩子节点的值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>int</span> is_left<span style=color:#f92672>=</span>d[<span style=color:#ae81ff>2</span>];<span style=color:#75715e>//是否是左孩子
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//没找到count就是0，取反之后变成1，从而会创建新的节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>tree.count(root)){<span style=color:#75715e>//没找到根节点就创建
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                tree[root]<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TreeNode(root);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>tree.count(child)){<span style=color:#75715e>//没找到孩子节点就创建
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                tree[child]<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> TreeNode(child);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//在tree中搜索孩子节点将其连接上
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(is_left){<span style=color:#75715e>//如果是左孩子
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                tree[root]<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>=</span>tree[child];
-</span></span><span style=display:flex><span>            }<span style=color:#66d9ef>else</span>{<span style=color:#75715e>//如果是右孩子
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                tree[root]<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>=</span>tree[child];
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//孩子节点的入度加一
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            degreeIn[child]<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//寻找入度为0的根节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> node:tree){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> val<span style=color:#f92672>=</span>node.second<span style=color:#f92672>-&gt;</span>val;<span style=color:#75715e>//按照节点的val去找
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>degreeIn[val]){<span style=color:#75715e>//找到入度为0的节点就是根节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>return</span> node.second;<span style=color:#75715e>//对组的遍历方式
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nullptr</span>;<span style=color:#75715e>//没找到入度为0的根节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>createBinaryTree</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>descriptions</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*&gt;</span> <span style=color:#babbf1>tree</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span><span style=color:#babbf1>degreeIn</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>d</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>descriptions</span><span style=color:#c6d0f5>){</span><span style=color:#626880;font-style:italic>//遍历描述数组创建子树
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>=</span><span style=color:#babbf1>d</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>];</span><span style=color:#626880;font-style:italic>//父节点的值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>child</span><span style=color:#99d1db>=</span><span style=color:#babbf1>d</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>];</span><span style=color:#626880;font-style:italic>//孩子节点的值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>is_left</span><span style=color:#99d1db>=</span><span style=color:#babbf1>d</span><span style=color:#c6d0f5>[</span>2<span style=color:#c6d0f5>];</span><span style=color:#626880;font-style:italic>//是否是左孩子
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//没找到count就是0，取反之后变成1，从而会创建新的节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>tree</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>count</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>)){</span><span style=color:#626880;font-style:italic>//没找到根节点就创建
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TreeNode</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>tree</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>count</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>)){</span><span style=color:#626880;font-style:italic>//没找到孩子节点就创建
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>TreeNode</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//在tree中搜索孩子节点将其连接上
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>is_left</span><span style=color:#c6d0f5>){</span><span style=color:#626880;font-style:italic>//如果是左孩子
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>=</span><span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span><span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span><span style=color:#626880;font-style:italic>//如果是右孩子
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>=</span><span style=color:#babbf1>tree</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//孩子节点的入度加一
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>degreeIn</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>child</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//寻找入度为0的根节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>node</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>tree</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>val</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>;</span><span style=color:#626880;font-style:italic>//按照节点的val去找
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>degreeIn</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>]){</span><span style=color:#626880;font-style:italic>//找到入度为0的节点就是根节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>node</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span><span style=color:#c6d0f5>;</span><span style=color:#626880;font-style:italic>//对组的遍历方式
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>;</span><span style=color:#626880;font-style:italic>//没找到入度为0的根节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要有以下几个主要注意的点：</p><ol><li>对于每一个单独的描述，创建一个子树很简单，难得是如何将单独的子树连接起来，因为描述没有按照遍历顺序给出</li><li>使用map标记节点是否被创建，这样创建新的子树是，如果孩子节点已经存在，那么可以直接连接，从而将两个子树连接到一起形成更大的子树</li><li>连接之后孩子节点的入度需要增加，为了最后搜索根节点</li></ol><blockquote><p>主要是考察代码能力，知道<strong>对组</strong>的遍历方式</p></blockquote></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/%E8%A7%A3%E5%86%B3%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/ rel=next title=解决背包问题的思路><i class="fa fa-chevron-left"></i> 解决背包问题的思路</a></div><div class="post-nav-prev post-nav-item"><a href=/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/ rel=prev title=96.不同的二叉搜索树>96.不同的二叉搜索树
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

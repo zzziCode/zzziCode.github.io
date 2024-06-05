@@ -24,138 +24,138 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e9%85%8d%e7%bd%ae%e6%96%b9%e6%a1%88></a></h2><h3 id=第一种>第一种
 <a class=header-anchor href=#%e7%ac%ac%e4%b8%80%e7%a7%8d></a></h3><p>自行创建<code>.vscode</code>文件夹，添加<code>tasks.json</code>和<code>launch.json</code>文件，此时直接编译文件</p><h3 id=第二种>第二种
 <a class=header-anchor href=#%e7%ac%ac%e4%ba%8c%e7%a7%8d></a></h3><ol><li><p>先创建<strong>英文</strong><code>cpp</code>文件，之后<code>ctrl+f5</code>进行编译，选择<code>GDB</code>和<code>G++</code></p></li><li><p>自动生成<code>tasks.json</code>和<code>launch.json</code>,自动跳转到<code>launch.json</code>文件中</p></li><li><p>改变<code>program</code>和<code>externalConsole</code>两个配置</p></li><li><p>改变<code>tasks.json</code>文件中的<code>args</code>配置</p></li></ol><h3 id=配置文件>配置文件
-<a class=header-anchor href=#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6></a></h3><blockquote><p><strong>tasks.json</strong></p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;tasks&#34;</span>: [
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;cppbuild&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;label&#34;</span>: <span style=color:#e6db74>&#34;C/C++: g++.exe 生成活动文件&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;command&#34;</span>: <span style=color:#e6db74>&#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe&#34;</span>,<span style=color:#75715e>//自己的路径
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;args&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;-fdiagnostics-color=always&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;-g&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//新增如下两项
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#e6db74>&#34;-fexec-charset=GBK&#34;</span>,   <span style=color:#75715e>// 处理mingw中文编码问题
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#e6db74>&#34;-finput-charset=UTF-8&#34;</span>,<span style=color:#75715e>// 处理mingw中文编码问题
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#e6db74>&#34;${file}&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;-o&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#e6db74>&#34;${fileDirname}\\test.exe&#34;</span><span style=color:#75715e>//更改这一项
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            ],
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;options&#34;</span>: {
-</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;cwd&#34;</span>: <span style=color:#e6db74>&#34;${fileDirname}&#34;</span>
-</span></span><span style=display:flex><span>            },
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;problemMatcher&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;$gcc&#34;</span>
-</span></span><span style=display:flex><span>            ],
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;group&#34;</span>: {
-</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;kind&#34;</span>: <span style=color:#e6db74>&#34;build&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;isDefault&#34;</span>: <span style=color:#66d9ef>true</span>
-</span></span><span style=display:flex><span>            },
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;detail&#34;</span>: <span style=color:#e6db74>&#34;调试器生成的任务。&#34;</span>
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    ],
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;2.0.0&#34;</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><blockquote><p><strong>launch.json</strong></p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 使用 IntelliSense 了解相关属性。 
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// 悬停以查看现有属性的描述。
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;0.2.0&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;configurations&#34;</span>: [
+<a class=header-anchor href=#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6></a></h3><blockquote><p><strong>tasks.json</strong></p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>&#34;tasks&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;type&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;cppbuild&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;label&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;C/C++: g++.exe 生成活动文件&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;command&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe&#34;</span><span style=color:#c6d0f5>,</span><span style=color:#626880;font-style:italic>//自己的路径
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;args&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6d189>&#34;-fdiagnostics-color=always&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6d189>&#34;-g&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//新增如下两项
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#a6d189>&#34;-fexec-charset=GBK&#34;</span><span style=color:#c6d0f5>,</span>   <span style=color:#626880;font-style:italic>// 处理mingw中文编码问题
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#a6d189>&#34;-finput-charset=UTF-8&#34;</span><span style=color:#c6d0f5>,</span><span style=color:#626880;font-style:italic>// 处理mingw中文编码问题
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#a6d189>&#34;${file}&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6d189>&#34;-o&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#a6d189>&#34;${fileDirname}\\test.exe&#34;</span><span style=color:#626880;font-style:italic>//更改这一项
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#c6d0f5>],</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;options&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>&#34;cwd&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;${fileDirname}&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>},</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;problemMatcher&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6d189>&#34;$gcc&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>],</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;group&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>&#34;kind&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;build&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>&#34;isDefault&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#ca9ee6;font-style:italic>true</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>},</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;detail&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;调试器生成的任务。&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>],</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>&#34;version&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;2.0.0&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><strong>launch.json</strong></p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>// 使用 IntelliSense 了解相关属性。 
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>// 悬停以查看现有属性的描述。
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>&#34;version&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;0.2.0&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>&#34;configurations&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;g++.exe - 生成和调试活动文件&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;cppdbg&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;request&#34;</span>: <span style=color:#e6db74>&#34;launch&#34;</span>,
-</span></span><span style=display:flex><span>           <span style=color:#75715e>// &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//指向项目生成的可执行文件才可以进行调试运行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;program&#34;</span>: <span style=color:#e6db74>&#34;${fileDirname}\\test.exe&#34;</span>,<span style=color:#75715e>//修改这一项
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;args&#34;</span>: [],
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;stopAtEntry&#34;</span>: <span style=color:#66d9ef>false</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;cwd&#34;</span>: <span style=color:#e6db74>&#34;${fileDirname}&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;environment&#34;</span>: [],
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//在窗口显示
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;externalConsole&#34;</span>: <span style=color:#66d9ef>true</span>,<span style=color:#75715e>//false改为true
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;MIMode&#34;</span>: <span style=color:#e6db74>&#34;gdb&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;miDebuggerPath&#34;</span>: <span style=color:#e6db74>&#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;setupCommands&#34;</span>: [
-</span></span><span style=display:flex><span>                {
-</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;为 gdb 启用整齐打印&#34;</span>,
-</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;-enable-pretty-printing&#34;</span>,
-</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;ignoreFailures&#34;</span>: <span style=color:#66d9ef>true</span>
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            ],
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//在执行launch文件之前执行什么
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>&#34;preLaunchTask&#34;</span>: <span style=color:#e6db74>&#34;C/C++: g++.exe 生成活动文件&#34;</span>
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    ]
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;name&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;g++.exe - 生成和调试活动文件&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;type&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;cppdbg&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;request&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;launch&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>           <span style=color:#626880;font-style:italic>// &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//指向项目生成的可执行文件才可以进行调试运行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;program&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;${fileDirname}\\test.exe&#34;</span><span style=color:#c6d0f5>,</span><span style=color:#626880;font-style:italic>//修改这一项
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;args&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[],</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;stopAtEntry&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;cwd&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;${fileDirname}&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;environment&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[],</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//在窗口显示
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;externalConsole&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#c6d0f5>,</span><span style=color:#626880;font-style:italic>//false改为true
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;MIMode&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;gdb&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;miDebuggerPath&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;E:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>&#34;setupCommands&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#c6d0f5>[</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>&#34;description&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;为 gdb 启用整齐打印&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>&#34;text&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;-enable-pretty-printing&#34;</span><span style=color:#c6d0f5>,</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>&#34;ignoreFailures&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#ca9ee6;font-style:italic>true</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>],</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//在执行launch文件之前执行什么
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>&#34;preLaunchTask&#34;</span><span style=color:#c6d0f5>:</span> <span style=color:#a6d189>&#34;C/C++: g++.exe 生成活动文件&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>]</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>确保编译器的路径正确，之后文件可以自动生成，并且可以运行中文文件，但是<strong>无法调试中文文件</strong></p><p>如果控制台窗口一闪而过，自动关闭的话，在main函数最后<code>return 0</code>的前面加上一句<code>systemctl("pause")</code>即可</p></div><footer class=post-footer><div class=post-tags><a href=/tags/vscode%e9%85%8d%e7%bd%ae>vscode配置</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/56.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/ rel=next title=56.合并区间><i class="fa fa-chevron-left"></i> 56.合并区间</a></div><div class="post-nav-prev post-nav-item"><a href=/post/763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4/ rel=prev title=763.划分字母区间>763.划分字母区间
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

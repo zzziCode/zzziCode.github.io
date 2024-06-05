@@ -22,162 +22,162 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>☣ 2385.感染二叉树需要的总时间</p></blockquote><p>给你一棵二叉树的根节点 <code>root</code> ，二叉树中节点的值 <strong>互不相同</strong> 。另给你一个整数 <code>start</code> 。在第 <code>0</code> 分钟，<strong>感染</strong> 将会从值为 <code>start</code> 的节点开始爆发。</p><p>每分钟，如果节点满足以下全部条件，就会被感染：</p><ul><li>节点此前还没有感染。</li><li>节点与一个已感染节点相邻。</li></ul><p>返回感染整棵树需要的分钟数*。*</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>​ 因为被感染的节点都是当前节点的邻居节点，所以第一步就是要求出所有节点的邻居节点，又因为题目中说，所有的节点互不相同，所以可以用一个map存储所有节点的邻居节点</p><p>​ 节点的邻居节点无非就是父节点和两个孩子节点，所以可以直接用一次遍历，然后记录当前节点的父节点，遍历结束就可以形成所有节点的邻居节点，代码为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//找到每一个节点的相邻节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>help</span><span style=color:#f92672>(</span>TreeNode root<span style=color:#f92672>,</span>TreeNode pre<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> neighbor<span style=color:#f92672>=</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>getOrDefault</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>,</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;());</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将当前节点的邻居全部记录下来
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>pre<span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>        neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>pre<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>        neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>        neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将当前节点的所有邻居加入
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>,</span>neighbor<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    set<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    help<span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>,</span>root<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    help<span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>,</span>root<span style=color:#f92672>);</span>        
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>​ 因为被感染的节点都是当前节点的邻居节点，所以第一步就是要求出所有节点的邻居节点，又因为题目中说，所有的节点互不相同，所以可以用一个map存储所有节点的邻居节点</p><p>​ 节点的邻居节点无非就是父节点和两个孩子节点，所以可以直接用一次遍历，然后记录当前节点的父节点，遍历结束就可以形成所有节点的邻居节点，代码为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#626880;font-style:italic>//找到每一个节点的相邻节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>TreeNode</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>,</span><span style=color:#babbf1>TreeNode</span> <span style=color:#babbf1>pre</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>=</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getOrDefault</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>,</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;());</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将当前节点的邻居全部记录下来
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pre</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pre</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将当前节点的所有邻居加入
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>put</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>,</span><span style=color:#babbf1>neighbor</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>set</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>,</span><span style=color:#babbf1>root</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>,</span><span style=color:#babbf1>root</span><span style=color:#99d1db>);</span>        
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>​ 有了邻居节点之后，需要从一个start节点开始感染，每次感染的都是自己的邻居节点，相当于一层一层的扩散，这种层式的扩散可以使用层次遍历来模拟，每一层遍历的都是当前这一分钟被感染的节点，下一分钟将要被感染的节点就是当前这些节点的<strong>未被感染邻居节点</strong></p><p>​ 为了判断哪些节点没有被感染，需要使用一个set来记录，正好在遍历的过程中就可以保存所有的节点，这样依赖就形成了完成的流程</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>利用前序遍历求出所有节点的邻居节点，并且将所有的节点加入Set中</li><li>从start出发依次开始感染</li><li>被感染的节点从Set中删除，然后将当前被感染节点的未被感染邻居节点加入队列中</li><li>每次遍历一层结束之后，这一分钟分工作结束，分钟数+1</li><li>最后返回结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//遍历一次统计每一个节点的相邻节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//然后从start出发，
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Map<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span>List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;&gt;</span> map<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    Set<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> set<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>amountOfTime</span><span style=color:#f92672>(</span>TreeNode root<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span> start<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//只有一个节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>&amp;&amp;</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//保存所有节点的相邻节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        map<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//保存所有没被感染的节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        set<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> HashSet<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>        help<span style=color:#f92672>(</span>root<span style=color:#f92672>,</span><span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//找到每一个节点的相邻节点之后，如何感染，如何判断感染完了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//层序遍历
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Deque<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> queue<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> LinkedList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>        queue<span style=color:#f92672>.</span><span style=color:#a6e22e>addLast</span><span style=color:#f92672>(</span>start<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(!</span>queue<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>()){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> size<span style=color:#f92672>=</span>queue<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>size<span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> node<span style=color:#f92672>=</span>queue<span style=color:#f92672>.</span><span style=color:#a6e22e>removeFirst</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//被感染的节点剔除
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                set<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>node<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//每一个节点都可以感染自己的邻居
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span>Integer neigh <span style=color:#f92672>:</span> map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>node<span style=color:#f92672>)){</span>
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//还没被感染的节点才加入队列
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>set<span style=color:#f92672>.</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span>neigh<span style=color:#f92672>)){</span>
-</span></span><span style=display:flex><span>                        queue<span style=color:#f92672>.</span><span style=color:#a6e22e>addLast</span><span style=color:#f92672>(</span>neigh<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前一层节点被感染完
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>++</span>res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">59
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//遍历一次统计每一个节点的相邻节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//然后从start出发，
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>Map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>,</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>map</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>Set</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>set</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>amountOfTime</span><span style=color:#99d1db>(</span><span style=color:#babbf1>TreeNode</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>start</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//只有一个节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> 0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//保存所有节点的相邻节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>map</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>HashMap</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//保存所有没被感染的节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>set</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>HashSet</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>,</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//找到每一个节点的相邻节点之后，如何感染，如何判断感染完了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//层序遍历
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>Deque</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>queue</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>LinkedList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>addLast</span><span style=color:#99d1db>(</span><span style=color:#babbf1>start</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=-</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#99d1db>(!</span><span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEmpty</span><span style=color:#99d1db>()){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>size</span><span style=color:#99d1db>=</span><span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>size</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>removeFirst</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//被感染的节点剔除
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>set</span><span style=color:#99d1db>.</span><span style=color:#e5c890>remove</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//每一个节点都可以感染自己的邻居
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#babbf1>Integer</span> <span style=color:#babbf1>neigh</span> <span style=color:#99d1db>:</span> <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>)){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//还没被感染的节点才加入队列
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>set</span><span style=color:#99d1db>.</span><span style=color:#e5c890>contains</span><span style=color:#99d1db>(</span><span style=color:#babbf1>neigh</span><span style=color:#99d1db>)){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>addLast</span><span style=color:#99d1db>(</span><span style=color:#babbf1>neigh</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前一层节点被感染完
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//找到每一个节点的相邻节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>help</span><span style=color:#f92672>(</span>TreeNode root<span style=color:#f92672>,</span>TreeNode pre<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> neighbor<span style=color:#f92672>=</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>getOrDefault</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>,</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;());</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//将当前节点的邻居全部记录下来
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>pre<span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>            neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>pre<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>            neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>!=</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>            neighbor<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//将当前节点的所有邻居加入
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>,</span>neighbor<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        set<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>val</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        help<span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>left</span><span style=color:#f92672>,</span>root<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        help<span style=color:#f92672>(</span>root<span style=color:#f92672>.</span><span style=color:#a6e22e>right</span><span style=color:#f92672>,</span>root<span style=color:#f92672>);</span>        
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//找到每一个节点的相邻节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>TreeNode</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>,</span><span style=color:#babbf1>TreeNode</span> <span style=color:#babbf1>pre</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>=</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getOrDefault</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>,</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;());</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//将当前节点的邻居全部记录下来
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pre</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pre</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6;font-style:italic>null</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>neighbor</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//将当前节点的所有邻居加入
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>put</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>,</span><span style=color:#babbf1>neighbor</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>set</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>val</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>left</span><span style=color:#99d1db>,</span><span style=color:#babbf1>root</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>help</span><span style=color:#99d1db>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>.</span><span style=color:#e5c890>right</span><span style=color:#99d1db>,</span><span style=color:#babbf1>root</span><span style=color:#99d1db>);</span>        
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是问题拆分，将感染问题拆分成两个子问题，先求出所有节点的邻居节点，然后根据题目，使用层次遍历模拟感染的过程，只有未被感染的节点才加入队列中，每感染一层，当前分钟的工作就完成了，对列为空时可以返回结果</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/372.%E8%B6%85%E7%BA%A7%E6%AC%A1%E6%96%B9/ rel=next title=372.超级次方><i class="fa fa-chevron-left"></i> 372.超级次方</a></div><div class="post-nav-prev post-nav-item"><a href=/post/1509.%E4%B8%89%E6%AC%A1%E6%93%8D%E4%BD%9C%E5%90%8E%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%E4%B8%8E%E6%9C%80%E5%B0%8F%E5%80%BC/ rel=prev title=1509.三次操作后的最大值与最小值>1509.三次操作后的最大值与最小值
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

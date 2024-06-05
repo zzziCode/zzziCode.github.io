@@ -22,102 +22,102 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>2分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🧑‍🧒 2750.将数组划分成若干好子数组的方式</p></blockquote><p>给你一个二元数组 <code>nums</code> 。</p><p>如果数组中的某个子数组 <strong>恰好</strong> 只存在 <strong>一</strong> 个值为 <code>1</code> 的元素，则认为该子数组是一个 <strong>好子数组</strong> 。</p><p>请你统计将数组 <code>nums</code> 划分成若干 <strong>好子数组</strong> 的方法数，并以整数形式返回。由于数字可能很大，返回其对 <code>109 + 7</code> <strong>取余</strong> 之后的结果。</p><p>子数组是数组中的一个连续 <strong>非空</strong> 元素序列。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>看到本题的第一思路就是类似于字符串的分割一样，使用回溯法进行分割，只有当前子数组只有一个1时才能继续向下分割，就这样一直向下，然后分割完成就可以形成一个结果，统计所有的合法划分结果即可，代码为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//要将当前数组划分成很多段
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//考虑使用回溯法，当前子数组符合要求才继续划分
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>numberOfGoodSubarraySplits</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> nums<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        backtrack<span style=color:#f92672>(</span>nums<span style=color:#f92672>,</span><span style=color:#ae81ff>0</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>backtrack</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> nums<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> index<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>index<span style=color:#f92672>==</span>nums<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            res<span style=color:#f92672>=(</span>res<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)%</span><span style=color:#ae81ff>1000000007</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//开始划分，当前子数组没有1就继续，只存在一个1就向下，多余一个1就break
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> count<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span><span style=color:#75715e>//统计当前层中1的个数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>index<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>nums<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>i<span style=color:#f92672>]==</span><span style=color:#ae81ff>1</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>++</span>count<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//break
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>count<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//向下
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>count<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                backtrack<span style=color:#f92672>(</span>nums<span style=color:#f92672>,</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>看到本题的第一思路就是类似于字符串的分割一样，使用回溯法进行分割，只有当前子数组只有一个1时才能继续向下分割，就这样一直向下，然后分割完成就可以形成一个结果，统计所有的合法划分结果即可，代码为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//要将当前数组划分成很多段
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//考虑使用回溯法，当前子数组符合要求才继续划分
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>numberOfGoodSubarraySplits</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>backtrack</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>,</span>0<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>backtrack</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>index</span><span style=color:#99d1db>==</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#99d1db>=(</span><span style=color:#babbf1>res</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>)%</span>1000000007<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//开始划分，当前子数组没有1就继续，只存在一个1就向下，多余一个1就break
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>count</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#626880;font-style:italic>//统计当前层中1的个数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span><span style=color:#babbf1>index</span><span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]==</span>1<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>++</span><span style=color:#babbf1>count</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//break
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>count</span><span style=color:#99d1db>&gt;</span>1<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>break</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//向下
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>count</span><span style=color:#99d1db>==</span>1<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>backtrack</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>,</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>但是这样会造成超时，因为数组的长度过长，所以想到用<strong>数学</strong>的办法解决</p><p>当前一个数组可以划分的前提是划分的两部分各存在一个0，此时划分方案数取决于两个1之间有多少个0，从不同的0划分就可以形成不同的划分方案，这里的1就是划分边界，不同的边界与下一个边界之间的组合使用乘法法则来统计出所有的方案数，所以核心就是：找到所有的1，每两个1之间有多少0就有多少方案数，将这些方案数<strong>相乘</strong>即可</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>从头到尾找到没两个1之间的0的个数，可以得到当前的划分方案数</li><li>将所有的划分方案数相乘即可得到所有的划分方案数</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>numberOfGoodSubarraySplits</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> nums<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//这个记录上一个1存在的位置
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>nums<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>i<span style=color:#f92672>]==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//到这里就是找到了1，并且这个1并不是开头第一个1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>index<span style=color:#f92672>&gt;=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                res<span style=color:#f92672>=(</span>res<span style=color:#f92672>*(</span>i<span style=color:#f92672>-</span>index<span style=color:#f92672>))%</span><span style=color:#ae81ff>1000000007</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//记录当前1的位置
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            index<span style=color:#f92672>=</span>i<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>numberOfGoodSubarraySplits</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//这个记录上一个1存在的位置
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=-</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]==</span>0<span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>continue</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//到这里就是找到了1，并且这个1并不是开头第一个1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>index</span><span style=color:#99d1db>&gt;=</span>0<span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#99d1db>=(</span><span style=color:#babbf1>res</span><span style=color:#99d1db>*(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span><span style=color:#babbf1>index</span><span style=color:#99d1db>))%</span>1000000007<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//记录当前1的位置
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span><span style=color:#babbf1>i</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>核心就是从回溯法转换到<strong>数学求解</strong>，每个片段可以有多少种划分方案取决于当前两个1之间的0的个数</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/1887.%E4%BD%BF%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E7%9B%B8%E7%AD%89%E7%9A%84%E5%87%8F%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/ rel=next title=1887.使数组元素相等的减少操作次数><i class="fa fa-chevron-left"></i> 1887.使数组元素相等的减少操作次数</a></div><div class="post-nav-prev post-nav-item"><a href=/post/1252.%E5%A5%87%E6%95%B0%E5%80%BC%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%95%B0%E7%9B%AE/ rel=prev title=1252.奇数值单元格的数目>1252.奇数值单元格的数目
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

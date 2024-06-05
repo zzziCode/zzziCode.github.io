@@ -25,44 +25,44 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <i class="fa fa-external-link-alt"></i>
 </a>中</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><p>​ 一般的spring容器需要经历两步才能将一个bean存储到IOC容器中，分别是定义、注册，其中定义一般是存放bean的类型，但是在本节中直接存放的是bean对象本身，后期将对这个功能做出修改。注册一般是将bean的名称与其类型的映射关系，但是本节中直接实例化一个bean，然后将这个bean存储到容器中，最后的获取就是按照bean的名称获取对应的bean对象</p><p>​ 按照上面的分析，代码的主要逻辑就是将bean的实例化对象存储到一个容器中，之后通过bean的名称获取，实现这中功能的容器一般是Map，整个流程如下：</p><img src=https://bugstack.cn/assets/images/spring/spring-2-01.png alt=img style=zoom:50%><h2 id=实现>实现
-<a class=header-anchor href=#%e5%ae%9e%e7%8e%b0></a></h2><ol><li>定义：主要是定义一个BeanDefinition类，然后将bean的实例化对象存储进去，所以这里直接使用Object来存储这个对象</li><li>注册，主要是将BeanDefinition中的bean对象及其名称之间的映射关系保存起来，代码中直接使用HashMap来存储这种映射关系</li><li>获取，直接按照键，也就是bean的名称获取到对应的bean，这里并没有考虑bean不存在的问题，因为本节中只是最简单的手动实例化一个bean，然后将其存储到容器中</li><li>测试：针对定义的IOC容器进行测试：</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Test</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>testBeanFactory</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//1.定义
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//获取工厂对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    BeanFactory beanFactory <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BeanFactory<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//准备要注入的bean对象
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    UserService userService <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UserService<span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将其注入到BeanDefinition中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    BeanDefinition beanDefinition <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BeanDefinition<span style=color:#f92672>(</span>userService<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//2.注册
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//将bean保存到IOC容器中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    beanFactory<span style=color:#f92672>.</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>registerBeanDefinition</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;userService&#34;</span><span style=color:#f92672>,</span> beanDefinition<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//3.获取
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//根据名称从IOC容器中取出对应的bean
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    UserService user <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>UserService<span style=color:#f92672>)</span> beanFactory<span style=color:#f92672>.</span><span style=color:#a6e22e>getBean</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;userService&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//执行bean的对应方法
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    user<span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%ae%9e%e7%8e%b0></a></h2><ol><li>定义：主要是定义一个BeanDefinition类，然后将bean的实例化对象存储进去，所以这里直接使用Object来存储这个对象</li><li>注册，主要是将BeanDefinition中的bean对象及其名称之间的映射关系保存起来，代码中直接使用HashMap来存储这种映射关系</li><li>获取，直接按照键，也就是bean的名称获取到对应的bean，这里并没有考虑bean不存在的问题，因为本节中只是最简单的手动实例化一个bean，然后将其存储到容器中</li><li>测试：针对定义的IOC容器进行测试：</li></ol><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f4b8e4>@Test</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>testBeanFactory</span><span style=color:#99d1db>()</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//1.定义
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//获取工厂对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>BeanFactory</span> <span style=color:#babbf1>beanFactory</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>BeanFactory</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//准备要注入的bean对象
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>UserService</span> <span style=color:#babbf1>userService</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>UserService</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将其注入到BeanDefinition中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>BeanDefinition</span> <span style=color:#babbf1>beanDefinition</span> <span style=color:#99d1db>=</span> <span style=color:#ca9ee6>new</span> <span style=color:#babbf1>BeanDefinition</span><span style=color:#99d1db>(</span><span style=color:#babbf1>userService</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//2.注册
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//将bean保存到IOC容器中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>beanFactory</span><span style=color:#99d1db>.</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>registerBeanDefinition</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;userService&#34;</span><span style=color:#99d1db>,</span> <span style=color:#babbf1>beanDefinition</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//3.获取
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//根据名称从IOC容器中取出对应的bean
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>UserService</span> <span style=color:#babbf1>user</span> <span style=color:#99d1db>=</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>UserService</span><span style=color:#99d1db>)</span> <span style=color:#babbf1>beanFactory</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getBean</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;userService&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//执行bean的对应方法
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>user</span><span style=color:#99d1db>.</span><span style=color:#e5c890>print</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>可以看出测试的过程就是上面描述的三步，只不过相比于真正的spting，大大的简化了所有的步骤</p><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>本节实现了一个最基础的不标准IOC容器，后面的章节会逐步对这个容器进行扩充</p></div><footer class=post-footer><div class=post-tags><a href=/tags/spring>spring</a>
 <a href=/tags/%e6%ba%90%e7%a0%81>源码</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/2.%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1/ rel=next title=2.自动创建bean对象><i class="fa fa-chevron-left"></i> 2.自动创建bean对象</a></div><div class="post-nav-prev post-nav-item"><a href=/post/80.%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9ii/ rel=prev title=80.删除有序数组中的重复项II>80.删除有序数组中的重复项II

@@ -24,106 +24,106 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>按照题目的描述，就是求那些陆地不能到达给定的图的边界，而一旦岛屿中的某一个陆地的上下左右的任意一个方向能够到达边界，那么整个岛屿中就没有”飞地“，也就是所有的陆地都能到达边界</p><p>所以将岛屿求面积的算法进行简单改进，在求岛屿面积的时候，将返回条件分开，一旦某一个陆地的上下左右四个方向中有一个方向到达边界，那么这整个岛屿都能到达边界，也就是说岛屿中不存在飞地</p><p>所以一旦超过边界，就可以返回true，这样一层一层的返回，最终岛屿就会返回true，而遇到了海洋和已遍历过的陆地，就暂时返回false，并且在遍历的过程中还需要统计岛屿的面积，因为一旦岛屿中出现飞地，也就是岛屿中的所有陆地都无法到达边界，最终就会返回false，那么岛屿中飞地的数量就是岛屿的面积</p><p>需要注意的是，遍历当前陆地的上下左右四个方向时，需要分开遍历，因为合在一起遍历，一旦出现一个true，岛屿没有遍历结束就会返回，<font color=red>剩下没有遍历的陆地就会被认为是一个新的陆地</font>，可能造成飞地的数量<strong>变多</strong>，这是c++语法的问题，不是解题思路的问题</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>遍历图中所有的节点，一旦出现陆地就开始统计面积</li><li>统计面积时一旦遇到边界，说明这个岛屿能够到达边界，返回true</li><li>遇到海洋或者已遍历的陆地时暂时返回false</li><li>将当前的陆地标记为已统计，同时岛屿的面积+1</li><li>上下左右四个方向分开进行统计，防止程序提前返回</li><li>返回四个方向的或，这样一旦出现一个true（能够到达边界），所有的陆地都返回true，最终说明岛屿能够到达边界</li><li>如果统计岛屿面积的时候，岛屿无法到边界，也就是返回了false，此时统计飞地的数量，也就是岛屿的面积</li><li>返回飞地的数量</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//统计的就是无法离开边界的陆地的数量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//改造岛屿面积统计的函数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//一旦某个陆地遇到了边界，那么这个岛屿中的所有陆地都可以离开边界，不是飞地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//当一个岛屿中没有任何一个陆地的上下左右能够遇到边界，说明这个岛屿的所有陆地都是飞地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//此时这个岛屿的面积就是岛屿中飞地的数量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>numEnclaves</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//初始飞地数量为0
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span>(grid[i][j]<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>){
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>int</span> area<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>bool</span> flag<span style=color:#f92672>=</span><span style=color:#a6e22e>dfs</span>(grid,area,i,j);
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//当前岛屿是飞地，也就是无法到达边界
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>flag){
-</span></span><span style=display:flex><span>                        res<span style=color:#f92672>+=</span>area;
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//bool代表该岛屿能不能够到达边界
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>dfs</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid,<span style=color:#66d9ef>int</span><span style=color:#f92672>&amp;</span> area,<span style=color:#66d9ef>int</span> x,<span style=color:#66d9ef>int</span> y){
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//超过边界，说明这个岛屿可以到达边界，其中的陆地不是飞地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(x<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>y<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>x<span style=color:#f92672>&gt;=</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>y<span style=color:#f92672>&gt;=</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>()){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遇到海洋或者遇到已遍历的陆地，暂时返回false
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(grid[x][y]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>grid[x][y]<span style=color:#f92672>==</span><span style=color:#ae81ff>2</span>){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> false;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//标记当前陆地为已遍历，并统计岛屿的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//如果当前岛屿是飞地，那么面积就是当前岛屿中飞地的数量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        area<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//一旦有一个陆地接触到了边界就说明不是飞地，直接返回true
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//有一个为真就为真
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//如果上下左右不分开的话，那么一旦遇到一个真就会直接返回，后面的陆地就不会统计
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//此时岛屿就无法统计完全，所以需要强行将四个遍历语句分开
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//从而使得岛屿的遍历完全
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>bool</span> up<span style=color:#f92672>=</span><span style=color:#a6e22e>dfs</span>(grid,area,x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,y);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>bool</span> down<span style=color:#f92672>=</span><span style=color:#a6e22e>dfs</span>(grid,area,x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,y);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>bool</span> left<span style=color:#f92672>=</span><span style=color:#a6e22e>dfs</span>(grid,area,x,y<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>bool</span> right<span style=color:#f92672>=</span><span style=color:#a6e22e>dfs</span>(grid,area,x,y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> up<span style=color:#f92672>||</span>down<span style=color:#f92672>||</span>left<span style=color:#f92672>||</span>right;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">50
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//统计的就是无法离开边界的陆地的数量
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//改造岛屿面积统计的函数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//一旦某个陆地遇到了边界，那么这个岛屿中的所有陆地都可以离开边界，不是飞地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//当一个岛屿中没有任何一个陆地的上下左右能够遇到边界，说明这个岛屿的所有陆地都是飞地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//此时这个岛屿的面积就是岛屿中飞地的数量
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>numEnclaves</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//初始飞地数量为0
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>1<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#e5c890>int</span> <span style=color:#babbf1>area</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#e5c890>bool</span> <span style=color:#babbf1>flag</span><span style=color:#99d1db>=</span><span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//当前岛屿是飞地，也就是无法到达边界
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#99d1db>!</span><span style=color:#babbf1>flag</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>res</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//bool代表该岛屿能不能够到达边界
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>bool</span> <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&amp;</span> <span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>y</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//超过边界，说明这个岛屿可以到达边界，其中的陆地不是飞地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遇到海洋或者遇到已遍历的陆地，暂时返回false
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>2<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//标记当前陆地为已遍历，并统计岛屿的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span>2<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//如果当前岛屿是飞地，那么面积就是当前岛屿中飞地的数量
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//一旦有一个陆地接触到了边界就说明不是飞地，直接返回true
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//有一个为真就为真
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//如果上下左右不分开的话，那么一旦遇到一个真就会直接返回，后面的陆地就不会统计
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//此时岛屿就无法统计完全，所以需要强行将四个遍历语句分开
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//从而使得岛屿的遍历完全
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>bool</span> <span style=color:#babbf1>up</span><span style=color:#99d1db>=</span><span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>bool</span> <span style=color:#babbf1>down</span><span style=color:#99d1db>=</span><span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>bool</span> <span style=color:#babbf1>left</span><span style=color:#99d1db>=</span><span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>bool</span> <span style=color:#babbf1>right</span><span style=color:#99d1db>=</span><span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>up</span><span style=color:#99d1db>||</span><span style=color:#babbf1>down</span><span style=color:#99d1db>||</span><span style=color:#babbf1>left</span><span style=color:#99d1db>||</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>一旦有陆地能够到达边界，这个岛屿就不存在飞地，统计当前陆地的上下左右时，记得分开统计，合在一起统计时，一旦出现一个true，程序就会提前返回，此时岛屿中剩下的节点没有被标记为已访问，程序认为这是一个新的岛屿，会造成意想不到的错误</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%be%e8%ae%ba>图论</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/jupyter_notebook%E7%9A%84%E4%BD%BF%E7%94%A8/ rel=next title=Jupyter_notebook的使用><i class="fa fa-chevron-left"></i> Jupyter_notebook的使用</a></div><div class="post-nav-prev post-nav-item"><a href=/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/ rel=prev title=827.最大人工岛>827.最大人工岛
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

@@ -24,70 +24,70 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了求出最长的连续子序列的长度，需要不断的将游离的子序列进行合并，这是一个核心的观点，为了合并游离的子序列，就需要在遍历到一个数时，将左右的可能存在的子序列进行合并</p><p>最简单的办法就是对数据进行排序，然后自然就合并了，但是题目要求时间复杂度，故不能合并，所以我们使用unordered_map来存储每一个连续子序列中左右端点以及其子序列的长度，例如[1,2,3,4]这个子序列，就只用存储umap[1]=4,umap[4]=4,中间的元素不用管</p><p>之所以只用存储端点的值，是因为一旦再新来一个元素，可以将两边游离的子序列合并，只需要读取这两个子序列端点的值就能知道子序列的长度，例如两个子序列[1,2,3,4]和[6,7,8]，此时元素5到达，可以将这两个子序列合并成[1,2,3,4,5,6,7,8]，合并时只需要读取元素5左右相邻的两个元素就可以得到两个子序列的长度</p><p>并且之后尝试合并时，只用尝试合并没有被访问过的元素，被访问过的元素已经尽可能的被合并了，对于只访问没被访问过的元素以及更新时为什么只更新区间端点，有另外一种说法：</p><p>(1). 为什么只更新端点? 答：因为中间点会被 if num not in hash_dict: 过滤掉，不会进入下面的逻辑。进入下面的处理逻辑的必然是GAP，如map中已有2,3，5；现在遍历至4才会进入下面的处理逻辑， 此时，left = 2，right = 1，加入4后形成新的连续序列，最大连续长度为4；最后更新的时候，也只需要更新map[2] = 4以及map[5] = 4即可。因为之后，3，4均不会被再次访问，只有当出现1或者6的时候，才会访问map[2]和map[5], 中间的map[2]、map[3]、map[4]永远不会再被访问到。</p><p>(2). 为什么 hash_dict[num] = 1 可以随意赋值? 答：诚如评论区的各位同行所言，此处赋值的意义仅在于占位；当map为空加入第一个元素时，left = right = 0，此时，无论给hash_dict[num]赋多少，最后都会被后面的值(hash_dict[num - left] = hash_dict[num - right] = hash_dict[num - 0])覆盖；而当left或right 不等于0时， 由于上述(1)的原因，中间值永远不会被访问到，因此，赋啥值就随意了，此时赋值只起占位作用，防止 if num not in hash_dict: 再次进入处理逻辑。</p><blockquote><p>总结起来就是合并时只用到了子序列的区间端点，合并之后，当前元素变成了区间内的元素，所以核心就是更新区间端点</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li><p>遍历所有元素</p></li><li><p>如果当前元素没有被访问过，那么就尝试合并</p><blockquote><p>注意c++中unordered_map访问一个不存在的元素时，之后会自动将这个元素存储，所以判断一个元素是否被访问过不能根据是否存在于容器中来判断，而是判断其值是否为0</p></blockquote></li><li><p>获取当前元素左右可能存在的子序列的长度，尝试合并</p></li><li><p>合并之后更新新的子序列的区间端点值</p></li><li><p>有了新的连续子序列长度，查看是否需要更新最长的连续子序列长度</p></li><li><p>重复上述步骤</p></li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//只能用常数时间，所以不能使用排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//数字太大，也不建议使用稀疏的字典
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//从元素没出现在map中开始理解
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>longestConsecutive</span>(vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> nums) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(nums.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> umap;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> num:nums){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前元素不在map中
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(umap[num]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//尝试将左右两边的游离区间合并
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#75715e>//因为umap访问了不存在的元素之后会自动创建
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#75715e>//所以访问没访问过的元素需要使用是否等于0来判断
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>int</span> left<span style=color:#f92672>=</span>umap[num<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>];
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> right<span style=color:#f92672>=</span>umap[num<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> length<span style=color:#f92672>=</span>left<span style=color:#f92672>+</span>right<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//尝试找到最长的连续序列
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                res<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(res,length);
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//只能用常数时间，所以不能使用排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//数字太大，也不建议使用稀疏的字典
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//从元素没出现在map中开始理解
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>longestConsecutive</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#babbf1>nums</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>==</span>0<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> 0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>num</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>nums</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前元素不在map中
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//尝试将左右两边的游离区间合并
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#626880;font-style:italic>//因为umap访问了不存在的元素之后会自动创建
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#626880;font-style:italic>//所以访问没访问过的元素需要使用是否等于0来判断
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>left</span><span style=color:#99d1db>=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>right</span><span style=color:#99d1db>=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>length</span><span style=color:#99d1db>=</span><span style=color:#babbf1>left</span><span style=color:#99d1db>+</span><span style=color:#babbf1>right</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//尝试找到最长的连续序列
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>length</span><span style=color:#c6d0f5>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//当前元素更新长度只是为了占位
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                umap[num]<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//区间端点更新才是核心
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                umap[num<span style=color:#f92672>-</span>left]<span style=color:#f92672>=</span>length;
-</span></span><span style=display:flex><span>                umap[num<span style=color:#f92672>+</span>right]<span style=color:#f92672>=</span>length;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//当前元素更新长度只是为了占位
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//区间端点更新才是核心
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>-</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>length</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>num</span><span style=color:#99d1db>+</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>length</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要就是理解更新时更新的是新区间端点的值，而不是其他的值，因为下一次合并时只会用到这个区间端点</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/11.%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/ rel=next title=11.盛最多水的容器><i class="fa fa-chevron-left"></i> 11.盛最多水的容器</a></div><div class="post-nav-prev post-nav-item"><a href=/post/49.%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/ rel=prev title=49.字母异位词分组>49.字母异位词分组
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

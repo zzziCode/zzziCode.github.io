@@ -25,188 +25,188 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了形成最大人工岛，需要将临近的岛屿合并，合并的规则规定只能将一个海洋变成陆地，所以要尽可能的将临近的岛屿合并，但是找临近的岛屿不好找，于是换一种思路，找海洋的临近岛屿，如果一个海洋旁边（上下左右）有临近岛屿，就可以将岛屿合并，合并之后可能形成最大人岛，重点是合并的<strong>逻辑</strong></p><img src=https://pic.leetcode-cn.com/3a993272977112d82a37676380bf723f3f6b919a20da322e9a5c5afda07fa397.jpg alt=一个海洋格子连接起两个岛屿 style=zoom:33%><p>为了将岛屿合并，需要先计算各个岛屿的面积，计算之后，岛屿中每个陆地都需要进行标记，这样海洋找到了岛屿中的任何一个陆地都可以直接进行合并（面积的相加），所以这个标记需要记住岛屿的面积</p><p>如果直接使用面积做标记，那么出现海洋临近同一个岛屿的不同陆地时，就无法区分这两个陆地是来自同一个岛屿的两个陆地还是来自相同面积的两个不同岛屿中的陆地，所以需要使用一个map来记录面积和岛屿编号的映射，这样岛屿是唯一的，一旦海洋接壤一个不同的岛屿就可以通过map查询到面积，从而进行合并</p><img src=https://pic.leetcode-cn.com/f519da076eb48fc993c7c71a0fa091b53bc6a1661163549eab60010606ee0e1c.jpg alt=一个海洋格子与同一个岛屿有两个边相邻 style=zoom:50%>
 <img src=https://pic.leetcode-cn.com/56ec808215d4ff3014476ef22297522b3731602266f9a069a82daf41001f904c.jpg alt=标记每个岛屿的索引（下标） style=zoom:50%><p>合并时可能出现好几种情况：上和左有不同岛屿，左和下有不同岛屿，下和右有不同岛屿，右和上有不同岛屿，上和左和下有不同岛屿，左和下和右有不同岛屿。。。甚至上下左右都有不同岛屿，所以还需要一个容器来记录那些岛屿被合并过</p><p>并且在初始求岛屿面积时，就需要记录最大岛屿的面积，最大岛屿的面积等于最大岛屿本身的面积加上<strong>可能存在</strong>的一个海洋，因为一旦给定的图中全是陆地，那么此时就不存在海洋，也就不需要合并，这样有两个好处:</p><ol><li>当图中全是海洋时，求面积的循环不会执行，无法合并，此时最大陆地就是1，可以提前返回，结束代码</li><li>当图中全是陆地时，此时最大人工岛的面积就是最大岛屿的面积，并且不需要合并，此时可以直接返回最大的面积</li></ol><p>剩下的就是普通的情况，需要先计算每个岛屿的面积，再看所有的海洋能不能将独立的岛屿进行合并</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li><p>定义求岛屿面积的函数，用来求岛屿的面积</p></li><li><p>按照常规的思想，求解每个岛屿的面积，并且将岛屿的面积和岛屿的编号进行映射，岛屿中遍历过的陆地全改成当前岛屿的编号，便于后期海洋合并时直接查询到这个岛屿的面积</p><blockquote><p>注意岛屿的编号从2开始，避免出现未遍历的陆地原本编号是1，遍历过后岛屿的编号也是1，无法区分的问题</p></blockquote></li><li><p>在求解岛屿面积的同时，记录当前最大的岛屿面积</p></li><li><p>求解完岛屿的面积之后，如果出现极端情况（全是海洋或者全是陆地），可以提前返回</p></li><li><p>遍历所有的海洋，一旦出现海洋的上下左右有岛屿，就可以尝试合并</p></li><li><p>为了防止岛屿重复合并（海洋的两侧是同一个岛屿）的问题，需要一个容器记录当前已合并的岛屿，从而可以防止重复合并</p></li><li><p>对于上下左右的方向，定义不同的合并代码</p></li><li><p>最终返回最大人工岛的面积</p></li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">69
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">70
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">71
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">72
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">73
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">74
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">75
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">76
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">77
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">78
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">79
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">80
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">81
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">82
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">83
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">84
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">85
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">86
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">87
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">88
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">89
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">90
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">91
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//如果当前两个岛屿之间只隔了一个海洋，那么当前两个岛屿就可以合并
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>largestIsland</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//统计当前陆地的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//保存当前岛屿的索引与其面积的映射
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span>,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> umap;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//海洋的默认面积为1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        umap[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//index从2开始，防止与陆地初始的编号1冲突
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//记录最大人工岛的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//岛屿的最大面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> max_area<span style=color:#f92672>=</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>*</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//统计岛屿的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span>(grid[i][j]<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>){
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>int</span> area<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>dfs</span>(grid,i,j,index,area);
-</span></span><span style=display:flex><span>                    umap[index]<span style=color:#f92672>=</span>area;
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//这里先更新，防止无法合并的情况
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    res<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(res,area<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>&lt;</span>max_area<span style=color:#f92672>?</span>area<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>:</span>max_area);
-</span></span><span style=display:flex><span>                    index<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//如果res==0，说明全是海洋，直接返回1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(res<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//如果res==max_area，说明全是陆地，不需要合并
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(res<span style=color:#f92672>==</span>max_area)
-</span></span><span style=display:flex><span>            res max_area;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//看所有海洋的上下左右是不是岛屿，是的话连接起来是不是能构成最大人工岛
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//遇到了海洋，查看上下所有是否有岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span>(grid[i][j]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>){
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//上下左右任有一个位置有岛屿就可以更新
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#66d9ef>int</span> area<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//用来临时保存已遍历过的岛屿
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    unordered_set<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> uset;
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//没有越界并且海洋旁边出现了岛屿，岛屿没有统计过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>&amp;&amp;</span>grid[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][j]<span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>                       uset.<span style=color:#a6e22e>find</span>(grid[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][j])<span style=color:#f92672>==</span>uset.<span style=color:#a6e22e>end</span>()){
-</span></span><span style=display:flex><span>                        area<span style=color:#f92672>+=</span>umap[grid[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][j]];
-</span></span><span style=display:flex><span>                        uset.<span style=color:#a6e22e>insert</span>(grid[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][j]);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>&amp;&amp;</span>grid[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>][j]<span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>                       uset.<span style=color:#a6e22e>find</span>(grid[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>][j])<span style=color:#f92672>==</span>uset.<span style=color:#a6e22e>end</span>()){
-</span></span><span style=display:flex><span>                        area<span style=color:#f92672>+=</span>umap[grid[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>][j]];
-</span></span><span style=display:flex><span>                        uset.<span style=color:#a6e22e>insert</span>(grid[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>][j]);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span>(j<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>&amp;&amp;</span>grid[i][j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>                       uset.<span style=color:#a6e22e>find</span>(grid[i][j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])<span style=color:#f92672>==</span>uset.<span style=color:#a6e22e>end</span>()){
-</span></span><span style=display:flex><span>                        area<span style=color:#f92672>+=</span>umap[grid[i][j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]];
-</span></span><span style=display:flex><span>                        uset.<span style=color:#a6e22e>insert</span>(grid[i][j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span>(j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>&amp;&amp;</span>grid[i][j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>&amp;&amp;</span>
-</span></span><span style=display:flex><span>                       uset.<span style=color:#a6e22e>find</span>(grid[i][j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>])<span style=color:#f92672>==</span>uset.<span style=color:#a6e22e>end</span>()){
-</span></span><span style=display:flex><span>                        area<span style=color:#f92672>+=</span>umap[grid[i][j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]];
-</span></span><span style=display:flex><span>                        uset.<span style=color:#a6e22e>insert</span>(grid[i][j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//带上当前的海洋
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    area<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>                    res<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(res,area);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//当把所有的海洋遍历完毕之后，得到最终的最大人工岛面积   
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//统计面积的时候，将当前岛屿的陆地全部改成当前岛屿的索引
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//一旦当前陆地有索引了，说明当前岛屿被遍历了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//并且index从2开始，防止与陆地初始的编号1冲突
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid,<span style=color:#66d9ef>int</span> x,<span style=color:#66d9ef>int</span> y,<span style=color:#66d9ef>int</span> index,<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>area){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(x<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>y<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>x<span style=color:#f92672>&gt;=</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>y<span style=color:#f92672>&gt;=</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>
-</span></span><span style=display:flex><span>        grid[x][y]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>grid[x][y]<span style=color:#f92672>==</span>index)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//当前陆地没有被遍历过，将当前陆地的值改成当前岛屿的索引代表当前位置被访问过
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>=</span>index;
-</span></span><span style=display:flex><span>        area<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span>;
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">91
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//如果当前两个岛屿之间只隔了一个海洋，那么当前两个岛屿就可以合并
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>largestIsland</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//统计当前陆地的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//保存当前岛屿的索引与其面积的映射
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//海洋的默认面积为1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//index从2开始，防止与陆地初始的编号1冲突
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span>2<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//记录最大人工岛的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//岛屿的最大面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>max_area</span><span style=color:#99d1db>=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>*</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//统计岛屿的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>1<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#e5c890>int</span> <span style=color:#babbf1>area</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//这里先更新，防止无法合并的情况
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>&lt;</span><span style=color:#babbf1>max_area</span><span style=color:#99d1db>?</span><span style=color:#babbf1>area</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>:</span><span style=color:#babbf1>max_area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>index</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//如果res==0，说明全是海洋，直接返回1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#99d1db>==</span>0<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> 1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//如果res==max_area，说明全是陆地，不需要合并
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#99d1db>==</span><span style=color:#babbf1>max_area</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span> <span style=color:#babbf1>max_area</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//看所有海洋的上下左右是不是岛屿，是的话连接起来是不是能构成最大人工岛
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//遇到了海洋，查看上下所有是否有岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//上下左右任有一个位置有岛屿就可以更新
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#e5c890>int</span> <span style=color:#babbf1>area</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//用来临时保存已遍历过的岛屿
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#babbf1>unordered_set</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//没有越界并且海洋旁边出现了岛屿，岛屿没有统计过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&gt;</span>0<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span>
+</span></span><span style=display:flex><span>                       <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>])</span><span style=color:#99d1db>==</span><span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]];</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>insert</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span>
+</span></span><span style=display:flex><span>                       <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>])</span><span style=color:#99d1db>==</span><span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]];</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>insert</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&gt;</span>0<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span>
+</span></span><span style=display:flex><span>                       <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>])</span><span style=color:#99d1db>==</span><span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]];</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>insert</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>&amp;&amp;</span>
+</span></span><span style=display:flex><span>                       <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>find</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>])</span><span style=color:#99d1db>==</span><span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>end</span><span style=color:#c6d0f5>()){</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>umap</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]];</span>
+</span></span><span style=display:flex><span>                        <span style=color:#babbf1>uset</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>insert</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//带上当前的海洋
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//当把所有的海洋遍历完毕之后，得到最终的最大人工岛面积   
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//统计面积的时候，将当前岛屿的陆地全部改成当前岛屿的索引
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//一旦当前陆地有索引了，说明当前岛屿被遍历了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//并且index从2开始，防止与陆地初始的编号1冲突
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>y</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#99d1db>&amp;</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//当前陆地没有被遍历过，将当前陆地的值改成当前岛屿的索引代表当前位置被访问过
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span>1<span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//在当前陆地的上下左右遍历，计算当前岛屿的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,y,index,area);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,y,index,area);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,x,y<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,index,area);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,x,y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,index,area);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//在当前陆地的上下左右遍历，计算当前岛屿的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是岛屿合并的逻辑，合并时从海洋出发，一旦出现可以合并的岛屿，就可以尝试合并，合并时需要记住已合并的岛屿，为了合并需要建立岛屿和编号之间的映射，还有极端情况的处理也需要注意，合并时不能出现下标越界的情况</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%be%e8%ae%ba>图论</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/1020.%E9%A3%9E%E5%9C%B0%E7%9A%84%E6%95%B0%E9%87%8F/ rel=next title=1020.飞地的数量><i class="fa fa-chevron-left"></i> 1020.飞地的数量</a></div><div class="post-nav-prev post-nav-item"><a href=/post/695.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/ rel=prev title=695.岛屿的最大面积>695.岛屿的最大面积
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

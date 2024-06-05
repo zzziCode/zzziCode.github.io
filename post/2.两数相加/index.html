@@ -22,106 +22,106 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>2分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>2.两数相加</p></blockquote><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p><p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p><p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>主要是模拟相加的过程，需要考虑进位，基本上使用了暴力法，从头开始遍历两个链表，两个节点相加，余10是当前位的结果，除10是下一位的进位，知道这些之后，就是代码的模拟，需要注意当前位相加得到结果之前，需要现将上一位的进位取出来，否则会出现覆盖的情况，在代码中为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>num<span style=color:#f92672>=</span>l1<span style=color:#f92672>-&gt;</span>val<span style=color:#f92672>+</span>l2<span style=color:#f92672>-&gt;</span>val;
-</span></span><span style=display:flex><span><span style=color:#75715e>//相加之后是否需要进位
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>res[index]<span style=color:#f92672>=</span>(num<span style=color:#f92672>+</span>res[index])<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>res[index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>=</span>(num<span style=color:#f92672>+</span>res[index])<span style=color:#f92672>/</span><span style=color:#ae81ff>10</span>;
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>主要是模拟相加的过程，需要考虑进位，基本上使用了暴力法，从头开始遍历两个链表，两个节点相加，余10是当前位的结果，除10是下一位的进位，知道这些之后，就是代码的模拟，需要注意当前位相加得到结果之前，需要现将上一位的进位取出来，否则会出现覆盖的情况，在代码中为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>num</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#99d1db>+</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>//相加之后是否需要进位
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#99d1db>+</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>])</span><span style=color:#99d1db>%</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#99d1db>+</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>])</span><span style=color:#99d1db>/</span>10<span style=color:#c6d0f5>;</span>
 </span></span></code></pre></td></tr></table></div></div><p>这种代码就会将当前位的进位抹去，导致第四行的结果出错</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>从头开始遍历两个链表</li><li>将两个链表的节点值相加，再加上进位，余10得到当前位的结果，除10得到下一位的结果</li><li>重复上一步，直到某一个链表到了结尾</li><li>剩下的链表如果没到尾部，需要继续累加获得结果</li><li>返回最终的结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得到以下结果：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//从低位开始加，然后出现进位就向高位进位
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    ListNode<span style=color:#f92672>*</span> <span style=color:#a6e22e>addTwoNumbers</span>(ListNode<span style=color:#f92672>*</span> l1, ListNode<span style=color:#f92672>*</span> l2) {
-</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>res</span>(<span style=color:#ae81ff>101</span>,<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> index<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,num<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(l1<span style=color:#f92672>!=</span>nullptr<span style=color:#f92672>&amp;&amp;</span>l2<span style=color:#f92672>!=</span>nullptr){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//需要先考虑进位，否则真正的进位会被覆盖
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            num<span style=color:#f92672>=</span>l1<span style=color:#f92672>-&gt;</span>val<span style=color:#f92672>+</span>l2<span style=color:#f92672>-&gt;</span>val<span style=color:#f92672>+</span>res[index];
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//相加之后是否需要进位
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            res[index]<span style=color:#f92672>=</span>(num)<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            res[index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>=</span>(<span style=color:#66d9ef>int</span>)(num)<span style=color:#f92672>/</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            index<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>            l1<span style=color:#f92672>=</span>l1<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>            l2<span style=color:#f92672>=</span>l2<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到了这里由于节点的范围不超过9，所以直接拿出来即可
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>while</span>(l1<span style=color:#f92672>!=</span>nullptr){
-</span></span><span style=display:flex><span>            num<span style=color:#f92672>=</span>l1<span style=color:#f92672>-&gt;</span>val<span style=color:#f92672>+</span>res[index];
-</span></span><span style=display:flex><span>            res[index]<span style=color:#f92672>=</span>(num)<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            res[index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>=</span>(num)<span style=color:#f92672>/</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            index<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>            l1<span style=color:#f92672>=</span>l1<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(l2<span style=color:#f92672>!=</span>nullptr){
-</span></span><span style=display:flex><span>            num<span style=color:#f92672>=</span>l2<span style=color:#f92672>-&gt;</span>val<span style=color:#f92672>+</span>res[index];
-</span></span><span style=display:flex><span>            res[index]<span style=color:#f92672>=</span>(num)<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            res[index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>=</span>(num)<span style=color:#f92672>/</span><span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span>            index<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>            l2<span style=color:#f92672>=</span>l2<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        index<span style=color:#f92672>=</span>res[index]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>?</span>index:index<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>        res.<span style=color:#a6e22e>resize</span>(index);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里加法统计结束,需要形成链表
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ListNode<span style=color:#f92672>*</span> dummyHead<span style=color:#f92672>=</span>new <span style=color:#a6e22e>ListNode</span>(<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        ListNode<span style=color:#f92672>*</span> node<span style=color:#f92672>=</span>dummyHead;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> val:res){
-</span></span><span style=display:flex><span>            ListNode<span style=color:#f92672>*</span> temp<span style=color:#f92672>=</span>new <span style=color:#a6e22e>ListNode</span>(val);
-</span></span><span style=display:flex><span>            node<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>temp;
-</span></span><span style=display:flex><span>            node<span style=color:#f92672>=</span>node<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        node<span style=color:#f92672>-&gt;</span>next<span style=color:#f92672>=</span>nullptr;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> dummyHead<span style=color:#f92672>-&gt;</span>next;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得到以下结果：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//从低位开始加，然后出现进位就向高位进位
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#99d1db>addTwoNumbers</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>l1</span><span style=color:#c6d0f5>,</span> <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>l2</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>res</span><span style=color:#c6d0f5>(</span>101<span style=color:#c6d0f5>,</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>,</span><span style=color:#babbf1>num</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>nullptr</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>nullptr</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//需要先考虑进位，否则真正的进位会被覆盖
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>num</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#99d1db>+</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#99d1db>+</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//相加之后是否需要进位
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>%</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span><span style=color:#c6d0f5>)(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>/</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>index</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>l1</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>l2</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到了这里由于节点的范围不超过9，所以直接拿出来即可
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>nullptr</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>num</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#99d1db>+</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>%</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>/</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>index</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>l1</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l1</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>nullptr</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>num</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#99d1db>+</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>%</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>num</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>/</span>10<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>index</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>l2</span><span style=color:#99d1db>=</span><span style=color:#babbf1>l2</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>index</span><span style=color:#99d1db>=</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>?</span><span style=color:#e5c890>index</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>index</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>resize</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>index</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到这里加法统计结束,需要形成链表
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>dummyHead</span><span style=color:#99d1db>=</span><span style=color:#babbf1>new</span> <span style=color:#99d1db>ListNode</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>dummyHead</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#ca9ee6>auto</span> <span style=color:#e5c890>val</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>ListNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>new</span> <span style=color:#99d1db>ListNode</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>node</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>temp</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>node</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>node</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#99d1db>=</span><span style=color:#babbf1>nullptr</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>dummyHead</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>next</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>就是简单的代码模拟，主要是要考虑进位</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/25.k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/ rel=next title=25.k个一组翻转链表><i class="fa fa-chevron-left"></i> 25.k个一组翻转链表</a></div><div class="post-nav-prev post-nav-item"><a href=/post/148.%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/ rel=prev title=148.排序链表>148.排序链表
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

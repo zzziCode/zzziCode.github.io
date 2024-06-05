@@ -22,120 +22,120 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🍌 875.爱吃香蕉的珂珂</p></blockquote><p>珂珂喜欢吃香蕉。这里有 <code>n</code> 堆香蕉，第 <code>i</code> 堆中有 <code>piles[i]</code> 根香蕉。警卫已经离开了，将在 <code>h</code> 小时后回来。</p><p>珂珂可以决定她吃香蕉的速度 <code>k</code> （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 <code>k</code> 根。如果这堆香蕉少于 <code>k</code> 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。</p><p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。</p><p>返回她可以在 <code>h</code> 小时内吃掉所有香蕉的最小速度 <code>k</code>（<code>k</code> 为整数）。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>开始第一想法是从速度1开始，每次求出按照这个速度吃掉香蕉需要多少时间，当事件刚好小于等于警卫回来的时间h时就可以得到最终的结果，相当于是一个暴力算法：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将h均匀分给piles中的每个数，然后再确定一个k
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>minEatingSpeed</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> piles<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span> h<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> k<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//针对每一个k，看花费多少个小时能吃完
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//当花费的时间小于h时就可以返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>long</span> time<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>piles<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                time<span style=color:#f92672>+=(</span>piles<span style=color:#f92672>[</span>i<span style=color:#f92672>]+</span>k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)/</span>k<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>time<span style=color:#f92672>&lt;=</span>h<span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>k<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> k<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>这种操作方式大部分情况是可行的，但是一旦香蕉数过多，就会导致超时，主要是因为k的求解是逐步进行的，需要从最小的1逐步增长，这导致了时间过长，于是想到了二分查找的方式</p><p>二分查找需要找到k的上界和下界，下界就是吃香蕉的最小速度，也就是1，上界就是一小时最多能吃多少香蕉，由于规定一次只能吃一堆，所以最大速度就看哪一堆香蕉最多，这就是最大速度</p><p>找到边界之后，就看是二分查找，计算出按照当前时间需要耗费多少时间能吃完香蕉，当耗费的时间大于警卫回来的时间时，此时说明吃慢了，需要提高速度，也就是目标速度在[mid+1,fast]中，当耗费时间小于等于警卫回来的时间时，说明此时的速度就<strong>吃的不慢</strong>，目标速度在[slow,mid]中</p><p>为什么不是[slow,mid-1]呢，这是因为我们要找到一个刚好吃完的速度，因为这个mid的速度此时吃的不慢，说明可能符合要求，如果将mid丢弃，有可能就丢弃了最终目标</p><blockquote><p>相当于不要丢掉任何一个可能的目标</p></blockquote><p>并且就这样不停地更新区间，最终出现的情况就是区间只剩下两个端点，并且一个端点吃慢了，一个端点吃的速度刚好，当二分查找结束时，区间只剩下唯一的一个值，也就是最终的目标，区间更新的代码为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>time<span style=color:#f92672>&lt;=</span>h<span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>    fast<span style=color:#f92672>=</span>mid<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>//吃慢了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>else</span>
-</span></span><span style=display:flex><span>    slow<span style=color:#f92672>=</span>mid<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>开始第一想法是从速度1开始，每次求出按照这个速度吃掉香蕉需要多少时间，当事件刚好小于等于警卫回来的时间h时就可以得到最终的结果，相当于是一个暴力算法：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将h均匀分给piles中的每个数，然后再确定一个k
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>minEatingSpeed</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>piles</span><span style=color:#99d1db>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>h</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>k</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//针对每一个k，看花费多少个小时能吃完
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//当花费的时间小于h时就可以返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#e5c890>long</span> <span style=color:#babbf1>time</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>time</span><span style=color:#99d1db>+=(</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]+</span><span style=color:#babbf1>k</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>)/</span><span style=color:#babbf1>k</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>time</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>h</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>break</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>k</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>k</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种操作方式大部分情况是可行的，但是一旦香蕉数过多，就会导致超时，主要是因为k的求解是逐步进行的，需要从最小的1逐步增长，这导致了时间过长，于是想到了二分查找的方式</p><p>二分查找需要找到k的上界和下界，下界就是吃香蕉的最小速度，也就是1，上界就是一小时最多能吃多少香蕉，由于规定一次只能吃一堆，所以最大速度就看哪一堆香蕉最多，这就是最大速度</p><p>找到边界之后，就看是二分查找，计算出按照当前时间需要耗费多少时间能吃完香蕉，当耗费的时间大于警卫回来的时间时，此时说明吃慢了，需要提高速度，也就是目标速度在[mid+1,fast]中，当耗费时间小于等于警卫回来的时间时，说明此时的速度就<strong>吃的不慢</strong>，目标速度在[slow,mid]中</p><p>为什么不是[slow,mid-1]呢，这是因为我们要找到一个刚好吃完的速度，因为这个mid的速度此时吃的不慢，说明可能符合要求，如果将mid丢弃，有可能就丢弃了最终目标</p><blockquote><p>相当于不要丢掉任何一个可能的目标</p></blockquote><p>并且就这样不停地更新区间，最终出现的情况就是区间只剩下两个端点，并且一个端点吃慢了，一个端点吃的速度刚好，当二分查找结束时，区间只剩下唯一的一个值，也就是最终的目标，区间更新的代码为：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>time</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>h</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#626880;font-style:italic>//吃慢了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span><span style=color:#ca9ee6>else</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>slow</span><span style=color:#99d1db>=</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>;</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>确定二分查找的边界</li><li>以二分查找确定速度，从而计算出以当前速度要吃多少个小时</li><li>判断耗费时间与警卫回来时间之间的关系，从而更新区间</li><li>就这样不停的更新，当二分查找结束时，就可以得到结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//将h均匀分给piles中的每个数，然后再确定一个k
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>minEatingSpeed</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> piles<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span> h<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>piles<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>==</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)</span> 
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> piles<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]%</span>h<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>?</span>piles<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]/</span>h<span style=color:#f92672>:</span>piles<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]/</span>h<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//吃香蕉的速度不顺序查找，而是二分查找，先找到一个合法的，然后逐步减小
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//找到最大速度(最大堆的香蕉数)和最小速度
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> slow<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>,</span>fast<span style=color:#f92672>=</span>piles<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>piles<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            fast<span style=color:#f92672>=</span>fast<span style=color:#f92672>&lt;</span>piles<span style=color:#f92672>[</span>i<span style=color:#f92672>]?</span>piles<span style=color:#f92672>[</span>i<span style=color:#f92672>]:</span>fast<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//二分查找找到一个合法的时间
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>long</span> time<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> mid<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>slow<span style=color:#f92672>&lt;</span>fast<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            mid<span style=color:#f92672>=(</span>slow<span style=color:#f92672>+</span>fast<span style=color:#f92672>)/</span><span style=color:#ae81ff>2</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            time<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>piles<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//以当前速度吃掉当前堆香蕉需要几小时
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                time<span style=color:#f92672>+=(</span>piles<span style=color:#f92672>[</span>i<span style=color:#f92672>]+</span>mid<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)/</span>mid<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//找到一个合法的时间,继续减小吃香蕉的速度
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//最终不断减小吃香蕉的速度，总有一天区间只剩下两个值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//一个吃慢了，一个刚好
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>time<span style=color:#f92672>&lt;=</span>h<span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>                fast<span style=color:#f92672>=</span>mid<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//吃慢了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>else</span>
-</span></span><span style=display:flex><span>                slow<span style=color:#f92672>=</span>mid<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> fast<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//将h均匀分给piles中的每个数，然后再确定一个k
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>int</span> <span style=color:#99d1db>minEatingSpeed</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>piles</span><span style=color:#99d1db>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>h</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>==</span>1<span style=color:#99d1db>)</span> 
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>]%</span><span style=color:#babbf1>h</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>?</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>]/</span><span style=color:#babbf1>h</span><span style=color:#99d1db>:</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>]/</span><span style=color:#babbf1>h</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//吃香蕉的速度不顺序查找，而是二分查找，先找到一个合法的，然后逐步减小
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//找到最大速度(最大堆的香蕉数)和最小速度
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>slow</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>,</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>1<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]?</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]:</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//二分查找找到一个合法的时间
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>long</span> <span style=color:#babbf1>time</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>mid</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#99d1db>(</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>mid</span><span style=color:#99d1db>=(</span><span style=color:#babbf1>slow</span><span style=color:#99d1db>+</span><span style=color:#babbf1>fast</span><span style=color:#99d1db>)/</span>2<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>time</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//以当前速度吃掉当前堆香蕉需要几小时
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>time</span><span style=color:#99d1db>+=(</span><span style=color:#babbf1>piles</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]+</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>-</span>1<span style=color:#99d1db>)/</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//找到一个合法的时间,继续减小吃香蕉的速度
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//最终不断减小吃香蕉的速度，总有一天区间只剩下两个值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//一个吃慢了，一个刚好
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>time</span><span style=color:#99d1db>&lt;=</span><span style=color:#babbf1>h</span><span style=color:#99d1db>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>fast</span><span style=color:#99d1db>=</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//吃慢了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>else</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>slow</span><span style=color:#99d1db>=</span><span style=color:#babbf1>mid</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>fast</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是从暴力法超时从而想到优化k的更新过程，从逐步更新变成二分查找的方式更新，减小很多无谓的更新步骤，当二分查找结束时，区间中剩下的值就是目标值，需要注意二分查找区间更新时，<strong>不要丢掉任何一个可能的目标</strong></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/ rel=next title=Elasticsearch学习笔记2><i class="fa fa-chevron-left"></i> Elasticsearch学习笔记2</a></div><div class="post-nav-prev post-nav-item"><a href=/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/ rel=prev title=Elasticsearch学习笔记1>Elasticsearch学习笔记1
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

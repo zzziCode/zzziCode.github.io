@@ -24,78 +24,78 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>主要的思想就是遍历整个图，将岛屿找出来，同时需要将岛屿中的面积计算出来，从而找出最大的面积，所以分为以下几步：</p><ol><li><p>找出岛屿：</p><p>只需要遵循二叉树的遍历思路，一旦遇到一个陆地，将陆地遍历一下，然后已遍历的陆地进行标记，在该陆地的上下左右找是否存在相邻的陆地，将所有相邻的陆地找出来，才算是形成一个岛屿</p></li><li><p>计算岛屿的面积：</p><p>为了计算面积，岛屿中的一块陆地的面积为1，所以只需要将岛屿中的所有陆地统计出来即可，在遍历岛屿中所有的陆地时，遇到一个没有遍历的陆地，岛屿的面积应该+1，当岛屿中所有的陆地都被访问过之后，就得到了岛屿最终的面积</p></li><li><p>找出最大的面积：</p><p>为了找出最大的面积，每计算出一个面积，都需要判断当前面积是否是最大的，所以需要定义一个全局变量来存储最终的面积</p></li></ol><blockquote><p>经过以上步骤，就可以得到最终的结果</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>遍历给定的图，出现一块陆地，将其相邻的所有陆地找出来形成一个岛</li><li>为了形成一个岛，需要从当前的陆地出发进行遍历，需要借助一个函数</li><li>进入当前函数时，如果当前的位置超过范围，或者是海洋，亦或者是已遍历的陆地，直接返回</li><li>当当前陆地没有被遍历，那么就需要遍历当前陆地，然后从当前陆地出发，遍历上下所有，查看是否存在陆地</li><li>遍历之前需要注意，当前的陆地面积为1，所以岛屿的面积应该+1</li><li>遍历结束之后，岛屿的面积统计到了，此时需要判断岛屿的面积是否是全局最大的面积</li><li>返回全局最大的面积</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;<span style=color:#75715e>//如果没法更新，说明没有岛屿，此时返回0
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//遇到一个陆地，就将相邻的陆地找出来，遇到一个没遍历过的陆地，面积+1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>maxAreaOfIsland</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>grid.<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>i){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>();<span style=color:#f92672>++</span>j){
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span>(grid[i][j]<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>){
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>int</span> area<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>dfs</span>(grid,area,i,j);
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>//看是不是更大的陆地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                    res<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(res,area);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//返回最大的面积
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//为了岛屿的面积能够记录，这里应该传递引用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;&amp;</span> grid,<span style=color:#66d9ef>int</span><span style=color:#f92672>&amp;</span> area,<span style=color:#66d9ef>int</span> x,<span style=color:#66d9ef>int</span> y){
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//超出边界，遇到海洋，已遍历的陆地都会直接返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(x<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>y<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>x<span style=color:#f92672>&gt;=</span>grid.<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>y<span style=color:#f92672>&gt;=</span>grid[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>size</span>()<span style=color:#f92672>||</span>
-</span></span><span style=display:flex><span>        grid[x][y]<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>||</span>grid[x][y]<span style=color:#f92672>==</span><span style=color:#ae81ff>2</span>)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里说明找到一个未遍历的陆地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        grid[x][y]<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//面积+1
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        area<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span>;
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#626880;font-style:italic>//如果没法更新，说明没有岛屿，此时返回0
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//遇到一个陆地，就将相邻的陆地找出来，遇到一个没遍历过的陆地，面积+1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>maxAreaOfIsland</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>j</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span><span style=color:#babbf1>j</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>();</span><span style=color:#99d1db>++</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>1<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#e5c890>int</span> <span style=color:#babbf1>area</span><span style=color:#99d1db>=</span>0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>i</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>j</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#626880;font-style:italic>//看是不是更大的陆地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                    <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//返回最大的面积
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//为了岛屿的面积能够记录，这里应该传递引用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>void</span> <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&amp;</span> <span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>y</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//超出边界，遇到海洋，已遍历的陆地都会直接返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&lt;</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>x</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>.</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span><span style=color:#babbf1>y</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>].</span><span style=color:#99d1db>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>||</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>0<span style=color:#99d1db>||</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>==</span>2<span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到这里说明找到一个未遍历的陆地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>grid</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>][</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span>2<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//面积+1
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>area</span><span style=color:#99d1db>+=</span>1<span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//遍历当前位置的上下左右，看能不能找到新的陆地
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>dfs</span>(grid,area,x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,y);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,area,x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,y);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,area,x,y<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dfs</span>(grid,area,x,y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//遍历当前位置的上下左右，看能不能找到新的陆地
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>dfs</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>grid</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>area</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>x</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>y</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>对二叉树的遍历稍加修改，并且未遍历的陆地面积为1，所以岛屿的面积应该+1</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%be%e8%ae%ba>图论</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/827.%E6%9C%80%E5%A4%A7%E4%BA%BA%E5%B7%A5%E5%B2%9B/ rel=next title=827.最大人工岛><i class="fa fa-chevron-left"></i> 827.最大人工岛</a></div><div class="post-nav-prev post-nav-item"><a href=/post/463.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/ rel=prev title=463.岛屿的周长>463.岛屿的周长
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

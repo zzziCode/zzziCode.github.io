@@ -25,88 +25,88 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>根据题中的描述，能够偷盗的房屋形成了一个二叉树，所以对于二叉树中的每一个节点，只有两种情况，要么偷要么不偷；
 如果当前节点偷了，那么当前节点的孩子节点就不能偷，需要从孙子节点开始偷</p><p>如果当前节点没偷，那么当前节点的孩子节点就可以偷</p><p>从当前节点将遍历的路径分成了两条，两条路径上得到的金额不同，最终从当前节点出发得到的最大金额就是这两条路径得到的金额的较大者</p><p>对于程序来说，如果给定的二叉树是空树，此时直接返回0，如果给定的二叉树只有一个节点，那么直接偷，如果给定的二叉树从当前节点开始已经搜索过了，此时直接返回当前的答案供上面的节点使用</p><p>整体的遍历逻辑是：从上到下遍历，从下到上返回，最终返回从根节点出发的结果</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>如果当前节点为空节点，返回0</li><li>如果当前节点没有孩子节点，直接返回当前节点的值</li><li>如果当前节点不为空且有孩子节点，且已经统计了从当前节点开始偷盗的结果，那么将当前的结果返回给上层作为参考</li><li>如果当前节点出发没有被统计，那么分为两种情况：<ol><li>当前节点偷，那么下一次偷的只能是孙子节点开始</li><li>当前节点不偷，那么下一次偷的就可以是孩子节点开始</li></ol></li><li>返回最终的答案</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><ol><li><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span> 
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//对于一棵树来说，当前节点只能是偷或者不偷
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//下层节点需要参考上层节点是不是偷
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//这个res记录了从那个节点开始偷能够获得的最大金额
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    unordered_map<span style=color:#f92672>&lt;</span>TreeNode<span style=color:#f92672>*</span>,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> res;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>rob</span>(TreeNode<span style=color:#f92672>*</span> root) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//第一个代码块
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        {
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//确定递归的返回条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span><span style=color:#f92672>&amp;&amp;</span>root<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>==</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> root<span style=color:#f92672>-&gt;</span>val;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//第二个代码块
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        {
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前节点被偷过了，直接返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(res[root])
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> res[root];
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前节点没被偷过，此时需要分情况讨论
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//偷当前节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>int</span> val1<span style=color:#f92672>=</span>root<span style=color:#f92672>-&gt;</span>val;
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>!=</span><span style=color:#66d9ef>nullptr</span>)        
-</span></span><span style=display:flex><span>                    val1<span style=color:#f92672>+=</span>rob(root<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>-&gt;</span>left)<span style=color:#f92672>+</span>
-</span></span><span style=display:flex><span>                    		rob(root<span style=color:#f92672>-&gt;</span>left<span style=color:#f92672>-&gt;</span>right);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>!=</span><span style=color:#66d9ef>nullptr</span>)
-</span></span><span style=display:flex><span>                    val1<span style=color:#f92672>+=</span>rob(root<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>-&gt;</span>left)<span style=color:#f92672>+</span>
-</span></span><span style=display:flex><span>                    	rob(root<span style=color:#f92672>-&gt;</span>right<span style=color:#f92672>-&gt;</span>right);
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><ol><li><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span> 
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//对于一棵树来说，当前节点只能是偷或者不偷
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//下层节点需要参考上层节点是不是偷
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//这个res记录了从那个节点开始偷能够获得的最大金额
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>root</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//第一个代码块
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//确定递归的返回条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> 0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#99d1db>&amp;&amp;</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>==</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//第二个代码块
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前节点被偷过了，直接返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>])</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前节点没被偷过，此时需要分情况讨论
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>else</span><span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//偷当前节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>val1</span><span style=color:#99d1db>=</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>        
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>val1</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>+</span>
+</span></span><span style=display:flex><span>                    		<span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>!=</span><span style=color:#ca9ee6>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>val1</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>+</span>
+</span></span><span style=display:flex><span>                    	<span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//不偷当前节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>int</span> val2<span style=color:#f92672>=</span>rob(root<span style=color:#f92672>-&gt;</span>left)<span style=color:#f92672>+</span>rob(root<span style=color:#f92672>-&gt;</span>right);
-</span></span><span style=display:flex><span>                res[root]<span style=color:#f92672>=</span>max(val1,val2);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> res[root];
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//不偷当前节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#e5c890>int</span> <span style=color:#babbf1>val2</span><span style=color:#99d1db>=</span><span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>+</span><span style=color:#babbf1>rob</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>]</span><span style=color:#99d1db>=</span><span style=color:#babbf1>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>val1</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>val2</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>];</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是从当前节点出发，分成<strong>两种情况</strong>，从而形成两种不同的路径，从上到下遍历，从下到上返回结果</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/1207.%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C%E7%9A%84%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/ rel=next title=1207.独一无二的出现次数><i class="fa fa-chevron-left"></i> 1207.独一无二的出现次数</a></div><div class="post-nav-prev post-nav-item"><a href=/post/17.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/ rel=prev title=17.电话号码的字母组合>17.电话号码的字母组合
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

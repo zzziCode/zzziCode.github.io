@@ -22,166 +22,166 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🏧 22.括号生成</p></blockquote><p>数字 <code>n</code> 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 <strong>有效的</strong> 括号组合。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了找出所有的合法括号组合,最简单的办法就是找出所有的括号组合,然后从中筛选出合法的括号组合,这个方法分为两步:</p><ol><li><p>产生出所有的括号组合</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>generate</span><span style=color:#f92672>(</span><span style=color:#66d9ef>char</span><span style=color:#f92672>[]</span> path<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> pos<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//括号组合生成完成，数组填充满了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>==</span>pos<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>isValid<span style=color:#f92672>(</span>path<span style=color:#f92672>))</span>
-</span></span><span style=display:flex><span>            res<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> String<span style=color:#f92672>(</span>path<span style=color:#f92672>));</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//对于当前位置,要么添加(,要么添加),形成2*n的长度立即返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//可以递归搜索出所有的结果
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//两种递归方式，因为每个位置有两种填充方式（左括号或者）
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        path<span style=color:#f92672>[</span>pos<span style=color:#f92672>]=</span><span style=color:#e6db74>&#39;(&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        generate<span style=color:#f92672>(</span>path<span style=color:#f92672>,</span>pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        path<span style=color:#f92672>[</span>pos<span style=color:#f92672>]=</span><span style=color:#e6db74>&#39;)&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        generate<span style=color:#f92672>(</span>path<span style=color:#f92672>,</span>pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>给定三个括号,一共六个位置,每个位置不是放置左括号就是放置右括号,所以可以使用递归的方法产生出所有的括号组合</p></li><li><p>判断括号组合是否合法</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isValid</span><span style=color:#f92672>(</span><span style=color:#66d9ef>char</span><span style=color:#f92672>[]</span> path<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> balance <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>char</span> c<span style=color:#f92672>:</span> path<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>c <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;(&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>balance<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>--</span>balance<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>balance <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> balance <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了找出所有的合法括号组合,最简单的办法就是找出所有的括号组合,然后从中筛选出合法的括号组合,这个方法分为两步:</p><ol><li><p>产生出所有的括号组合</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>generate</span><span style=color:#99d1db>(</span><span style=color:#e5c890>char</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>pos</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//括号组合生成完成，数组填充满了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>==</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>isValid</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>))</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>String</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>else</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//对于当前位置,要么添加(,要么添加),形成2*n的长度立即返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//可以递归搜索出所有的结果
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//两种递归方式，因为每个位置有两种填充方式（左括号或者）
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>path</span><span style=color:#99d1db>[</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>]=</span><span style=color:#a6d189>&#39;(&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>generate</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>path</span><span style=color:#99d1db>[</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>]=</span><span style=color:#a6d189>&#39;)&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>generate</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>给定三个括号,一共六个位置,每个位置不是放置左括号就是放置右括号,所以可以使用递归的方法产生出所有的括号组合</p></li><li><p>判断括号组合是否合法</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>isValid</span><span style=color:#99d1db>(</span><span style=color:#e5c890>char</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>balance</span> <span style=color:#99d1db>=</span> 0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>for</span> <span style=color:#99d1db>(</span><span style=color:#e5c890>char</span> <span style=color:#babbf1>c</span><span style=color:#99d1db>:</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>c</span> <span style=color:#99d1db>==</span> <span style=color:#a6d189>&#39;(&#39;</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>balance</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>else</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>--</span><span style=color:#babbf1>balance</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>balance</span> <span style=color:#99d1db>&lt;</span> 0<span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>balance</span> <span style=color:#99d1db>==</span> 0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>统计出所有的左括号数量,遇到一个右括号就将左括号的数量-1,当左括号的数量小于零时,括号组合不合法,返回false,当统计结束左括号还有剩余,也返回false,除此之外返回true</p></li></ol><p>以上方法亲测可行,但是还可以进一步改进</p><hr><p>上面的方法每次添加新括号时,可以<strong>进一步筛选</strong>,只有当右括号的数量大于等于左括号的数量时,才能继续添加一个右括号,否则右边的括号就不能无脑添加</p><p>左括号的数量超过整体数量的一半时,左括号也不能添加,所以可以添加了两个变量,记录左右括号的数量,简单的添加两个变量之后,可以减小很多搜索过程,一旦在途中数量不符合要求,就已经提前结束了</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>递归生成所有括号的组合,每一个位置要么添加左括号,要么添加右括号</li><li>对于每个位置来说,左括号的数量不能超过总数的一半,右括号的数量不能超过左括号</li><li>每生成一种括号的组合,都判断其是否合法</li><li>合法的括号加入结果容器中</li><li>返回结果</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> res<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//利用递归产生出所有的括号组合,之后找出合法的括号组合
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>generateParenthesis</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>char</span><span style=color:#f92672>[]</span> path<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>[</span><span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>n<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        generate<span style=color:#f92672>(</span>path<span style=color:#f92672>,</span><span style=color:#ae81ff>0</span><span style=color:#f92672>,</span><span style=color:#ae81ff>0</span><span style=color:#f92672>,</span><span style=color:#ae81ff>0</span><span style=color:#f92672>,</span>n<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//递归产生所有括号组合
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>generate</span><span style=color:#f92672>(</span><span style=color:#66d9ef>char</span><span style=color:#f92672>[]</span> path<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> pos<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> left<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> right<span style=color:#f92672>,</span><span style=color:#66d9ef>int</span> n<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>==</span>pos<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>isValid<span style=color:#f92672>(</span>path<span style=color:#f92672>))</span>
-</span></span><span style=display:flex><span>                res<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> String<span style=color:#f92672>(</span>path<span style=color:#f92672>));</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span><span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//对于当前位置,要么添加(,要么添加),形成2*n的长度立即返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//可以递归搜索出所有的结果
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//左括号的数量不能超过总数的一半
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>left<span style=color:#f92672>&lt;</span>n<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                path<span style=color:#f92672>[</span>pos<span style=color:#f92672>]=</span><span style=color:#e6db74>&#39;(&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                generate<span style=color:#f92672>(</span>path<span style=color:#f92672>,</span>pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>,</span>left<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>,</span>right<span style=color:#f92672>,</span>n<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//右括号的数量不能超过左括号
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>right<span style=color:#f92672>&lt;</span>left<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                path<span style=color:#f92672>[</span>pos<span style=color:#f92672>]=</span><span style=color:#e6db74>&#39;)&#39;</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                generate<span style=color:#f92672>(</span>path<span style=color:#f92672>,</span>pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>,</span>left<span style=color:#f92672>,</span>right<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>,</span>n<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isValid</span><span style=color:#f92672>(</span><span style=color:#66d9ef>char</span><span style=color:#f92672>[]</span> path<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> balance <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>char</span> c<span style=color:#f92672>:</span> path<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//统计左括号的数量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>c <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;(&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>++</span>balance<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span><span style=color:#75715e>//遇到右括号就与左括号抵消
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#f92672>--</span>balance<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//左括号不够抵消返回false
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>balance <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//左括号有冗余也返回false
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> balance <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//利用递归产生出所有的括号组合,之后找出合法的括号组合
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>generateParenthesis</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>char</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#e5c890>char</span><span style=color:#99d1db>[</span>2<span style=color:#99d1db>*</span><span style=color:#babbf1>n</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>generate</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>,</span>0<span style=color:#99d1db>,</span>0<span style=color:#99d1db>,</span>0<span style=color:#99d1db>,</span><span style=color:#babbf1>n</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//递归产生所有括号组合
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>void</span> <span style=color:#99d1db>generate</span><span style=color:#99d1db>(</span><span style=color:#e5c890>char</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>pos</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>left</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>right</span><span style=color:#99d1db>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>n</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>==</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>isValid</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>))</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>res</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>String</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>));</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>else</span><span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//对于当前位置,要么添加(,要么添加),形成2*n的长度立即返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//可以递归搜索出所有的结果
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//左括号的数量不能超过总数的一半
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>left</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>n</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>[</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>]=</span><span style=color:#a6d189>&#39;(&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>generate</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>,</span><span style=color:#babbf1>left</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>,</span><span style=color:#babbf1>right</span><span style=color:#99d1db>,</span><span style=color:#babbf1>n</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//右括号的数量不能超过左括号
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>right</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>left</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>[</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>]=</span><span style=color:#a6d189>&#39;)&#39;</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>generate</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>,</span><span style=color:#babbf1>pos</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>,</span><span style=color:#babbf1>left</span><span style=color:#99d1db>,</span><span style=color:#babbf1>right</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>,</span><span style=color:#babbf1>n</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>isValid</span><span style=color:#99d1db>(</span><span style=color:#e5c890>char</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>balance</span> <span style=color:#99d1db>=</span> 0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span> <span style=color:#99d1db>(</span><span style=color:#e5c890>char</span> <span style=color:#babbf1>c</span><span style=color:#99d1db>:</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//统计左括号的数量
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>c</span> <span style=color:#99d1db>==</span> <span style=color:#a6d189>&#39;(&#39;</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>++</span><span style=color:#babbf1>balance</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span> <span style=color:#ca9ee6>else</span> <span style=color:#99d1db>{</span><span style=color:#626880;font-style:italic>//遇到右括号就与左括号抵消
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#99d1db>--</span><span style=color:#babbf1>balance</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//左括号不够抵消返回false
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span> <span style=color:#99d1db>(</span><span style=color:#babbf1>balance</span> <span style=color:#99d1db>&lt;</span> 0<span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//左括号有冗余也返回false
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>balance</span> <span style=color:#99d1db>==</span> 0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>思想很简单,主要是代码模拟能力,使用递归将所有的括号组合都生成出来,在生成的过程中加上控制条件,生成结束再进行过滤,一层一层的筛选,减小搜索开销的同时得到正确答案</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/spring03/ rel=next title=Spring03><i class="fa fa-chevron-left"></i> Spring03</a></div><div class="post-nav-prev post-nav-item"><a href=/post/spring02/ rel=prev title=Spring02>Spring02
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

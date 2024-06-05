@@ -22,84 +22,84 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span class=post-meta-item-text>阅读：&ap;</span>
 <span>3分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>💫 2537.统计好子数组的数目</p></blockquote><p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你返回 <code>nums</code> 中 <strong>好</strong> 子数组的数目。</p><p>一个子数组 <code>arr</code> 如果有 <strong>至少</strong> <code>k</code> 对下标 <code>(i, j)</code> 满足 <code>i &lt; j</code> 且 <code>arr[i] == arr[j]</code> ，那么称它是一个 <strong>好</strong> 子数组。</p><p><strong>子数组</strong> 是原数组中一段连续 <strong>非空</strong> 的元素序列。</p><h2 id=思路>思路
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
-<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>统计符合条件的子数组，第一个想法就是使用<strong>滑动窗口</strong>，每一个滑动窗口都是一个子数组，然后统计滑动窗口中元素的出现次数，当前元素有n个，则可以形成<code>n*(n-1)/2</code>对，滑动窗口不断累加，一旦超过k就得到了一个好数组，此时就开始缩小滑动窗口</p><p>缩小时有一定的讲究，每删除一个左边的元素，该元素形成的对数可能就会减小，举例来说，当前元素原本有7个，可以形成21对，减小之后变成6个，只能形成15对，删除一个元素后元素的对数减小了6对，也就是当前元素减小之后，使用<code>pairs-=count</code>更新对数即可：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>pairs<span style=color:#f92672>&gt;=</span>k<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>++</span>res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//减小当前窗户左边元素的出现次数，并且减小其对数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    count<span style=color:#f92672>=</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>left<span style=color:#f92672>]);</span>
-</span></span><span style=display:flex><span>    map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>left<span style=color:#f92672>++],--</span>count<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>    pairs<span style=color:#f92672>-=</span>count<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>统计符合条件的子数组，第一个想法就是使用<strong>滑动窗口</strong>，每一个滑动窗口都是一个子数组，然后统计滑动窗口中元素的出现次数，当前元素有n个，则可以形成<code>n*(n-1)/2</code>对，滑动窗口不断累加，一旦超过k就得到了一个好数组，此时就开始缩小滑动窗口</p><p>缩小时有一定的讲究，每删除一个左边的元素，该元素形成的对数可能就会减小，举例来说，当前元素原本有7个，可以形成21对，减小之后变成6个，只能形成15对，删除一个元素后元素的对数减小了6对，也就是当前元素减小之后，使用<code>pairs-=count</code>更新对数即可：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>while</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pairs</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>k</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//减小当前窗户左边元素的出现次数，并且减小其对数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>count</span><span style=color:#99d1db>=</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>left</span><span style=color:#99d1db>]);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>put</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>left</span><span style=color:#99d1db>++],--</span><span style=color:#babbf1>count</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>pairs</span><span style=color:#99d1db>-=</span><span style=color:#babbf1>count</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>需要注意的是，一旦当前滑动窗口中的对数小于k就停止缩小，此时滑动窗口左边有left个元素，不管滑动窗口是否符合条件，加上这left个元素一定是符合要求的好子数组，因为处于<code>left-1</code>位置的元素是最后一个被删除的元素（<strong>临界点</strong>），加上他就满足了要求，这是<strong>临界点</strong></p><p>举例来说，当前需要<code>k=2</code>对，原始数组为<code>[3,1,4,3,2,2,4,5]</code>。窗口中的元素为<code>[3,2,2,4]</code>，被删除的元素为<code>[3,1,4]</code>，则<code>left=3</code>，不管后面怎么变化只要向左带上被删除的元素4就可以形成一个好子数组，而有三种可以带上4的情况:<code>[4],[1,4],[3,1,4]</code>，所以每次都需要<code>+left</code></p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>开始滑动窗口，每次统计元素出现次数以及当前窗口形成的元素对数</li><li>滑动窗口一变化，带上左边的元素就可以形成好子数组，所以每次都要<code>+left</code></li><li>当前滑动窗口元素对数大于k就开始缩小窗口</li><li>缩小时需要减小元素的出现次数和当前元素形成的对数</li><li>滑动完毕返回答案</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//滑动窗口统计当前窗口中元素个数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//然后判断当前窗口中元素有没有k对、
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//当前元素有n个，则可以形成n*(n-1)/2对
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>long</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>long</span> <span style=color:#a6e22e>countGood</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> nums<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span> k<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        Map<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span>Integer<span style=color:#f92672>&gt;</span>map<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>long</span> res<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//滑动窗口，一旦有k对就开始缩小
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> pairs<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>,</span>left<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>nums<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> count<span style=color:#f92672>=</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>getOrDefault</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>i<span style=color:#f92672>],</span><span style=color:#ae81ff>0</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>i<span style=color:#f92672>],</span>count<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//元素对数增加count对
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            pairs<span style=color:#f92672>+=</span>count<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//left在不满足条件的窗口左边最小处（临界点）
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//前面的left个元素算上就满足了条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//每次都加上left，这样就不用每次都从头开始计算
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//这里是核心
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            res<span style=color:#f92672>+=</span>left<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>pairs<span style=color:#f92672>&gt;=</span>k<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>++</span>res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//减小当前窗户左边元素的出现次数，并且减小其对数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                count<span style=color:#f92672>=</span>map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>left<span style=color:#f92672>]);</span>
-</span></span><span style=display:flex><span>                map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>nums<span style=color:#f92672>[</span>left<span style=color:#f92672>++],--</span>count<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>                pairs<span style=color:#f92672>-=</span>count<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//滑动窗口统计当前窗口中元素个数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//然后判断当前窗口中元素有没有k对、
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//当前元素有n个，则可以形成n*(n-1)/2对
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>long</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>long</span> <span style=color:#99d1db>countGood</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>nums</span><span style=color:#99d1db>,</span> <span style=color:#e5c890>int</span> <span style=color:#babbf1>k</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>Map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>,</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span><span style=color:#babbf1>map</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>HashMap</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>long</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//滑动窗口，一旦有k对就开始缩小
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>pairs</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>,</span><span style=color:#babbf1>left</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>count</span><span style=color:#99d1db>=</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>getOrDefault</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>],</span>0<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>put</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>],</span><span style=color:#babbf1>count</span><span style=color:#99d1db>+</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//元素对数增加count对
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>pairs</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>count</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//left在不满足条件的窗口左边最小处（临界点）
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//前面的left个元素算上就满足了条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//每次都加上left，这样就不用每次都从头开始计算
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//这里是核心
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>res</span><span style=color:#99d1db>+=</span><span style=color:#babbf1>left</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>while</span><span style=color:#99d1db>(</span><span style=color:#babbf1>pairs</span><span style=color:#99d1db>&gt;=</span><span style=color:#babbf1>k</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>++</span><span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//减小当前窗户左边元素的出现次数，并且减小其对数
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>count</span><span style=color:#99d1db>=</span><span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>left</span><span style=color:#99d1db>]);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>map</span><span style=color:#99d1db>.</span><span style=color:#e5c890>put</span><span style=color:#99d1db>(</span><span style=color:#babbf1>nums</span><span style=color:#99d1db>[</span><span style=color:#babbf1>left</span><span style=color:#99d1db>++],--</span><span style=color:#babbf1>count</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>pairs</span><span style=color:#99d1db>-=</span><span style=color:#babbf1>count</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>核心就是滑动窗口缩小到刚好不满足条件时（临界点），此时不管后续滑动窗口怎么变化，加上删除的临界点就可以满足条件，于是每次都会形成满足条件的好子数组，也就是都需要<code>+left</code></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/ rel=next title=Elasticsearch学习笔记3><i class="fa fa-chevron-left"></i> Elasticsearch学习笔记3</a></div><div class="post-nav-prev post-nav-item"><a href=/post/2063.%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3/ rel=prev title=2063.所有子字符串中的元音>2063.所有子字符串中的元音
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

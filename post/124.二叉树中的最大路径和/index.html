@@ -24,52 +24,52 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>为了得到最大的路径和,每一个节点都需要形成最大的路径和,最大的路径和可能出现在遍历的过程中,也就是最大路径不一定包含根节点,这里利用了贪心的思想</p><p>对于当前节点来说,如果最大路径包含当前节点,分为<strong>两种</strong>情况:</p><ol><li><p>以当前节点为节点向两边出发形成一条最长路径</p><p>此时当前节点可以加上左右两边的节点的最长路径和</p></li><li><p>当前节点和上层节点在一起形成一条最长路径</p><p>此时当前节点向上返回时只能挑选较大的一侧返回</p></li></ol><p>路径是一条线,不能出现在一个节点有两个<strong>分叉</strong>的情况,所以当前节点在向上返回时只能返回左右节点加上当前节点中的一条较大路径,只是在返回的途中由于当前节点将左右节点连接在一起形成了最大路径,从而<strong>临时</strong>的判断是不是出现了最大路径,返回时还是只能返回一侧</p><blockquote><p>总结起来就是在向上返回较大的一侧时,临时判断当前节点+左右两侧的值是不是形成了最大的路径和</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>前序遍历正常执行</li><li>判断左右两侧的和与0谁大就保留谁,防止出现返回负数的情况,负数对最大路径和无法起到增益效果</li><li><strong>临时</strong>判断当前节点+左右两侧节点是不是形成了最大路径和</li><li><strong>正常</strong>向上返回一侧节点,与上层节点拼接在一起形成路径</li><li>遍历完成之后,全局变量res保存了最大路径和</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span>class Solution {
-</span></span><span style=display:flex><span>public:
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//对于每一个节点来说,都有一个当前的最大路径和
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//并且对于一个节点来说,向上返回时,只能返回左右一边,不然不能形成路径
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> res<span style=color:#f92672>=</span>INT_MIN;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>maxPathSum</span>(TreeNode<span style=color:#f92672>*</span> root) {
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>help</span>(root);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#babbf1>class</span> <span style=color:#babbf1>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#e5c890>public</span><span style=color:#c6d0f5>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//对于每一个节点来说,都有一个当前的最大路径和
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//并且对于一个节点来说,向上返回时,只能返回左右一边,不然不能形成路径
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#e5c890>int</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#babbf1>INT_MIN</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>maxPathSum</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>root</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>help</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>help</span>(TreeNode<span style=color:#f92672>*</span> root){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(root<span style=color:#f92672>==</span>nullptr)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//对于当前节点来说,当前节点的最大值是左右两边的最大值+当前值
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//返回时只能挑选左右两边较大的返回才能和上层拼接在一起形成一条路径
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> left<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0</span>,<span style=color:#a6e22e>help</span>(root<span style=color:#f92672>-&gt;</span>left));
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> right<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0</span>,<span style=color:#a6e22e>help</span>(root<span style=color:#f92672>-&gt;</span>right));
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//临时判断当前节点加上左右子树是不是形成了最大路径和
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        res<span style=color:#f92672>=</span><span style=color:#a6e22e>max</span>(res,left<span style=color:#f92672>+</span>right<span style=color:#f92672>+</span>root<span style=color:#f92672>-&gt;</span>val);
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//正常返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>max</span>(left,right)<span style=color:#f92672>+</span>root<span style=color:#f92672>-&gt;</span>val;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>int</span> <span style=color:#99d1db>help</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>TreeNode</span><span style=color:#99d1db>*</span> <span style=color:#babbf1>root</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>==</span><span style=color:#babbf1>nullptr</span><span style=color:#c6d0f5>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> 0<span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//对于当前节点来说,当前节点的最大值是左右两边的最大值+当前值
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//返回时只能挑选左右两边较大的返回才能和上层拼接在一起形成一条路径
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>left</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>,</span><span style=color:#99d1db>help</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>right</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span>0<span style=color:#c6d0f5>,</span><span style=color:#99d1db>help</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//临时判断当前节点加上左右子树是不是形成了最大路径和
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>left</span><span style=color:#99d1db>+</span><span style=color:#babbf1>right</span><span style=color:#99d1db>+</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//正常返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#99d1db>max</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>left</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>right</span><span style=color:#c6d0f5>)</span><span style=color:#99d1db>+</span><span style=color:#babbf1>root</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>val</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>正常向上层返回一侧数据,防止路径出现分叉,返回的途中临时判断当前节点+左右两侧节点是不是形成了最大路径和,每个节点返回之前都临时判断一下,遍历结束之后,全局变量保存了最大路径和</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/spring01/ rel=next title=Spring01><i class="fa fa-chevron-left"></i> Spring01</a></div><div class="post-nav-prev post-nav-item"><a href=/post/114.%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/ rel=prev title=114.二叉树展开为链表>114.二叉树展开为链表
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

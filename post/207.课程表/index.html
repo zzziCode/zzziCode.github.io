@@ -24,90 +24,90 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本思想>基本思想
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><p>这是一道典型的拓扑排序的题目,给定的所有课程的选择,有先修课程的概念,必须先选择先修课程,才能选择接下来的课程,这种结构可以看成是一种图,最开始的先修课程可以看成入度为零的节点,先修课程修完之后,从这个图中拿掉之后,又会出现新的入度为零的节点,也就是下一步可以修的课程</p><img src=https://oi-wiki.org/graph/images/topo-example-1.svg alt=topo style=zoom:50%><p>在图中来看,程序设计和高等数学就是是最开始的先修课程,入度为零,修完他们之后,将其从图中拿掉,又会出现新的入度为零的课程,也就是普通物理,离散数学,算法语言,就这样修完一门拿掉一门,不断地出现入度为零的节点,就这样一直拿,一直修改</p><p>最终可以形成一个图的拓扑排序,长度是图中所有节点的数量,本题中不要求将全部的拓扑排序求出来,只需要修够规定的课程数即可</p><p>拓扑排序的思想就是,整理得到课程图的信息,一个出发点对应很多到达点,所以对于一个出发点而言,需要一个容器存储所有的到达点,故需要容器的嵌套</p><p>从给定的所有课程的信息中获得所有边的信息,之后获得所有入度点的信息,下一步就是正常的拓扑排序,先找出所有的入度为零的节点加入队列中,之后讲这些节点标记为已修完,从而这些节点的到达点的入度会减一,当出现新的入度为零的节点时,将其加入队列中</p><p>重复上述操作,当队列中没有节点时,说明拓扑排序完成,若此时拓扑排序形成的结果长度刚好是图中节点的长度,说明拓扑排序完成,可以完成选修</p><blockquote><p>重点就是入度为零的节点才能选修,选修之后,对应的到达点入度减一,从而判断是否有新的入度为零的节点出现</p></blockquote><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><ol><li>初始化容器,包括所有的节点及其对应的到达点的容器,以及所有节点的入度情况</li><li>将初始状态下所有入度为零的节点加入队列中,从而将他们的到达节点的入度减一</li><li>判断是不是有新的入度为零的节点出现,将新节点加入队列中</li><li>判断拓扑排序中是不是包含了所有的节点</li></ol><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//如何从所有的情况中找出一个合法的情况
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//拓扑排序的题目
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//广度优先遍历更好理解,就是正常的拓扑排序,之后判断是否成功排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>canFinish</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> numCourses<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[][]</span> prerequisites<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//存储所有的边和节点的入度
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        List<span style=color:#f92672>&lt;</span>ArrayList<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;&gt;</span> edges<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>ArrayList<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;&gt;();</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> inNum<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>numCourses<span style=color:#f92672>];</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>numCourses<span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            edges<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;());</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//计算所有的边和入度
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> prerequisite <span style=color:#f92672>:</span> prerequisites<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>            edges<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>prerequisite<span style=color:#f92672>[</span><span style=color:#ae81ff>1</span><span style=color:#f92672>]).</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>prerequisite<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]);</span>
-</span></span><span style=display:flex><span>            inNum<span style=color:#f92672>[</span>prerequisite<span style=color:#f92672>[</span><span style=color:#ae81ff>0</span><span style=color:#f92672>]]++;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析,得出以下代码:</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//如何从所有的情况中找出一个合法的情况
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//拓扑排序的题目
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//广度优先遍历更好理解,就是正常的拓扑排序,之后判断是否成功排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#ca9ee6>public</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>canFinish</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>numCourses</span><span style=color:#99d1db>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>[][]</span> <span style=color:#babbf1>prerequisites</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//存储所有的边和节点的入度
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>edges</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>inNum</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>[</span><span style=color:#babbf1>numCourses</span><span style=color:#99d1db>];</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>numCourses</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>edges</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;());</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//计算所有的边和入度
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span> <span style=color:#99d1db>(</span><span style=color:#e5c890>int</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>prerequisite</span> <span style=color:#99d1db>:</span> <span style=color:#babbf1>prerequisites</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>edges</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>prerequisite</span><span style=color:#99d1db>[</span>1<span style=color:#99d1db>]).</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>prerequisite</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>]);</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>inNum</span><span style=color:#99d1db>[</span><span style=color:#babbf1>prerequisite</span><span style=color:#99d1db>[</span>0<span style=color:#99d1db>]]++;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//找到所有入度为零的节点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        LinkedList<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> queue<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> LinkedList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>inNum<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>inNum<span style=color:#f92672>[</span>i<span style=color:#f92672>]==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                queue<span style=color:#f92672>.</span><span style=color:#a6e22e>addLast</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>		<span style=color:#75715e>//开始拓扑排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> count<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span><span style=color:#f92672>(!</span>queue<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>()){</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>count<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> node<span style=color:#f92672>=</span>queue<span style=color:#f92672>.</span><span style=color:#a6e22e>removeFirst</span><span style=color:#f92672>();</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//根据这个点拿到所有的邻接点,减小他们的入度
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> temp<span style=color:#f92672>=</span>edges<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>node<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>temp<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                inNum<span style=color:#f92672>[</span>temp<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>)]--;</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>inNum<span style=color:#f92672>[</span>temp<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>)]==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>                    queue<span style=color:#f92672>.</span><span style=color:#a6e22e>addLast</span><span style=color:#f92672>(</span>temp<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>));</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//找到所有入度为零的节点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>LinkedList</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>queue</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>LinkedList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>inNum</span><span style=color:#99d1db>.</span><span style=color:#e5c890>length</span><span style=color:#99d1db>;++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>inNum</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]==</span>0<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>addLast</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#626880;font-style:italic>//开始拓扑排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>int</span> <span style=color:#babbf1>count</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>while</span><span style=color:#99d1db>(!</span><span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>isEmpty</span><span style=color:#99d1db>()){</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>++</span><span style=color:#babbf1>count</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#e5c890>int</span> <span style=color:#babbf1>node</span><span style=color:#99d1db>=</span><span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>removeFirst</span><span style=color:#99d1db>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//根据这个点拿到所有的邻接点,减小他们的入度
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>Integer</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>temp</span><span style=color:#99d1db>=</span><span style=color:#babbf1>edges</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>node</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>inNum</span><span style=color:#99d1db>[</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>)]--;</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>inNum</span><span style=color:#99d1db>[</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>)]==</span>0<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#babbf1>queue</span><span style=color:#99d1db>.</span><span style=color:#e5c890>addLast</span><span style=color:#99d1db>(</span><span style=color:#babbf1>temp</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>));</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> count<span style=color:#f92672>==</span>numCourses<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>count</span><span style=color:#99d1db>==</span><span style=color:#babbf1>numCourses</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>核心就是<strong>拓扑排序</strong>,这里使用广度优先遍历的拓扑排序更好理解,遍历一个就删除一个,同时将其到达点的入度减一</p></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%af%8f%e6%97%a5%e4%b8%80%e9%a2%98>每日一题</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/208.%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%BC%80%E6%A0%91/ rel=next title=208.实现前缀树><i class="fa fa-chevron-left"></i> 208.实现前缀树</a></div><div class="post-nav-prev post-nav-item"><a href=/post/994.%E8%85%90%E7%83%82%E7%9A%84%E6%A9%98%E5%AD%90/ rel=prev title=994.腐烂的橘子>994.腐烂的橘子
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;

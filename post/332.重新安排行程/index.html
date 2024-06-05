@@ -25,204 +25,204 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <a class=header-anchor href=#%e6%80%9d%e8%b7%af></a></h2><h3 id=基本想法>基本想法
 <a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%83%b3%e6%b3%95></a></h3><p>需要明确以下问题：</p><ol><li><p><strong>如何搜索</strong>：从出发机场x开始搜索，判断x可以到哪些y，进行统计。之后再从y出发，判断y可以到哪些z。。。</p></li><li><p><strong>如何排序</strong>：</p><blockquote><p>题中要求对于同一个出发机场的不同到达机场，字母排序在前面的到达机场需要先选择</p></blockquote><p>一定要理解这一句，所以在记录一个出发机场的所有到达机场时，需要将到达机场排序，可以使用<code>map</code>，因为他自动给元素排序</p></li><li><p><strong>何时终止</strong>：给定一个<code>tickets</code>的集合，一共有<code>ticketNum</code>种行程，最终形成的行程序列长度一定是<code>ticketNum+1</code></p></li><li><p>如何避免死循环：<code>tickets</code>中的一个元素只能使用一次，如果到达机场中出现起飞机场并且使用多次，那么就会出现死循环。避免的方法就是每一张票都有一个标签，使用过之后标签减一，为零就无法使用</p><blockquote><p>这里为什么不用<code>true</code>和<code>false</code>呢，因为可能<strong>多张相同</strong>的票，所以需要记录相同的票出现的次数，然后使用过一张票，对应的票数就减一，票数为0就无法使用</p></blockquote></li></ol><p>总结：一个起飞机场对应多个降落机场，降落机场也可能重复，所以是一个一对多的关系，降落机场重复几次就是几张有效的机票</p><h3 id=执行流程>执行流程
 <a class=header-anchor href=#%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b></a></h3><p>首先统计所有的票，统计出现的次数，也就是上面说的标签。</p><p>统计完成之后，从肯尼迪机场出发，从统计的集合中遍历所有的到达机场，选取字母序排在前面的机场x加入结果集。</p><p>然后再从x出发，看x能到达哪些机场，选择一个字母序在前面的y。</p><p>再从y出发。。。</p><p>直到形成大小为<code>ticketNum+1</code>的结果集，此时可以直接返回答案。</p><p>但是由于是递归，只能一层一层的退出，所以给递归一个标志，当出现大小为<code>ticketNum+1</code>的结果集就返回<code>true</code>，当遇到<code>true</code>再返回<code>true</code>。一层一层向上最终回到开始位置，再返回结果集。</p><p>如果没有这个返回true的话，那么就会统计出所有符合要求的结果，最终的res会成为最后一种合法的结果，想要res保存的是第一种合法的结果，那么就需要在一出现这种合法的结果就向上返回，并且建立标志，便于程序<strong>提前结束</strong></p><h2 id=代码>代码
-<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，从回溯法的基本框架中得出以下代码：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> {
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//定义一个全局变量存放结果集
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> res;
-</span></span><span style=display:flex><span>    vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> findItinerary(vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;&gt;&amp;</span> tickets) {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//定义存放所有机票的集合
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//集合元素的结构为
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//&lt;起飞机场，&lt;降落机场，机票数&gt;&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unordered_map<span style=color:#f92672>&lt;</span>string,map<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> targets;
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//每次从tickets中拿一张机票统计
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> vec:tickets){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//其中targets[vec[0]]是一个map
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//map[vec[1]]取出的是map的第二个int类型的元素
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//机票数++
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            targets[vec[<span style=color:#ae81ff>0</span>]][vec[<span style=color:#ae81ff>1</span>]]<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//从肯尼迪出发
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        res.push_back(<span style=color:#e6db74>&#34;JFK&#34;</span>);
-</span></span><span style=display:flex><span>        backtrack(targets,tickets.size());
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>backtrack</span>(unordered_map<span style=color:#f92672>&lt;</span>string,map<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&gt;</span> targets,<span style=color:#66d9ef>int</span> ticketNum){
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(res.size()<span style=color:#f92672>==</span>ticketNum<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>){
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//进行横向遍历，从起飞机场的所有到达机场中选择一个字典序排在前面的
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//并且没有使用过的机票，也就是遍历map
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//以结果集的最后一个元素当起飞机场继续航行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//也就是x到y，再从y出发
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//res[res.size()-1]就是吧y当成起飞机场
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(map<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;::</span>iterator ticket<span style=color:#f92672>=</span>targets[res[res.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]].begin();         						  ticket<span style=color:#f92672>!=</span>targets[res[res.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]].end();						            <span style=color:#f92672>++</span>ticket){
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//机票还能使用
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span>(ticket<span style=color:#f92672>-&gt;</span>second<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span>){
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//使用机票
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                res.push_back(ticket<span style=color:#f92672>-&gt;</span>first);
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//机票销毁
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                ticket<span style=color:#f92672>-&gt;</span>second<span style=color:#f92672>--</span>;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//纵向遍历：从y开始
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#75715e>//不管if是不是为真，backtrack都会执行
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span>(backtrack(targets,ticketNum))
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//进行回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                res.pop_back();
-</span></span><span style=display:flex><span>                ticket<span style=color:#f92672>-&gt;</span>second<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>            }
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81></a></h2><p>根据以上分析，从回溯法的基本框架中得出以下代码：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">53
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span><span style=color:#ca9ee6>public</span><span style=color:#99d1db>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//定义一个全局变量存放结果集
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>findItinerary</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;&gt;&amp;</span> <span style=color:#babbf1>tickets</span><span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//定义存放所有机票的集合
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//集合元素的结构为
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//&lt;起飞机场，&lt;降落机场，机票数&gt;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>targets</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//每次从tickets中拿一张机票统计
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>vector</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#99d1db>&gt;</span> <span style=color:#e5c890>vec</span><span style=color:#c6d0f5>:</span><span style=color:#babbf1>tickets</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//其中targets[vec[0]]是一个map
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//map[vec[1]]取出的是map的第二个int类型的元素
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#626880;font-style:italic>//机票数++
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#babbf1>targets</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>vec</span><span style=color:#c6d0f5>[</span>0<span style=color:#c6d0f5>]][</span><span style=color:#babbf1>vec</span><span style=color:#c6d0f5>[</span>1<span style=color:#c6d0f5>]]</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//从肯尼迪出发
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#a6d189>&#34;JFK&#34;</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>targets</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>tickets</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#e5c890>bool</span> <span style=color:#99d1db>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>unordered_map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>targets</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>ticketNum</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>==</span><span style=color:#babbf1>ticketNum</span><span style=color:#99d1db>+</span>1<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//进行横向遍历，从起飞机场的所有到达机场中选择一个字典序排在前面的
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//并且没有使用过的机票，也就是遍历map
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//以结果集的最后一个元素当起飞机场继续航行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//也就是x到y，再从y出发
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//res[res.size()-1]就是吧y当成起飞机场
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>map</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span><span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;::</span><span style=color:#babbf1>iterator</span> <span style=color:#babbf1>ticket</span><span style=color:#99d1db>=</span><span style=color:#babbf1>targets</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]].</span><span style=color:#babbf1>begin</span><span style=color:#c6d0f5>();</span>         						  <span style=color:#babbf1>ticket</span><span style=color:#99d1db>!=</span><span style=color:#babbf1>targets</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span><span style=color:#99d1db>-</span>1<span style=color:#c6d0f5>]].</span><span style=color:#babbf1>end</span><span style=color:#c6d0f5>();</span>						            <span style=color:#99d1db>++</span><span style=color:#babbf1>ticket</span><span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//机票还能使用
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ticket</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>second</span><span style=color:#99d1db>&gt;</span>0<span style=color:#c6d0f5>){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//使用机票
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ticket</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>first</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//机票销毁
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>ticket</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>second</span><span style=color:#99d1db>--</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//纵向遍历：从y开始
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#626880;font-style:italic>//不管if是不是为真，backtrack都会执行
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#ca9ee6>if</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>backtrack</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>targets</span><span style=color:#c6d0f5>,</span><span style=color:#babbf1>ticketNum</span><span style=color:#c6d0f5>))</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//进行回溯
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>res</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop_back</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>ticket</span><span style=color:#99d1db>-&gt;</span><span style=color:#babbf1>second</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#c6d0f5>}</span>
 </span></span><span style=display:flex><span>            
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//到这里返回false是什么意思
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//还没有到叶子节点，不能一直向上返回
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//但是当前的搜索结果又无法满足条件
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> false;<span style=color:#75715e>//必须要有这个，不然上面的if无法判断
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }
-</span></span><span style=display:flex><span>};
-</span></span></code></pre></td></tr></table></div></div><p>其实for循环遍历所有的降落机场可以改为范围for循环，也就是：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>for</span> (pair<span style=color:#f92672>&lt;</span>string, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;&amp;</span> target : targets[result[result.size() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]]) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (target.second <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> ) { <span style=color:#75715e>// 记录到达机场是否飞过了
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        result.push_back(target.first);
-</span></span><span style=display:flex><span>        target.second<span style=color:#f92672>--</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (backtracking(ticketNum, result)) <span style=color:#66d9ef>return</span> true;
-</span></span><span style=display:flex><span>        result.pop_back();
-</span></span><span style=display:flex><span>        target.second<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></td></tr></table></div></div><p>此时直接取出了一个一个的队组，不用使用指针可以直接遍历到<code>first</code>和<code>second</code></p><blockquote><p>根据代码分析搜索树：</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305262023605.png alt=image-20230526202354540 style=zoom:67%><p>有两种情况都需要向上返回，第一种情况是无法找到合法的行程，<strong>从KUL出发无法降落</strong>。只能向上返回一层，所以<code>return false</code>，第二种是找到了合法的行程，此时<code>return true</code>。</p><p>并且从当前机场出发，搜索所有的降落机场时，机票有效才能使用这个机票，</p><p>也就是<code>ticket->second > 0</code></p><blockquote><p>java代码为：</p></blockquote><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Solution</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>//tickets中的每一个list都是一个机票，1其中存储了起始点和终止点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//为了每次找到的行程都是当前能到达的行程中字典序最小的，先将终点进行排序
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> path<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
-</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>findItinerary</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;&gt;</span> tickets<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//按照终点对票进行排序，每次找到最先符合要求的终点，然后是第二个，第三个
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>sort</span><span style=color:#f92672>(</span>tickets<span style=color:#f92672>,(</span>a<span style=color:#f92672>,</span>b<span style=color:#f92672>)-&gt;</span>a<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#ae81ff>1</span><span style=color:#f92672>).</span><span style=color:#a6e22e>compareTo</span><span style=color:#f92672>(</span>b<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#ae81ff>1</span><span style=color:#f92672>)));</span>
-</span></span><span style=display:flex><span>        path<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;JFK&#34;</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//标记当前票据被使用过没
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[]</span> used<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[</span>tickets<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()];</span>
-</span></span><span style=display:flex><span>        backtrack<span style=color:#f92672>(</span>tickets<span style=color:#f92672>,</span>used<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> res<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>backtrack</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;&gt;</span> tickets<span style=color:#f92672>,</span><span style=color:#66d9ef>boolean</span><span style=color:#f92672>[]</span> used<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()==</span>tickets<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            res<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>(</span>path<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>//从中找到一个从当前起点出发的
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>tickets<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>();++</span>i<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>            <span style=color:#75715e>//当前起点是上一份路径的终点并且没访问过，可以向下尝试
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(!</span>used<span style=color:#f92672>[</span>i<span style=color:#f92672>]&amp;&amp;</span>tickets<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>).</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#ae81ff>0</span><span style=color:#f92672>).</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>))){</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//加入终点
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                path<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>tickets<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>).</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span><span style=color:#ae81ff>1</span><span style=color:#f92672>));</span>
-</span></span><span style=display:flex><span>                used<span style=color:#f92672>[</span>i<span style=color:#f92672>]=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>backtrack<span style=color:#f92672>(</span>tickets<span style=color:#f92672>,</span>used<span style=color:#f92672>)){</span>
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>                <span style=color:#75715e>//回溯
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                used<span style=color:#f92672>[</span>i<span style=color:#f92672>]=</span><span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>                path<span style=color:#f92672>.</span><span style=color:#a6e22e>remove</span><span style=color:#f92672>(</span>path<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//到这里返回false是什么意思
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//还没有到叶子节点，不能一直向上返回
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#626880;font-style:italic>//但是当前的搜索结果又无法满足条件
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>false</span><span style=color:#c6d0f5>;</span><span style=color:#626880;font-style:italic>//必须要有这个，不然上面的if无法判断
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>其实for循环遍历所有的降落机场可以改为范围for循环，也就是：</p><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#ca9ee6>for</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>pair</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>string</span><span style=color:#c6d0f5>,</span> <span style=color:#e5c890>int</span><span style=color:#99d1db>&gt;&amp;</span> <span style=color:#e5c890>target</span> <span style=color:#c6d0f5>:</span> <span style=color:#babbf1>targets</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>result</span><span style=color:#c6d0f5>[</span><span style=color:#babbf1>result</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>size</span><span style=color:#c6d0f5>()</span> <span style=color:#99d1db>-</span> 1<span style=color:#c6d0f5>]])</span> <span style=color:#c6d0f5>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>target</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span> <span style=color:#99d1db>&gt;</span> 0 <span style=color:#c6d0f5>)</span> <span style=color:#c6d0f5>{</span> <span style=color:#626880;font-style:italic>// 记录到达机场是否飞过了
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>result</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>push_back</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>target</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>first</span><span style=color:#c6d0f5>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>target</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span><span style=color:#99d1db>--</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span> <span style=color:#c6d0f5>(</span><span style=color:#babbf1>backtracking</span><span style=color:#c6d0f5>(</span><span style=color:#babbf1>ticketNum</span><span style=color:#c6d0f5>,</span> <span style=color:#babbf1>result</span><span style=color:#c6d0f5>))</span> <span style=color:#ca9ee6>return</span> <span style=color:#c6d0f5;font-style:italic>true</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>result</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>pop_back</span><span style=color:#c6d0f5>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>target</span><span style=color:#c6d0f5>.</span><span style=color:#babbf1>second</span><span style=color:#99d1db>++</span><span style=color:#c6d0f5>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#c6d0f5>}</span>
+</span></span><span style=display:flex><span><span style=color:#c6d0f5>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时直接取出了一个一个的队组，不用使用指针可以直接遍历到<code>first</code>和<code>second</code></p><blockquote><p>根据代码分析搜索树：</p></blockquote><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202305262023605.png alt=image-20230526202354540 style=zoom:67%><p>有两种情况都需要向上返回，第一种情况是无法找到合法的行程，<strong>从KUL出发无法降落</strong>。只能向上返回一层，所以<code>return false</code>，第二种是找到了合法的行程，此时<code>return true</code>。</p><p>并且从当前机场出发，搜索所有的降落机场时，机票有效才能使用这个机票，</p><p>也就是<code>ticket->second > 0</code></p><blockquote><p>java代码为：</p></blockquote><div class=highlight><div style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#774f3b">37
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#ef9f76;background-color:#303446;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ca9ee6>class</span> <span style=color:#e5c890>Solution</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#626880;font-style:italic>//tickets中的每一个list都是一个机票，1其中存储了起始点和终止点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#626880;font-style:italic>//为了每次找到的行程都是当前能到达的行程中字典序最小的，先将终点进行排序
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>path</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>    <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>public</span> <span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;</span> <span style=color:#99d1db>findItinerary</span><span style=color:#99d1db>(</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>tickets</span><span style=color:#99d1db>)</span> <span style=color:#99d1db>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//按照终点对票进行排序，每次找到最先符合要求的终点，然后是第二个，第三个
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#babbf1>Collections</span><span style=color:#99d1db>.</span><span style=color:#e5c890>sort</span><span style=color:#99d1db>(</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>,(</span><span style=color:#babbf1>a</span><span style=color:#99d1db>,</span><span style=color:#babbf1>b</span><span style=color:#99d1db>)-&gt;</span><span style=color:#babbf1>a</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span>1<span style=color:#99d1db>).</span><span style=color:#e5c890>compareTo</span><span style=color:#99d1db>(</span><span style=color:#babbf1>b</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span>1<span style=color:#99d1db>)));</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#a6d189>&#34;JFK&#34;</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//标记当前票据被使用过没
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>used</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#e5c890>boolean</span><span style=color:#99d1db>[</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()];</span>
+</span></span><span style=display:flex><span>        <span style=color:#babbf1>backtrack</span><span style=color:#99d1db>(</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>,</span><span style=color:#babbf1>used</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#babbf1>res</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ca9ee6>private</span> <span style=color:#e5c890>boolean</span> <span style=color:#99d1db>backtrack</span><span style=color:#99d1db>(</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>List</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>String</span><span style=color:#99d1db>&gt;&gt;</span> <span style=color:#babbf1>tickets</span><span style=color:#99d1db>,</span><span style=color:#e5c890>boolean</span><span style=color:#99d1db>[]</span> <span style=color:#babbf1>used</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()==</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()+</span>1<span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#babbf1>res</span><span style=color:#99d1db>=</span><span style=color:#ca9ee6>new</span> <span style=color:#babbf1>ArrayList</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#626880;font-style:italic>//从中找到一个从当前起点出发的
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>        <span style=color:#ca9ee6>for</span><span style=color:#99d1db>(</span><span style=color:#e5c890>int</span> <span style=color:#babbf1>i</span><span style=color:#99d1db>=</span>0<span style=color:#99d1db>;</span><span style=color:#babbf1>i</span><span style=color:#99d1db>&lt;</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>();++</span><span style=color:#babbf1>i</span><span style=color:#99d1db>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#626880;font-style:italic>//当前起点是上一份路径的终点并且没访问过，可以向下尝试
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>            <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(!</span><span style=color:#babbf1>used</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]&amp;&amp;</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>).</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span>0<span style=color:#99d1db>).</span><span style=color:#e5c890>equals</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()-</span>1<span style=color:#99d1db>))){</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//加入终点
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>add</span><span style=color:#99d1db>(</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>.</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span><span style=color:#babbf1>i</span><span style=color:#99d1db>).</span><span style=color:#e5c890>get</span><span style=color:#99d1db>(</span>1<span style=color:#99d1db>));</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>used</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#ca9ee6>if</span><span style=color:#99d1db>(</span><span style=color:#babbf1>backtrack</span><span style=color:#99d1db>(</span><span style=color:#babbf1>tickets</span><span style=color:#99d1db>,</span><span style=color:#babbf1>used</span><span style=color:#99d1db>)){</span>
+</span></span><span style=display:flex><span>                    <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>true</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#626880;font-style:italic>//回溯
+</span></span></span><span style=display:flex><span><span style=color:#626880;font-style:italic></span>                <span style=color:#babbf1>used</span><span style=color:#99d1db>[</span><span style=color:#babbf1>i</span><span style=color:#99d1db>]=</span><span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>remove</span><span style=color:#99d1db>(</span><span style=color:#babbf1>path</span><span style=color:#99d1db>.</span><span style=color:#e5c890>size</span><span style=color:#99d1db>()-</span>1<span style=color:#99d1db>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#ca9ee6>return</span> <span style=color:#ca9ee6;font-style:italic>false</span><span style=color:#99d1db>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#99d1db>}</span>
+</span></span><span style=display:flex><span><span style=color:#99d1db>}</span>
 </span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结
 <a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>主要是根据回溯法的框架形成的代码，有几个难点</p><ol><li><p>统计所有的机票，依次取出tickets给出的vector集合，第一个元素是起飞机场，第二个元素是降落机场，也就是看懂：<code>targets[vec[0]] [vec[1]]++</code></p></li><li><p>选取合适的数据结构，主要是<code>target</code>形成的复合<code>unordered_map&lt;string,map&lt;string,int>></code></p><p>分别代表&lt;起飞机场，&lt;降落机场，机票数&#187;</p></li><li><p>如何遍历target，将当前降落的机场y当作==跳板==，也就是当成新的起飞机场，代码中体现为：<code>result[result.size() - 1]]</code>,</p><p>之后筛选所有以y出发的机票信息，选择未使用的并且降落机场字典序排在前面的机票使用，所以使用map存储降落机场的信息，因为它可以排序</p></li><li><p>看懂for循环的遍历条件，遍历的是map</p></li><li><p>何时递归返回，需要区分是得到最终结果返回，还是遇到无法向下递归需要返回回溯一步的情况，具体可以看<strong>搜索树</strong>，出现无法降落的情况就无法递归</p></li></ol></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%9b%9e%e6%ba%af%e6%b3%95>回溯法</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/ rel=next title=平衡二叉树和红黑树><i class="fa fa-chevron-left"></i> 平衡二叉树和红黑树</a></div><div class="post-nav-prev post-nav-item"><a href=/post/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ rel=prev title=Git学习笔记>Git学习笔记
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
