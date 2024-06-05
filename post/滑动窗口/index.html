@@ -23,7 +23,7 @@ Github</a></span></div><div class="cc-license animated" itemprop=license><a href
 <span>4分钟</span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>🚍 滑动窗口</p></blockquote><p>根据灵神的滑动窗口
 <a href=https://leetcode.cn/circle/discuss/0viNMK/ title=题单 rel="noopener external nofollow noreferrer" target=_blank class=exturl>题单
 <i class="fa fa-external-link-alt"></i>
-</a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度</p><h2 id=定长滑动窗口>定长滑动窗口
+</a>总结的滑动窗口模版，主要分为两个大类，重点在于变长滑动窗口时如何减小时间复杂度</p><img src=https://zzzi-img-1313100942.cos.ap-beijing.myqcloud.com/img/202406051705753.png alt=sliding-window style=zoom:50%><h2 id=定长滑动窗口>定长滑动窗口
 <a class=header-anchor href=#%e5%ae%9a%e9%95%bf%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3></a></h2><blockquote><p>定长滑动窗口的精髓是固定k</p></blockquote><p>所谓的定长，指的是窗口的长度不变，题目中一般会给出长度为K的限制，此时只需要一个单指针<code>right</code>就可以固定住窗口大小，窗口滑动时，左边窗口的位置可以用<code>right-k</code>来计算，不符合要求的元素扔掉即可，模版为：</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3

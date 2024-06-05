@@ -9,7 +9,7 @@
 ​	相当于我们在划掉所有不符合要求的数时，要保证当前数只能被自己的最小质因子划掉，也就是12不能被3划掉，只能被2划掉，为了找到这个最小质因子，就要保证当前数的因子出现后，就不能进行划分，最后得到的代码为：
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 public static void isPrime(int right) { boolean[] flag = new boolean[right + 1]; List&lt;Integer&gt; prime = new ArrayList&lt;&gt;(); Arrays.fill(flag, true); for (int i = 2; i &lt;= right; ++i) { //当前数没有被划掉，说明当前数是质数 if (flag[i]) { prime.add(i); } //针对当前数来说，只划掉能划掉的数 for (int j = 0; j &lt; prime.size(); ++j) { if (i * prime.get(j) &gt; right) break; //划掉当前数的倍数 flag[i * prime.get(j)] = false; //出现了最小质因子 if (i % prime.get(j) == 0) break; } } } 如果无法理解线性筛，埃氏筛也能解决大部分问题，因为埃氏筛的思想就是一旦出现一个质数，就将当前范围内质数的所有倍数全部划掉，线性筛只是埃氏筛的优化版，基本原理还是划掉不是质数的数
   ]]></content></entry><entry><title>Java的移位操作符</title><url>/post/java%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6/</url><categories><category>学习笔记</category></categories><tags><tag>Java</tag></tags><content type="html"> 🧢 Java的移位操作符
-介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍
+介绍Java中的移位操作符,一共有三种,从数据底层的存储开始介绍，然后依次说明正数和负数使用不同移位运算符的计算方法并举例
 数据在底层的存储
 数据在计算机的底层统一采用补码的二进制形式存储,而Java的移位操作符只能作用于long,int,short,char四种基本整数类型上,所以这里用int进行介绍,其余的差别就是在所占的字节数上,这里总结Java中所有基本数据类型的占位情况
 数据类型 位数 字节数 默认值 boolean 1 - false byte 8 1 0 short 16 2 0 char 16 2 &amp;amp;lsquo;u0000&amp;amp;rsquo; int 32 4 0 float 32 4 0f long 64 8 0L double 64 8 0d 正数
@@ -21,9 +21,7 @@
 最后将反码转换成补码,就是在反码的基础上对反码加1即可,-5的补码是11111111 11111111 11111111 11111011
 移位操作符
 左移
-左移没有什么特殊的地方,高位直接覆盖,包括负数的符号位也直接覆盖,低位补零即可,例如-5的计算机存储形式为11111111 11111111 11111111 11111011,左移两位变成11111111 11111111 11111111 11101100,这是一个数的补码形式,将其转换成反码(补码-1)为11111111 11111111 11111111 11101011,进一步将其转换成原码(除了符号位都取反)为10000000 00000000 00000000 00010100,可以看出这是-20的原码,也就是说-5左移两位变成了-20
-代码测试为:
-1 2 3 4 5 …</content></entry><entry><title>JDK中的动态代理</title><url>/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url><categories><category>学习笔记</category></categories><tags><tag>动态代理</tag></tags><content type="html"><![CDATA[   🐇 JDK中的动态代理
+左移没有什么特殊的地方,高位直接覆盖,包括负数的符号位也直接覆盖,低位补零即可,例如-5的计算机存储形式为11111111 11111111 11111111 11111011,左移两位变成11111111 11111111 11111111 11101100,这是一个数的补码形式,将其转换成反码(补码-1)为11111111 11111111 11111111 11101011,进一步将其转换成原码(除了符号位都取反)为10000000 00000000 00000000 00010100,可以看出这是-20的原码,也就是 …</content></entry><entry><title>JDK中的动态代理</title><url>/post/jdk%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url><categories><category>学习笔记</category></categories><tags><tag>动态代理</tag></tags><content type="html"><![CDATA[   🐇 JDK中的动态代理
 本文主要介绍JDK中的代理是如何实现的，从基本的例子出发，先介绍简单的静态代理，然后重点介绍动态代理，开始分析源码，之后展示JDK动态生成的代理类长什么样，是如何实现代理的，最后总结整个代理的流程
 静态代理所谓的代理，就是在原有方法的基础上进行增强，并且不侵入源代码，下面介绍一个静态代理的例子：
 UserService接口的代码
