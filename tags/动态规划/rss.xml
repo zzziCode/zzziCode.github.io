@@ -121,7 +121,7 @@
 &lt;/blockquote>
 &lt;p>分析最基本的0-1背包的动态规划解题思路，基本步骤从最开始的初始化价值数组，确定递推方程到最后的更新价值数组得到最终答案&lt;/p>
 &lt;p>之后再引出完全背包的问题，唯一的区别就是物品可以装入任意次&lt;/p>
-&lt;p>总结来看除了排列问题需要先遍历背包容量，其余都先遍历物品&lt;/p>
+&lt;p>总结来看除了排列问题需要先遍历背包容量，其余&lt;strong>都先遍历物品&lt;/strong>，然后完全背包由于物品可以重复放入，所以可以从小到大，小的更新了，大的也能用到&lt;/p>
 &lt;blockquote>
 &lt;p>核心就是确定递推公式和初始化方案&lt;/p>
 &lt;/blockquote></description></item><item><title>96.不同的二叉搜索树</title><link>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link><pubDate>Sat, 17 Jun 2023 19:13:27 +0800</pubDate><guid>https://zzzicode.github.io/post/96.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid><description>&lt;blockquote>
